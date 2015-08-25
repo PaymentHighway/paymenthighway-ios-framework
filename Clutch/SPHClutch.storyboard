@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="fAV-eV-Rpm">
+            <objects>
+                <navigationController id="ygf-d4-2bK" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mkT-aD-QT2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="GqZ-Va-IrH" kind="relationship" relationship="rootViewController" id="j9R-Cd-H8z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLI-Jj-mJH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-496" y="495"/>
+        </scene>
+        <!--Add Card View Controller-->
+        <scene sceneID="M4m-tn-rTk">
+            <objects>
+                <viewController storyboardIdentifier="SPHAddCardForm" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overCurrentContext" id="GqZ-Va-IrH" customClass="SPHAddCardViewController" customModule="Clutch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xki-Du-JiG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yjj-T1-yHy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DxJ-am-hix" customClass="UIScrollView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vsb-FS-bTZ">
+                                <rect key="frame" x="0.0" y="270" width="600" height="330"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CARD NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Mi-Ds-wUj" customClass="SPHClutchFormLabel" customModule="Clutch" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="26" width="560" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="3ym-sT-8Xu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
+                                        <color key="textColor" red="0.19215686274509805" green="0.36470588235294116" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="EXPIRY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tgp-nc-nJz" userLabel="Expiry Date Label" customClass="SPHClutchFormLabel" customModule="Clutch" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="117" width="270" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="BRT-Fo-fhE"/>
+                                            <constraint firstAttribute="width" constant="264" id="Nsm-n0-eaM"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
+                                        <color key="textColor" red="0.19215686274509805" green="0.36470588235294116" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Nsm-n0-eaM"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="20" y="111" width="64" height="24"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECURITY CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71K-T5-ONq" userLabel="Security Code Label" customClass="SPHClutchFormLabel" customModule="Clutch" customModuleProvider="target">
+                                        <rect key="frame" x="310" y="117" width="270" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="6K3-D1-Iza"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
+                                        <color key="textColor" red="0.19215686274509805" green="0.36470588235294116" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="286" y="111" width="102" height="24"/>
+                                        </variation>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="XXXX XXXX XXXX XXXX" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wn4-8b-Qr3" userLabel="Card Number Field" customClass="SPHClutchCreditCardTextField" customModule="Clutch" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="55" width="560" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="fNV-wT-0qv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c3h-QE-dJF" userLabel="Expiry Date Field" customClass="SPHClutchTextField" customModule="Clutch" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="146" width="270" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="aEq-Tz-Pjt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="XXX" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ko0-RW-gz8" userLabel="Security Code Field" customClass="SPHClutchTextField" customModule="Clutch" customModuleProvider="target">
+                                        <rect key="frame" x="310" y="146" width="270" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxM-8n-B0H" userLabel="Add Card Button">
+                                        <rect key="frame" x="20" y="208" width="560" height="50"/>
+                                        <color key="backgroundColor" red="0.23529411764705882" green="0.53725490196078429" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="wPd-n4-RH2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <size key="titleShadowOffset" width="0.0" height="-2"/>
+                                        <state key="normal" title="ADD CARD">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.34509803921568627" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poweredBy" translatesAutoresizingMaskIntoConstraints="NO" id="Inh-BH-AbX">
+                                        <rect key="frame" x="150" y="278" width="300" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="ebt-2I-EP9"/>
+                                            <constraint firstAttribute="height" constant="44" id="jDk-bd-nOG"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.96470588239999999" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="wn4-8b-Qr3" firstAttribute="top" secondItem="0Mi-Ds-wUj" secondAttribute="bottom" constant="5" id="7Aj-DX-IOh"/>
+                                    <constraint firstItem="0Mi-Ds-wUj" firstAttribute="leading" secondItem="Vsb-FS-bTZ" secondAttribute="leading" constant="20" id="BQW-Ha-NuG"/>
+                                    <constraint firstItem="Tgp-nc-nJz" firstAttribute="top" secondItem="wn4-8b-Qr3" secondAttribute="bottom" constant="18" id="CJx-Ie-b9V"/>
+                                    <constraint firstItem="c3h-QE-dJF" firstAttribute="width" secondItem="Ko0-RW-gz8" secondAttribute="width" id="Fke-Tc-RTn"/>
+                                    <constraint firstAttribute="bottom" secondItem="Inh-BH-AbX" secondAttribute="bottom" constant="8" id="G0b-dV-2bg"/>
+                                    <constraint firstItem="Ko0-RW-gz8" firstAttribute="width" secondItem="71K-T5-ONq" secondAttribute="width" id="GLV-be-XnD"/>
+                                    <constraint firstItem="Ko0-RW-gz8" firstAttribute="top" secondItem="71K-T5-ONq" secondAttribute="bottom" constant="5" id="JMO-6d-WTL"/>
+                                    <constraint firstAttribute="trailing" secondItem="71K-T5-ONq" secondAttribute="trailing" constant="20" id="JVq-AJ-2bu"/>
+                                    <constraint firstItem="wn4-8b-Qr3" firstAttribute="leading" secondItem="Vsb-FS-bTZ" secondAttribute="leading" constant="20" id="N5G-gz-QUT"/>
+                                    <constraint firstItem="Tgp-nc-nJz" firstAttribute="leading" secondItem="Vsb-FS-bTZ" secondAttribute="leading" constant="20" id="NDd-2f-Wg2"/>
+                                    <constraint firstItem="jxM-8n-B0H" firstAttribute="leading" secondItem="Vsb-FS-bTZ" secondAttribute="leading" constant="20" id="Nqr-yu-8gA"/>
+                                    <constraint firstAttribute="height" constant="272" id="PpW-Z7-LEE"/>
+                                    <constraint firstAttribute="centerX" secondItem="Inh-BH-AbX" secondAttribute="centerX" id="TYg-bz-gdR"/>
+                                    <constraint firstAttribute="trailing" secondItem="jxM-8n-B0H" secondAttribute="trailing" constant="20" id="Y3S-lg-5PY"/>
+                                    <constraint firstItem="c3h-QE-dJF" firstAttribute="width" secondItem="Tgp-nc-nJz" secondAttribute="width" id="Zdr-D2-2Kf"/>
+                                    <constraint firstAttribute="height" constant="330" id="cl7-Gz-dxU"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="330" id="fL2-qN-1Ul"/>
+                                    <constraint firstItem="71K-T5-ONq" firstAttribute="top" secondItem="wn4-8b-Qr3" secondAttribute="bottom" constant="18" id="gqv-5y-eV6"/>
+                                    <constraint firstItem="c3h-QE-dJF" firstAttribute="leading" secondItem="Vsb-FS-bTZ" secondAttribute="leading" constant="20" id="hYp-Re-ZVv"/>
+                                    <constraint firstItem="Inh-BH-AbX" firstAttribute="top" secondItem="jxM-8n-B0H" secondAttribute="bottom" constant="20" id="iCY-ix-xtb"/>
+                                    <constraint firstItem="Ko0-RW-gz8" firstAttribute="leading" secondItem="c3h-QE-dJF" secondAttribute="trailing" constant="20" id="mDd-uP-hN8"/>
+                                    <constraint firstAttribute="trailing" secondItem="wn4-8b-Qr3" secondAttribute="trailing" constant="20" id="qE9-0H-H2U"/>
+                                    <constraint firstAttribute="trailing" secondItem="0Mi-Ds-wUj" secondAttribute="trailing" constant="20" id="shu-Q2-dos"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ko0-RW-gz8" secondAttribute="trailing" constant="20" id="stT-b9-wFg"/>
+                                    <constraint firstItem="71K-T5-ONq" firstAttribute="width" secondItem="Tgp-nc-nJz" secondAttribute="width" id="sxj-aM-9u0"/>
+                                    <constraint firstItem="c3h-QE-dJF" firstAttribute="top" secondItem="Ko0-RW-gz8" secondAttribute="top" id="tBU-S6-dd0"/>
+                                    <constraint firstItem="c3h-QE-dJF" firstAttribute="top" secondItem="Tgp-nc-nJz" secondAttribute="bottom" constant="5" id="usj-Et-rbr"/>
+                                    <constraint firstItem="c3h-QE-dJF" firstAttribute="height" secondItem="Ko0-RW-gz8" secondAttribute="height" id="w6t-ld-eaO"/>
+                                    <constraint firstItem="jxM-8n-B0H" firstAttribute="top" secondItem="c3h-QE-dJF" secondAttribute="bottom" constant="18" id="xzn-FW-qnq"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PpW-Z7-LEE"/>
+                                        <exclude reference="sxj-aM-9u0"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Vsb-FS-bTZ" firstAttribute="leading" secondItem="DxJ-am-hix" secondAttribute="leadingMargin" constant="-20" id="5Ce-GH-vQ9"/>
+                            <constraint firstItem="Vsb-FS-bTZ" firstAttribute="leading" secondItem="DxJ-am-hix" secondAttribute="leading" id="AVL-jk-gdM"/>
+                            <constraint firstItem="Vsb-FS-bTZ" firstAttribute="centerX" secondItem="DxJ-am-hix" secondAttribute="centerX" id="apV-gj-efq"/>
+                            <constraint firstItem="Yjj-T1-yHy" firstAttribute="top" secondItem="Vsb-FS-bTZ" secondAttribute="bottom" id="cmh-fd-pQC"/>
+                            <constraint firstAttribute="trailing" secondItem="Vsb-FS-bTZ" secondAttribute="trailing" id="jC4-9h-ckz"/>
+                            <constraint firstItem="Vsb-FS-bTZ" firstAttribute="bottom" secondItem="Yjj-T1-yHy" secondAttribute="top" id="v5V-gR-9nQ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5Ce-GH-vQ9"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="lLE-Of-S0i">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="kNB-hb-ZRb">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0ta-PE-gVO">
+                                <rect key="frame" x="-23" y="-15" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addCardButton" destination="jxM-8n-B0H" id="d6u-Lc-3kQ"/>
+                        <outlet property="cardExpiryDateField" destination="c3h-QE-dJF" id="lFB-si-0kr"/>
+                        <outlet property="cardExpiryDateLabel" destination="Tgp-nc-nJz" id="z6g-Og-cIJ"/>
+                        <outlet property="cardNumberField" destination="wn4-8b-Qr3" id="6Cj-ur-wp7"/>
+                        <outlet property="cardNumberLabel" destination="0Mi-Ds-wUj" id="8CG-Gn-tcT"/>
+                        <outlet property="cardSecurityCodeField" destination="Ko0-RW-gz8" id="tWD-IW-BGV"/>
+                        <outlet property="cardSecurityCodeLabel" destination="71K-T5-ONq" id="J14-fv-peY"/>
+                        <outlet property="navCancel" destination="0ta-PE-gVO" id="MP0-8S-h5Q"/>
+                        <outlet property="scrollContainer" destination="DxJ-am-hix" id="ZW9-En-imX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lqB-dp-7i0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="191" y="495"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="poweredBy" width="323" height="16"/>
+    </resources>
+</document>

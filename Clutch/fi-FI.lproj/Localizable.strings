@@ -1,0 +1,16 @@
+/* The text shown on the 'add card' button */
+"AddCardButtonTitle" = "Lisää kortti";
+
+/* The text shown above the expiry date field */
+"CreditCardExpiryDate" = "Voimassaolo";
+
+/* The text shown above the credit card number field */
+"CreditCardNumber" = "Korttinumero";
+
+/* The text shown above the security code field */
+"CreditCardSecurityCode" = "Turvaluku";
+
+/* The initial value for add card form status label */
+"FillOutFormBelow" = "Täytä lomake";
+
+"MM/YY" = "KK/VV";

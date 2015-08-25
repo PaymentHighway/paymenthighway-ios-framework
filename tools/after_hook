@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+PROJECT_NAME = "Clutch"
+REQUIRED_COVERAGE = 85
+
+# Placeholder until Apple fixes Swift Code Coverage
+def code_coverage
+  command = "groovy http://frankencover.it/with -source-dir #{PROJECT_NAME} -required-coverage #{REQUIRED_COVERAGE}"
+end

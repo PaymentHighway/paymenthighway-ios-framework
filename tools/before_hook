@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+# Backwards compatible way of checking for gem existence
+def gem_available?(name)
+   Gem::Specification.find_by_name(name)
+rescue Gem::LoadError
+   false
+end
+
+# Dependencies need to be installed
+
+puts "Checking for ruby gem dependencies"
+dependencies = %w(bundler colorize)
+for dep in dependencies
+  unless gem_available?(dep)
+    puts "#{dep} not found. Installing."
+    system "sudo -A gem install #{dep}"
+  else
+    puts "#{dep} found. OK."
+  end
+end
+puts "Done."

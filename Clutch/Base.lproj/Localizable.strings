@@ -1,0 +1,16 @@
+/* The text shown on the 'add card' button */
+"AddCardButtonTitle" = "Add card";
+
+/* The text shown above the expiry date field */
+"CreditCardExpiryDate" = "Expiry date";
+
+/* The text shown above the credit card number field */
+"CreditCardNumber" = "Card number";
+
+/* The text shown above the security code field */
+"CreditCardSecurityCode" = "Security code";
+
+/* The initial value for add card form status label */
+"FillOutFormBelow" = "Fill out the form";
+
+"MM/YY" = "MM/YY";

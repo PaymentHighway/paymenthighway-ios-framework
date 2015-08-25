@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1sC-nH-Xu8">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gFW-wA-1UL">
+            <objects>
+                <viewController id="1sC-nH-Xu8" customClass="ViewController" customModule="ClutchDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S7G-BF-qx9"/>
+                        <viewControllerLayoutGuide type="bottom" id="qw5-a9-9Xa"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="y8h-nB-nwN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHE-5B-2ZY">
+                                <rect key="frame" x="16" y="28" width="63" height="30"/>
+                                <state key="normal" title="Add card">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCard:" destination="1sC-nH-Xu8" eventType="touchUpInside" id="XR8-Yb-69l"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Demo started, all log files will appear here." translatesAutoresizingMaskIntoConstraints="NO" id="ke0-Nw-SgS">
+                                <rect key="frame" x="16" y="66" width="568" height="514"/>
+                                <color key="backgroundColor" red="0.9363622798827238" green="0.96934566179338622" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93636227989999998" green="0.96934566180000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ke0-Nw-SgS" firstAttribute="trailing" secondItem="y8h-nB-nwN" secondAttribute="trailingMargin" id="2ji-Tc-XxK"/>
+                            <constraint firstItem="ke0-Nw-SgS" firstAttribute="leading" secondItem="NHE-5B-2ZY" secondAttribute="leading" id="FSL-rh-60M"/>
+                            <constraint firstItem="ke0-Nw-SgS" firstAttribute="top" secondItem="NHE-5B-2ZY" secondAttribute="bottom" constant="8" symbolic="YES" id="J0R-mr-T0C"/>
+                            <constraint firstItem="NHE-5B-2ZY" firstAttribute="top" secondItem="S7G-BF-qx9" secondAttribute="bottom" constant="8" symbolic="YES" id="NkT-PY-oFO"/>
+                            <constraint firstAttribute="bottom" secondItem="ke0-Nw-SgS" secondAttribute="bottom" constant="20" symbolic="YES" id="UKa-Sg-gvO"/>
+                            <constraint firstItem="ke0-Nw-SgS" firstAttribute="leading" secondItem="y8h-nB-nwN" secondAttribute="leadingMargin" id="a4W-2Z-Po5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logForUser" destination="ke0-Nw-SgS" id="79K-KQ-SSV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WjM-FJ-3dA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223" y="487"/>
+        </scene>
+    </scenes>
+</document>

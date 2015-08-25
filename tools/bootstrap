@@ -1,0 +1,112 @@
+#!/usr/bin/env ruby
+require 'colorize'
+require 'mkmf'
+ 
+# Make the MakeMakefile logger write file output to null.
+# Probably requires ruby >= 1.9.3
+module MakeMakefile::Logging
+  @logfile = File::NULL
+end
+
+# Utility functions
+def command_exists_for(command)
+  # We use find_executable0 for reduced logging output. Dirty.
+  find_executable0("#{command}") != nil
+end
+
+# Main Program
+puts "iOS Environment Bootstrapper\n".light_blue
+
+# Dependencies information
+dependencies = {
+  # Homebrew
+  brew: {
+    name: "Homebrew",
+    installer: lambda {
+        installer = "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+        system(installer)
+        updater = "brew update"
+        system(updater)
+    }
+  },
+
+  # CocoaPods
+  pod: {
+    name: "CocoaPods",
+    installer: lambda {
+      installer = "sudo -A gem install cocoapods"
+      system(installer)
+      setuper = "pod setup"
+      system(setuper)
+    }
+  },
+
+  # Carthage
+  carthage: {
+    name: "Carthage",
+    installer: lambda {
+      installer = "brew install carthage"
+      system(installer)
+    }
+  },
+
+  # Code Coverage Tools
+  groovy: {
+    name: "Groovy",
+    installer: lambda {
+      installer = "brew installer groovy"
+      system(installer)
+    }
+  },
+
+  lcov: {
+    name: "LCov",
+    installer: lambda {
+      installer = "brew installer lcov"
+      system(installer)
+    }
+  },
+
+  # Xcode Command-Line Tools
+  gcc: {
+    name: "Xcode Command-Line tools",
+    installer: lambda {
+      puts "Xcode Command-Line not installed. Please install them from Xcode.".red
+      exit
+    }
+  }
+}
+
+puts "Checking for dependencies".yellow
+dependencies.each_key do |key|
+  name = dependencies[key][:name]
+  unless command_exists_for key
+    puts "#{name} not found. Installing.".red
+    dependencies[key][:installer]
+  else
+    puts "#{name} found.".green
+  end
+end
+puts ""
+
+puts "Bootstrapping project dependencies.".yellow
+
+# Project bootstrap
+if File.file?("Podfile")
+  puts "Installing Cocoapods".yellow
+  system("pod install && pod update")
+  puts "Done.".green
+else
+  puts "No Podfile found. Skipping CocoaPods installer.".yellow
+end
+
+if File.file?("Cartfile")
+  puts "Building Carthage dependencies.".yellow
+  system("carthage update --use-submodules")
+  puts "Done.".green
+else
+  puts "No Cartfile found. Skipping Carthage installer.".yellow
+end
+
+puts ""
+puts "All Done.".green

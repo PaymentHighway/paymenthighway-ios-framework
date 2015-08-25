@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CloseButtonBackgroundColor</key>
+	<string>0x8ba7cf</string>
+	<key>CloseButtonShadowColor</key>
+	<string>0x0873c0</string>
+	<key>FormLabelTextColor</key>
+	<string>0x1d4e9b</string>
+	<key>FormInputBorderColor</key>
+	<string>0x1d4e9b</string>
+	<key>FormInputIconColor</key>
+	<string>0x1d4e9b</string>
+	<key>FormBackgroundColor</key>
+	<string>0xeef7fd</string>
+	<key>FormButtonBackgroundColor</key>
+	<string>0x47a3e3</string>
+	<key>FormButtonShadowColor</key>
+	<string>0x0873c0</string>
+</dict>
+</plist>
