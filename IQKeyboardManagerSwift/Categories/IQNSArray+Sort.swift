@@ -1,7 +1,7 @@
 //
 //  IQNSArray+Sort.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import UIKit
 /**
 UIView.subviews sorting category.
 */
-extension NSArray {
+internal extension Array {
     
     ///--------------
     /// MARK: Sorting
@@ -36,29 +36,23 @@ extension NSArray {
     /**
     Returns the array by sorting the UIView's by their tag property.
     */
-    func sortedArrayByTag() -> NSArray {
+    internal func sortedArrayByTag() -> [Element] {
         
-        return sortedArrayUsingComparator({ (let obj1: AnyObject?, let obj2: AnyObject?) -> NSComparisonResult in
+        return sort({ (obj1 : Element, obj2 : Element) -> Bool in
             
             let view1 = obj1 as! UIView
             let view2 = obj2 as! UIView
             
-            if view1.tag < view2.tag {
-                return .OrderedAscending
-            } else if view1.tag > view2.tag {
-                return .OrderedDescending
-            } else {
-                return .OrderedSame
-            }
+            return (view1.tag < view2.tag)
         })
     }
     
     /**
     Returns the array by sorting the UIView's by their tag property.
     */
-    func sortedArrayByPosition() -> NSArray {
+    internal func sortedArrayByPosition() -> [Element] {
         
-        return sortedArrayUsingComparator({ (let obj1: AnyObject?, let obj2: AnyObject?) -> NSComparisonResult in
+        return sort({ (obj1 : Element, obj2 : Element) -> Bool in
             
             let view1 = obj1 as! UIView
             let view2 = obj2 as! UIView
@@ -68,17 +62,10 @@ extension NSArray {
             let x2 = CGRectGetMinX(view2.frame)
             let y2 = CGRectGetMinY(view2.frame)
             
-            if y1 < y2 {
-                return .OrderedAscending
-            } else if y1 > y2 {
-                return .OrderedDescending
-            } else if x1 < x2 {    //Else both y are same so checking for x positions
-                
-                return .OrderedAscending
-            } else if x1 > x2 {
-                return .OrderedDescending
+            if y1 != y2 {
+                return y1 < y2
             } else {
-                return .OrderedSame
+                return x1 < x2
             }
         })
     }

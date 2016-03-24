@@ -53,7 +53,7 @@ public class Networking {
     {
         let date = NSDate()
         
-        var formatter = NSDateFormatter();
+        let formatter = NSDateFormatter();
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'";
         formatter.timeZone = NSTimeZone(abbreviation: "UTC");
         let utcTimeZoneStr = formatter.stringFromDate(date);
@@ -67,7 +67,7 @@ public class Networking {
     public func helperGetTransactionId(host: String, success: (String) -> (), failure: (NSError) -> ()) -> () {
         var reqId = getRequestId() // requestId not validated for this call
 
-            manager.request(.GET, "\(host)/mobile-key").responseJSON{(request, response, data, error) in
+            manager.request(.GET, "\(host)/mobile-key").responseJSON{request, response, data, error in
             if let errorMessage = error {
                 println("Networking.helperGetTransactionId most likely received malformed data from server.")
                 failure(errorMessage)
@@ -110,7 +110,7 @@ public class Networking {
     public func tokenize(transactionId: String, expiryMonth: String, expiryYear: String, cvc: String, pan: String, certificateBase64Der: String, success: (String) -> (), failure: (NSError) -> ()) -> () {
     
         let jsonCardData = JSON(["expiry_month": expiryMonth, "expiry_year": expiryYear, "cvc" : cvc, "pan" : pan])
-        if let encrypted = encryptWithRsaAes(jsonCardData.description, certificateBase64Der)
+        if let encrypted = encryptWithRsaAes(jsonCardData.description, certificateBase64Der: certificateBase64Der)
         {
             let payloadJson = ["encrypted" : encrypted.encryptedBase64Message, "key" : ["key" : encrypted.encryptedBase64Key, "iv" : encrypted.iv]]
             
@@ -173,7 +173,7 @@ public class Networking {
         {
             return true
         }
-        println("Error: received requestID did not match.")
+        print("Error: received requestID did not match.")
         return false
     }
 }

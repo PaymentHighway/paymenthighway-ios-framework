@@ -52,10 +52,10 @@ public class TextPattern {
 	
 	/// Move to the next character index and process it
 	public func next() -> Bool {
-		index++
-		if index >= count(text) { return true }
+		index += 1
+		if index >= text.characters.count { return true }
 		
-		current = text[advance(text.startIndex, index)]
+		current = text[text.startIndex.advancedBy(index)]
 		if current == "?" {
 			next()
 			mustFullfill = false
@@ -69,7 +69,7 @@ public class TextPattern {
 	public func rewind() -> Bool {
 		if index > rewindIndex && rewindIndex > 0 {
 			index = rewindIndex
-			current = text[advance(text.startIndex, rewindIndex)]
+			current = text[text.startIndex.advancedBy(rewindIndex)]
 			return true
 		}
 		
@@ -121,10 +121,10 @@ public class SPHClutchFormatter {
 		var collect = Array<TextPattern>()
 		var index = 0
 		var text = source
-		for char in text {
+		for char in text.characters {
 			var consumed = false
 			var lastChar: Character?
-			for pattern in pending.reverse() {
+			for pattern in Array(pending.reverse()) {
 				if char != pattern.current && pattern.mustFullfill {
 					pending = pending.filter{$0 != pattern}
 				} else if char == pattern.current {
@@ -133,15 +133,15 @@ public class SPHClutchFormatter {
 						continue //it is matching on the same pattern, so skip it
 					}
 					if pattern.next() {
-						let range = advance(text.startIndex, pattern.start)...advance(text.startIndex, index)
+						let range = text.startIndex.advancedBy(pattern.start)...text.startIndex.advancedBy(index)
 						//println("text range: \(text[range])")
 						if let match = pattern.matched {
 							let src = text[range]
-							let srcLen = count(src)
+							let srcLen = src.characters.count
 							var replace = match(src,text,pattern.start)
 							if replace.attributes != nil {
 								text.replaceRange(range, with: replace.text)
-								let replaceLen = count(replace.text)
+								let replaceLen = replace.count
 								index -= (srcLen-replaceLen)
 								lastChar = char
 								pattern.length = replaceLen
@@ -168,7 +168,7 @@ public class SPHClutchFormatter {
 					}
 				}
 			}
-			index++
+			index += 1
 		}
 		//we have our patterns, let's build a stylized string
 		var attributedText = NSMutableAttributedString(string: text)

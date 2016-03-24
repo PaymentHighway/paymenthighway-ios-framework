@@ -1,7 +1,7 @@
 //
-//  IQBarButtonItem.swift
+//  IQUIScrollView+Additions.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
+import Foundation
 import UIKit
 
-class IQBarButtonItem: UIBarButtonItem {
-   
-    override class func initialize() {
+private var kIQShouldRestoreScrollViewContentOffset = "kIQShouldRestoreScrollViewContentOffset"
 
-        superclass()?.initialize()
-        
-        self.appearance().tintColor = nil
-        self.appearance().setTitleTextAttributes(nil, forState: UIControlState.Normal)
-        self.appearance().setTitleTextAttributes(nil, forState: UIControlState.Highlighted)
-        self.appearance().setTitleTextAttributes(nil, forState: UIControlState.Disabled)
-        self.appearance().setTitleTextAttributes(nil, forState: UIControlState.Selected)
-        self.appearance().setTitleTextAttributes(nil, forState: UIControlState.Application)
-        self.appearance().setTitleTextAttributes(nil, forState: UIControlState.Reserved)
+public extension UIScrollView {
+    
+    /**
+     To set customized distance from keyboard for textField/textView. Can't be less than zero
+     */
+    public var shouldRestoreScrollViewContentOffset: Bool {
+        get {
+            
+            if let aValue = objc_getAssociatedObject(self, &kIQShouldRestoreScrollViewContentOffset) as? Bool {
+                return aValue
+            } else {
+                return false
+            }
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &kIQShouldRestoreScrollViewContentOffset, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
     }
 }

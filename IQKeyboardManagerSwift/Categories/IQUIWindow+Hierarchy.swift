@@ -1,7 +1,7 @@
 //
-//  IQKeyboardManagerConstantsInternal.swift
+//  IQUIWindow+Hierarchy.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,5 +23,32 @@
 
 
 import Foundation
+import UIKit
 
-let IQ_IS_IOS8_OR_GREATER = (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1)
+/** @abstract UIWindow hierarchy category.  */
+public extension UIWindow {
+
+    /** @return Returns the current Top Most ViewController in hierarchy.   */
+    override public func topMostController()->UIViewController? {
+        
+        var topController = rootViewController
+        
+        while let presentedController = topController?.presentedViewController {
+            topController = presentedController
+        }
+        
+        return topController
+    }
+    
+    /** @return Returns the topViewController in stack of topMostController.    */
+    public func currentViewController()->UIViewController? {
+        
+        var currentViewController = topMostController()
+        
+        while currentViewController != nil && currentViewController is UINavigationController && (currentViewController as! UINavigationController).topViewController != nil {
+            currentViewController = (currentViewController as! UINavigationController).topViewController
+        }
+
+        return currentViewController
+    }
+}

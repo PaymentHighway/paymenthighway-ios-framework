@@ -1,7 +1,7 @@
 //
 //  IQKeyboardManagerConstants.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -47,12 +47,11 @@ Creates Toolbar according to tag property of TextField's.
 `IQAutoToolbarByPosition`
 Creates Toolbar according to the y,x position of textField in it's superview coordinate.
 */
-enum IQAutoToolbarManageBehaviour {
+public enum IQAutoToolbarManageBehaviour : Int {
     case BySubviews
     case ByTag
     case ByPosition
 }
-
 
 /*
 

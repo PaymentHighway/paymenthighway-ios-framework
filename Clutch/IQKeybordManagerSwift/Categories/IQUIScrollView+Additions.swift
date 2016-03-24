@@ -1,7 +1,7 @@
 //
-//  IQUIWindow+Hierarchy.swift
+//  IQUIScrollView+Additions.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,34 +21,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 import Foundation
 import UIKit
 
-/** @abstract UIWindow hierarchy category.  */
-extension UIWindow {
+private var kIQShouldRestoreScrollViewContentOffset = "kIQShouldRestoreScrollViewContentOffset"
 
-    /** @return Returns the current Top Most ViewController in hierarchy.   */
-    override func topMostController()->UIViewController? {
-        
-        var topController = rootViewController
-        
-        while let presentedController = topController?.presentedViewController {
-            topController = presentedController
-        }
-        
-        return topController
-    }
+public extension UIScrollView {
     
-    /** @return Returns the topViewController in stack of topMostController.    */
-    func currentViewController()->UIViewController? {
-        
-        var currentViewController = topMostController()
-        
-        while currentViewController != nil && currentViewController is UINavigationController && (currentViewController as! UINavigationController).topViewController != nil {
-            currentViewController = (currentViewController as! UINavigationController).topViewController
+    /**
+     To set customized distance from keyboard for textField/textView. Can't be less than zero
+     */
+    public var shouldRestoreScrollViewContentOffset: Bool {
+        get {
+            
+            if let aValue = objc_getAssociatedObject(self, &kIQShouldRestoreScrollViewContentOffset) as? Bool {
+                return aValue
+            } else {
+                return false
+            }
         }
-
-        return currentViewController
+        set(newValue) {
+            objc_setAssociatedObject(self, &kIQShouldRestoreScrollViewContentOffset, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
     }
 }

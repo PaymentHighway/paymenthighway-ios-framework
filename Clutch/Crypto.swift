@@ -15,21 +15,21 @@ public func getRequestId() -> String {
 
 /// Returns Optional SecKeyRef from given certificate in DER-format.
 ///
-/// :param:   DER-formatted certificate
-/// :returns: SecKeyRef or Nil.
+/// - parameter   DER-formatted: certificate
+/// - returns: SecKeyRef or Nil.
 private func loadDER(publicKeyFileContent: NSData) -> SecKeyRef? {
     let certificate = SecCertificateCreateWithData(kCFAllocatorDefault, publicKeyFileContent as CFData).takeUnretainedValue()
     let policy = SecPolicyCreateBasicX509().takeUnretainedValue();
     var unmanagedTrust : Unmanaged<SecTrust>? = nil
     let status = SecTrustCreateWithCertificates(certificate, policy, &unmanagedTrust)
     if (status != 0) {
-        println("SecTrustCreateWithCertificates fail. Error Code: \(status)");
+        print("SecTrustCreateWithCertificates fail. Error Code: \(status)");
         return nil
     }
     let trust = unmanagedTrust!.takeUnretainedValue()
     let evaluateStatus = SecTrustEvaluate(trust, nil)
     if (evaluateStatus != 0) {
-        println("SecTrustEvaluate fail. Error Code: \(evaluateStatus)");
+        print("SecTrustEvaluate fail. Error Code: \(evaluateStatus)");
         return nil
     }
     return SecTrustCopyPublicKey(trust).takeUnretainedValue();
@@ -38,19 +38,19 @@ private func loadDER(publicKeyFileContent: NSData) -> SecKeyRef? {
 private func encryptWithData(content :NSData, publicKey :SecKeyRef) -> NSData? {
     
     let blockSize = Int(SecKeyGetBlockSize(publicKey) - 11)
-    var encryptedData = NSMutableData()
+    let encryptedData = NSMutableData()
     let blockCount = Int(ceil(Double(content.length) / Double(blockSize)))
 
     for i in 0..<blockCount {
         var cipherLen = SecKeyGetBlockSize(publicKey)
         var cipher = [UInt8](count: Int(cipherLen), repeatedValue: 0)
         let bufferSize = min(blockSize,(content.length - i * blockSize))
-        var buffer = content.subdataWithRange(NSMakeRange(i*blockSize, bufferSize))
-        let status = SecKeyEncrypt(publicKey, SecPadding(kSecPaddingOAEP), UnsafePointer<UInt8>(buffer.bytes), buffer.length, &cipher, &cipherLen)
+        let buffer = content.subdataWithRange(NSMakeRange(i*blockSize, bufferSize))
+        let status = SecKeyEncrypt(publicKey, SecPadding.OAEP, UnsafePointer<UInt8>(buffer.bytes), buffer.length, &cipher, &cipherLen)
         if (status == noErr){
             encryptedData.appendBytes(cipher, length: Int(cipherLen))
         }else{
-            println("SecKeyEncrypt fail. Error Code: \(status)")
+            print("SecKeyEncrypt fail. Error Code: \(status)")
             return nil
         }
     }
