@@ -138,10 +138,10 @@ public class SPHClutchFormatter {
 						if let match = pattern.matched {
 							let src = text[range]
 							let srcLen = src.characters.count
-							var replace = match(src,text,pattern.start)
+							let replace = match(src,text,pattern.start)
 							if replace.attributes != nil {
 								text.replaceRange(range, with: replace.text)
-								let replaceLen = replace.count
+								let replaceLen = replace.text.characters.count
 								index -= (srcLen-replaceLen)
 								lastChar = char
 								pattern.length = replaceLen
@@ -171,9 +171,9 @@ public class SPHClutchFormatter {
 			index += 1
 		}
 		//we have our patterns, let's build a stylized string
-		var attributedText = NSMutableAttributedString(string: text)
+		let attributedText = NSMutableAttributedString(string: text)
 		for pattern in collect {
-			attributedText.setAttributes(pattern.attributes, range: NSMakeRange(pattern.start, pattern.length))
+			attributedText.setAttributes((pattern.attributes as! [String: AnyObject]), range: NSMakeRange(pattern.start, pattern.length))
 		}
 		return attributedText
 	}

@@ -18,21 +18,21 @@ public func getRequestId() -> String {
 /// - parameter   DER-formatted: certificate
 /// - returns: SecKeyRef or Nil.
 private func loadDER(publicKeyFileContent: NSData) -> SecKeyRef? {
-    let certificate = SecCertificateCreateWithData(kCFAllocatorDefault, publicKeyFileContent as CFData).takeUnretainedValue()
-    let policy = SecPolicyCreateBasicX509().takeUnretainedValue();
-    var unmanagedTrust : Unmanaged<SecTrust>? = nil
-    let status = SecTrustCreateWithCertificates(certificate, policy, &unmanagedTrust)
+    let certificate = SecCertificateCreateWithData(kCFAllocatorDefault, publicKeyFileContent as CFData)
+    let policy = SecPolicyCreateBasicX509()
+    var unmanagedTrust : SecTrust? = nil
+    let status = SecTrustCreateWithCertificates(certificate!, policy, &unmanagedTrust)
     if (status != 0) {
         print("SecTrustCreateWithCertificates fail. Error Code: \(status)");
         return nil
     }
-    let trust = unmanagedTrust!.takeUnretainedValue()
+    let trust = unmanagedTrust!
     let evaluateStatus = SecTrustEvaluate(trust, nil)
     if (evaluateStatus != 0) {
         print("SecTrustEvaluate fail. Error Code: \(evaluateStatus)");
         return nil
     }
-    return SecTrustCopyPublicKey(trust).takeUnretainedValue();
+    return SecTrustCopyPublicKey(trust)
 }
 
 private func encryptWithData(content :NSData, publicKey :SecKeyRef) -> NSData? {

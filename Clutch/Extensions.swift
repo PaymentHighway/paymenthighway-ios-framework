@@ -50,7 +50,7 @@ internal extension String {
         var strings = [String]()
         
         for result in results {
-            for var i = 1; i < result.numberOfRanges; i++ {
+            for i in 1 ..< result.numberOfRanges {
                 let range = result.rangeAtIndex(i)
                 strings.append(nsString.substringWithRange(range))
             }
