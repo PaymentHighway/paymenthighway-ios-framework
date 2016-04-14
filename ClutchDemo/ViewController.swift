@@ -30,7 +30,7 @@ class ViewController: UIViewController {
   
     @IBAction func addCard(sender: UIButton) {
         
-        let mobileBackendDevAddress = "http://127.0.0.1:8081"
+        let mobileBackendDevAddress = "http://54.194.196.206:8081"
         
         let mobileBackendStagingAddress = "http://54.194.196.206:8081"
         

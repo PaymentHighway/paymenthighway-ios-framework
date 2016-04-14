@@ -71,7 +71,7 @@ public class Networking {
             if let errorMessage = response.result.error {
                 print("Networking.helperGetTransactionId most likely received malformed data from server.")
                 failure(errorMessage)
-            } else if let json: AnyObject = response.data{
+            } else if let json: AnyObject = response.result.value {
                 let transactionId = JSON(json)["id"].stringValue
                 
                 if transactionId.characters.count > 0
@@ -93,7 +93,7 @@ public class Networking {
             if let errorMessage = response.result.error {
                 print("Networking.getKey most likely received malformed data from server.")
                 failure(errorMessage)
-            } else if let json: AnyObject = response.data {
+            } else if let json: AnyObject = response.result.value {
                 let key = JSON(json)["key"].stringValue
                 if key.characters.count > 0 && self.doesContainValidRequestId(response.response, requestId: reqId)
                 {
@@ -127,7 +127,7 @@ public class Networking {
                 if let errorMessage = response.result.error {
                     print("Networking.tokenize most likely received malformed data from server.")
                     failure(errorMessage)
-                } else if let json: AnyObject = response.data {
+                } else if let json: AnyObject = response.result.value {
                     let code = JSON(json)["result"]["code"].int
                     let message = JSON(json)["result"]["message"].stringValue
                     
