@@ -59,25 +59,30 @@ private func encryptWithData(content :NSData, publicKey :SecKeyRef) -> NSData? {
 
 public func encryptWithRsaAes(data: String, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)?
 {
-    //let keyAes = Cipher.randomIV(AES.blockSize)
-    //let iv = Cipher.randomIV(AES.blockSize)
+    let keyAes = AES.randomIV(AES.blockSize)
+    let iv = AES.randomIV(AES.blockSize)
     
-    /*if let encryptedData = CryptoSwift.AES(key: keyAes, iv: iv, blockMode: CryptoSwift.CipherBlockMode.CBC).encrypt([UInt8](data.utf8), padding: PKCS7())
-    {
-        if let publicKey = loadDER(NSData(base64EncodedString: certificateBase64Der, options: [])!)
+    do{
+        if let encryptedData: [UInt8] = try AES(key: keyAes, iv: iv, blockMode: CryptoSwift.CipherBlockMode.CBC).encrypt([UInt8](data.utf8), padding: PKCS7())
         {
-            if let encryptedKey = encryptWithData(NSData(bytes: keyAes, length: keyAes.count), publicKey: publicKey)
+            if let publicKey = loadDER(NSData(base64EncodedString: certificateBase64Der, options: [])!)
             {
-                let encryptedBase64Message =  NSData(bytes: encryptedData, length: encryptedData.count).base64EncodedStringWithOptions(.allZeros)
-                
-                let encryptedBase64Key = encryptedKey.base64EncodedStringWithOptions([])
-                
-                let base64Iv = NSData(bytes: iv, length: iv.count).base64EncodedStringWithOptions([])
-                
-                return (encryptedBase64Message, encryptedBase64Key, base64Iv)
+                if let encryptedKey = encryptWithData(NSData(bytes: keyAes, length: keyAes.count), publicKey: publicKey)
+                {
+                    let encryptedBase64Message =  NSData(bytes: encryptedData, length: encryptedData.count).base64EncodedStringWithOptions([])
+                    
+                    let encryptedBase64Key = encryptedKey.base64EncodedStringWithOptions([])
+                    
+                    let base64Iv = NSData(bytes: iv, length: iv.count).base64EncodedStringWithOptions([])
+                    
+                    return (encryptedBase64Message, encryptedBase64Key, base64Iv)
+                }
             }
         }
-    }*/
-    return nil
+
+    }catch{
+        //TODO handle errors
+    }
+        return nil
 }
 
