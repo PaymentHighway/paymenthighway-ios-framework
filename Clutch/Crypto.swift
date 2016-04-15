@@ -57,13 +57,12 @@ private func encryptWithData(content :NSData, publicKey :SecKeyRef) -> NSData? {
     return encryptedData
 }
 
-public func encryptWithRsaAes(data: String?, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)?
+public func encryptWithRsaAes(data: String, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)?
 {
-    let cipher = (dispatch_queue_create("", DISPATCH_QUEUE_SERIAL) as! Cipher).dynamicType
     let keyAes = cipher.randomIV(AES.blockSize)
     let iv = cipher.randomIV(AES.blockSize)
     
-    /*if let encryptedData = try CryptoSwift.AES(key: keyAes, iv: iv, blockMode: CryptoSwift.CipherBlockMode.CBC).encrypt([UInt8](data!.utf8), padding: PKCS7())
+    /*if let encryptedData = CryptoSwift.AES(key: keyAes, iv: iv, blockMode: CryptoSwift.CipherBlockMode.CBC).encrypt([UInt8](data.utf8), padding: PKCS7())
     {
         if let publicKey = loadDER(NSData(base64EncodedString: certificateBase64Der, options: [])!)
         {
