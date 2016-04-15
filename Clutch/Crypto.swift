@@ -59,8 +59,8 @@ private func encryptWithData(content :NSData, publicKey :SecKeyRef) -> NSData? {
 
 public func encryptWithRsaAes(data: String, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)?
 {
-    let keyAes = cipher.randomIV(AES.blockSize)
-    let iv = cipher.randomIV(AES.blockSize)
+    //let keyAes = Cipher.randomIV(AES.blockSize)
+    //let iv = Cipher.randomIV(AES.blockSize)
     
     /*if let encryptedData = CryptoSwift.AES(key: keyAes, iv: iv, blockMode: CryptoSwift.CipherBlockMode.CBC).encrypt([UInt8](data.utf8), padding: PKCS7())
     {
