@@ -35,7 +35,7 @@ Currently only Carthage is supported. CocoaPods release is planned and manual in
 
 1. Create a "Cartfile"-file in the root of your project and add a line within: 
 ```
-github "solinor/paymenthighway-ios-framework" "v-1.0" 
+github "solinor/paymenthighway-ios-framework" "v-1.0.1" 
 ```
 
 2. Run command
