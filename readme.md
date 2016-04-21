@@ -4,6 +4,7 @@ Clutch is the name for the Solinor Payment Highway iOS SDK (actually it is a .fr
 
 ## Requirements
 
+* At least Xcode 7.3
 * You have an existing iOS project supporting iOS 8 or later
 * [Carthage]( https://github.com/Carthage/Carthage)
 * Valid SPH account id and merchant id
@@ -34,12 +35,12 @@ Currently only Carthage is supported. CocoaPods release is planned and manual in
 
 1. Create a "Cartfile"-file in the root of your project and add a line within: 
 ```
-github "solinor/paymenthighway-ios-framework" "v-1.0" 
+github "solinor/paymenthighway-ios-framework" "v-1.0.1" 
 ```
 
 2. Run command
 ```
-carthage update
+carthage update --platform iOS
 ```
 
 3. Follow the Carthage's instructions for ”[Adding frameworks to an application](https://github.com/Carthage/Carthage)” from steap 3 on "If you're building for iOS"

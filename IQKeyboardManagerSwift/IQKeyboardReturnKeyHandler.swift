@@ -1,7 +1,7 @@
 //
 //  IQKeyboardReturnKeyHandler.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import UIKit
 /**
 Manages the return key to work like next/done in a view hierarchy.
 */
-class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDelegate {
+public class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDelegate {
     
     
     ///---------------
@@ -37,23 +37,18 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     /**
     Delegate of textField/textView.
     */
-    var delegate: protocol<UITextFieldDelegate, UITextViewDelegate>?
-    
-    /**
-    It help to choose the lastTextField instance from sibling responderViews. Default is IQAutoToolbarBySubviews.
-    */
-    var toolbarManageBehaviour = IQAutoToolbarManageBehaviour.BySubviews
+    public var delegate: protocol<UITextFieldDelegate, UITextViewDelegate>?
     
     /**
     Set the last textfield return key type. Default is UIReturnKeyDefault.
     */
-    var lastTextFieldReturnKeyType : UIReturnKeyType = UIReturnKeyType.Default {
+    public var lastTextFieldReturnKeyType : UIReturnKeyType = UIReturnKeyType.Default {
         
         didSet {
             
             for infoDict in textFieldInfoCache {
                 
-                if let view = infoDict[kIQTextField] as? UIView {
+                if let view = infoDict.objectForKey(kIQTextField) as? UIView {
                     updateReturnKeyTypeOnTextField(view)
                 }
             }
@@ -64,14 +59,14 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     /// MARK: Initialization/Deinitialization
     ///--------------------------------------
 
-    override init() {
+    public override init() {
         super.init()
     }
     
     /**
     Add all the textFields available in UIViewController's view.
     */
-    init(controller : UIViewController) {
+    public init(controller : UIViewController) {
         super.init()
         
         addResponderFromView(controller.view)
@@ -81,12 +76,12 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
         
         for infoDict in textFieldInfoCache {
             
-            let view : AnyObject = infoDict[kIQTextField]!!
+            let view : AnyObject = infoDict.objectForKey(kIQTextField)!
             
             if let textField = view as? UITextField {
                 
                 let returnKeyTypeValue = infoDict[kIQTextFieldReturnKeyType] as! NSNumber
-                textField.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.unsignedIntegerValue)!
+                textField.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.integerValue)!
                 
                 textField.delegate = infoDict[kIQTextFieldDelegate] as! UITextFieldDelegate?
             } else if let textView = view as? UITextView {
@@ -94,7 +89,7 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
                 textView.returnKeyType = UIReturnKeyType(rawValue: (infoDict[kIQTextFieldReturnKeyType] as! NSNumber).integerValue)!
                 
                 let returnKeyTypeValue = infoDict[kIQTextFieldReturnKeyType] as! NSNumber
-                textView.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.unsignedIntegerValue)!
+                textView.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.integerValue)!
                 
                 textView.delegate = infoDict[kIQTextFieldDelegate] as! UITextViewDelegate?
             }
@@ -107,7 +102,7 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     ///------------------------
     /// MARK: Private variables
     ///------------------------
-    private var textFieldInfoCache  = NSMutableSet()
+    private var textFieldInfoCache          =   NSMutableSet()
     private let kIQTextField                =   "kIQTextField"
     private let kIQTextFieldDelegate        =   "kIQTextFieldDelegate"
     private let kIQTextFieldReturnKeyType   =   "kIQTextFieldReturnKeyType"
@@ -120,7 +115,7 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
         
         for infoDict in textFieldInfoCache {
             
-            if infoDict[kIQTextField] as! NSObject == textField {
+            if infoDict.objectForKey(kIQTextField) as! NSObject == textField {
                 return infoDict as? [String : AnyObject]
             }
         }
@@ -130,22 +125,32 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
 
     private func updateReturnKeyTypeOnTextField(view : UIView)
     {
-        var tableView : UIView? = view.superviewOfClassType(UITableView)
-        if tableView == nil {
-            tableView = tableView?.superviewOfClassType(UICollectionView)
-        }
+        var superConsideredView : UIView?
         
-        var textFields : NSArray?
+        //If find any consider responderView in it's upper hierarchy then will get deepResponderView. (Bug ID: #347)
+        for disabledClassString in IQKeyboardManager.sharedManager().toolbarPreviousNextAllowedClasses {
+            
+            if let disabledClass = NSClassFromString(disabledClassString) {
+                
+                superConsideredView = view.superviewOfClassType(disabledClass)
+                
+                if superConsideredView != nil {
+                    break
+                }
+            }
+        }
+
+        var textFields : [UIView]?
         
         //If there is a tableView in view's hierarchy, then fetching all it's subview that responds.
-        if let unwrappedTableView = tableView {     //   (Enhancement ID: #22)
+        if let unwrappedTableView = superConsideredView {     //   (Enhancement ID: #22)
             textFields = unwrappedTableView.deepResponderViews()
         } else {  //Otherwise fetching all the siblings
             
             textFields = view.responderSiblings()
             
             //Sorting textFields according to behaviour
-            switch toolbarManageBehaviour {
+            switch IQKeyboardManager.sharedManager().toolbarManageBehaviour {
                 //If needs to sort it by tag
             case .ByTag:        textFields = textFields?.sortedArrayByTag()
                 //If needs to sort it by Position
@@ -154,7 +159,7 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
             }
         }
         
-        if let lastView = textFields?.lastObject as? UIView {
+        if let lastView = textFields?.last {
             
             if let textField = view as? UITextField {
                 
@@ -178,7 +183,7 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     
     @param textFieldView UITextField/UITextView object to register.
     */
-    func addTextFieldView(view : UIView) {
+    public func addTextFieldView(view : UIView) {
         
         var dictInfo : [String : AnyObject] = [String : AnyObject]()
         
@@ -212,20 +217,20 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     
     @param textFieldView UITextField/UITextView object to unregister.
     */
-    func removeTextFieldView(view : UIView) {
+    public func removeTextFieldView(view : UIView) {
         
         if let dict : [String : AnyObject] = textFieldCachedInfo(view) {
             
             if let textField = view as? UITextField {
                 
                 let returnKeyTypeValue = dict[kIQTextFieldReturnKeyType] as! NSNumber
-                textField.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.unsignedIntegerValue)!
+                textField.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.integerValue)!
                 
                 textField.delegate = dict[kIQTextFieldDelegate] as! UITextFieldDelegate?
             } else if let textView = view as? UITextView {
                 
                 let returnKeyTypeValue = dict[kIQTextFieldReturnKeyType] as! NSNumber
-                textView.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.unsignedIntegerValue)!
+                textView.returnKeyType = UIReturnKeyType(rawValue: returnKeyTypeValue.integerValue)!
                 
                 textView.delegate = dict[kIQTextFieldDelegate] as! UITextViewDelegate?
             }
@@ -239,11 +244,11 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     
     @param UIView object to register all it's responder subviews.
     */
-    func addResponderFromView(view : UIView) {
+    public func addResponderFromView(view : UIView) {
         
         let textFields = view.deepResponderViews()
         
-        for textField in textFields as! [UIView] {
+        for textField in textFields {
             
             addTextFieldView(textField)
         }
@@ -254,34 +259,44 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     
     @param UIView object to unregister all it's responder subviews.
     */
-    func removeResponderFromView(view : UIView) {
+    public func removeResponderFromView(view : UIView) {
         
         let textFields = view.deepResponderViews()
         
-        for textField in textFields as! [UIView] {
+        for textField in textFields {
             
             removeTextFieldView(textField)
         }
     }
     
-    func goToNextResponderOrResign(view : UIView) {
+    private func goToNextResponderOrResign(view : UIView) {
         
-        var tableView : UIView? = view.superviewOfClassType(UITableView)
-        if tableView == nil {
-            tableView = tableView?.superviewOfClassType(UICollectionView)
+        var superConsideredView : UIView?
+        
+        //If find any consider responderView in it's upper hierarchy then will get deepResponderView. (Bug ID: #347)
+        for disabledClassString in IQKeyboardManager.sharedManager().toolbarPreviousNextAllowedClasses {
+            
+            if let disabledClass = NSClassFromString(disabledClassString) {
+                
+                superConsideredView = view.superviewOfClassType(disabledClass)
+                
+                if superConsideredView != nil {
+                    break
+                }
+            }
         }
-
-        var textFields : NSArray?
+        
+        var textFields : [UIView]?
         
         //If there is a tableView in view's hierarchy, then fetching all it's subview that responds.
-        if let unwrappedTableView = tableView {     //   (Enhancement ID: #22)
+        if let unwrappedTableView = superConsideredView {     //   (Enhancement ID: #22)
             textFields = unwrappedTableView.deepResponderViews()
         } else {  //Otherwise fetching all the siblings
             
             textFields = view.responderSiblings()
             
             //Sorting textFields according to behaviour
-            switch toolbarManageBehaviour {
+            switch IQKeyboardManager.sharedManager().toolbarManageBehaviour {
                 //If needs to sort it by tag
             case .ByTag:        textFields = textFields?.sortedArrayByTag()
                 //If needs to sort it by Position
@@ -293,17 +308,15 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
 
         if let unwrappedTextFields = textFields {
             
-            if unwrappedTextFields.containsObject(view) == true {
-                //Getting index of current textField.
-                let index = unwrappedTextFields.indexOfObject(view)
-                
+            //Getting index of current textField.
+            if let index = unwrappedTextFields.indexOf(view) {
                 //If it is not last textField. then it's next object becomeFirstResponder.
                 if index < (unwrappedTextFields.count - 1) {
                     
-                    let nextTextField = unwrappedTextFields[index+1] as! UIView
+                    let nextTextField = unwrappedTextFields[index+1]
                     nextTextField.becomeFirstResponder()
                 } else {
-
+                    
                     view.resignFirstResponder()
                 }
             }
@@ -315,47 +328,47 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     /// MARK: UITextField/UITextView delegates
     ///----------------------------------------------
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    public func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        if delegate?.respondsToSelector("textFieldShouldBeginEditing:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextFieldDelegate.textFieldShouldBeginEditing(_:))) != nil {
             return (delegate?.textFieldShouldBeginEditing?(textField) == true)
         } else {
             return true
         }
     }
     
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+    public func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
-        if delegate?.respondsToSelector("textFieldShouldEndEditing:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextFieldDelegate.textFieldShouldEndEditing(_:))) != nil {
             return (delegate?.textFieldShouldEndEditing?(textField) == true)
         } else {
             return true
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    public func textFieldDidBeginEditing(textField: UITextField) {
         updateReturnKeyTypeOnTextField(textField)
         
         delegate?.textFieldShouldBeginEditing?(textField)
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    public func textFieldDidEndEditing(textField: UITextField) {
         
         delegate?.textFieldDidEndEditing?(textField)
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
-        if delegate?.respondsToSelector("textField:shouldChangeCharactersInRange:replacementString:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextFieldDelegate.textField(_:shouldChangeCharactersInRange:replacementString:))) != nil {
             return (delegate?.textField?(textField, shouldChangeCharactersInRange: range, replacementString: string) == true)
         } else {
             return true
         }
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
+    public func textFieldShouldClear(textField: UITextField) -> Bool {
         
-        if delegate?.respondsToSelector("textFieldShouldClear:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextFieldDelegate.textFieldShouldClear(_:))) != nil {
             return (delegate?.textFieldShouldClear?(textField) == true)
         } else {
             return true
@@ -363,11 +376,11 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     }
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         var shouldReturn = true
         
-        if delegate?.respondsToSelector("textFieldShouldReturn:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextFieldDelegate.textFieldShouldReturn(_:))) != nil {
             shouldReturn = (delegate?.textFieldShouldReturn?(textField) == true)
         }
         
@@ -379,40 +392,40 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
     }
     
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    public func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         
-        if delegate?.respondsToSelector("textViewShouldBeginEditing:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextViewDelegate.textViewShouldBeginEditing(_:))) != nil {
             return (delegate?.textViewShouldBeginEditing?(textView) == true)
         } else {
             return true
         }
     }
     
-    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+    public func textViewShouldEndEditing(textView: UITextView) -> Bool {
         
-        if delegate?.respondsToSelector("textViewShouldEndEditing:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextViewDelegate.textViewShouldEndEditing(_:))) != nil {
             return (delegate?.textViewShouldEndEditing?(textView) == true)
         } else {
             return true
         }
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    public func textViewDidBeginEditing(textView: UITextView) {
         updateReturnKeyTypeOnTextField(textView)
         
         delegate?.textViewDidBeginEditing?(textView)
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    public func textViewDidEndEditing(textView: UITextView) {
         
         delegate?.textViewDidEndEditing?(textView)
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         var shouldReturn = true
         
-        if delegate?.respondsToSelector("textView:shouldChangeCharactersInRange:replacementString:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextViewDelegate.textView(_:shouldChangeTextInRange:replacementText:))) != nil {
             shouldReturn = ((delegate?.textView?(textView, shouldChangeTextInRange: range, replacementText: text)) == true)
         }
         
@@ -424,19 +437,19 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
         return shouldReturn
     }
     
-    func textViewDidChange(textView: UITextView) {
+    public func textViewDidChange(textView: UITextView) {
         
         delegate?.textViewDidChange?(textView)
     }
     
-    func textViewDidChangeSelection(textView: UITextView) {
+    public func textViewDidChangeSelection(textView: UITextView) {
         
         delegate?.textViewDidChangeSelection?(textView)
     }
     
-    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    public func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
         
-        if delegate?.respondsToSelector("textView:shouldInteractWithURL:inRange:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextViewDelegate.textView(_:shouldInteractWithURL:inRange:))) != nil {
             return ((delegate?.textView?(textView, shouldInteractWithURL: URL, inRange: characterRange)) == true)
         } else {
             return true
@@ -444,9 +457,9 @@ class IQKeyboardReturnKeyHandler: NSObject , UITextFieldDelegate, UITextViewDele
         
     }
     
-    func textView(textView: UITextView, shouldInteractWithTextAttachment textAttachment: NSTextAttachment, inRange characterRange: NSRange) -> Bool {
+    public func textView(textView: UITextView, shouldInteractWithTextAttachment textAttachment: NSTextAttachment, inRange characterRange: NSRange) -> Bool {
         
-        if delegate?.respondsToSelector("textView:shouldInteractWithTextAttachment:inRange:") != nil {
+        if delegate?.respondsToSelector(#selector(UITextViewDelegate.textView(_:shouldInteractWithTextAttachment:inRange:))) != nil {
             return ((delegate?.textView?(textView, shouldInteractWithTextAttachment: textAttachment, inRange: characterRange)) == true)
         } else {
             return true

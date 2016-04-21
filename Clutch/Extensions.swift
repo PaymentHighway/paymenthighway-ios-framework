@@ -25,32 +25,32 @@ public struct Inset {
 internal extension String {
 
 	/// Get a given substring of a string
-	/// :param: r The range of the substring wanted
-	/// :returns: The found substring
+	/// - parameter r: The range of the substring wanted
+	/// - returns: The found substring
 	subscript (r: Range<Int>) -> String {
 		get {
-			let startIndex = advance(self.startIndex, r.startIndex)
-			let endIndex = advance(startIndex, r.endIndex - r.startIndex)
+			let startIndex = self.startIndex.advancedBy(r.startIndex)
+			let endIndex = startIndex.advancedBy(r.endIndex - r.startIndex)
 			
 			return self[Range(start: startIndex, end: endIndex)]
 		}
 	}
     /// Returns matches for given regexp
-    /// :param: regex The pattern to evaluate
-    /// :returns: Found matches as an array
+    /// - parameter regex: The pattern to evaluate
+    /// - returns: Found matches as an array
     func matchesForRegex(regex: String!) -> [String] {
         
-        let regex = NSRegularExpression(pattern: regex,
-            options: nil, error: nil)!
+        let regex = try! NSRegularExpression(pattern: regex,
+            options: [])
         let nsString = self as NSString
         let results = regex.matchesInString(nsString as String,
-            options: nil, range: NSMakeRange(0, nsString.length))
-            as! [NSTextCheckingResult]
+            options: [], range: NSMakeRange(0, nsString.length))
+            
 		
         var strings = [String]()
         
         for result in results {
-            for var i = 1; i < result.numberOfRanges; i++ {
+            for i in 1 ..< result.numberOfRanges {
                 let range = result.rangeAtIndex(i)
                 strings.append(nsString.substringWithRange(range))
             }
@@ -63,8 +63,8 @@ internal extension String {
     /// appends optional trailing string if longer
     /// Source: https://gist.github.com/aorcsik/c8210a84f163b1b644c0
     func truncate(length: Int, trailing: String? = nil) -> String {
-        if count(self) > length {
-            return self.substringToIndex(advance(self.startIndex, length)) + (trailing ?? "")
+        if self.characters.count > length {
+            return self.substringToIndex(self.startIndex.advancedBy(length)) + (trailing ?? "")
         } else {
             return self
         }
@@ -77,9 +77,9 @@ internal extension String {
 internal extension UIColor {
 	
 	/// Convenience method for initializing with 0-255 color values
-	/// :param: red   The red color value
-	/// :param: green The green color value
-	/// :param: blue  The blue color value
+	/// - parameter red:   The red color value
+	/// - parameter green: The green color value
+	/// - parameter blue:  The blue color value
 	convenience init(red: Int, green: Int, blue: Int) {
 		assert(red >= 0 && red <= 255, "Invalid red component")
 		assert(green >= 0 && green <= 255, "Invalid green component")
@@ -89,7 +89,7 @@ internal extension UIColor {
 	}
 	
 	/// Convenience method for initializing with a 0xFFFFFF-0x000000 color value
-	/// :param: hexInt The hexadecimal integer color value
+	/// - parameter hexInt: The hexadecimal integer color value
 	convenience init(hexInt: Int) {
 		self.init(red: (hexInt >> 16) & 0xff, green: (hexInt >> 8) & 0xff, blue: hexInt & 0xff)
 	}
@@ -106,7 +106,7 @@ public extension UIViewController {
         controller.successHandler = success
         controller.errorHandler = error
         
-        var nav = UINavigationController(rootViewController: controller)
+        let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = UIModalPresentationStyle.Popover
         let ppc = nav.popoverPresentationController!
         let minimunSize = controller.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)

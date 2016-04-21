@@ -17,7 +17,7 @@ public struct ClutchDomains {
 }
 
 /// The recognized card types in the system
-public enum SPHClutchCardType: Int, Printable {
+public enum SPHClutchCardType: Int, CustomStringConvertible {
 	case Visa = 0
 	case MasterCard
 	case AmericanExpress
@@ -111,17 +111,17 @@ public class SPHClutch {
 	
 	/// Formats a card number for processing purposes
     ///
-	/// :param:   cardNumber The card number to format
-	/// :returns: The formatted card number, or an empty string
+	/// - parameter   cardNumber: The card number to format
+	/// - returns: The formatted card number, or an empty string
 	public func formattedCardNumberForProcessing(cardNumber: String) -> String {
 		let illegal    = NSCharacterSet.decimalDigitCharacterSet().invertedSet
 		let components = cardNumber.componentsSeparatedByCharactersInSet(illegal)
-		return join("", components)
+		return components.joinWithSeparator("")
 	}
 	
 	/// Recognize the type of a credit card number
     ///
-	/// :param: cardNumber The card number string
+	/// - parameter cardNumber: The card number string
 	public func cardTypeForCardNumber(cardNumber: String) -> SPHClutchCardType {
 		let valid = self.isValidCardNumber(cardNumber)
 		if !valid {
@@ -129,7 +129,7 @@ public class SPHClutch {
 		}
 		
 		let formattedString: String = self.formattedCardNumberForProcessing(cardNumber)
-		if count(formattedString) < 9 {
+		if formattedString.characters.count < 9 {
 			return .Invalid
 		}
 		
@@ -147,16 +147,16 @@ public class SPHClutch {
 	
 	/// Validate a given credit card number using the Luhn algorithm
     ///
-	/// :param:   cardNumber The card number to validate
-	/// :returns: true if the number passes, false if not
+	/// - parameter   cardNumber: The card number to validate
+	/// - returns: true if the number passes, false if not
 	public func isValidCardNumber(cardNumber: String) -> Bool {
 		let formattedString = self.formattedCardNumberForProcessing(cardNumber)
-		if count(formattedString) < 9 {
+		if formattedString.characters.count < 9 {
 			return false
 		}
         
 		let asciiOffset: UInt8 = 48
-		let digits = Array(formattedString.utf8).reverse().map{$0 - asciiOffset}
+		let digits = Array(Array(formattedString.utf8).reverse()).map{$0 - asciiOffset}
 		
 		let convert: (UInt8) -> (UInt8) = {
 			let n = $0 * 2
@@ -164,7 +164,7 @@ public class SPHClutch {
 		}
 		
 		var sum: UInt8 = 0
-		for (index, digit) in enumerate(digits) {
+		for (index, digit) in digits.enumerate() {
 			if index & 1 == 1 {
 				sum += convert(digit)
 			} else {
@@ -177,9 +177,9 @@ public class SPHClutch {
 	
 	/// Format a given card number to a neat string
     ///
-	/// :param:   cardNumber The card number to format
-	/// :param:   cardType   The type of the card number
-	/// :returns: The properly spaced credit card number
+	/// - parameter   cardNumber: The card number to format
+	/// - parameter   cardType:   The type of the card number
+	/// - returns: The properly spaced credit card number
 	public func formattedCardNumber(cardNumber: String, cardType: SPHClutchCardType) -> String {
         let formattedString = self.formattedCardNumberForProcessing(cardNumber).truncate(19, trailing: "")
         
@@ -190,25 +190,25 @@ public class SPHClutch {
 		}
 		
 		// Create and check regexp matches
-		let regexp  = NSRegularExpression(pattern: regexpString, options: nil, error: nil)!
+		let regexp  = try! NSRegularExpression(pattern: regexpString, options: [])
 		var groups  = [String]()
         
         let matches = formattedString.matchesForRegex(regexpString)
 		
 		// Glue them together
-		return join(" ", matches)
+		return matches.joinWithSeparator(" ")
 	}
     
     // MARK: expiration date 
     
     public func isValidExpirationDate(expirationDate: String) -> Bool {
         
-        if(count(expirationDate) == 5)
+        if(expirationDate.characters.count == 5)
         {
             let month = expirationDate.componentsSeparatedByString("/")[0]
             let year = "20" + expirationDate.componentsSeparatedByString("/")[1]
          
-            var dateFormatter = NSDateFormatter()
+            let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "MMyyyy"
             
             let currentDate = dateFormatter.stringFromDate(NSDate())
@@ -229,13 +229,13 @@ public class SPHClutch {
     
     public func formattedExpirationDate(expirationDate: String) -> String {
         var onlyDigitsExpirationDate = formattedExpirationDateForProcessing(expirationDate)
-        let length = count(onlyDigitsExpirationDate)
+        let length = onlyDigitsExpirationDate.characters.count
         
         var text = ""
         
         switch length {
         case 1:
-            if(2...9 ~= onlyDigitsExpirationDate.toInt()!)
+            if(2...9 ~= Int(onlyDigitsExpirationDate)!)
             {
                 text = "0\(onlyDigitsExpirationDate)/"
             } else {
@@ -246,7 +246,7 @@ public class SPHClutch {
             {
                 text = onlyDigitsExpirationDate
             } else {
-                if onlyDigitsExpirationDate.toInt()! < 1 || onlyDigitsExpirationDate.toInt()! > 12
+                if Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12
                 {
                     onlyDigitsExpirationDate.removeAtIndex(onlyDigitsExpirationDate.endIndex.predecessor())
                     text = onlyDigitsExpirationDate
@@ -255,26 +255,26 @@ public class SPHClutch {
                 }
             }
         case 3:
-            onlyDigitsExpirationDate.insert("/", atIndex: advance(onlyDigitsExpirationDate.startIndex, 2))
+            onlyDigitsExpirationDate.insert("/", atIndex: onlyDigitsExpirationDate.startIndex.advancedBy(2))
             text = onlyDigitsExpirationDate
         case 4:
-            onlyDigitsExpirationDate.insert("/", atIndex: advance(onlyDigitsExpirationDate.startIndex, 2))
+            onlyDigitsExpirationDate.insert("/", atIndex: onlyDigitsExpirationDate.startIndex.advancedBy(2))
             text = onlyDigitsExpirationDate
         case 5:
             onlyDigitsExpirationDate.removeAtIndex(onlyDigitsExpirationDate.endIndex.predecessor())
-            onlyDigitsExpirationDate.insert("/", atIndex: advance(onlyDigitsExpirationDate.startIndex, 2))
+            onlyDigitsExpirationDate.insert("/", atIndex: onlyDigitsExpirationDate.startIndex.advancedBy(2))
             text = onlyDigitsExpirationDate
         default:
             text = ""
         }
         
-        lastExpirationDateLength = count(text)
+        lastExpirationDateLength = text.characters.count
         
         return text
     }
     
     public func isValidSecurityCode(securityCode: String) -> Bool {
-        return count(self.formattedSecurityCodeForProcessing(securityCode)) > 0
+        return self.formattedSecurityCodeForProcessing(securityCode).characters.count > 0
     }
     
     public func formattedSecurityCodeForProcessing(securityCode: String) -> String {
@@ -284,7 +284,7 @@ public class SPHClutch {
     public func formattedSecurityCode(securityCode: String) -> String {
         var onlyDigitsSecurityCode = formattedSecurityCodeForProcessing(securityCode)
         var text = ""
-        switch count(onlyDigitsSecurityCode)
+        switch onlyDigitsSecurityCode.characters.count
         {
             case 0...4 : text = onlyDigitsSecurityCode
             case 5 :

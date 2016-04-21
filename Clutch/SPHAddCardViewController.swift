@@ -24,8 +24,8 @@ import UIKit
     @IBOutlet weak var scrollContainer: UIScrollView!
 
     internal var transactionId = ""
-    internal var successHandler : (String) -> () = {println($0)}
-    internal var errorHandler : (NSError) -> () = {println($0)}
+    internal var successHandler : (String) -> () = {print($0)}
+    internal var errorHandler : (NSError) -> () = {print($0)}
     
     let correctBorderColor = UIColor(hexInt: 0xa6b9dc).CGColor
 
@@ -37,7 +37,7 @@ import UIKit
     
     func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         // Override default behavior for popover on small screens
-        println(controller.presentedViewController)
+        print(controller.presentedViewController)
         let navcon = controller.presentedViewController as! UINavigationController
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         visualEffectView.frame = navcon.view.bounds
@@ -71,13 +71,13 @@ import UIKit
             switch field {
             case cardNumberField:
                 iconImage = UIImage(named: "cardicon", inBundle: clutchBundle, compatibleWithTraitCollection: nil)
-                field.addTarget(self, action: "formatCardNumberFieldOnTheFly:", forControlEvents: UIControlEvents.EditingChanged)
+                field.addTarget(self, action: #selector(SPHAddCardViewController.formatCardNumberFieldOnTheFly(_:)), forControlEvents: UIControlEvents.EditingChanged)
             case cardExpiryDateField:
                 iconImage = UIImage(named: "calendaricon", inBundle: clutchBundle, compatibleWithTraitCollection: nil)
-                field.addTarget(self, action: "formatExpirationDateFieldOnTheFly:", forControlEvents: UIControlEvents.EditingChanged)
+                field.addTarget(self, action: #selector(SPHAddCardViewController.formatExpirationDateFieldOnTheFly(_:)), forControlEvents: UIControlEvents.EditingChanged)
             case cardSecurityCodeField:
                 iconImage = UIImage(named: "lockicon", inBundle: clutchBundle, compatibleWithTraitCollection: nil)
-                field.addTarget(self, action: "formatSecurityCodeFieldOnTheFly:", forControlEvents: UIControlEvents.EditingChanged)
+                field.addTarget(self, action: #selector(SPHAddCardViewController.formatSecurityCodeFieldOnTheFly(_:)), forControlEvents: UIControlEvents.EditingChanged)
             default: break
             }
     
@@ -97,12 +97,12 @@ import UIKit
         
         addCardButton.layer.cornerRadius = 4.0
         addCardButton.layer.masksToBounds = true
-        addCardButton.addTarget(self, action: "addCardButtonTapped:", forControlEvents: .TouchUpInside)
+        addCardButton.addTarget(self, action: #selector(SPHAddCardViewController.addCardButtonTapped(_:)), forControlEvents: .TouchUpInside)
         addCardButton.layer.insertSublayer(gradientLayer, atIndex: 0)
         
         // Setup cancel
         
-        navCancel.addTarget(self, action: "navCancelButtonTapped:",
+        navCancel.addTarget(self, action: #selector(SPHAddCardViewController.navCancelButtonTapped(_:)),
             forControlEvents: .TouchUpInside)
         
         setupLocalization()
@@ -121,7 +121,7 @@ import UIKit
     
     func formatCardNumberFieldOnTheFly(textView: AnyObject){
         if let sphField = textView as? SPHClutchTextField{
-            sphField.text = SPHClutch.sharedInstance.formattedCardNumber(sphField.text, cardType: SPHClutch.sharedInstance.cardTypeForCardNumber(SPHClutch.sharedInstance.formattedCardNumberForProcessing(sphField.text)))
+            sphField.text = SPHClutch.sharedInstance.formattedCardNumber(sphField.text!, cardType: SPHClutch.sharedInstance.cardTypeForCardNumber(SPHClutch.sharedInstance.formattedCardNumberForProcessing(sphField.text!)))
             
             updateCardNumberValidity(sphField)
         }
@@ -129,7 +129,7 @@ import UIKit
     
     func formatExpirationDateFieldOnTheFly(textView: AnyObject){
         if let sphField = textView as? SPHClutchTextField{
-            sphField.text = SPHClutch.sharedInstance.formattedExpirationDate(sphField.text)
+            sphField.text = SPHClutch.sharedInstance.formattedExpirationDate(sphField.text!)
             
             updateExpirationValidity(sphField)
         }
@@ -138,7 +138,7 @@ import UIKit
     
     func formatSecurityCodeFieldOnTheFly(textView: AnyObject){
         if let sphField = textView as? SPHClutchTextField{
-            sphField.text = SPHClutch.sharedInstance.formattedSecurityCode(sphField.text)
+            sphField.text = SPHClutch.sharedInstance.formattedSecurityCode(sphField.text!)
             
             updateSecurityCodeValidity(sphField)
         }
@@ -174,7 +174,7 @@ import UIKit
     }
     
     func genericUpdateCodeValidity(sphField: SPHClutchTextField, validityFunction: (String) -> Bool){
-        if validityFunction(sphField.text) == true {
+        if validityFunction(sphField.text!) == true {
             sphField.fieldState = SPHClutchTextFieldState.Valid
         } else {
             sphField.fieldState = SPHClutchTextFieldState.Invalid
@@ -199,7 +199,7 @@ import UIKit
     }
     
     func addCardButtonTapped(sender: AnyObject) {
-        if let gradient = self.addCardButton.layer.sublayers.first as? CAGradientLayer {
+        if let gradient = self.addCardButton.layer.sublayers!.first as? CAGradientLayer {
             UIView.animateWithDuration(0.25, delay: 0.0, options: .BeginFromCurrentState,
                 animations: {
                     gradient.colors = [UIColor(hexInt: 0x3c89cf).CGColor, UIColor(hexInt: 0x4f9ee5).CGColor]
@@ -218,10 +218,10 @@ import UIKit
             return
         } else {
         
-        let month = cardExpiryDateField.text.componentsSeparatedByString("/")[0]
-        let year = "20" + cardExpiryDateField.text.componentsSeparatedByString("/")[1]
+        let month = cardExpiryDateField.text!.componentsSeparatedByString("/")[0]
+        let year = "20" + cardExpiryDateField.text!.componentsSeparatedByString("/")[1]
         
-        SPHClutch.sharedInstance.addCard(transactionId, pan: SPHClutch.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text), cvc: cardSecurityCodeField.text, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
+        SPHClutch.sharedInstance.addCard(transactionId, pan: SPHClutch.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)

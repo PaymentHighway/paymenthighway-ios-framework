@@ -1,7 +1,7 @@
 //
 //  IQUIWindow+Hierarchy.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,10 @@ import Foundation
 import UIKit
 
 /** @abstract UIWindow hierarchy category.  */
-extension UIWindow {
+public extension UIWindow {
 
     /** @return Returns the current Top Most ViewController in hierarchy.   */
-    override func topMostController()->UIViewController? {
+    override public func topMostController()->UIViewController? {
         
         var topController = rootViewController
         
@@ -41,7 +41,7 @@ extension UIWindow {
     }
     
     /** @return Returns the topViewController in stack of topMostController.    */
-    func currentViewController()->UIViewController? {
+    public func currentViewController()->UIViewController? {
         
         var currentViewController = topMostController()
         

@@ -41,7 +41,7 @@ public class SPHClutchTextField: UITextField {
 		super.init(frame: frame)
 	}
 	
-	public required init(coder aDecoder: NSCoder) {
+	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
         
 	}
@@ -66,7 +66,7 @@ public class SPHClutchCreditCardTextField: SPHClutchTextField {
         
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

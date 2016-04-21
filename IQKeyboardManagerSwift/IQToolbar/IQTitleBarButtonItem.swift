@@ -1,7 +1,7 @@
 //
 //  IQTitleBarButtonItem.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,41 +24,49 @@
 
 import UIKit
 
-class IQTitleBarButtonItem: UIBarButtonItem {
+public class IQTitleBarButtonItem: IQBarButtonItem {
    
-    var font : UIFont? {
+    public var font : UIFont? {
     
         didSet {
             if let unwrappedFont = font {
-                titleLabel?.font = unwrappedFont
+                _titleLabel?.font = unwrappedFont
             } else {
-                titleLabel?.font = UIFont.boldSystemFontOfSize(12)
+                _titleLabel?.font = UIFont.systemFontOfSize(13)
             }
         }
     }
     
-    private var titleLabel : UILabel?
-    
+    private var _titleLabel : UILabel?
+    private var _titleView : UIView?
+
     override init() {
         super.init()
     }
     
-    init(frame : CGRect, title : String?) {
+    init(title : String?) {
 
-        super.init(title: nil, style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.init(title: nil, style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
-        titleLabel = UILabel(frame: frame)
-        titleLabel?.backgroundColor = UIColor.clearColor()
-        titleLabel?.textAlignment = .Center
-        titleLabel?.text = title
-        titleLabel?.autoresizingMask = .FlexibleWidth
-        font = UIFont.boldSystemFontOfSize(12.0)
-        titleLabel?.font = self.font
-        customView = titleLabel
+        _titleView = UIView()
+        _titleView?.backgroundColor = UIColor.clearColor()
+        _titleView?.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+        
+        _titleLabel = UILabel()
+        _titleLabel?.numberOfLines = 0
+        _titleLabel?.textColor = UIColor.grayColor()
+        _titleLabel?.backgroundColor = UIColor.clearColor()
+        _titleLabel?.textAlignment = .Center
+        _titleLabel?.text = title
+        _titleLabel?.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+        font = UIFont.systemFontOfSize(13.0)
+        _titleLabel?.font = self.font
+        _titleView?.addSubview(_titleLabel!)
+        customView = _titleView
         enabled = false
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }

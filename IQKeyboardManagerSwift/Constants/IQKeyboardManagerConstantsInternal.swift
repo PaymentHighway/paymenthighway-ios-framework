@@ -1,7 +1,7 @@
 //
 //  IQKeyboardManagerConstantsInternal.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,4 +24,22 @@
 
 import Foundation
 
-let IQ_IS_IOS8_OR_GREATER = (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1)
+///-----------------------------------
+/// MARK: IQLayoutGuidePosition
+///-----------------------------------
+
+/**
+`IQLayoutGuidePositionNone`
+If there are no IQLayoutGuideConstraint associated with viewController
+
+`IQLayoutGuidePositionTop`
+If provided IQLayoutGuideConstraint is associated with with viewController topLayoutGuide
+
+`IQLayoutGuidePositionBottom`
+If provided IQLayoutGuideConstraint is associated with with viewController bottomLayoutGuide
+*/
+public enum IQLayoutGuidePosition : Int {
+    case None
+    case Top
+    case Bottom
+}
