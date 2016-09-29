@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let sphBackendDevAddress  = "https://v1-hub-mobile.sph-test-solinor.com"
+        let sphBackendDevAddress  = "https://v1-hub-staging.sph-test-solinor.com/"
 
         SPHClutch.initSharedInstance("test_merchantId", accountId: "test", mobileApiAddress: sphBackendDevAddress)
         
