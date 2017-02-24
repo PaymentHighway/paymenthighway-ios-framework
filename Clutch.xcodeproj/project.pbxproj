@@ -512,7 +512,7 @@
 				0448528B1B396FC90034D0CA /* Alamofire.framework */,
 				0448528F1B396FC90034D0CA /* Alamofire iOS Tests.xctest */,
 				0448528D1B396FC90034D0CA /* Alamofire.framework */,
-				044852911B396FC90034D0CA /* Alamofire OSX Tests.xctest */,
+				044852911B396FC90034D0CA /* Alamofire macOS Tests.xctest */,
 				046E7EE71CA43D5300DEE76A /* Alamofire.framework */,
 				046E7EE91CA43D5300DEE76A /* Alamofire tvOS Tests.xctest */,
 				046E7EEB1CA43D5300DEE76A /* Alamofire.framework */,
@@ -833,10 +833,10 @@
 			remoteRef = 0448528E1B396FC90034D0CA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		044852911B396FC90034D0CA /* Alamofire OSX Tests.xctest */ = {
+		044852911B396FC90034D0CA /* Alamofire macOS Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Alamofire OSX Tests.xctest";
+			path = "Alamofire macOS Tests.xctest";
 			remoteRef = 044852901B396FC90034D0CA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1175,6 +1175,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1201,6 +1202,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
