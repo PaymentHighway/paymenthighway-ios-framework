@@ -27,21 +27,21 @@ import UIKit
     internal var successHandler : (String) -> () = {print($0)}
     internal var errorHandler : (NSError) -> () = {print($0)}
     
-    let correctBorderColor = UIColor(hexInt: 0xa6b9dc).CGColor
+    let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor
 
-    private var iqKeyboardManagerEnabledCachedValue = false
+    fileprivate var iqKeyboardManagerEnabledCachedValue = false
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.OverFullScreen
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.overFullScreen
     }
     
-    func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+    func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         // Override default behavior for popover on small screens
         print(controller.presentedViewController)
         let navcon = controller.presentedViewController as! UINavigationController
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
         visualEffectView.frame = navcon.view.bounds
-        navcon.view.insertSubview(visualEffectView, atIndex: 0)
+        navcon.view.insertSubview(visualEffectView, at: 0)
         return navcon
     }
     
@@ -51,75 +51,73 @@ import UIKit
         super.viewDidLoad()
 
         scrollContainer.bounces = false
+        KeyboardAvoiding.avoidingView = self.scrollContainer
 
-        let clutchBundle = NSBundle(forClass: SPHClutch.self)
+        let clutchBundle = Bundle(for: SPHClutch.self)
         
         // Setup text field
         for field in [cardNumberField, cardExpiryDateField, cardSecurityCodeField] {
-            field.backgroundColor = UIColor.whiteColor()
-            field.layer.borderColor  = correctBorderColor
-            field.layer.borderWidth  = 1.5
-            field.layer.cornerRadius = 2.0
-            field.inset = Inset(44, 0)
+            field?.backgroundColor = UIColor.white
+            field?.layer.borderColor  = correctBorderColor
+            field?.layer.borderWidth  = 1.5
+            field?.layer.cornerRadius = 2.0
+            field?.inset = Inset(44, 0)
             
-            field.keyboardType = UIKeyboardType.NumberPad
+            field?.keyboardType = UIKeyboardType.numberPad
             
             
             var iconImage: UIImage? = nil
-            let iconImageView = UIImageView(frame: CGRectZero)
+            let iconImageView = UIImageView(frame: CGRect.zero)
             
             switch field {
-            case cardNumberField:
-                iconImage = UIImage(named: "cardicon", inBundle: clutchBundle, compatibleWithTraitCollection: nil)
-                field.addTarget(self, action: #selector(SPHAddCardViewController.formatCardNumberFieldOnTheFly(_:)), forControlEvents: UIControlEvents.EditingChanged)
-            case cardExpiryDateField:
-                iconImage = UIImage(named: "calendaricon", inBundle: clutchBundle, compatibleWithTraitCollection: nil)
-                field.addTarget(self, action: #selector(SPHAddCardViewController.formatExpirationDateFieldOnTheFly(_:)), forControlEvents: UIControlEvents.EditingChanged)
-            case cardSecurityCodeField:
-                iconImage = UIImage(named: "lockicon", inBundle: clutchBundle, compatibleWithTraitCollection: nil)
-                field.addTarget(self, action: #selector(SPHAddCardViewController.formatSecurityCodeFieldOnTheFly(_:)), forControlEvents: UIControlEvents.EditingChanged)
+            case cardNumberField?:
+                iconImage = UIImage(named: "cardicon", in: clutchBundle, compatibleWith: nil)
+                field?.addTarget(self, action: #selector(SPHAddCardViewController.formatCardNumberFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
+            case cardExpiryDateField?:
+                iconImage = UIImage(named: "calendaricon", in: clutchBundle, compatibleWith: nil)
+                field?.addTarget(self, action: #selector(SPHAddCardViewController.formatExpirationDateFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
+            case cardSecurityCodeField?:
+                iconImage = UIImage(named: "lockicon", in: clutchBundle, compatibleWith: nil)
+                field?.addTarget(self, action: #selector(SPHAddCardViewController.formatSecurityCodeFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
             default: break
             }
     
             iconImageView.image = iconImage
-            iconImageView.frame = CGRectMake(0, 0, field.frame.height, field.frame.height)
-            iconImageView.contentMode = UIViewContentMode.ScaleAspectFit
-            field.addSubview(iconImageView)
+            iconImageView.frame = CGRect(x: 0, y: 0, width: (field?.frame.height)!, height: (field?.frame.height)!)
+            iconImageView.contentMode = UIViewContentMode.scaleAspectFit
+            field?.addSubview(iconImageView)
         }
         
         // Setup button
         
         let gradientLayer    = CAGradientLayer()
         gradientLayer.frame  = addCardButton.layer.bounds
-        gradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).CGColor, UIColor(hexInt: 0x3c89cf).CGColor]
+        gradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.cornerRadius = 4.0
         
         addCardButton.layer.cornerRadius = 4.0
         addCardButton.layer.masksToBounds = true
-        addCardButton.addTarget(self, action: #selector(SPHAddCardViewController.addCardButtonTapped(_:)), forControlEvents: .TouchUpInside)
-        addCardButton.layer.insertSublayer(gradientLayer, atIndex: 0)
+        addCardButton.addTarget(self, action: #selector(SPHAddCardViewController.addCardButtonTapped(_:)), for: .touchUpInside)
+        addCardButton.layer.insertSublayer(gradientLayer, at: 0)
         
         // Setup cancel
         
         navCancel.addTarget(self, action: #selector(SPHAddCardViewController.navCancelButtonTapped(_:)),
-            forControlEvents: .TouchUpInside)
+            for: .touchUpInside)
         
         setupLocalization()
     }
 
-    override func  viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        iqKeyboardManagerEnabledCachedValue = IQKeyboardManager.sharedManager().enable
-        IQKeyboardManager.sharedManager().enable = true
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        IQKeyboardManager.sharedManager().enable = iqKeyboardManagerEnabledCachedValue
     }
     
-    func formatCardNumberFieldOnTheFly(textView: AnyObject){
+    func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
         if let sphField = textView as? SPHClutchTextField{
             sphField.text = SPHClutch.sharedInstance.formattedCardNumber(sphField.text!, cardType: SPHClutch.sharedInstance.cardTypeForCardNumber(SPHClutch.sharedInstance.formattedCardNumberForProcessing(sphField.text!)))
             
@@ -127,7 +125,7 @@ import UIKit
         }
     }
     
-    func formatExpirationDateFieldOnTheFly(textView: AnyObject){
+    func formatExpirationDateFieldOnTheFly(_ textView: AnyObject){
         if let sphField = textView as? SPHClutchTextField{
             sphField.text = SPHClutch.sharedInstance.formattedExpirationDate(sphField.text!)
             
@@ -136,7 +134,7 @@ import UIKit
     }
     
     
-    func formatSecurityCodeFieldOnTheFly(textView: AnyObject){
+    func formatSecurityCodeFieldOnTheFly(_ textView: AnyObject){
         if let sphField = textView as? SPHClutchTextField{
             sphField.text = SPHClutch.sharedInstance.formattedSecurityCode(sphField.text!)
             
@@ -144,17 +142,17 @@ import UIKit
         }
     }
     
-    func updateCardNumberValidity(sphField: SPHClutchTextField)
+    func updateCardNumberValidity(_ sphField: SPHClutchTextField)
     {
         genericUpdateCodeValidity(sphField, validityFunction: SPHClutch.sharedInstance.isValidCardNumber)
     }
     
-    func updateExpirationValidity(sphField: SPHClutchTextField)
+    func updateExpirationValidity(_ sphField: SPHClutchTextField)
     {
         genericUpdateCodeValidity(sphField, validityFunction: SPHClutch.sharedInstance.isValidExpirationDate)
     }
     
-    func updateSecurityCodeValidity(sphField: SPHClutchTextField)
+    func updateSecurityCodeValidity(_ sphField: SPHClutchTextField)
     {
         genericUpdateCodeValidity(sphField, validityFunction: SPHClutch.sharedInstance.isValidSecurityCode)
     }
@@ -168,46 +166,46 @@ import UIKit
     
     func allFieldsValid() -> Bool
     {
-        return cardNumberField.fieldState == SPHClutchTextFieldState.Valid &&
-        cardExpiryDateField.fieldState == SPHClutchTextFieldState.Valid &&
-        cardSecurityCodeField.fieldState == SPHClutchTextFieldState.Valid
+        return cardNumberField.fieldState == SPHClutchTextFieldState.valid &&
+        cardExpiryDateField.fieldState == SPHClutchTextFieldState.valid &&
+        cardSecurityCodeField.fieldState == SPHClutchTextFieldState.valid
     }
     
-    func genericUpdateCodeValidity(sphField: SPHClutchTextField, validityFunction: (String) -> Bool){
+    func genericUpdateCodeValidity(_ sphField: SPHClutchTextField, validityFunction: (String) -> Bool){
         if validityFunction(sphField.text!) == true {
-            sphField.fieldState = SPHClutchTextFieldState.Valid
+            sphField.fieldState = SPHClutchTextFieldState.valid
         } else {
-            sphField.fieldState = SPHClutchTextFieldState.Invalid
+            sphField.fieldState = SPHClutchTextFieldState.invalid
         }
     }
     
     func setupLocalization() {
-        let clutchBundle = NSBundle(forClass: SPHClutch.self)
+        let clutchBundle = Bundle(for: SPHClutch.self)
         cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: clutchBundle, value: "",comment: "The text shown above the credit card number field")
         cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown above the expiry date field")
         cardSecurityCodeLabel.text = NSLocalizedString("CreditCardSecurityCode", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown above the security code field")
-        addCardButton.setTitle(NSLocalizedString("AddCardButtonTitle", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown on the 'add card' button"), forState: .Normal)
+        addCardButton.setTitle(NSLocalizedString("AddCardButtonTitle", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown on the 'add card' button"), for: UIControlState())
         cardExpiryDateField.placeholder = NSLocalizedString("MM/YY", tableName: nil, bundle: clutchBundle, value: "", comment: "Expiration date placeholder.")
 
     }
     
     // MARK: UI Events
     
-    func navCancelButtonTapped(sender: AnyObject) {
+    func navCancelButtonTapped(_ sender: AnyObject) {
         errorHandler(NSError(domain: ClutchDomains.Default , code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func addCardButtonTapped(sender: AnyObject) {
+    func addCardButtonTapped(_ sender: AnyObject) {
         if let gradient = self.addCardButton.layer.sublayers!.first as? CAGradientLayer {
-            UIView.animateWithDuration(0.25, delay: 0.0, options: .BeginFromCurrentState,
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .beginFromCurrentState,
                 animations: {
-                    gradient.colors = [UIColor(hexInt: 0x3c89cf).CGColor, UIColor(hexInt: 0x4f9ee5).CGColor]
+                    gradient.colors = [UIColor(hexInt: 0x3c89cf).cgColor, UIColor(hexInt: 0x4f9ee5).cgColor]
                 },
                 completion: { finished in
-                    UIView.animateWithDuration(0.25) {
-                        gradient.colors = [UIColor(hexInt: 0x4f9ee5).CGColor, UIColor(hexInt: 0x3c89cf).CGColor]
-                    }
+                    UIView.animate(withDuration: 0.25, animations: {
+                        gradient.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
+                    }) 
                 }
             )
         }
@@ -218,12 +216,12 @@ import UIKit
             return
         } else {
         
-        let month = cardExpiryDateField.text!.componentsSeparatedByString("/")[0]
-        let year = "20" + cardExpiryDateField.text!.componentsSeparatedByString("/")[1]
+        let month = cardExpiryDateField.text!.components(separatedBy: "/")[0]
+        let year = "20" + cardExpiryDateField.text!.components(separatedBy: "/")[1]
         
         SPHClutch.sharedInstance.addCard(transactionId, pan: SPHClutch.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -9,15 +9,19 @@ import Foundation
 import UIKit
 import CryptoSwift
 
+public enum ClutchCryptoError: Error {
+    case invalid
+}
+
 public func getRequestId() -> String {
-    return NSUUID().UUIDString.lowercaseString
+    return NSUUID().uuidString.lowercased()
 }
 
 /// Returns Optional SecKeyRef from given certificate in DER-format.
 ///
 /// - parameter   DER-formatted: certificate
 /// - returns: SecKeyRef or Nil.
-private func loadDER(publicKeyFileContent: NSData) -> SecKeyRef? {
+private func loadDER(_ publicKeyFileContent: Data) -> SecKey? {
     let certificate = SecCertificateCreateWithData(kCFAllocatorDefault, publicKeyFileContent as CFData)
     let policy = SecPolicyCreateBasicX509()
     var unmanagedTrust : SecTrust? = nil
@@ -35,54 +39,60 @@ private func loadDER(publicKeyFileContent: NSData) -> SecKeyRef? {
     return SecTrustCopyPublicKey(trust)
 }
 
-private func encryptWithData(content :NSData, publicKey :SecKeyRef) -> NSData? {
+private func encryptWithData(_ content :Data, publicKey :SecKey) -> Data? {
     
     let blockSize = Int(SecKeyGetBlockSize(publicKey) - 11)
     let encryptedData = NSMutableData()
-    let blockCount = Int(ceil(Double(content.length) / Double(blockSize)))
+    let blockCount = Int(ceil(Double(content.count) / Double(blockSize)))
 
     for i in 0..<blockCount {
         var cipherLen = SecKeyGetBlockSize(publicKey)
-        var cipher = [UInt8](count: Int(cipherLen), repeatedValue: 0)
-        let bufferSize = min(blockSize,(content.length - i * blockSize))
-        let buffer = content.subdataWithRange(NSMakeRange(i*blockSize, bufferSize))
-        let status = SecKeyEncrypt(publicKey, SecPadding.OAEP, UnsafePointer<UInt8>(buffer.bytes), buffer.length, &cipher, &cipherLen)
+        var cipher = [UInt8](repeating: 0, count: Int(cipherLen))
+        let bufferSize = min(blockSize,(content.count - i * blockSize))
+        let buffer = content.subdata(in: Range.init(uncheckedBounds: (lower: i*blockSize, upper: bufferSize)))
+        let status = SecKeyEncrypt(publicKey, SecPadding.OAEP, (buffer as NSData).bytes.bindMemory(to: UInt8.self, capacity: buffer.count), buffer.count, &cipher, &cipherLen)
         if (status == noErr){
-            encryptedData.appendBytes(cipher, length: Int(cipherLen))
+            encryptedData.append(cipher, length: Int(cipherLen))
         }else{
             print("SecKeyEncrypt fail. Error Code: \(status)")
             return nil
         }
     }
-    return encryptedData
+    return encryptedData as Data
 }
 
-public func encryptWithRsaAes(data: String, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)?
+public func encryptWithRsaAes(_ data: String, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)?
 {
     let keyAes = AES.randomIV(AES.blockSize)
     let iv = AES.randomIV(AES.blockSize)
     
-    do{
-        if let encryptedData: [UInt8] = try AES(key: keyAes, iv: iv, blockMode: CryptoSwift.CipherBlockMode.CBC).encrypt([UInt8](data.utf8), padding: PKCS7())
-        {
-            if let publicKey = loadDER(NSData(base64EncodedString: certificateBase64Der, options: [])!)
-            {
-                if let encryptedKey = encryptWithData(NSData(bytes: keyAes, length: keyAes.count), publicKey: publicKey)
-                {
-                    let encryptedBase64Message =  NSData(bytes: encryptedData, length: encryptedData.count).base64EncodedStringWithOptions([])
-                    
-                    let encryptedBase64Key = encryptedKey.base64EncodedStringWithOptions([])
-                    
-                    let base64Iv = NSData(bytes: iv, length: iv.count).base64EncodedStringWithOptions([])
-                    
-                    return (encryptedBase64Message, encryptedBase64Key, base64Iv)
-                }
-            }
+    do {
+        // Create AES encryptor
+        let aes = try AES(key: keyAes, iv: iv, blockMode: .CBC, padding: PKCS7())
+        
+        // Encrypt given data
+        let encryptedData = try aes.encrypt(Array(data.utf8))
+        
+        
+        // Create encryption key
+        guard let publicKey = loadDER(Data(base64Encoded: certificateBase64Der, options: [])!) else {
+            return nil
         }
-
-    }catch{
-        //TODO handle errors
+        
+        guard let encryptedKey = encryptWithData(Data(bytes: keyAes, count: keyAes.count), publicKey: publicKey) else {
+            return nil
+        }
+        
+        // Encrypt data
+        let encryptedBase64Data = Data(bytes: UnsafePointer<UInt8>(encryptedData), count: encryptedData.count).base64EncodedString(options: [])
+        let encryptedBase64Key = encryptedKey.base64EncodedString(options: [])
+        let base64IV = Data(bytes: iv, count: iv.count).base64EncodedString(options: [])
+        
+        return (encryptedBase64Data, encryptedBase64Key, base64IV)
+    } catch {
+        // Handle errors
     }
-        return nil
+
+    return nil
 }
 

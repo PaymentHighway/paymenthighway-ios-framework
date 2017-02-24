@@ -29,21 +29,21 @@ internal extension String {
 	/// - returns: The found substring
 	subscript (r: Range<Int>) -> String {
 		get {
-			let startIndex = self.startIndex.advancedBy(r.startIndex)
-			let endIndex = startIndex.advancedBy(r.endIndex - r.startIndex)
+			let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
+			let endIndex = self.characters.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
 			
-			return self[Range(start: startIndex, end: endIndex)]
+			return self[(startIndex ..< endIndex)]
 		}
 	}
     /// Returns matches for given regexp
     /// - parameter regex: The pattern to evaluate
     /// - returns: Found matches as an array
-    func matchesForRegex(regex: String!) -> [String] {
+    func matchesForRegex(_ regex: String!) -> [String] {
         
         let regex = try! NSRegularExpression(pattern: regex,
             options: [])
         let nsString = self as NSString
-        let results = regex.matchesInString(nsString as String,
+        let results = regex.matches(in: nsString as String,
             options: [], range: NSMakeRange(0, nsString.length))
             
 		
@@ -51,8 +51,8 @@ internal extension String {
         
         for result in results {
             for i in 1 ..< result.numberOfRanges {
-                let range = result.rangeAtIndex(i)
-                strings.append(nsString.substringWithRange(range))
+                let range = result.rangeAt(i)
+                strings.append(nsString.substring(with: range))
             }
         }
         
@@ -62,9 +62,9 @@ internal extension String {
     /// Truncates the string to length number of characters and
     /// appends optional trailing string if longer
     /// Source: https://gist.github.com/aorcsik/c8210a84f163b1b644c0
-    func truncate(length: Int, trailing: String? = nil) -> String {
+    func truncate(_ length: Int, trailing: String? = nil) -> String {
         if self.characters.count > length {
-            return self.substringToIndex(self.startIndex.advancedBy(length)) + (trailing ?? "")
+            return self.substring(to: self.characters.index(self.startIndex, offsetBy: length)) + (trailing ?? "")
         } else {
             return self
         }
@@ -99,21 +99,21 @@ internal extension UIColor {
 
 public extension UIViewController {
 	
-    public func presentSPHAddCardViewController(source: UIViewController, animated: Bool, transactionId : String, success: (String) -> (), error: (NSError) -> (), completion: (() -> Void)?) {
-		let storyboard = UIStoryboard(name: "SPHClutch", bundle: NSBundle(forClass: SPHClutch.self))
-		let controller = storyboard.instantiateViewControllerWithIdentifier("SPHAddCardForm") as! SPHAddCardViewController
+    public func presentSPHAddCardViewController(_ source: UIViewController, animated: Bool, transactionId : String, success: @escaping (String) -> (), error: @escaping (NSError) -> (), completion: (() -> Void)?) {
+		let storyboard = UIStoryboard(name: "SPHClutch", bundle: Bundle(for: SPHClutch.self))
+		let controller = storyboard.instantiateViewController(withIdentifier: "SPHAddCardForm") as! SPHAddCardViewController
         controller.transactionId = transactionId
         controller.successHandler = success
         controller.errorHandler = error
         
         let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+        nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let ppc = nav.popoverPresentationController!
-        let minimunSize = controller.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        let minimunSize = controller.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         controller.preferredContentSize = CGSize(width: minimunSize.width, height: minimunSize.height)
         ppc.delegate = controller
         ppc.sourceView = source.view
-		self.presentViewController(nav, animated: animated, completion: completion)
+		self.present(nav, animated: animated, completion: completion)
 	}
 	
 }

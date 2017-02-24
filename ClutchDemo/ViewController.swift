@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 	}
@@ -28,18 +28,14 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var logForUser: UITextView!
   
-    @IBAction func addCard(sender: UIButton) {
+    @IBAction func addCard(_ sender: UIButton) {
         
-        let mobileBackendDevAddress = "http://54.194.196.206:8081"
-        
-        let mobileBackendStagingAddress = "http://54.194.196.206:8081"
-        
-        var mobileBackendAddress = mobileBackendDevAddress
+        let _ = "http://54.194.196.206:8081" // development
+        let _ = "http://54.194.196.206:8081" // staging
         
         logForUser.text = "Add card-button pushed.\n\(logForUser.text)"
         
-        SPHClutch.sharedInstance.networking!.helperGetTransactionId(
-            mobileBackendAddress,
+        SPHClutch.sharedInstance.networking!.transactionId(
             success: {
                 let txId = $0
                 self.presentSPHAddCardViewController(
@@ -48,8 +44,7 @@ class ViewController: UIViewController {
                     transactionId : txId,
                     success: {
                         self.logForUser.text = "\($0)\n\(self.logForUser.text)"
-                        SPHClutch.sharedInstance.networking!.helperGetToken(
-                            mobileBackendAddress,
+                        SPHClutch.sharedInstance.networking!.transactionToken(
                             transactionId: txId,
                             success: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"},
                             failure: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"})

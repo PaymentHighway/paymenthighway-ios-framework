@@ -9,12 +9,12 @@
 import Foundation
 
 // MARK: Text Pattern Callbacks
-public typealias TextPatternMatchedBlock    = ((String, String, Int) -> (text: String, attributes: [NSObject: AnyObject]?))?
-public typealias TextPatternMatchAttributes = [NSObject: AnyObject]?
+public typealias TextPatternMatchedBlock    = ((String, String, Int) -> (text: String, attributes: [AnyHashable: Any]?))?
+public typealias TextPatternMatchAttributes = [AnyHashable: Any]?
 
 
 /// TextPattern Representation Class
-public class TextPattern {
+open class TextPattern {
 	/// Callback Block for Matches
 	var matched: TextPatternMatchedBlock
 	
@@ -51,11 +51,11 @@ public class TextPattern {
 	}
 	
 	/// Move to the next character index and process it
-	public func next() -> Bool {
+	open func next() -> Bool {
 		index += 1
 		if index >= text.characters.count { return true }
 		
-		current = text[text.startIndex.advancedBy(index)]
+		current = text[text.characters.index(text.startIndex, offsetBy: index)]
 		if current == "?" {
 			next()
 			mustFullfill = false
@@ -66,10 +66,10 @@ public class TextPattern {
 	}
 
 	/// Rewind to previous rewindIndex position
-	public func rewind() -> Bool {
+	open func rewind() -> Bool {
 		if index > rewindIndex && rewindIndex > 0 {
 			index = rewindIndex
-			current = text[text.startIndex.advancedBy(rewindIndex)]
+			current = text[text.characters.index(text.startIndex, offsetBy: rewindIndex)]
 			return true
 		}
 		
@@ -79,7 +79,7 @@ public class TextPattern {
 
 
 /// Represents
-public class TextMatcher {
+open class TextMatcher {
 	var source: String
 	var recursive: Bool
 	var matched: TextPatternMatchedBlock
@@ -98,25 +98,25 @@ public func ==(lhs: TextPattern, rhs: TextPattern) -> Bool {
 }
 
 
-public class SPHClutchFormatter {
+open class SPHClutchFormatter {
 	/// The patterns array holds all the variables that make up a pattern
 	var patterns: [TextMatcher] = []
 	
 	/// Returns the character used for attachments
-	public var attachmentString: String {
-		return "\(Character(UnicodeScalar(NSAttachmentCharacter)))"
+	open var attachmentString: String {
+		return "\(Character(UnicodeScalar(NSAttachmentCharacter)!))"
 	}
 	
 	/// Init does nothing
 	public init () { }
 	
 	/// Add a new pattern for the formatter
-	public func add(pattern: String, recursive: Bool, matched: TextPatternMatchedBlock) {
+	open func add(_ pattern: String, recursive: Bool, matched: TextPatternMatchedBlock) {
 		patterns.append(TextMatcher(source: pattern, recursive: recursive, matched: matched))
 	}
 	
 	/// Process a given text source with our patterns
-	public func process(source: String) -> NSAttributedString {
+	open func process(_ source: String) -> NSAttributedString {
 		var pending = Array<TextPattern>()
 		var collect = Array<TextPattern>()
 		var index = 0
@@ -124,7 +124,7 @@ public class SPHClutchFormatter {
 		for char in text.characters {
 			var consumed = false
 			var lastChar: Character?
-			for pattern in Array(pending.reverse()) {
+			for pattern in Array(pending.reversed()) {
 				if char != pattern.current && pattern.mustFullfill {
 					pending = pending.filter{$0 != pattern}
 				} else if char == pattern.current {
@@ -133,14 +133,14 @@ public class SPHClutchFormatter {
 						continue //it is matching on the same pattern, so skip it
 					}
 					if pattern.next() {
-						let range = text.startIndex.advancedBy(pattern.start)...text.startIndex.advancedBy(index)
+						let range = text.characters.index(text.startIndex, offsetBy: pattern.start)...text.characters.index(text.startIndex, offsetBy: index)
 						//println("text range: \(text[range])")
 						if let match = pattern.matched {
 							let src = text[range]
 							let srcLen = src.characters.count
 							let replace = match(src,text,pattern.start)
 							if replace.attributes != nil {
-								text.replaceRange(range, with: replace.text)
+								text.replaceSubrange(range, with: replace.text)
 								let replaceLen = replace.text.characters.count
 								index -= (srcLen-replaceLen)
 								lastChar = char

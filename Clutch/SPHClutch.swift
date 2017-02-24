@@ -18,40 +18,40 @@ public struct ClutchDomains {
 
 /// The recognized card types in the system
 public enum SPHClutchCardType: Int, CustomStringConvertible {
-	case Visa = 0
-	case MasterCard
-	case AmericanExpress
-	case Discover
-	case JCB
-	case DinersClub
-	case Unsupported
-	case Invalid
+	case visa = 0
+	case masterCard
+	case americanExpress
+	case discover
+	case jcb
+	case dinersClub
+	case unsupported
+	case invalid
 	
 	/// The valid card types
 	static func validValues() -> [SPHClutchCardType] {
-		return [.Visa, .MasterCard, .AmericanExpress, .Discover, .JCB, .DinersClub]
+		return [.visa, .masterCard, .americanExpress, .discover, .jcb, .dinersClub]
 	}
 	
 	/// The invalid card types
 	static func invalidValues() -> [SPHClutchCardType] {
-		return [.Unsupported, .Invalid]
+		return [.unsupported, .invalid]
 	}
 
 	/// Returns the correct NSPredicate for validating a card type
-	static func matcherPredicateForType(cardType: SPHClutchCardType) -> NSPredicate {
+	static func matcherPredicateForType(_ cardType: SPHClutchCardType) -> NSPredicate {
 		var regexp: String? = nil
 		switch cardType {
-		case .Visa:
+		case .visa:
 			regexp = "^4[0-9]{6,}$"
-		case .MasterCard:
+		case .masterCard:
 			regexp = "^5[1-5][0-9]{5,}$"
-		case .AmericanExpress:
+		case .americanExpress:
 			regexp = "^3[47][0-9]{5,}$"
-		case .Discover:
+		case .discover:
 			regexp = "^6(?:011|5[0-9]{2})[0-9]{3,}$"
-		case .JCB:
+		case .jcb:
 			regexp = "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$"
-		case .DinersClub:
+		case .dinersClub:
 			regexp = "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$"
 		default:
 			regexp = nil
@@ -68,14 +68,14 @@ public enum SPHClutchCardType: Int, CustomStringConvertible {
 	/// Printable
 	public var description: String {
 		switch self {
-		case .Visa: return "Visa"
-		case .MasterCard: return "MasterCard"
-		case .AmericanExpress: return "AmericanExpress"
-		case .Discover: return "Discover"
-		case .JCB: return "JCB"
-		case .DinersClub: return "DinersClub"
-		case .Invalid: return "Invalid"
-		case .Unsupported: return "Unsupported"
+		case .visa: return "Visa"
+		case .masterCard: return "MasterCard"
+		case .americanExpress: return "AmericanExpress"
+		case .discover: return "Discover"
+		case .jcb: return "JCB"
+		case .dinersClub: return "DinersClub"
+		case .invalid: return "Invalid"
+		case .unsupported: return "Unsupported"
 		}
 	}
 }
@@ -83,10 +83,10 @@ public enum SPHClutchCardType: Int, CustomStringConvertible {
 // MARK: Main Class
 
 /// Main Clutch Class
-public class SPHClutch {
+open class SPHClutch {
     
 	/// The singleton accessor
-	public class var sharedInstance: SPHClutch {
+	open class var sharedInstance: SPHClutch {
         struct Static {
             static let instance: SPHClutch = SPHClutch()
         }
@@ -94,16 +94,16 @@ public class SPHClutch {
         return Static.instance
 	}
     
-    private var lastExpirationDateLength = 0
+    fileprivate var lastExpirationDateLength = 0
     
-    public var networking: Networking?
+    open var networking: SPHNetworking?
 	
 	// MARK: Initializers
 	
 	public init() { /* Nothing to do here */ }
 	
-    public class func initSharedInstance(merchantId: String, accountId: String, mobileApiAddress: String) -> SPHClutch {
-        SPHClutch.sharedInstance.networking = Networking(merchant: merchantId, accountId: accountId, host: mobileApiAddress)
+    open class func initSharedInstance(_ merchantId: String, accountId: String, mobileApiAddress: String) -> SPHClutch {
+        SPHClutch.sharedInstance.networking = SPHNetworking(merchantId: merchantId, accountId: accountId, hostname: mobileApiAddress)
         return SPHClutch.sharedInstance
 	}
 
@@ -113,30 +113,30 @@ public class SPHClutch {
     ///
 	/// - parameter   cardNumber: The card number to format
 	/// - returns: The formatted card number, or an empty string
-	public func formattedCardNumberForProcessing(cardNumber: String) -> String {
-		let illegal    = NSCharacterSet.decimalDigitCharacterSet().invertedSet
-		let components = cardNumber.componentsSeparatedByCharactersInSet(illegal)
-		return components.joinWithSeparator("")
+	open func formattedCardNumberForProcessing(_ cardNumber: String) -> String {
+		let illegal    = CharacterSet.decimalDigits.inverted
+		let components = cardNumber.components(separatedBy: illegal)
+		return components.joined(separator: "")
 	}
 	
 	/// Recognize the type of a credit card number
     ///
 	/// - parameter cardNumber: The card number string
-	public func cardTypeForCardNumber(cardNumber: String) -> SPHClutchCardType {
+	open func cardTypeForCardNumber(_ cardNumber: String) -> SPHClutchCardType {
 		let valid = self.isValidCardNumber(cardNumber)
 		if !valid {
-			return .Invalid
+			return .invalid
 		}
 		
 		let formattedString: String = self.formattedCardNumberForProcessing(cardNumber)
 		if formattedString.characters.count < 9 {
-			return .Invalid
+			return .invalid
 		}
 		
-		var foundType: SPHClutchCardType = .Invalid
+		var foundType: SPHClutchCardType = .invalid
 		for type in SPHClutchCardType.validValues() {
 			let predicate = SPHClutchCardType.matcherPredicateForType(type)
-			if predicate.evaluateWithObject(cardNumber) == true {
+			if predicate.evaluate(with: cardNumber) == true {
 				foundType = type
 				break
 			}
@@ -149,14 +149,14 @@ public class SPHClutch {
     ///
 	/// - parameter   cardNumber: The card number to validate
 	/// - returns: true if the number passes, false if not
-	public func isValidCardNumber(cardNumber: String) -> Bool {
+	open func isValidCardNumber(_ cardNumber: String) -> Bool {
 		let formattedString = self.formattedCardNumberForProcessing(cardNumber)
 		if formattedString.characters.count < 9 {
 			return false
 		}
         
 		let asciiOffset: UInt8 = 48
-		let digits = Array(Array(formattedString.utf8).reverse()).map{$0 - asciiOffset}
+		let digits = Array(Array(formattedString.utf8).reversed()).map{$0 - asciiOffset}
 		
 		let convert: (UInt8) -> (UInt8) = {
 			let n = $0 * 2
@@ -164,7 +164,7 @@ public class SPHClutch {
 		}
 		
 		var sum: UInt8 = 0
-		for (index, digit) in digits.enumerate() {
+		for (index, digit) in digits.enumerated() {
 			if index & 1 == 1 {
 				sum += convert(digit)
 			} else {
@@ -180,41 +180,41 @@ public class SPHClutch {
 	/// - parameter   cardNumber: The card number to format
 	/// - parameter   cardType:   The type of the card number
 	/// - returns: The properly spaced credit card number
-	public func formattedCardNumber(cardNumber: String, cardType: SPHClutchCardType) -> String {
+	open func formattedCardNumber(_ cardNumber: String, cardType: SPHClutchCardType) -> String {
         let formattedString = self.formattedCardNumberForProcessing(cardNumber).truncate(19, trailing: "")
         
 		// Stupid AMEX uses their own weird format
 		var regexpString = "(\\d{1,4})"
-		if cardType == .AmericanExpress {
+		if cardType == .americanExpress {
 			regexpString = "(\\d{1,4})(\\d{1,6})?(\\d{1,5})?"
 		}
 		
 		// Create and check regexp matches
-		let regexp  = try! NSRegularExpression(pattern: regexpString, options: [])
-		var groups  = [String]()
+		// let regexp  = try! NSRegularExpression(pattern: regexpString, options: [])
+		// var groups  = [String]()
         
         let matches = formattedString.matchesForRegex(regexpString)
 		
 		// Glue them together
-		return matches.joinWithSeparator(" ")
+		return matches.joined(separator: " ")
 	}
     
     // MARK: expiration date 
     
-    public func isValidExpirationDate(expirationDate: String) -> Bool {
+    open func isValidExpirationDate(_ expirationDate: String) -> Bool {
         
         if(expirationDate.characters.count == 5)
         {
-            let month = expirationDate.componentsSeparatedByString("/")[0]
-            let year = "20" + expirationDate.componentsSeparatedByString("/")[1]
+            let month = expirationDate.components(separatedBy: "/")[0]
+            let year = "20" + expirationDate.components(separatedBy: "/")[1]
          
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMyyyy"
             
-            let currentDate = dateFormatter.stringFromDate(NSDate())
+            let currentDate = dateFormatter.string(from: Date())
                         
-            if let givenDate = dateFormatter.dateFromString(month + year) {
-                if givenDate.compare(dateFormatter.dateFromString(currentDate)! ) != NSComparisonResult.OrderedAscending { //TODO: there might more easier way to do this..
+            if let givenDate = dateFormatter.date(from: month + year) {
+                if givenDate.compare(dateFormatter.date(from: currentDate)! ) != ComparisonResult.orderedAscending { //TODO: there might more easier way to do this..
                     return true
                 }
             }
@@ -223,11 +223,11 @@ public class SPHClutch {
         return false
     }
     
-    public func formattedExpirationDateForProcessing(expirationDate: String) -> String {
+    open func formattedExpirationDateForProcessing(_ expirationDate: String) -> String {
         return formattedCardNumberForProcessing(expirationDate)
     }
     
-    public func formattedExpirationDate(expirationDate: String) -> String {
+    open func formattedExpirationDate(_ expirationDate: String) -> String {
         var onlyDigitsExpirationDate = formattedExpirationDateForProcessing(expirationDate)
         let length = onlyDigitsExpirationDate.characters.count
         
@@ -248,21 +248,21 @@ public class SPHClutch {
             } else {
                 if Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12
                 {
-                    onlyDigitsExpirationDate.removeAtIndex(onlyDigitsExpirationDate.endIndex.predecessor())
+                    onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.characters.index(before: onlyDigitsExpirationDate.endIndex))
                     text = onlyDigitsExpirationDate
                 } else {
                     text = "\(onlyDigitsExpirationDate)/"
                 }
             }
         case 3:
-            onlyDigitsExpirationDate.insert("/", atIndex: onlyDigitsExpirationDate.startIndex.advancedBy(2))
+            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.characters.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
             text = onlyDigitsExpirationDate
         case 4:
-            onlyDigitsExpirationDate.insert("/", atIndex: onlyDigitsExpirationDate.startIndex.advancedBy(2))
+            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.characters.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
             text = onlyDigitsExpirationDate
         case 5:
-            onlyDigitsExpirationDate.removeAtIndex(onlyDigitsExpirationDate.endIndex.predecessor())
-            onlyDigitsExpirationDate.insert("/", atIndex: onlyDigitsExpirationDate.startIndex.advancedBy(2))
+            onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.characters.index(before: onlyDigitsExpirationDate.endIndex))
+            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.characters.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
             text = onlyDigitsExpirationDate
         default:
             text = ""
@@ -273,43 +273,47 @@ public class SPHClutch {
         return text
     }
     
-    public func isValidSecurityCode(securityCode: String) -> Bool {
+    open func isValidSecurityCode(_ securityCode: String) -> Bool {
         return self.formattedSecurityCodeForProcessing(securityCode).characters.count > 0
     }
     
-    public func formattedSecurityCodeForProcessing(securityCode: String) -> String {
+    open func formattedSecurityCodeForProcessing(_ securityCode: String) -> String {
         return formattedCardNumberForProcessing(securityCode)
     }
     
-    public func formattedSecurityCode(securityCode: String) -> String {
+    open func formattedSecurityCode(_ securityCode: String) -> String {
         var onlyDigitsSecurityCode = formattedSecurityCodeForProcessing(securityCode)
         var text = ""
         switch onlyDigitsSecurityCode.characters.count
         {
             case 0...4 : text = onlyDigitsSecurityCode
             case 5 :
-                onlyDigitsSecurityCode.removeAtIndex(onlyDigitsSecurityCode.endIndex.predecessor())
+                onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.characters.index(before: onlyDigitsSecurityCode.endIndex))
                 text = onlyDigitsSecurityCode
             default : text = ""
         }
         return text
     }
     
-    public func addCard(transactionId: String, pan: String, cvc: String, expiryMonth: String, expiryYear: String, success: (String) -> (), failure: (NSError) -> ()) -> () {
+    open func addCard(_ transactionId: String, pan: String, cvc: String, expiryMonth: String, expiryYear: String, success: @escaping (String) -> (), failure: @escaping (NSError) -> ()) -> () {
         
-        func handleReceivedTokenisationResult(result: String) -> () {
+        func handleReceivedTokenisationResult(_ result: String) -> () {
             success(result)
         }
         
-        func handleFailure(error: NSError) -> () {
+        func handleFailure(_ error: NSError) -> () {
+            print("Failed to receive key")
             failure(error)
         }
         
-        func handleReceivedKeySuccess(key: String) -> () {
-            networking!.tokenize(transactionId, expiryMonth: expiryMonth, expiryYear: expiryYear, cvc: cvc, pan: pan, certificateBase64Der: key, success: {success($0)}, failure: {failure($0)})
+        func handleReceivedKeySuccess(_ key: String) -> () {
+            print("Received key \(key)")
+            networking!.tokenizeTransaction(transactionId: transactionId, expiryMonth: expiryMonth, expiryYear: expiryYear, cvc: cvc, pan: pan, certificateBase64Der: key, success: {success($0)}, failure: {failure($0)})
         }
         
-        networking!.getKey(transactionId, success: handleReceivedKeySuccess, failure: handleFailure)
+        networking!.transactionKey(transactionId: transactionId, success: handleReceivedKeySuccess, failure: { error in
+            print("Failed to get response: \(error)")
+        })
         
         }
     }

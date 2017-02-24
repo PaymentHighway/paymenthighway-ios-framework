@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SPHClutchFormLabel: UILabel {
+open class SPHClutchFormLabel: UILabel {
 
 	override public init(frame: CGRect) {
 		super.init(frame: frame)

@@ -13,24 +13,24 @@ import UIKit
 /// The possible states for a text field to have
 public enum SPHClutchTextFieldState: Int {
     /// Is empty and not validated yet
-    case Empty = 0
+    case empty = 0
     /// The field was validated and has a valid value
-    case Valid = 1
+    case valid = 1
     /// The field was validated and has an invalid value
-    case Invalid = 2
+    case invalid = 2
 }
 
-public class SPHClutchTextField: UITextField {
+open class SPHClutchTextField: UITextField {
 	/// The inset to apply to inside the text field's content
-	public var inset: Inset = Inset(5, 5)
+	open var inset: Inset = Inset(5, 5)
     
     /// State Handling
-    public var fieldState: SPHClutchTextFieldState = .Empty {
+    open var fieldState: SPHClutchTextFieldState = .empty {
         didSet {
-            if fieldState == SPHClutchTextFieldState.Invalid  {
-               self.layer.borderColor = UIColor.redColor().CGColor
+            if fieldState == SPHClutchTextFieldState.invalid  {
+               self.layer.borderColor = UIColor.red.cgColor
             } else {
-                self.layer.borderColor = UIColor(hexInt: 0xa6b9dc).CGColor
+                self.layer.borderColor = UIColor(hexInt: 0xa6b9dc).cgColor
             }
         }
     }
@@ -48,19 +48,19 @@ public class SPHClutchTextField: UITextField {
 	
 	// MARK: Layout
 	
-	override public func textRectForBounds(bounds: CGRect) -> CGRect {
-		return CGRectInset(bounds, inset.x, inset.y)
+	override open func textRect(forBounds bounds: CGRect) -> CGRect {
+		return bounds.insetBy(dx: inset.x, dy: inset.y)
 	}
 	
-	public override func editingRectForBounds(bounds: CGRect) -> CGRect {
-		return CGRectInset(bounds, inset.x, inset.y)
+	open override func editingRect(forBounds bounds: CGRect) -> CGRect {
+		return bounds.insetBy(dx: inset.x, dy: inset.y)
 	}
 }
 
 
 // MARK: Custom Fields
 
-public class SPHClutchCreditCardTextField: SPHClutchTextField {
+open class SPHClutchCreditCardTextField: SPHClutchTextField {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
