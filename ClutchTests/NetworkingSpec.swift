@@ -15,7 +15,7 @@ import Alamofire
 class NetworkingSpec: QuickSpec {
     override func spec() {
         
-        var networking = Networking(merchant: "test_merchantId", accountId: "test", host: "http://127.0.0.1:9000")
+        var networking = SPHNetworking(merchantId: "test_merchantId", accountId: "test", hostname: "http://127.0.0.1:9000")
         
         let MobileBackendAddress = "http://127.0.0.1:8081"
         
@@ -23,7 +23,7 @@ class NetworkingSpec: QuickSpec {
             it("we should get ID"){
                 var receivedMessage = ""
                 
-                networking.helperGetTransactionId(MobileBackendAddress, success: {(message) in receivedMessage = message}, failure: {(error) in println("error \(error)")})
+                networking.transactionId(success: {(message) in receivedMessage = message}, failure: {(error) in print("error \(error)")})
             
                 expect(receivedMessage).toEventually(contain("-"), timeout: 3)
             }
@@ -35,11 +35,11 @@ class NetworkingSpec: QuickSpec {
                 var transactionId = ""
                 var receivedKey = ""
                 
-                networking.helperGetTransactionId(MobileBackendAddress, success: {(message) in transactionId = message}, failure: {(error) in println("error \(error)")})
+                networking.transactionId(success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
                 
                 expect(transactionId).toEventually(contain("-"), timeout: 3)
                 
-                networking.getKey(transactionId, success: {(message) in receivedKey = message}, failure: {(error) in println("error \(error)")})
+                networking.transactionKey(transactionId: transactionId, success: {(message) in receivedKey = message}, failure: {(error) in print("error \(error)")})
                 
                 expect(receivedKey).toEventually(contain("MII"), timeout: 3)
             }
@@ -51,17 +51,17 @@ class NetworkingSpec: QuickSpec {
                 var receivedKey = ""
                 var receivedResponse = "not empty"
                 
-                networking.helperGetTransactionId(MobileBackendAddress, success: {(message) in transactionId = message}, failure: {(error) in println("error \(error)")})
+                networking.transactionId(success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
                 
                 expect(transactionId).toEventually(contain("-"), timeout: 3)
                 
-                networking.getKey(transactionId, success: {(message) in receivedKey = message}, failure: {(error) in println("error \(error)")})
+                networking.transactionKey(transactionId: transactionId, success: {(message) in receivedKey = message}, failure: {(error) in print("error \(error)")})
                 
                 expect(receivedKey).toEventually(contain("MII"), timeout: 3)
                 
-                networking.tokenize(transactionId, expiryMonth: "11", expiryYear: "2017", cvc: "024", pan: "4153013999700024", certificateBase64Der: receivedKey, success: {(message) in receivedResponse = message}, failure: {(error) in println("error \(error)")})
+                networking.tokenizeTransaction(transactionId: transactionId, expiryMonth: "11", expiryYear: "2017", cvc: "024", pan: "4153013999700024", certificateBase64Der: receivedKey, success: {(message) in receivedResponse = message}, failure: {(error) in print("error \(error)")})
 
-                expect(receivedResponse).toEventually(contain(networking.resultStringTokenisationSuccess), timeout: 5)
+                expect(receivedResponse).toEventually(contain(networking.tokenisationSuccessResultString), timeout: 5)
 
             }
         }
@@ -73,20 +73,16 @@ class NetworkingSpec: QuickSpec {
                 var receivedResponse = ""
                 var receivedToken = ""
                 
-                networking.helperGetTransactionId(MobileBackendAddress, success: {(message) in transactionId = message}, failure: {(error) in println("error \(error)")})
-                
+                networking.transactionId(success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
                 expect(transactionId).toEventually(contain("-"), timeout: 3)
                 
-                networking.getKey(transactionId, success: {(message) in receivedKey = message}, failure: {(error) in println("error \(error)")})
-                
+                networking.transactionKey(transactionId: transactionId, success: {(message) in receivedKey = message}, failure: {(error) in print("error \(error)")})
                 expect(receivedKey).toEventually(contain("MII"), timeout: 3)
                 
-                networking.tokenize(transactionId, expiryMonth: "11", expiryYear: "2017", cvc: "024", pan: "4153013999700024", certificateBase64Der: receivedKey, success: {(message) in receivedResponse = message}, failure: {(error) in println("error \(error)")})
-
-                expect(receivedResponse).toEventually(contain(networking.resultStringTokenisationSuccess), timeout: 5)
+                networking.tokenizeTransaction(transactionId: transactionId, expiryMonth: "11", expiryYear: "2017", cvc: "024", pan: "4153013999700024", certificateBase64Der: receivedKey, success: {(message) in receivedResponse = message}, failure: {(error) in print("error \(error)")})
+                expect(receivedResponse).toEventually(contain(networking.tokenisationSuccessResultString), timeout: 5)
                 
-                networking.helperGetToken(MobileBackendAddress, transactionId: transactionId, success: {(message) in receivedToken = message}, failure: {(error) in println("error \(error)")})
-                
+                networking.transactionToken(transactionId: transactionId, success: {(message) in receivedToken = message}, failure: {(error) in print("error \(error)")})
                 expect(receivedToken).toEventually(contain("-"), timeout: 5)
             }
         }

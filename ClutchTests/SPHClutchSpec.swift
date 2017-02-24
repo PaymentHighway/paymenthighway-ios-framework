@@ -17,12 +17,12 @@ class SPHClutchSpec: QuickSpec {
 	override func spec() {
 		// Test Data
 		let validCards: [SPHClutchCardType: [String]] = [
-			.AmericanExpress: ["378282246310005", "371449635398431", "378734493671000"],
-			.DinersClub:      ["30569309025904", "38520000023237"],
-			.Discover:        ["6011111111111117", "6011000990139424"],
-			.JCB:             ["3530111333300000", "3566002020360505"],
-			.MasterCard:      ["5555555555554444", "5105105105105100"],
-			.Visa:            ["4444333322221111", "4012888888881881", "4222222222222"],
+			.americanExpress: ["378282246310005", "371449635398431", "378734493671000"],
+			.dinersClub:      ["30569309025904", "38520000023237"],
+			.discover:        ["6011111111111117", "6011000990139424"],
+			.jcb:             ["3530111333300000", "3566002020360505"],
+			.masterCard:      ["5555555555554444", "5105105105105100"],
+			.visa:            ["4444333322221111", "4012888888881881", "4222222222222"],
 		]
 		
 		let invalidCards = ["123", "0935835", "82378493", "000000"]
@@ -83,7 +83,7 @@ class SPHClutchSpec: QuickSpec {
 			
 			it("shouldn't recognize invalid card numbers as any type") {
 				for cardNumber in invalidCards {
-					expect(SPHClutch.sharedInstance.cardTypeForCardNumber(cardNumber)).to(equal(SPHClutchCardType.Invalid))
+					expect(SPHClutch.sharedInstance.cardTypeForCardNumber(cardNumber)).to(equal(SPHClutchCardType.invalid))
 				}
 			}
 		}
@@ -109,11 +109,11 @@ class SPHClutchSpec: QuickSpec {
         
         describe("Card Formatting") {
             it("should format cards properly with general rule") {
-                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumber("5555555555554444", cardType: SPHClutchCardType.Visa)
+                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumber("5555555555554444", cardType: SPHClutchCardType.visa)
                 expect(actualCardNumber).to(equal("5555 5555 5555 4444"))
             }
             it("should format AMEX using special rule") {
-                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumber("378282246310005", cardType: SPHClutchCardType.AmericanExpress)
+                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumber("378282246310005", cardType: SPHClutchCardType.americanExpress)
                 expect(actualCardNumber).to(equal("3782 822463 10005"))
             }
         }

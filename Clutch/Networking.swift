@@ -90,6 +90,8 @@ open class SPHNetworking {
     fileprivate var manager: Alamofire.SessionManager!
     fileprivate var adapter: SPHRequestAdapter!
     
+    open let tokenisationSuccessResultString = "Tokenisation OK"
+    
     private enum errorCode: Int {
         case invalidResponse, unknown
     }
