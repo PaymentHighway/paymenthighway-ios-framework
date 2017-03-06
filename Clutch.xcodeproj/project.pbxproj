@@ -30,7 +30,11 @@
 		03C92A451ACC26B700422831 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03C92A441ACC26B700422831 /* Images.xcassets */; };
 		03C92A481ACC26B700422831 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C92A461ACC26B700422831 /* LaunchScreen.xib */; };
 		03C92A641ACC29E900422831 /* SPHClutchFormLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A631ACC29E900422831 /* SPHClutchFormLabel.swift */; };
-		04382FB31B0F616000FF6A08 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04382FB21B0F616000FF6A08 /* Networking.swift */; };
+		03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E0081E6D5B710059B7F2 /* SecureSigner.swift */; };
+		03F9E0141E6D63B00059B7F2 /* SecureSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E0121E6D63AB0059B7F2 /* SecureSignerSpec.swift */; };
+		03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */; };
+		03F9E0611E6DA70B0059B7F2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E05E1E6DA70B0059B7F2 /* Router.swift */; };
+		03F9E0621E6DA70B0059B7F2 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E05F1E6DA70B0059B7F2 /* Networking.swift */; };
 		044852951B396FE00034D0CA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; };
 		044852971B3970A10034D0CA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03791CD11AD695C300FD80AC /* Media.xcassets */; };
 		0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456BD5A1AEE5B5800218197 /* Crypto.swift */; };
@@ -186,8 +190,12 @@
 		03C92A471ACC26B700422831 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		03C92A611ACC287B00422831 /* DefaultTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultTheme.plist; sourceTree = "<group>"; };
 		03C92A631ACC29E900422831 /* SPHClutchFormLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutchFormLabel.swift; sourceTree = "<group>"; };
+		03F9E0081E6D5B710059B7F2 /* SecureSigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureSigner.swift; sourceTree = "<group>"; };
+		03F9E0121E6D63AB0059B7F2 /* SecureSignerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureSignerSpec.swift; sourceTree = "<group>"; };
+		03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAdapter.swift; sourceTree = "<group>"; };
+		03F9E05E1E6DA70B0059B7F2 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		03F9E05F1E6DA70B0059B7F2 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		0405D65B1B0A15B70050CA82 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "CryptoSwift/build/Debug-iphoneos/CryptoSwift.framework"; sourceTree = "<group>"; };
-		04382FB21B0F616000FF6A08 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		04382FB41B10EDA200FF6A08 /* NetworkingSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingSpec.swift; sourceTree = "<group>"; };
 		0448524B1B396FC90034D0CA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0448524C1B396FC90034D0CA /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
@@ -397,7 +405,8 @@
 			children = (
 				0456BD5A1AEE5B5800218197 /* Crypto.swift */,
 				03788D6C1AC988D5007FC30F /* Extensions.swift */,
-				04382FB21B0F616000FF6A08 /* Networking.swift */,
+				03F9E0081E6D5B710059B7F2 /* SecureSigner.swift */,
+				03F9E0631E6DA70F0059B7F2 /* Networking */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -427,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				03788D851ACABEC5007FC30F /* SPHClutchSpec.swift */,
+				03F9E0121E6D63AB0059B7F2 /* SecureSignerSpec.swift */,
 			);
 			name = ClassTests;
 			sourceTree = "<group>";
@@ -472,6 +482,16 @@
 				03788D541AC978DD007FC30F /* ClutchTests */,
 			);
 			name = Library;
+			sourceTree = "<group>";
+		};
+		03F9E0631E6DA70F0059B7F2 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */,
+				03F9E05E1E6DA70B0059B7F2 /* Router.swift */,
+				03F9E05F1E6DA70B0059B7F2 /* Networking.swift */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		0448524A1B396FC90034D0CA /* Alamofire */ = {
@@ -872,15 +892,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */,
 				03788D6D1AC988D5007FC30F /* Extensions.swift in Sources */,
 				03575C761E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */,
+				03F9E0621E6DA70B0059B7F2 /* Networking.swift in Sources */,
 				6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */,
+				03F9E0611E6DA70B0059B7F2 /* Router.swift in Sources */,
 				03C92A341ACC235400422831 /* SPHClutchFormatter.swift in Sources */,
-				04382FB31B0F616000FF6A08 /* Networking.swift in Sources */,
 				03575C781E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */,
 				0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */,
 				03C92A641ACC29E900422831 /* SPHClutchFormLabel.swift in Sources */,
 				03C92A321ACC226C00422831 /* SPHClutchTextField.swift in Sources */,
+				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
 				03788D641AC9793D007FC30F /* SPHClutch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,6 +913,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03788D861ACABEC5007FC30F /* SPHClutchSpec.swift in Sources */,
+				03F9E0141E6D63B00059B7F2 /* SecureSignerSpec.swift in Sources */,
 				04B48B421B29BB3A00616048 /* NetworkingSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

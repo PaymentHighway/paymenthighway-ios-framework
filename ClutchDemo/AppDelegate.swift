@@ -16,11 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        let serviceUrl = "http://54.194.196.206:8081"
+        let accountId = "test"
+        let merchantId = "test_merchantId"
         
-        let sphBackendDevAddress  = "http://54.194.196.206:8081"
-
-        SPHClutch.initSharedInstance("test_merchantId", accountId: "test", mobileApiAddress: sphBackendDevAddress)
-		SPHClutchTextField.appearance().backgroundColor = UIColor.red
+        SPHClutch.initSharedInstance(
+            merchantId: merchantId,
+            accountId: accountId,
+            mobileApiAddress: serviceUrl
+        )
+        SPHClutchTextField.appearance().backgroundColor = UIColor.red
 		
 		return true
 	}

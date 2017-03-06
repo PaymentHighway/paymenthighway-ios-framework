@@ -11,7 +11,6 @@ import Clutch
 
 class ViewController: UIViewController {
 	
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
@@ -30,12 +29,12 @@ class ViewController: UIViewController {
   
     @IBAction func addCard(_ sender: UIButton) {
         
-        let _ = "http://54.194.196.206:8081" // development
-        let _ = "http://54.194.196.206:8081" // staging
+        let hostname = "http://54.194.196.206:8081" // development
         
         logForUser.text = "Add card-button pushed.\n\(logForUser.text)"
-        
-        SPHClutch.sharedInstance.networking!.transactionId(
+                
+        SPHClutch.sharedInstance.transactionId(
+            hostname: hostname,
             success: {
                 let txId = $0
                 self.presentSPHAddCardViewController(
@@ -44,7 +43,8 @@ class ViewController: UIViewController {
                     transactionId : txId,
                     success: {
                         self.logForUser.text = "\($0)\n\(self.logForUser.text)"
-                        SPHClutch.sharedInstance.networking!.transactionToken(
+                        SPHClutch.sharedInstance.transactionToken(
+                            hostname: hostname,
                             transactionId: txId,
                             success: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"},
                             failure: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"})

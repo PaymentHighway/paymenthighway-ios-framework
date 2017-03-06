@@ -14,10 +14,15 @@ import Alamofire
 
 class NetworkingSpec: QuickSpec {
     override func spec() {
+        let merchantId = "test_merchantId"
+        let accountId = "test"
+        let signatureKey = "testKey"
+        let signatureSecret = "testSecret"
+        let serviceUrl = "http://54.194.196.206:8081"
         
-        var networking = SPHNetworking(merchantId: "test_merchantId", accountId: "test", hostname: "http://127.0.0.1:9000")
+        let networking = SPHNetworking(merchantId: merchantId, accountId: accountId, signatureKeyId: signatureKey, signatureSecret: signatureSecret, hostname: serviceUrl)
         
-        let MobileBackendAddress = "http://127.0.0.1:8081"
+        // let MobileBackendAddress = "http://54.194.196.206:8081"
         
         describe("transactionId") {
             it("we should get ID"){

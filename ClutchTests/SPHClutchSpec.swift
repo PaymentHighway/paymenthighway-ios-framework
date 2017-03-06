@@ -12,6 +12,13 @@ import Nimble
 import Clutch
 import Alamofire
 
+// Test values
+
+let SPHClutchServiceURL = "http://54.194.196.206:8081"
+let SPHClutchMerchantID = "test_merchantId"
+let SPHClutchAccountID = "test"
+let SPHClutchSignatureKeyId = "testKey"
+let SPHClutchSignatureSecret = "testSecret"
 
 class SPHClutchSpec: QuickSpec {
 	override func spec() {
@@ -54,7 +61,13 @@ class SPHClutchSpec: QuickSpec {
         
 		// Reset Clutch credentials before testsuite
 		beforeSuite {
-            SPHClutch.initSharedInstance("foo", accountId: "bar", mobileApiAddress: "")
+            SPHClutch.initSharedInstance(
+                merchantId: SPHClutchMerchantID,
+                accountId: SPHClutchAccountID,
+                signatureKeyId: SPHClutchSignatureKeyId,
+                signatureSecret: SPHClutchSignatureSecret,
+                mobileApiAddress: SPHClutchServiceURL
+            )
 			return
 		}
         

@@ -96,15 +96,14 @@ open class SPHClutch {
     
     fileprivate var lastExpirationDateLength = 0
     
-    open var networking: SPHNetworking?
+    internal var networking: Networking?
 	
 	// MARK: Initializers
 	
 	public init() { /* Nothing to do here */ }
 	
-    open class func initSharedInstance(_ merchantId: String, accountId: String, mobileApiAddress: String) -> SPHClutch {
-        SPHClutch.sharedInstance.networking = SPHNetworking(merchantId: merchantId, accountId: accountId, hostname: mobileApiAddress)
-        return SPHClutch.sharedInstance
+    open class func initSharedInstance(merchantId: String, accountId: String, mobileApiAddress: String) {
+        SPHClutch.sharedInstance.networking = Networking(merchantId: merchantId, accountId: accountId, serviceUrl: mobileApiAddress)
 	}
 
 	// MARK: Card Recognition and Validation
@@ -295,6 +294,14 @@ open class SPHClutch {
         return text
     }
     
+    open func transactionId(hostname: String, success: @escaping (String) -> (), failure: @escaping (Error) -> ()) -> () {
+        networking!.transactionId(hostname: hostname, success: success, failure: failure)
+    }
+    
+    open func transactionToken(hostname: String, transactionId: String, success: @escaping (String) -> (), failure: @escaping (Error) -> ()) -> () {
+        networking!.transactionToken(hostname: hostname, transactionId: transactionId, success: success, failure: failure)
+    }
+    
     open func addCard(_ transactionId: String, pan: String, cvc: String, expiryMonth: String, expiryYear: String, success: @escaping (String) -> (), failure: @escaping (NSError) -> ()) -> () {
         
         func handleReceivedTokenisationResult(_ result: String) -> () {
@@ -308,7 +315,7 @@ open class SPHClutch {
         
         func handleReceivedKeySuccess(_ key: String) -> () {
             print("Received key \(key)")
-            networking!.tokenizeTransaction(transactionId: transactionId, expiryMonth: expiryMonth, expiryYear: expiryYear, cvc: cvc, pan: pan, certificateBase64Der: key, success: {success($0)}, failure: {failure($0)})
+            networking!.tokenizeTransaction(transactionId: transactionId, expiryMonth: expiryMonth, expiryYear: expiryYear, cvc: cvc, pan: pan, certificateBase64Der: key, success: {success($0)}, failure: {failure($0 as NSError)})
         }
         
         networking!.transactionKey(transactionId: transactionId, success: handleReceivedKeySuccess, failure: { error in
