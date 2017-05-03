@@ -336,7 +336,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		03788D471AC978DD007FC30F /* Clutch */ = {
+		03788D471AC978DD007FC30F /* PaymentHighway */ = {
 			isa = PBXGroup;
 			children = (
 				BF08947B1EB9BEA500A96DB5 /* Vendor */,
@@ -347,7 +347,7 @@
 				03788D481AC978DD007FC30F /* Supporting Files */,
 				03788D4A1AC978DD007FC30F /* PaymentHighway.h */,
 			);
-			path = Clutch;
+			path = PaymentHighway;
 			sourceTree = "<group>";
 		};
 		03788D481AC978DD007FC30F /* Supporting Files */ = {
@@ -362,14 +362,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		03788D541AC978DD007FC30F /* ClutchTests */ = {
+		03788D541AC978DD007FC30F /* PaymentHighwayTests */ = {
 			isa = PBXGroup;
 			children = (
 				03788D781ACAA559007FC30F /* ClassTests */,
 				03788D771ACAA551007FC30F /* UtilityTests */,
 				03788D551AC978DD007FC30F /* Supporting Files */,
 			);
-			path = ClutchTests;
+			path = PaymentHighwayTests;
 			sourceTree = "<group>";
 		};
 		03788D551AC978DD007FC30F /* Supporting Files */ = {
@@ -452,7 +452,7 @@
 				03C92A3B1ACC26B700422831 /* Supporting Files */,
 			);
 			name = Demo;
-			path = ClutchDemo;
+			path = PaymentHighwayDemo;
 			sourceTree = "<group>";
 		};
 		03C92A3B1ACC26B700422831 /* Supporting Files */ = {
@@ -467,8 +467,8 @@
 		03C92A711ACC2DB000422831 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				03788D471AC978DD007FC30F /* Clutch */,
-				03788D541AC978DD007FC30F /* ClutchTests */,
+				03788D471AC978DD007FC30F /* PaymentHighway */,
+				03788D541AC978DD007FC30F /* PaymentHighwayTests */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -1130,7 +1130,7 @@
 				);
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
-				INFOPLIST_FILE = Clutch/Info.plist;
+				INFOPLIST_FILE = PaymentHighway/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1157,7 +1157,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = Clutch/Info.plist;
+				INFOPLIST_FILE = PaymentHighway/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1225,7 +1225,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ClutchDemo/Info.plist;
+				INFOPLIST_FILE = PaymentHighwayDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.solinor.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1246,7 +1246,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = ClutchDemo/Info.plist;
+				INFOPLIST_FILE = PaymentHighwayDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.solinor.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
