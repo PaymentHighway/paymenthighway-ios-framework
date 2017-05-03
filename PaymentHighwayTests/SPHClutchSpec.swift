@@ -1,6 +1,6 @@
 //
 //  SPHSpec.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 31/03/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import Quick
 import Nimble
-import Clutch
+import PaymentHighway
 import Alamofire
 
 // Test values
@@ -59,7 +59,7 @@ class SPHSpec: QuickSpec {
             "123412344234" : "",
             " 1 43 / 2k k nkm" : "1432"]
         
-		// Reset Clutch credentials before testsuite
+		// Reset PaymentHighway credentials before testsuite
 		beforeSuite {
             SPH.initSharedInstance(
                 merchantId: SPHMerchantID,

@@ -1,6 +1,6 @@
 //
 //  SPHAddCardViewController.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Atlas Rome on 09/04/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -192,7 +192,7 @@ import UIKit
     // MARK: UI Events
     
     func navCancelButtonTapped(_ sender: AnyObject) {
-        errorHandler(NSError(domain: ClutchDomains.Default , code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
+        errorHandler(NSError(domain: PaymentHighwayDomains.Default , code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
         self.dismiss(animated: true, completion: nil)
     }
     

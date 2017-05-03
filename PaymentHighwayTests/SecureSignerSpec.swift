@@ -1,6 +1,6 @@
 //
 //  SecureSignerSpec.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 06/03/2017.
 //  Copyright © 2017 Solinor Oy. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import Quick
 import Nimble
-import Clutch
+import PaymentHighway
 
 class SecureSignerSpec: QuickSpec {
     override func spec() {

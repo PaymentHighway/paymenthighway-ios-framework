@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  ClutchDemo
+//  PaymentHighwayDemo
 //
 //  Created by Nico Hämäläinen on 01/04/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.

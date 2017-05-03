@@ -1,6 +1,6 @@
 //
 //  SPH.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 30/03/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -12,7 +12,7 @@ import CryptoSwift
 
 // MARK: Card Types
 
-public struct ClutchDomains {
+public struct PaymentHighwayDomains {
     static let Default = "fi.solinor.clutch.errordomain"
 }
 
@@ -82,7 +82,7 @@ public enum SPHCardType: Int, CustomStringConvertible {
 
 // MARK: Main Class
 
-/// Main Clutch Class
+/// Main PaymentHighway Class
 open class SPH {
     
 	/// The singleton accessor
