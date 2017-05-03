@@ -10,15 +10,15 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "Juha Salo" => "juha.salo@solinor.com" }
   s.platform     = :ios, "8.0"
-  s.source       = { :git => "https://github.com/solinor/paymenthighway-ios-sdk.git", :tag => "pod-proto" } # TODO change tag
+  s.source       = { :git => "git@github.com:solinor/paymenthighway-ios-framework.git", :tag => "v-1.0.4" } # TODO change tag
   s.requires_arc = true
 
   s.resources = ["Clutch/*.{storyboard,lproj,xcassets,png}", "Clutch/IQKeybordManagerSwift/Resources/IQKeyboardManager.bundle/*.png"]
-  s.source_files  = "Clutch", "Clutch/**/*.{h,swift}"
+  s.source_files  = "Clutch", "Clutch/*.{h,swift}"
   s.frameworks  = "Foundation", "UIKit"
 
-  s.dependency "Alamofire", "~> 1.2.0"
-  s.dependency "SwiftyJSON", "~> 2.2.0"
-  s.dependency "CryptoSwift"
- 
+  s.dependency "Alamofire", "~> 4.4.0"
+  s.dependency "SwiftyJSON", "~> 3.1.4"
+  s.dependency "CryptoSwift", "~> 0.6.9"
+
 end
