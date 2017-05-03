@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Clutch
+import PaymentHighway
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

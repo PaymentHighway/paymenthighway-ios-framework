@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Clutch
+import PaymentHighway
 
 class ViewController: UIViewController {
 	

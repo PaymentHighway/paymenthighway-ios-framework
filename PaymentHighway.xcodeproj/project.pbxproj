@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		03134FFD1ACAEABD00EFBD3F /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D7C1ACABDD6007FC30F /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03134FFE1ACAEABD00EFBD3F /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D741ACAA53B007FC30F /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		03134FFF1ACAEBBE00EFBD3F /* Clutch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		03788D4B1AC978DD007FC30F /* Clutch.h in Headers */ = {isa = PBXBuildFile; fileRef = 03788D4A1AC978DD007FC30F /* Clutch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		03788D511AC978DD007FC30F /* Clutch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; };
+		03134FFF1ACAEBBE00EFBD3F /* PaymentHighway.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		03788D4B1AC978DD007FC30F /* PaymentHighway.h in Headers */ = {isa = PBXBuildFile; fileRef = 03788D4A1AC978DD007FC30F /* PaymentHighway.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03788D511AC978DD007FC30F /* PaymentHighway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; };
 		03788D641AC9793D007FC30F /* SPHClutch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03788D631AC9793D007FC30F /* SPHClutch.swift */; };
 		03788D6D1AC988D5007FC30F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03788D6C1AC988D5007FC30F /* Extensions.swift */; };
 		03788D751ACAA53B007FC30F /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D741ACAA53B007FC30F /* Nimble.framework */; };
@@ -44,8 +44,8 @@
 		04E4840A1B131C3100119ABC /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E99B261B13176800BCCDA1 /* SwiftyJSON.framework */; };
 		04E4840B1B131C7500119ABC /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04E99B261B13176800BCCDA1 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFD1FEA1AD6C02D001DF798 /* SPHAddCardViewController.swift */; };
-		945B16F81B467EFD00158A40 /* Clutch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; };
-		945B16F91B467EFD00158A40 /* Clutch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		945B16F81B467EFD00158A40 /* PaymentHighway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; };
+		945B16F91B467EFD00158A40 /* PaymentHighway.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		945B17011B467F1300158A40 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C0956A1B46539F0017D024 /* SwiftyJSON.framework */; };
 		945B17051B467FA900158A40 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94C0956A1B46539F0017D024 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		945B17061B467FBB00158A40 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; };
@@ -139,7 +139,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				04E4840B1B131C7500119ABC /* SwiftyJSON.framework in CopyFiles */,
-				03134FFF1ACAEBBE00EFBD3F /* Clutch.framework in CopyFiles */,
+				03134FFF1ACAEBBE00EFBD3F /* PaymentHighway.framework in CopyFiles */,
 				03134FFD1ACAEABD00EFBD3F /* Quick.framework in CopyFiles */,
 				03134FFE1ACAEABD00EFBD3F /* Nimble.framework in CopyFiles */,
 			);
@@ -151,7 +151,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				945B16F91B467EFD00158A40 /* Clutch.framework in Embed Frameworks */,
+				945B16F91B467EFD00158A40 /* PaymentHighway.framework in Embed Frameworks */,
 				945B17051B467FA900158A40 /* SwiftyJSON.framework in Embed Frameworks */,
 				945B17091B467FC300158A40 /* Alamofire.framework in Embed Frameworks */,
 				945B17071B467FBB00158A40 /* CryptoSwift.framework in Embed Frameworks */,
@@ -163,10 +163,10 @@
 
 /* Begin PBXFileReference section */
 		03575C6F1E60317F00C77AE4 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
-		03788D451AC978DD007FC30F /* Clutch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Clutch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03788D451AC978DD007FC30F /* PaymentHighway.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PaymentHighway.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03788D491AC978DD007FC30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03788D4A1AC978DD007FC30F /* Clutch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Clutch.h; sourceTree = "<group>"; };
-		03788D501AC978DD007FC30F /* ClutchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClutchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03788D4A1AC978DD007FC30F /* PaymentHighway.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentHighway.h; sourceTree = "<group>"; };
+		03788D501AC978DD007FC30F /* PaymentHighwayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentHighwayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03788D561AC978DD007FC30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03788D631AC9793D007FC30F /* SPHClutch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutch.swift; sourceTree = "<group>"; };
 		03788D6C1AC988D5007FC30F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		03791CD31AD6960300FD80AC /* SPHClutch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SPHClutch.storyboard; sourceTree = "<group>"; };
 		03C92A311ACC226C00422831 /* SPHClutchTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutchTextField.swift; sourceTree = "<group>"; };
 		03C92A331ACC235400422831 /* SPHClutchFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutchFormatter.swift; sourceTree = "<group>"; };
-		03C92A391ACC26B700422831 /* ClutchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClutchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03C92A391ACC26B700422831 /* PaymentHighwayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaymentHighwayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C92A3C1ACC26B700422831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03C92A3D1ACC26B700422831 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03C92A3F1ACC26B700422831 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 			files = (
 				04E4840A1B131C3100119ABC /* SwiftyJSON.framework in Frameworks */,
 				0456BD5E1AEFB34500218197 /* Alamofire.framework in Frameworks */,
-				03788D511AC978DD007FC30F /* Clutch.framework in Frameworks */,
+				03788D511AC978DD007FC30F /* PaymentHighway.framework in Frameworks */,
 				03788D751ACAA53B007FC30F /* Nimble.framework in Frameworks */,
 				03788D7D1ACABDD6007FC30F /* Quick.framework in Frameworks */,
 			);
@@ -295,7 +295,7 @@
 				945B17081B467FC300158A40 /* Alamofire.framework in Frameworks */,
 				945B17061B467FBB00158A40 /* CryptoSwift.framework in Frameworks */,
 				945B17011B467F1300158A40 /* SwiftyJSON.framework in Frameworks */,
-				945B16F81B467EFD00158A40 /* Clutch.framework in Frameworks */,
+				945B16F81B467EFD00158A40 /* PaymentHighway.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,9 +329,9 @@
 		03788D461AC978DD007FC30F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03788D451AC978DD007FC30F /* Clutch.framework */,
-				03788D501AC978DD007FC30F /* ClutchTests.xctest */,
-				03C92A391ACC26B700422831 /* ClutchDemo.app */,
+				03788D451AC978DD007FC30F /* PaymentHighway.framework */,
+				03788D501AC978DD007FC30F /* PaymentHighwayTests.xctest */,
+				03C92A391ACC26B700422831 /* PaymentHighwayDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -345,7 +345,7 @@
 				03C92A301ACC225900422831 /* Views */,
 				6FFD1FE91AD6C01A001DF798 /* Controllers */,
 				03788D481AC978DD007FC30F /* Supporting Files */,
-				03788D4A1AC978DD007FC30F /* Clutch.h */,
+				03788D4A1AC978DD007FC30F /* PaymentHighway.h */,
 			);
 			path = Clutch;
 			sourceTree = "<group>";
@@ -639,16 +639,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03788D4B1AC978DD007FC30F /* Clutch.h in Headers */,
+				03788D4B1AC978DD007FC30F /* PaymentHighway.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		03788D441AC978DD007FC30F /* Clutch */ = {
+		03788D441AC978DD007FC30F /* PaymentHighway */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "Clutch" */;
+			buildConfigurationList = 03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighway" */;
 			buildPhases = (
 				03788D401AC978DD007FC30F /* Sources */,
 				03788D411AC978DD007FC30F /* Frameworks */,
@@ -660,14 +660,14 @@
 			);
 			dependencies = (
 			);
-			name = Clutch;
+			name = PaymentHighway;
 			productName = Clutch;
-			productReference = 03788D451AC978DD007FC30F /* Clutch.framework */;
+			productReference = 03788D451AC978DD007FC30F /* PaymentHighway.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		03788D4F1AC978DD007FC30F /* ClutchTests */ = {
+		03788D4F1AC978DD007FC30F /* PaymentHighwayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "ClutchTests" */;
+			buildConfigurationList = 03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighwayTests" */;
 			buildPhases = (
 				03788D4C1AC978DD007FC30F /* Sources */,
 				03788D4D1AC978DD007FC30F /* Frameworks */,
@@ -679,14 +679,14 @@
 			dependencies = (
 				04E484091B131C1300119ABC /* PBXTargetDependency */,
 			);
-			name = ClutchTests;
+			name = PaymentHighwayTests;
 			productName = ClutchTests;
-			productReference = 03788D501AC978DD007FC30F /* ClutchTests.xctest */;
+			productReference = 03788D501AC978DD007FC30F /* PaymentHighwayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		03C92A381ACC26B700422831 /* ClutchDemo */ = {
+		03C92A381ACC26B700422831 /* PaymentHighwayDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "ClutchDemo" */;
+			buildConfigurationList = 03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "PaymentHighwayDemo" */;
 			buildPhases = (
 				03C92A351ACC26B700422831 /* Sources */,
 				03C92A361ACC26B700422831 /* Frameworks */,
@@ -699,9 +699,9 @@
 			dependencies = (
 				945B16FB1B467EFD00158A40 /* PBXTargetDependency */,
 			);
-			name = ClutchDemo;
+			name = PaymentHighwayDemo;
 			productName = ClutchDemo;
-			productReference = 03C92A391ACC26B700422831 /* ClutchDemo.app */;
+			productReference = 03C92A391ACC26B700422831 /* PaymentHighwayDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -729,7 +729,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "Clutch" */;
+			buildConfigurationList = 03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "PaymentHighway" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -752,9 +752,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				03788D441AC978DD007FC30F /* Clutch */,
-				03788D4F1AC978DD007FC30F /* ClutchTests */,
-				03C92A381ACC26B700422831 /* ClutchDemo */,
+				03788D441AC978DD007FC30F /* PaymentHighway */,
+				03788D4F1AC978DD007FC30F /* PaymentHighwayTests */,
+				03C92A381ACC26B700422831 /* PaymentHighwayDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -930,12 +930,12 @@
 /* Begin PBXTargetDependency section */
 		04E484091B131C1300119ABC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 03788D441AC978DD007FC30F /* Clutch */;
+			target = 03788D441AC978DD007FC30F /* PaymentHighway */;
 			targetProxy = 04E484081B131C1300119ABC /* PBXContainerItemProxy */;
 		};
 		945B16FB1B467EFD00158A40 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 03788D441AC978DD007FC30F /* Clutch */;
+			target = 03788D441AC978DD007FC30F /* PaymentHighway */;
 			targetProxy = 945B16FA1B467EFD00158A40 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1259,7 +1259,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "Clutch" */ = {
+		03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "PaymentHighway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03788D591AC978DD007FC30F /* Debug */,
@@ -1268,7 +1268,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "Clutch" */ = {
+		03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03788D5C1AC978DD007FC30F /* Debug */,
@@ -1277,7 +1277,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "ClutchTests" */ = {
+		03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighwayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03788D5F1AC978DD007FC30F /* Debug */,
@@ -1286,7 +1286,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "ClutchDemo" */ = {
+		03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "PaymentHighwayDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03C92A561ACC26B800422831 /* Debug */,
