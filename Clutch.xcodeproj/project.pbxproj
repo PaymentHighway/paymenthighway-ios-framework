@@ -10,10 +10,6 @@
 		03134FFD1ACAEABD00EFBD3F /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D7C1ACABDD6007FC30F /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03134FFE1ACAEABD00EFBD3F /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D741ACAA53B007FC30F /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03134FFF1ACAEBBE00EFBD3F /* Clutch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		03575C761E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */; };
-		03575C771E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */; };
-		03575C781E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */; };
-		03575C791E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */; };
 		03788D4B1AC978DD007FC30F /* Clutch.h in Headers */ = {isa = PBXBuildFile; fileRef = 03788D4A1AC978DD007FC30F /* Clutch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03788D511AC978DD007FC30F /* Clutch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; };
 		03788D641AC9793D007FC30F /* SPHClutch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03788D631AC9793D007FC30F /* SPHClutch.swift */; };
@@ -58,6 +54,8 @@
 		945B17091B467FC300158A40 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94C095551B464F5A0017D024 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; };
 		94C0956B1B46539F0017D024 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C0956A1B46539F0017D024 /* SwiftyJSON.framework */; };
+		BF08947E1EB9BEC300A96DB5 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */; };
+		BF08947F1EB9BEC300A96DB5 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,8 +163,6 @@
 
 /* Begin PBXFileReference section */
 		03575C6F1E60317F00C77AE4 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
-		03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
-		03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
 		03788D451AC978DD007FC30F /* Clutch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Clutch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03788D491AC978DD007FC30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03788D4A1AC978DD007FC30F /* Clutch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Clutch.h; sourceTree = "<group>"; };
@@ -265,6 +261,8 @@
 		94C095531B464F5A0017D024 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		94C095541B464F5A0017D024 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		94C0956A1B46539F0017D024 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
+		BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,15 +315,6 @@
 			name = Carthage;
 			sourceTree = "<group>";
 		};
-		03575C731E60626000C77AE4 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */,
-				03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */,
-			);
-			name = Vendor;
-			sourceTree = "<group>";
-		};
 		03788D3B1AC978DD007FC30F = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +339,7 @@
 		03788D471AC978DD007FC30F /* Clutch */ = {
 			isa = PBXGroup;
 			children = (
+				BF08947B1EB9BEA500A96DB5 /* Vendor */,
 				03788D6B1AC988C6007FC30F /* Utilities */,
 				03788D611AC978F8007FC30F /* Classes */,
 				03C92A301ACC225900422831 /* Views */,
@@ -477,7 +467,6 @@
 		03C92A711ACC2DB000422831 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				03575C731E60626000C77AE4 /* Vendor */,
 				03788D471AC978DD007FC30F /* Clutch */,
 				03788D541AC978DD007FC30F /* ClutchTests */,
 			);
@@ -632,6 +621,15 @@
 				6FFD1FEA1AD6C02D001DF798 /* SPHAddCardViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BF08947B1EB9BEA500A96DB5 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */,
+				BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */,
+			);
+			name = Vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -894,13 +892,13 @@
 			files = (
 				03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */,
 				03788D6D1AC988D5007FC30F /* Extensions.swift in Sources */,
-				03575C761E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */,
 				03F9E0621E6DA70B0059B7F2 /* Networking.swift in Sources */,
+				BF08947F1EB9BEC300A96DB5 /* KeyboardDismissingView.swift in Sources */,
 				6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */,
 				03F9E0611E6DA70B0059B7F2 /* Router.swift in Sources */,
 				03C92A341ACC235400422831 /* SPHClutchFormatter.swift in Sources */,
-				03575C781E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */,
 				0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */,
+				BF08947E1EB9BEC300A96DB5 /* KeyboardAvoiding.swift in Sources */,
 				03C92A641ACC29E900422831 /* SPHClutchFormLabel.swift in Sources */,
 				03C92A321ACC226C00422831 /* SPHClutchTextField.swift in Sources */,
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
@@ -923,8 +921,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				03C92A401ACC26B700422831 /* ViewController.swift in Sources */,
-				03575C791E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */,
-				03575C771E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */,
 				03C92A3E1ACC26B700422831 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
