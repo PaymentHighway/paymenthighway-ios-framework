@@ -47,7 +47,7 @@ open class TextPattern {
 		self.text = text
 		self.matched = matched
 		self.current = text[text.startIndex]
-		next()
+		_ = next()
 	}
 	
 	/// Move to the next character index and process it
@@ -57,7 +57,7 @@ open class TextPattern {
 		
 		current = text[text.characters.index(text.startIndex, offsetBy: index)]
 		if current == "?" {
-			next()
+			_ = next()
 			mustFullfill = false
 			rewindIndex = index
 		}
