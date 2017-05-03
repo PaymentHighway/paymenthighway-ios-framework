@@ -1,5 +1,5 @@
 //
-//  SPHClutchFormatter.swift
+//  SPHFormatter.swift
 //  Clutch
 //
 //  Created by Nico Hämäläinen on 01/04/15.
@@ -98,7 +98,7 @@ public func ==(lhs: TextPattern, rhs: TextPattern) -> Bool {
 }
 
 
-open class SPHClutchFormatter {
+open class SPHFormatter {
 	/// The patterns array holds all the variables that make up a pattern
 	var patterns: [TextMatcher] = []
 	

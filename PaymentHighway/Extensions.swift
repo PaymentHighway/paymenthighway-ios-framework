@@ -100,7 +100,7 @@ internal extension UIColor {
 public extension UIViewController {
 	
     public func presentSPHAddCardViewController(_ source: UIViewController, animated: Bool, transactionId : String, success: @escaping (String) -> (), error: @escaping (NSError) -> (), completion: (() -> Void)?) {
-		let storyboard = UIStoryboard(name: "SPHClutch", bundle: Bundle(for: SPHClutch.self))
+		let storyboard = UIStoryboard(name: "SPH", bundle: Bundle(for: SPH.self))
 		let controller = storyboard.instantiateViewController(withIdentifier: "SPHAddCardForm") as! SPHAddCardViewController
         controller.transactionId = transactionId
         controller.successHandler = success

@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         
         logForUser.text = "Add card-button pushed.\n\(logForUser.text)"
                 
-        SPHClutch.sharedInstance.transactionId(
+        SPH.sharedInstance.transactionId(
             hostname: hostname,
             success: {
                 let txId = $0
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
                     transactionId : txId,
                     success: {
                         self.logForUser.text = "\($0)\n\(self.logForUser.text)"
-                        SPHClutch.sharedInstance.transactionToken(
+                        SPH.sharedInstance.transactionToken(
                             hostname: hostname,
                             transactionId: txId,
                             success: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"},

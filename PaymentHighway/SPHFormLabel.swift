@@ -1,5 +1,5 @@
 //
-//  SPHClutchFormLabel.swift
+//  SPHFormLabel.swift
 //  Clutch
 //
 //  Created by Nico Hämäläinen on 01/04/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class SPHClutchFormLabel: UILabel {
+open class SPHFormLabel: UILabel {
 
 	override public init(frame: CGRect) {
 		super.init(frame: frame)

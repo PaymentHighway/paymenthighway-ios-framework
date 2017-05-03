@@ -20,12 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let accountId = "test"
         let merchantId = "test_merchantId"
         
-        SPHClutch.initSharedInstance(
+        SPH.initSharedInstance(
             merchantId: merchantId,
             accountId: accountId,
             mobileApiAddress: serviceUrl
         )
-        SPHClutchTextField.appearance().backgroundColor = UIColor.red
+        SPHTextField.appearance().backgroundColor = UIColor.red
 		
 		return true
 	}

@@ -1,5 +1,5 @@
 //
-//  SPHClutchSpec.swift
+//  SPHSpec.swift
 //  Clutch
 //
 //  Created by Nico Hämäläinen on 31/03/15.
@@ -14,16 +14,16 @@ import Alamofire
 
 // Test values
 
-let SPHClutchServiceURL = "http://54.194.196.206:8081"
-let SPHClutchMerchantID = "test_merchantId"
-let SPHClutchAccountID = "test"
-let SPHClutchSignatureKeyId = "testKey"
-let SPHClutchSignatureSecret = "testSecret"
+let SPHServiceURL = "http://54.194.196.206:8081"
+let SPHMerchantID = "test_merchantId"
+let SPHAccountID = "test"
+let SPHSignatureKeyId = "testKey"
+let SPHSignatureSecret = "testSecret"
 
-class SPHClutchSpec: QuickSpec {
+class SPHSpec: QuickSpec {
 	override func spec() {
 		// Test Data
-		let validCards: [SPHClutchCardType: [String]] = [
+		let validCards: [SPHCardType: [String]] = [
 			.americanExpress: ["378282246310005", "371449635398431", "378734493671000"],
 			.dinersClub:      ["30569309025904", "38520000023237"],
 			.discover:        ["6011111111111117", "6011000990139424"],
@@ -61,23 +61,23 @@ class SPHClutchSpec: QuickSpec {
         
 		// Reset Clutch credentials before testsuite
 		beforeSuite {
-            SPHClutch.initSharedInstance(
-                merchantId: SPHClutchMerchantID,
-                accountId: SPHClutchAccountID,
-                signatureKeyId: SPHClutchSignatureKeyId,
-                signatureSecret: SPHClutchSignatureSecret,
-                mobileApiAddress: SPHClutchServiceURL
+            SPH.initSharedInstance(
+                merchantId: SPHMerchantID,
+                accountId: SPHAccountID,
+                signatureKeyId: SPHSignatureKeyId,
+                signatureSecret: SPHSignatureSecret,
+                mobileApiAddress: SPHServiceURL
             )
 			return
 		}
         
         describe("Card Formatting for processing") {
             it("should remove illegal characters") {
-                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumberForProcessing("55555🐺5555a5554 44,. -4")
+                let actualCardNumber = SPH.sharedInstance.formattedCardNumberForProcessing("55555🐺5555a5554 44,. -4")
                 expect(actualCardNumber).to(equal("5555555555554444"))
             }
             it("should do nothing if already formatted") {
-                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumberForProcessing("378282246310005")
+                let actualCardNumber = SPH.sharedInstance.formattedCardNumberForProcessing("378282246310005")
                 expect(actualCardNumber).to(equal("378282246310005"))
             }
         }
@@ -88,7 +88,7 @@ class SPHClutchSpec: QuickSpec {
 			it("should recognize basic card types from their numbers") {
 				for (cardType, cardNumbers) in validCards {
 					for cardNumber in cardNumbers {
-						let foundType = SPHClutch.sharedInstance.cardTypeForCardNumber(cardNumber)
+						let foundType = SPH.sharedInstance.cardTypeForCardNumber(cardNumber)
 						expect(foundType.rawValue).to(equal(cardType.rawValue))
 					}
 				}
@@ -96,7 +96,7 @@ class SPHClutchSpec: QuickSpec {
 			
 			it("shouldn't recognize invalid card numbers as any type") {
 				for cardNumber in invalidCards {
-					expect(SPHClutch.sharedInstance.cardTypeForCardNumber(cardNumber)).to(equal(SPHClutchCardType.invalid))
+					expect(SPH.sharedInstance.cardTypeForCardNumber(cardNumber)).to(equal(SPHCardType.invalid))
 				}
 			}
 		}
@@ -108,13 +108,13 @@ class SPHClutchSpec: QuickSpec {
 			it("should validate cards properly") {
 				for (cardType, cardNumbers) in validCards {
 					for cardNumber in cardNumbers {
-						let isValid = SPHClutch.sharedInstance.isValidCardNumber(cardNumber)
+						let isValid = SPH.sharedInstance.isValidCardNumber(cardNumber)
 						expect(isValid).to(beTrue())
 					}
 				}
 				
 				for cardNumber in invalidCards {
-					let isValid = SPHClutch.sharedInstance.isValidCardNumber(cardNumber)
+					let isValid = SPH.sharedInstance.isValidCardNumber(cardNumber)
 					expect(isValid).to(beFalse())
 				}
 			}
@@ -122,11 +122,11 @@ class SPHClutchSpec: QuickSpec {
         
         describe("Card Formatting") {
             it("should format cards properly with general rule") {
-                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumber("5555555555554444", cardType: SPHClutchCardType.visa)
+                let actualCardNumber = SPH.sharedInstance.formattedCardNumber("5555555555554444", cardType: SPHCardType.visa)
                 expect(actualCardNumber).to(equal("5555 5555 5555 4444"))
             }
             it("should format AMEX using special rule") {
-                let actualCardNumber = SPHClutch.sharedInstance.formattedCardNumber("378282246310005", cardType: SPHClutchCardType.americanExpress)
+                let actualCardNumber = SPH.sharedInstance.formattedCardNumber("378282246310005", cardType: SPHCardType.americanExpress)
                 expect(actualCardNumber).to(equal("3782 822463 10005"))
             }
         }
@@ -136,7 +136,7 @@ class SPHClutchSpec: QuickSpec {
         describe("Expiration date formatting") {
             it("should format dates as expected") {
                 for (given, expected) in expirationDateFormats {
-                    let actual = SPHClutch.sharedInstance.formattedExpirationDate(given)
+                    let actual = SPH.sharedInstance.formattedExpirationDate(given)
                     expect(actual).to(equal(expected))
                 }
             }
@@ -147,7 +147,7 @@ class SPHClutchSpec: QuickSpec {
         describe("Security code formatting") {
             it("Format security code as expected") {
                 for (given, expected) in securityCodeFormats {
-                    let actual = SPHClutch.sharedInstance.formattedSecurityCode(given)
+                    let actual = SPH.sharedInstance.formattedSecurityCode(given)
                     expect(actual).to(equal(expected))
                 }
             }
