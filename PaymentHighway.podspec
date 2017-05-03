@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
-  s.name         = "Clutch"
-  s.version      = "1.0.4"
+  s.name         = "PaymentHighway"
+  s.version      = "1.0.5"
   s.summary      = "Solinor Payment Highway framework for iOS."
   s.description  = <<-DESC
 		   This is the Solinor Payment Highway iOS SDK. Solinor Payment Highway is the smoothest service for accepting card payments, one-click payments, recurring charging and for tailor made payment solutions.
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "git@github.com:solinor/paymenthighway-ios-framework.git", :tag => "v-#{s.version}" }
   s.requires_arc = true
 
-  s.resources = ["Clutch/*.{storyboard,lproj,xcassets,png}", "Clutch/IQKeybordManagerSwift/Resources/IQKeyboardManager.bundle/*.png"]
-  s.source_files  = "Clutch", "Clutch/*.{h,swift}"
+  s.resources = ["PaymentHighway/*.{storyboard,lproj,xcassets,png}", "PaymentHighway/IQKeybordManagerSwift/Resources/IQKeyboardManager.bundle/*.png"]
+  s.source_files  = "PaymentHighway", "PaymentHighway/*.{h,swift}"
   s.frameworks  = "Foundation", "UIKit"
 
   s.dependency "Alamofire", "~> 4.4.0"
