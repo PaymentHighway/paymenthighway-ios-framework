@@ -1,14 +1,14 @@
 # Overview
 
-Clutch is the name for the Solinor Payment Highway iOS SDK (actually it is a .framework).
+This is the Solinor Payment Highway (SPH) iOS SDK.
 
 ## Requirements
 
 * At least Xcode 7.3
 * You have an existing iOS project supporting iOS 8 or later
-* [Carthage]( https://github.com/Carthage/Carthage)
+* [Carthage]( https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/)
 * Valid SPH account id and merchant id
-* Custom-build Mobile Application Backend that returns session id and handles token with token id 
+* Custom-build Mobile Application Backend that returns session id and handles token with token id
 
 ## Mobile Application Backend
 
@@ -19,43 +19,61 @@ MIT
 
 ## Todo
 
-* CocoaPods release
 * Manual installation instructions
 * iOS SDK should validate that the received certificate is signed by Certificate Authority (CA should be bundled with SDK)
 * Remove IQKeyboardManager and do a custom solution.
 * Remove SwiftyJson
-* Separate Demo-project from the Clutch project
+* Separate Demo-project from the framework
 
 
 # Install
 
-Currently only Carthage is supported. CocoaPods release is planned and manual installation needs instructions.
+Currently installation via Carthage and CocoaPods is supported.
 
 ## Carthage
 
-1. Create a "Cartfile"-file in the root of your project and add a line within: 
+Create a "Cartfile"-file in the root of your project and add a line within:
 ```
-github "solinor/paymenthighway-ios-framework" "v-1.0.2" 
+github "solinor/paymenthighway-ios-framework" "v-1.0.2"
 ```
 
-2. Run command
+Run the following command to integrate the required frameworks to your project.
 ```
 carthage update --platform iOS
 ```
 
-3. Follow the Carthage's instructions for ”[Adding frameworks to an application](https://github.com/Carthage/Carthage)” from steap 3 on "If you're building for iOS"
+You can follow the Carthage's instructions for ”[Adding frameworks to an application](https://github.com/Carthage/Carthage)” from step 3 on "If you're building for iOS"
+
+## CocoaPods
+
+You can install CocoaPods with the following commands.
+
+```
+$ gem install cocoapods
+```
+
+To integrate PaymentHighway framework to your project, specify it in your `Podfile`.
+```
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target '<Your Target Name>' do
+    pod 'PaymentHighway', '1.0.5'
+end
+```
 
 # Use
 
-See the demo project included how to use Clutch.
+See the demo project included how to use the framework.
 
-In short, you need to import clutch, initialize framework (for instance in AppDelegate) and call presentSPHAddCardViewController when you want to show SPH dialog.
+In short, you need to import PaymentHighway, initialize the framework (for instance in `AppDelegate`, check the demo) and present `SPHAddCardViewController` when you want to show SPH dialog.
 
 # Problems
 
-## carthage update fails
+## Carthage update fails
 
-If you receive
+If you see the following error during framework installation using Carthage
 
 ```
 Code Sign error: No code signing identities found: No valid signing identities (i.e. certificate and private key pair) matching the team ID “(null)” were found.
