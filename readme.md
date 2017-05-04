@@ -22,9 +22,9 @@ MIT
 * Manual installation instructions
 * iOS SDK should validate that the received certificate is signed by Certificate Authority (CA should be bundled with SDK)
 * Remove IQKeyboardManager and do a custom solution.
-* Remove SwiftyJson
 * Separate Demo-project from the framework
-
+* ~~Remove SwiftyJson~~
+* ~~CocoaPods Release~~
 
 # Install
 
@@ -34,7 +34,7 @@ Currently installation via Carthage and CocoaPods is supported.
 
 Create a "Cartfile"-file in the root of your project and add a line within:
 ```
-github "solinor/paymenthighway-ios-framework" "v-1.0.2"
+github "solinor/paymenthighway-ios-framework" "v-1.0.5"
 ```
 
 Run the following command to integrate the required frameworks to your project.
