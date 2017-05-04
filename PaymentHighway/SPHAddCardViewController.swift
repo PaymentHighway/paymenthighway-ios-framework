@@ -53,7 +53,7 @@ import UIKit
         scrollContainer.bounces = false
         KeyboardAvoiding.avoidingView = self.scrollContainer
 
-        let clutchBundle = Bundle(for: SPH.self)
+        let bundle = Bundle(for: SPH.self)
         
         // Setup text field
         for field in [cardNumberField, cardExpiryDateField, cardSecurityCodeField] {
@@ -71,13 +71,13 @@ import UIKit
             
             switch field {
             case cardNumberField?:
-                iconImage = UIImage(named: "cardicon", in: clutchBundle, compatibleWith: nil)
+                iconImage = UIImage(named: "cardicon", in: bundle, compatibleWith: nil)
                 field?.addTarget(self, action: #selector(SPHAddCardViewController.formatCardNumberFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
             case cardExpiryDateField?:
-                iconImage = UIImage(named: "calendaricon", in: clutchBundle, compatibleWith: nil)
+                iconImage = UIImage(named: "calendaricon", in: bundle, compatibleWith: nil)
                 field?.addTarget(self, action: #selector(SPHAddCardViewController.formatExpirationDateFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
             case cardSecurityCodeField?:
-                iconImage = UIImage(named: "lockicon", in: clutchBundle, compatibleWith: nil)
+                iconImage = UIImage(named: "lockicon", in: bundle, compatibleWith: nil)
                 field?.addTarget(self, action: #selector(SPHAddCardViewController.formatSecurityCodeFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
             default: break
             }
@@ -180,12 +180,12 @@ import UIKit
     }
     
     func setupLocalization() {
-        let clutchBundle = Bundle(for: SPH.self)
-        cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: clutchBundle, value: "",comment: "The text shown above the credit card number field")
-        cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown above the expiry date field")
-        cardSecurityCodeLabel.text = NSLocalizedString("CreditCardSecurityCode", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown above the security code field")
-        addCardButton.setTitle(NSLocalizedString("AddCardButtonTitle", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown on the 'add card' button"), for: UIControlState())
-        cardExpiryDateField.placeholder = NSLocalizedString("MM/YY", tableName: nil, bundle: clutchBundle, value: "", comment: "Expiration date placeholder.")
+        let bundle = Bundle(for: SPH.self)
+        cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: bundle, value: "",comment: "The text shown above the credit card number field")
+        cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the expiry date field")
+        cardSecurityCodeLabel.text = NSLocalizedString("CreditCardSecurityCode", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the security code field")
+        addCardButton.setTitle(NSLocalizedString("AddCardButtonTitle", tableName: nil, bundle: bundle, value: "", comment: "The text shown on the 'add card' button"), for: UIControlState())
+        cardExpiryDateField.placeholder = NSLocalizedString("MM/YY", tableName: nil, bundle: bundle, value: "", comment: "Expiration date placeholder.")
 
     }
     
