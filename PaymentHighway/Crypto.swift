@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import CryptoSwift
 
-public enum ClutchCryptoError: Error {
+public enum PaymentHighwayCryptoError: Error {
     case invalid
 }
 

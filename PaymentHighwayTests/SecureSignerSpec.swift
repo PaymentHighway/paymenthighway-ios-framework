@@ -1,6 +1,6 @@
 //
 //  SecureSignerSpec.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 06/03/2017.
 //  Copyright © 2017 Solinor Oy. All rights reserved.
@@ -9,17 +9,17 @@
 import Foundation
 import Quick
 import Nimble
-import Clutch
+import PaymentHighway
 
 class SecureSignerSpec: QuickSpec {
     override func spec() {
         beforeSuite {
-            SPHClutch.initSharedInstance(
-                merchantId: SPHClutchMerchantID,
-                accountId: SPHClutchAccountID,
-                signatureKeyId: SPHClutchSignatureKeyId,
-                signatureSecret: SPHClutchSignatureSecret,
-                mobileApiAddress: SPHClutchServiceURL
+            SPH.initSharedInstance(
+                merchantId: SPHMerchantID,
+                accountId: SPHAccountID,
+                signatureKeyId: SPHSignatureKeyId,
+                signatureSecret: SPHSignatureSecret,
+                mobileApiAddress: SPHServiceURL
             )
         }
         
@@ -40,11 +40,11 @@ class SecureSignerSpec: QuickSpec {
             }
             
             it("Creates signatures properly") {
-                let signer = SecureSigner(signatureKeyId: SPHClutchSignatureKeyId, signatureSecret: SPHClutchSignatureSecret)
+                let signer = SecureSigner(signatureKeyId: SPHSignatureKeyId, signatureSecret: SPHSignatureSecret)
                 let signature = signer.createSignature(method: "POST", uri: "/form/view/payment", keyValues: [
                     ("sph-api-version", "20151028")
                 ], body: "")
-                expect(signature.contains(SPHClutchSignatureKeyId)).to(equal(true))
+                expect(signature.contains(SPHSignatureKeyId)).to(equal(true))
             }
         }
     }

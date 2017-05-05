@@ -9,27 +9,23 @@
 /* Begin PBXBuildFile section */
 		03134FFD1ACAEABD00EFBD3F /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D7C1ACABDD6007FC30F /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03134FFE1ACAEABD00EFBD3F /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D741ACAA53B007FC30F /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		03134FFF1ACAEBBE00EFBD3F /* Clutch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		03575C761E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */; };
-		03575C771E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */; };
-		03575C781E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */; };
-		03575C791E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */; };
-		03788D4B1AC978DD007FC30F /* Clutch.h in Headers */ = {isa = PBXBuildFile; fileRef = 03788D4A1AC978DD007FC30F /* Clutch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		03788D511AC978DD007FC30F /* Clutch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; };
-		03788D641AC9793D007FC30F /* SPHClutch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03788D631AC9793D007FC30F /* SPHClutch.swift */; };
+		03134FFF1ACAEBBE00EFBD3F /* PaymentHighway.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		03788D4B1AC978DD007FC30F /* PaymentHighway.h in Headers */ = {isa = PBXBuildFile; fileRef = 03788D4A1AC978DD007FC30F /* PaymentHighway.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03788D511AC978DD007FC30F /* PaymentHighway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; };
+		03788D641AC9793D007FC30F /* SPH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03788D631AC9793D007FC30F /* SPH.swift */; };
 		03788D6D1AC988D5007FC30F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03788D6C1AC988D5007FC30F /* Extensions.swift */; };
 		03788D751ACAA53B007FC30F /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D741ACAA53B007FC30F /* Nimble.framework */; };
 		03788D7D1ACABDD6007FC30F /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D7C1ACABDD6007FC30F /* Quick.framework */; };
 		03788D861ACABEC5007FC30F /* SPHClutchSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03788D851ACABEC5007FC30F /* SPHClutchSpec.swift */; };
-		03791CD41AD6960300FD80AC /* SPHClutch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03791CD31AD6960300FD80AC /* SPHClutch.storyboard */; };
-		03C92A321ACC226C00422831 /* SPHClutchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A311ACC226C00422831 /* SPHClutchTextField.swift */; };
-		03C92A341ACC235400422831 /* SPHClutchFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A331ACC235400422831 /* SPHClutchFormatter.swift */; };
+		03791CD41AD6960300FD80AC /* SPH.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03791CD31AD6960300FD80AC /* SPH.storyboard */; };
+		03C92A321ACC226C00422831 /* SPHTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A311ACC226C00422831 /* SPHTextField.swift */; };
+		03C92A341ACC235400422831 /* SPHFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A331ACC235400422831 /* SPHFormatter.swift */; };
 		03C92A3E1ACC26B700422831 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A3D1ACC26B700422831 /* AppDelegate.swift */; };
 		03C92A401ACC26B700422831 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A3F1ACC26B700422831 /* ViewController.swift */; };
 		03C92A431ACC26B700422831 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03C92A411ACC26B700422831 /* Main.storyboard */; };
 		03C92A451ACC26B700422831 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03C92A441ACC26B700422831 /* Images.xcassets */; };
 		03C92A481ACC26B700422831 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C92A461ACC26B700422831 /* LaunchScreen.xib */; };
-		03C92A641ACC29E900422831 /* SPHClutchFormLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A631ACC29E900422831 /* SPHClutchFormLabel.swift */; };
+		03C92A641ACC29E900422831 /* SPHFormLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C92A631ACC29E900422831 /* SPHFormLabel.swift */; };
 		03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E0081E6D5B710059B7F2 /* SecureSigner.swift */; };
 		03F9E0141E6D63B00059B7F2 /* SecureSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E0121E6D63AB0059B7F2 /* SecureSignerSpec.swift */; };
 		03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */; };
@@ -48,16 +44,15 @@
 		04E4840A1B131C3100119ABC /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E99B261B13176800BCCDA1 /* SwiftyJSON.framework */; };
 		04E4840B1B131C7500119ABC /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04E99B261B13176800BCCDA1 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFD1FEA1AD6C02D001DF798 /* SPHAddCardViewController.swift */; };
-		945B16F81B467EFD00158A40 /* Clutch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; };
-		945B16F91B467EFD00158A40 /* Clutch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* Clutch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		945B17011B467F1300158A40 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C0956A1B46539F0017D024 /* SwiftyJSON.framework */; };
-		945B17051B467FA900158A40 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94C0956A1B46539F0017D024 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		945B16F81B467EFD00158A40 /* PaymentHighway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; };
+		945B16F91B467EFD00158A40 /* PaymentHighway.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		945B17061B467FBB00158A40 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; };
 		945B17071B467FBB00158A40 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		945B17081B467FC300158A40 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; };
 		945B17091B467FC300158A40 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94C095551B464F5A0017D024 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; };
-		94C0956B1B46539F0017D024 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C0956A1B46539F0017D024 /* SwiftyJSON.framework */; };
+		BF08947E1EB9BEC300A96DB5 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */; };
+		BF08947F1EB9BEC300A96DB5 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,7 +136,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				04E4840B1B131C7500119ABC /* SwiftyJSON.framework in CopyFiles */,
-				03134FFF1ACAEBBE00EFBD3F /* Clutch.framework in CopyFiles */,
+				03134FFF1ACAEBBE00EFBD3F /* PaymentHighway.framework in CopyFiles */,
 				03134FFD1ACAEABD00EFBD3F /* Quick.framework in CopyFiles */,
 				03134FFE1ACAEABD00EFBD3F /* Nimble.framework in CopyFiles */,
 			);
@@ -153,8 +148,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				945B16F91B467EFD00158A40 /* Clutch.framework in Embed Frameworks */,
-				945B17051B467FA900158A40 /* SwiftyJSON.framework in Embed Frameworks */,
+				945B16F91B467EFD00158A40 /* PaymentHighway.framework in Embed Frameworks */,
 				945B17091B467FC300158A40 /* Alamofire.framework in Embed Frameworks */,
 				945B17071B467FBB00158A40 /* CryptoSwift.framework in Embed Frameworks */,
 			);
@@ -165,23 +159,21 @@
 
 /* Begin PBXFileReference section */
 		03575C6F1E60317F00C77AE4 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
-		03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
-		03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
-		03788D451AC978DD007FC30F /* Clutch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Clutch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03788D451AC978DD007FC30F /* PaymentHighway.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PaymentHighway.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03788D491AC978DD007FC30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03788D4A1AC978DD007FC30F /* Clutch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Clutch.h; sourceTree = "<group>"; };
-		03788D501AC978DD007FC30F /* ClutchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClutchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03788D4A1AC978DD007FC30F /* PaymentHighway.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentHighway.h; sourceTree = "<group>"; };
+		03788D501AC978DD007FC30F /* PaymentHighwayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentHighwayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03788D561AC978DD007FC30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03788D631AC9793D007FC30F /* SPHClutch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutch.swift; sourceTree = "<group>"; };
+		03788D631AC9793D007FC30F /* SPH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPH.swift; sourceTree = "<group>"; };
 		03788D6C1AC988D5007FC30F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		03788D741ACAA53B007FC30F /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		03788D7C1ACABDD6007FC30F /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		03788D851ACABEC5007FC30F /* SPHClutchSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutchSpec.swift; sourceTree = "<group>"; };
 		03791CD11AD695C300FD80AC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		03791CD31AD6960300FD80AC /* SPHClutch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SPHClutch.storyboard; sourceTree = "<group>"; };
-		03C92A311ACC226C00422831 /* SPHClutchTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutchTextField.swift; sourceTree = "<group>"; };
-		03C92A331ACC235400422831 /* SPHClutchFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutchFormatter.swift; sourceTree = "<group>"; };
-		03C92A391ACC26B700422831 /* ClutchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClutchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03791CD31AD6960300FD80AC /* SPH.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SPH.storyboard; sourceTree = "<group>"; };
+		03C92A311ACC226C00422831 /* SPHTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHTextField.swift; sourceTree = "<group>"; };
+		03C92A331ACC235400422831 /* SPHFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHFormatter.swift; sourceTree = "<group>"; };
+		03C92A391ACC26B700422831 /* PaymentHighwayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaymentHighwayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C92A3C1ACC26B700422831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03C92A3D1ACC26B700422831 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03C92A3F1ACC26B700422831 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -189,7 +181,7 @@
 		03C92A441ACC26B700422831 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		03C92A471ACC26B700422831 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		03C92A611ACC287B00422831 /* DefaultTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultTheme.plist; sourceTree = "<group>"; };
-		03C92A631ACC29E900422831 /* SPHClutchFormLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHClutchFormLabel.swift; sourceTree = "<group>"; };
+		03C92A631ACC29E900422831 /* SPHFormLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHFormLabel.swift; sourceTree = "<group>"; };
 		03F9E0081E6D5B710059B7F2 /* SecureSigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureSigner.swift; sourceTree = "<group>"; };
 		03F9E0121E6D63AB0059B7F2 /* SecureSignerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureSignerSpec.swift; sourceTree = "<group>"; };
 		03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAdapter.swift; sourceTree = "<group>"; };
@@ -264,7 +256,8 @@
 		94C095521B464F5A0017D024 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		94C095531B464F5A0017D024 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		94C095541B464F5A0017D024 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
-		94C0956A1B46539F0017D024 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
+		BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,7 +267,6 @@
 			files = (
 				044852951B396FE00034D0CA /* Alamofire.framework in Frameworks */,
 				94C095551B464F5A0017D024 /* CryptoSwift.framework in Frameworks */,
-				94C0956B1B46539F0017D024 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +276,7 @@
 			files = (
 				04E4840A1B131C3100119ABC /* SwiftyJSON.framework in Frameworks */,
 				0456BD5E1AEFB34500218197 /* Alamofire.framework in Frameworks */,
-				03788D511AC978DD007FC30F /* Clutch.framework in Frameworks */,
+				03788D511AC978DD007FC30F /* PaymentHighway.framework in Frameworks */,
 				03788D751ACAA53B007FC30F /* Nimble.framework in Frameworks */,
 				03788D7D1ACABDD6007FC30F /* Quick.framework in Frameworks */,
 			);
@@ -296,8 +288,7 @@
 			files = (
 				945B17081B467FC300158A40 /* Alamofire.framework in Frameworks */,
 				945B17061B467FBB00158A40 /* CryptoSwift.framework in Frameworks */,
-				945B17011B467F1300158A40 /* SwiftyJSON.framework in Frameworks */,
-				945B16F81B467EFD00158A40 /* Clutch.framework in Frameworks */,
+				945B16F81B467EFD00158A40 /* PaymentHighway.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,18 +303,8 @@
 				94C095531B464F5A0017D024 /* Nimble.framework */,
 				94C095541B464F5A0017D024 /* Quick.framework */,
 				0456BD5F1AEFB3A100218197 /* Alamofire.framework */,
-				94C0956A1B46539F0017D024 /* SwiftyJSON.framework */,
 			);
 			name = Carthage;
-			sourceTree = "<group>";
-		};
-		03575C731E60626000C77AE4 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				03575C741E60627100C77AE4 /* KeyboardAvoiding.swift */,
-				03575C751E60627100C77AE4 /* KeyboardDismissingView.swift */,
-			);
-			name = Vendor;
 			sourceTree = "<group>";
 		};
 		03788D3B1AC978DD007FC30F = {
@@ -340,24 +321,25 @@
 		03788D461AC978DD007FC30F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03788D451AC978DD007FC30F /* Clutch.framework */,
-				03788D501AC978DD007FC30F /* ClutchTests.xctest */,
-				03C92A391ACC26B700422831 /* ClutchDemo.app */,
+				03788D451AC978DD007FC30F /* PaymentHighway.framework */,
+				03788D501AC978DD007FC30F /* PaymentHighwayTests.xctest */,
+				03C92A391ACC26B700422831 /* PaymentHighwayDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		03788D471AC978DD007FC30F /* Clutch */ = {
+		03788D471AC978DD007FC30F /* PaymentHighway */ = {
 			isa = PBXGroup;
 			children = (
+				BF08947B1EB9BEA500A96DB5 /* Vendor */,
 				03788D6B1AC988C6007FC30F /* Utilities */,
 				03788D611AC978F8007FC30F /* Classes */,
 				03C92A301ACC225900422831 /* Views */,
 				6FFD1FE91AD6C01A001DF798 /* Controllers */,
 				03788D481AC978DD007FC30F /* Supporting Files */,
-				03788D4A1AC978DD007FC30F /* Clutch.h */,
+				03788D4A1AC978DD007FC30F /* PaymentHighway.h */,
 			);
-			path = Clutch;
+			path = PaymentHighway;
 			sourceTree = "<group>";
 		};
 		03788D481AC978DD007FC30F /* Supporting Files */ = {
@@ -372,14 +354,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		03788D541AC978DD007FC30F /* ClutchTests */ = {
+		03788D541AC978DD007FC30F /* PaymentHighwayTests */ = {
 			isa = PBXGroup;
 			children = (
 				03788D781ACAA559007FC30F /* ClassTests */,
 				03788D771ACAA551007FC30F /* UtilityTests */,
 				03788D551AC978DD007FC30F /* Supporting Files */,
 			);
-			path = ClutchTests;
+			path = PaymentHighwayTests;
 			sourceTree = "<group>";
 		};
 		03788D551AC978DD007FC30F /* Supporting Files */ = {
@@ -394,8 +376,8 @@
 		03788D611AC978F8007FC30F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				03788D631AC9793D007FC30F /* SPHClutch.swift */,
-				03C92A331ACC235400422831 /* SPHClutchFormatter.swift */,
+				03788D631AC9793D007FC30F /* SPH.swift */,
+				03C92A331ACC235400422831 /* SPHFormatter.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -444,9 +426,9 @@
 		03C92A301ACC225900422831 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				03C92A311ACC226C00422831 /* SPHClutchTextField.swift */,
-				03C92A631ACC29E900422831 /* SPHClutchFormLabel.swift */,
-				03791CD31AD6960300FD80AC /* SPHClutch.storyboard */,
+				03C92A311ACC226C00422831 /* SPHTextField.swift */,
+				03C92A631ACC29E900422831 /* SPHFormLabel.swift */,
+				03791CD31AD6960300FD80AC /* SPH.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -462,7 +444,7 @@
 				03C92A3B1ACC26B700422831 /* Supporting Files */,
 			);
 			name = Demo;
-			path = ClutchDemo;
+			path = PaymentHighwayDemo;
 			sourceTree = "<group>";
 		};
 		03C92A3B1ACC26B700422831 /* Supporting Files */ = {
@@ -477,9 +459,8 @@
 		03C92A711ACC2DB000422831 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				03575C731E60626000C77AE4 /* Vendor */,
-				03788D471AC978DD007FC30F /* Clutch */,
-				03788D541AC978DD007FC30F /* ClutchTests */,
+				03788D471AC978DD007FC30F /* PaymentHighway */,
+				03788D541AC978DD007FC30F /* PaymentHighwayTests */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -634,6 +615,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		BF08947B1EB9BEA500A96DB5 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */,
+				BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -641,16 +631,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03788D4B1AC978DD007FC30F /* Clutch.h in Headers */,
+				03788D4B1AC978DD007FC30F /* PaymentHighway.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		03788D441AC978DD007FC30F /* Clutch */ = {
+		03788D441AC978DD007FC30F /* PaymentHighway */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "Clutch" */;
+			buildConfigurationList = 03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighway" */;
 			buildPhases = (
 				03788D401AC978DD007FC30F /* Sources */,
 				03788D411AC978DD007FC30F /* Frameworks */,
@@ -662,14 +652,14 @@
 			);
 			dependencies = (
 			);
-			name = Clutch;
+			name = PaymentHighway;
 			productName = Clutch;
-			productReference = 03788D451AC978DD007FC30F /* Clutch.framework */;
+			productReference = 03788D451AC978DD007FC30F /* PaymentHighway.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		03788D4F1AC978DD007FC30F /* ClutchTests */ = {
+		03788D4F1AC978DD007FC30F /* PaymentHighwayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "ClutchTests" */;
+			buildConfigurationList = 03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighwayTests" */;
 			buildPhases = (
 				03788D4C1AC978DD007FC30F /* Sources */,
 				03788D4D1AC978DD007FC30F /* Frameworks */,
@@ -681,14 +671,14 @@
 			dependencies = (
 				04E484091B131C1300119ABC /* PBXTargetDependency */,
 			);
-			name = ClutchTests;
+			name = PaymentHighwayTests;
 			productName = ClutchTests;
-			productReference = 03788D501AC978DD007FC30F /* ClutchTests.xctest */;
+			productReference = 03788D501AC978DD007FC30F /* PaymentHighwayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		03C92A381ACC26B700422831 /* ClutchDemo */ = {
+		03C92A381ACC26B700422831 /* PaymentHighwayDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "ClutchDemo" */;
+			buildConfigurationList = 03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "PaymentHighwayDemo" */;
 			buildPhases = (
 				03C92A351ACC26B700422831 /* Sources */,
 				03C92A361ACC26B700422831 /* Frameworks */,
@@ -701,9 +691,9 @@
 			dependencies = (
 				945B16FB1B467EFD00158A40 /* PBXTargetDependency */,
 			);
-			name = ClutchDemo;
+			name = PaymentHighwayDemo;
 			productName = ClutchDemo;
-			productReference = 03C92A391ACC26B700422831 /* ClutchDemo.app */;
+			productReference = 03C92A391ACC26B700422831 /* PaymentHighwayDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -731,7 +721,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "Clutch" */;
+			buildConfigurationList = 03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "PaymentHighway" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -754,9 +744,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				03788D441AC978DD007FC30F /* Clutch */,
-				03788D4F1AC978DD007FC30F /* ClutchTests */,
-				03C92A381ACC26B700422831 /* ClutchDemo */,
+				03788D441AC978DD007FC30F /* PaymentHighway */,
+				03788D4F1AC978DD007FC30F /* PaymentHighwayTests */,
+				03C92A381ACC26B700422831 /* PaymentHighwayDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -827,7 +817,7 @@
 			files = (
 				044852971B3970A10034D0CA /* Media.xcassets in Resources */,
 				04B48B4B1B3305AA00616048 /* Localizable.strings in Resources */,
-				03791CD41AD6960300FD80AC /* SPHClutch.storyboard in Resources */,
+				03791CD41AD6960300FD80AC /* SPH.storyboard in Resources */,
 				04B48B551B3305AB00616048 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -863,7 +853,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			outputPaths = (
 			);
@@ -894,17 +883,17 @@
 			files = (
 				03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */,
 				03788D6D1AC988D5007FC30F /* Extensions.swift in Sources */,
-				03575C761E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */,
 				03F9E0621E6DA70B0059B7F2 /* Networking.swift in Sources */,
+				BF08947F1EB9BEC300A96DB5 /* KeyboardDismissingView.swift in Sources */,
 				6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */,
 				03F9E0611E6DA70B0059B7F2 /* Router.swift in Sources */,
-				03C92A341ACC235400422831 /* SPHClutchFormatter.swift in Sources */,
-				03575C781E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */,
+				03C92A341ACC235400422831 /* SPHFormatter.swift in Sources */,
 				0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */,
-				03C92A641ACC29E900422831 /* SPHClutchFormLabel.swift in Sources */,
-				03C92A321ACC226C00422831 /* SPHClutchTextField.swift in Sources */,
+				BF08947E1EB9BEC300A96DB5 /* KeyboardAvoiding.swift in Sources */,
+				03C92A641ACC29E900422831 /* SPHFormLabel.swift in Sources */,
+				03C92A321ACC226C00422831 /* SPHTextField.swift in Sources */,
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
-				03788D641AC9793D007FC30F /* SPHClutch.swift in Sources */,
+				03788D641AC9793D007FC30F /* SPH.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,8 +912,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				03C92A401ACC26B700422831 /* ViewController.swift in Sources */,
-				03575C791E60627100C77AE4 /* KeyboardDismissingView.swift in Sources */,
-				03575C771E60627100C77AE4 /* KeyboardAvoiding.swift in Sources */,
 				03C92A3E1ACC26B700422831 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -934,12 +921,12 @@
 /* Begin PBXTargetDependency section */
 		04E484091B131C1300119ABC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 03788D441AC978DD007FC30F /* Clutch */;
+			target = 03788D441AC978DD007FC30F /* PaymentHighway */;
 			targetProxy = 04E484081B131C1300119ABC /* PBXContainerItemProxy */;
 		};
 		945B16FB1B467EFD00158A40 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 03788D441AC978DD007FC30F /* Clutch */;
+			target = 03788D441AC978DD007FC30F /* PaymentHighway */;
 			targetProxy = 945B16FA1B467EFD00158A40 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1134,7 +1121,7 @@
 				);
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
-				INFOPLIST_FILE = Clutch/Info.plist;
+				INFOPLIST_FILE = PaymentHighway/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1161,7 +1148,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = Clutch/Info.plist;
+				INFOPLIST_FILE = PaymentHighway/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1186,7 +1173,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ClutchTests/Info.plist;
+				INFOPLIST_FILE = PaymentHighwayTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.solinor.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1205,7 +1192,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = ClutchTests/Info.plist;
+				INFOPLIST_FILE = PaymentHighwayTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.solinor.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1229,7 +1216,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ClutchDemo/Info.plist;
+				INFOPLIST_FILE = PaymentHighwayDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.solinor.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1250,7 +1237,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = ClutchDemo/Info.plist;
+				INFOPLIST_FILE = PaymentHighwayDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.solinor.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1263,7 +1250,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "Clutch" */ = {
+		03788D3F1AC978DD007FC30F /* Build configuration list for PBXProject "PaymentHighway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03788D591AC978DD007FC30F /* Debug */,
@@ -1272,7 +1259,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "Clutch" */ = {
+		03788D5B1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03788D5C1AC978DD007FC30F /* Debug */,
@@ -1281,7 +1268,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "ClutchTests" */ = {
+		03788D5E1AC978DD007FC30F /* Build configuration list for PBXNativeTarget "PaymentHighwayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03788D5F1AC978DD007FC30F /* Debug */,
@@ -1290,7 +1277,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "ClutchDemo" */ = {
+		03C92A551ACC26B800422831 /* Build configuration list for PBXNativeTarget "PaymentHighwayDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03C92A561ACC26B800422831 /* Debug */,

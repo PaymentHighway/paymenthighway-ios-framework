@@ -1,6 +1,6 @@
 //
 //  SPHAddCardViewController.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Atlas Rome on 09/04/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -10,13 +10,13 @@ import UIKit
 
  class SPHAddCardViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
-    @IBOutlet weak var cardNumberLabel: SPHClutchFormLabel!
-    @IBOutlet weak var cardExpiryDateLabel: SPHClutchFormLabel!
-    @IBOutlet weak var cardSecurityCodeLabel: SPHClutchFormLabel!
+    @IBOutlet weak var cardNumberLabel: SPHFormLabel!
+    @IBOutlet weak var cardExpiryDateLabel: SPHFormLabel!
+    @IBOutlet weak var cardSecurityCodeLabel: SPHFormLabel!
 
-    @IBOutlet weak var cardNumberField: SPHClutchCreditCardTextField!
-    @IBOutlet weak var cardExpiryDateField: SPHClutchTextField!
-    @IBOutlet weak var cardSecurityCodeField: SPHClutchTextField!
+    @IBOutlet weak var cardNumberField: SPHCreditCardTextField!
+    @IBOutlet weak var cardExpiryDateField: SPHTextField!
+    @IBOutlet weak var cardSecurityCodeField: SPHTextField!
     
     @IBOutlet weak var addCardButton: UIButton!
     @IBOutlet weak var navCancel: UIButton!
@@ -53,7 +53,7 @@ import UIKit
         scrollContainer.bounces = false
         KeyboardAvoiding.avoidingView = self.scrollContainer
 
-        let clutchBundle = Bundle(for: SPHClutch.self)
+        let bundle = Bundle(for: SPH.self)
         
         // Setup text field
         for field in [cardNumberField, cardExpiryDateField, cardSecurityCodeField] {
@@ -71,13 +71,13 @@ import UIKit
             
             switch field {
             case cardNumberField?:
-                iconImage = UIImage(named: "cardicon", in: clutchBundle, compatibleWith: nil)
+                iconImage = UIImage(named: "cardicon", in: bundle, compatibleWith: nil)
                 field?.addTarget(self, action: #selector(SPHAddCardViewController.formatCardNumberFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
             case cardExpiryDateField?:
-                iconImage = UIImage(named: "calendaricon", in: clutchBundle, compatibleWith: nil)
+                iconImage = UIImage(named: "calendaricon", in: bundle, compatibleWith: nil)
                 field?.addTarget(self, action: #selector(SPHAddCardViewController.formatExpirationDateFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
             case cardSecurityCodeField?:
-                iconImage = UIImage(named: "lockicon", in: clutchBundle, compatibleWith: nil)
+                iconImage = UIImage(named: "lockicon", in: bundle, compatibleWith: nil)
                 field?.addTarget(self, action: #selector(SPHAddCardViewController.formatSecurityCodeFieldOnTheFly(_:)), for: UIControlEvents.editingChanged)
             default: break
             }
@@ -118,16 +118,16 @@ import UIKit
     }
     
     func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
-        if let sphField = textView as? SPHClutchTextField{
-            sphField.text = SPHClutch.sharedInstance.formattedCardNumber(sphField.text!, cardType: SPHClutch.sharedInstance.cardTypeForCardNumber(SPHClutch.sharedInstance.formattedCardNumberForProcessing(sphField.text!)))
+        if let sphField = textView as? SPHTextField{
+            sphField.text = SPH.sharedInstance.formattedCardNumber(sphField.text!, cardType: SPH.sharedInstance.cardTypeForCardNumber(SPH.sharedInstance.formattedCardNumberForProcessing(sphField.text!)))
             
             updateCardNumberValidity(sphField)
         }
     }
     
     func formatExpirationDateFieldOnTheFly(_ textView: AnyObject){
-        if let sphField = textView as? SPHClutchTextField{
-            sphField.text = SPHClutch.sharedInstance.formattedExpirationDate(sphField.text!)
+        if let sphField = textView as? SPHTextField{
+            sphField.text = SPH.sharedInstance.formattedExpirationDate(sphField.text!)
             
             updateExpirationValidity(sphField)
         }
@@ -135,26 +135,26 @@ import UIKit
     
     
     func formatSecurityCodeFieldOnTheFly(_ textView: AnyObject){
-        if let sphField = textView as? SPHClutchTextField{
-            sphField.text = SPHClutch.sharedInstance.formattedSecurityCode(sphField.text!)
+        if let sphField = textView as? SPHTextField{
+            sphField.text = SPH.sharedInstance.formattedSecurityCode(sphField.text!)
             
             updateSecurityCodeValidity(sphField)
         }
     }
     
-    func updateCardNumberValidity(_ sphField: SPHClutchTextField)
+    func updateCardNumberValidity(_ sphField: SPHTextField)
     {
-        genericUpdateCodeValidity(sphField, validityFunction: SPHClutch.sharedInstance.isValidCardNumber)
+        genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidCardNumber)
     }
     
-    func updateExpirationValidity(_ sphField: SPHClutchTextField)
+    func updateExpirationValidity(_ sphField: SPHTextField)
     {
-        genericUpdateCodeValidity(sphField, validityFunction: SPHClutch.sharedInstance.isValidExpirationDate)
+        genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidExpirationDate)
     }
     
-    func updateSecurityCodeValidity(_ sphField: SPHClutchTextField)
+    func updateSecurityCodeValidity(_ sphField: SPHTextField)
     {
-        genericUpdateCodeValidity(sphField, validityFunction: SPHClutch.sharedInstance.isValidSecurityCode)
+        genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidSecurityCode)
     }
     
     func updateAllValidityFields()
@@ -166,33 +166,33 @@ import UIKit
     
     func allFieldsValid() -> Bool
     {
-        return cardNumberField.fieldState == SPHClutchTextFieldState.valid &&
-        cardExpiryDateField.fieldState == SPHClutchTextFieldState.valid &&
-        cardSecurityCodeField.fieldState == SPHClutchTextFieldState.valid
+        return cardNumberField.fieldState == SPHTextFieldState.valid &&
+        cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
+        cardSecurityCodeField.fieldState == SPHTextFieldState.valid
     }
     
-    func genericUpdateCodeValidity(_ sphField: SPHClutchTextField, validityFunction: (String) -> Bool){
+    func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
         if validityFunction(sphField.text!) == true {
-            sphField.fieldState = SPHClutchTextFieldState.valid
+            sphField.fieldState = SPHTextFieldState.valid
         } else {
-            sphField.fieldState = SPHClutchTextFieldState.invalid
+            sphField.fieldState = SPHTextFieldState.invalid
         }
     }
     
     func setupLocalization() {
-        let clutchBundle = Bundle(for: SPHClutch.self)
-        cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: clutchBundle, value: "",comment: "The text shown above the credit card number field")
-        cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown above the expiry date field")
-        cardSecurityCodeLabel.text = NSLocalizedString("CreditCardSecurityCode", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown above the security code field")
-        addCardButton.setTitle(NSLocalizedString("AddCardButtonTitle", tableName: nil, bundle: clutchBundle, value: "", comment: "The text shown on the 'add card' button"), for: UIControlState())
-        cardExpiryDateField.placeholder = NSLocalizedString("MM/YY", tableName: nil, bundle: clutchBundle, value: "", comment: "Expiration date placeholder.")
+        let bundle = Bundle(for: SPH.self)
+        cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: bundle, value: "",comment: "The text shown above the credit card number field")
+        cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the expiry date field")
+        cardSecurityCodeLabel.text = NSLocalizedString("CreditCardSecurityCode", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the security code field")
+        addCardButton.setTitle(NSLocalizedString("AddCardButtonTitle", tableName: nil, bundle: bundle, value: "", comment: "The text shown on the 'add card' button"), for: UIControlState())
+        cardExpiryDateField.placeholder = NSLocalizedString("MM/YY", tableName: nil, bundle: bundle, value: "", comment: "Expiration date placeholder.")
 
     }
     
     // MARK: UI Events
     
     func navCancelButtonTapped(_ sender: AnyObject) {
-        errorHandler(NSError(domain: ClutchDomains.Default , code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
+        errorHandler(NSError(domain: PaymentHighwayDomains.Default , code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -219,7 +219,7 @@ import UIKit
         let month = cardExpiryDateField.text!.components(separatedBy: "/")[0]
         let year = "20" + cardExpiryDateField.text!.components(separatedBy: "/")[1]
         
-        SPHClutch.sharedInstance.addCard(transactionId, pan: SPHClutch.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
+        SPH.sharedInstance.addCard(transactionId, pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
         }
         
         self.dismiss(animated: true, completion: nil)

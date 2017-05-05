@@ -1,6 +1,6 @@
 //
 //  NetworkingSpec.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Juha Salo on 23/05/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import Quick
 import Nimble
-import Clutch
+import PaymentHighway
 import Alamofire
 
 class NetworkingSpec: QuickSpec {

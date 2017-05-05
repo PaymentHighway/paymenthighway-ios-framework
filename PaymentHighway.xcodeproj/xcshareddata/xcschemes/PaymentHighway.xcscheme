@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03788D441AC978DD007FC30F"
-               BuildableName = "Clutch.framework"
-               BlueprintName = "Clutch"
-               ReferencedContainer = "container:Clutch.xcodeproj">
+               BuildableName = "PaymentHighway.framework"
+               BlueprintName = "PaymentHighway"
+               ReferencedContainer = "container:PaymentHighway.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03788D4F1AC978DD007FC30F"
-               BuildableName = "ClutchTests.xctest"
-               BlueprintName = "ClutchTests"
-               ReferencedContainer = "container:Clutch.xcodeproj">
+               BuildableName = "PaymentHighwayTests.xctest"
+               BlueprintName = "PaymentHighwayTests"
+               ReferencedContainer = "container:PaymentHighway.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03788D4F1AC978DD007FC30F"
-               BuildableName = "ClutchTests.xctest"
-               BlueprintName = "ClutchTests"
-               ReferencedContainer = "container:Clutch.xcodeproj">
+               BuildableName = "PaymentHighwayTests.xctest"
+               BlueprintName = "PaymentHighwayTests"
+               ReferencedContainer = "container:PaymentHighway.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03788D441AC978DD007FC30F"
-            BuildableName = "Clutch.framework"
-            BlueprintName = "Clutch"
-            ReferencedContainer = "container:Clutch.xcodeproj">
+            BuildableName = "PaymentHighway.framework"
+            BlueprintName = "PaymentHighway"
+            ReferencedContainer = "container:PaymentHighway.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -79,9 +79,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03788D441AC978DD007FC30F"
-            BuildableName = "Clutch.framework"
-            BlueprintName = "Clutch"
-            ReferencedContainer = "container:Clutch.xcodeproj">
+            BuildableName = "PaymentHighway.framework"
+            BlueprintName = "PaymentHighway"
+            ReferencedContainer = "container:PaymentHighway.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -97,9 +97,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03788D441AC978DD007FC30F"
-            BuildableName = "Clutch.framework"
-            BlueprintName = "Clutch"
-            ReferencedContainer = "container:Clutch.xcodeproj">
+            BuildableName = "PaymentHighway.framework"
+            BlueprintName = "PaymentHighway"
+            ReferencedContainer = "container:PaymentHighway.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

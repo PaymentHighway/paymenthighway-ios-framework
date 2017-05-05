@@ -1,6 +1,6 @@
 //
-//  SPHClutch.swift
-//  Clutch
+//  SPH.swift
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 30/03/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -12,12 +12,12 @@ import CryptoSwift
 
 // MARK: Card Types
 
-public struct ClutchDomains {
+public struct PaymentHighwayDomains {
     static let Default = "fi.solinor.clutch.errordomain"
 }
 
 /// The recognized card types in the system
-public enum SPHClutchCardType: Int, CustomStringConvertible {
+public enum SPHCardType: Int, CustomStringConvertible {
 	case visa = 0
 	case masterCard
 	case americanExpress
@@ -28,17 +28,17 @@ public enum SPHClutchCardType: Int, CustomStringConvertible {
 	case invalid
 	
 	/// The valid card types
-	static func validValues() -> [SPHClutchCardType] {
+	static func validValues() -> [SPHCardType] {
 		return [.visa, .masterCard, .americanExpress, .discover, .jcb, .dinersClub]
 	}
 	
 	/// The invalid card types
-	static func invalidValues() -> [SPHClutchCardType] {
+	static func invalidValues() -> [SPHCardType] {
 		return [.unsupported, .invalid]
 	}
 
 	/// Returns the correct NSPredicate for validating a card type
-	static func matcherPredicateForType(_ cardType: SPHClutchCardType) -> NSPredicate {
+	static func matcherPredicateForType(_ cardType: SPHCardType) -> NSPredicate {
 		var regexp: String? = nil
 		switch cardType {
 		case .visa:
@@ -82,13 +82,13 @@ public enum SPHClutchCardType: Int, CustomStringConvertible {
 
 // MARK: Main Class
 
-/// Main Clutch Class
-open class SPHClutch {
+/// Main PaymentHighway Class
+open class SPH {
     
 	/// The singleton accessor
-	open class var sharedInstance: SPHClutch {
+	open class var sharedInstance: SPH {
         struct Static {
-            static let instance: SPHClutch = SPHClutch()
+            static let instance: SPH = SPH()
         }
         
         return Static.instance
@@ -103,7 +103,7 @@ open class SPHClutch {
 	public init() { /* Nothing to do here */ }
 	
     open class func initSharedInstance(merchantId: String, accountId: String, mobileApiAddress: String) {
-        SPHClutch.sharedInstance.networking = Networking(merchantId: merchantId, accountId: accountId, serviceUrl: mobileApiAddress)
+        SPH.sharedInstance.networking = Networking(merchantId: merchantId, accountId: accountId, serviceUrl: mobileApiAddress)
 	}
 
 	// MARK: Card Recognition and Validation
@@ -121,7 +121,7 @@ open class SPHClutch {
 	/// Recognize the type of a credit card number
     ///
 	/// - parameter cardNumber: The card number string
-	open func cardTypeForCardNumber(_ cardNumber: String) -> SPHClutchCardType {
+	open func cardTypeForCardNumber(_ cardNumber: String) -> SPHCardType {
 		let valid = self.isValidCardNumber(cardNumber)
 		if !valid {
 			return .invalid
@@ -132,9 +132,9 @@ open class SPHClutch {
 			return .invalid
 		}
 		
-		var foundType: SPHClutchCardType = .invalid
-		for type in SPHClutchCardType.validValues() {
-			let predicate = SPHClutchCardType.matcherPredicateForType(type)
+		var foundType: SPHCardType = .invalid
+		for type in SPHCardType.validValues() {
+			let predicate = SPHCardType.matcherPredicateForType(type)
 			if predicate.evaluate(with: cardNumber) == true {
 				foundType = type
 				break
@@ -179,7 +179,7 @@ open class SPHClutch {
 	/// - parameter   cardNumber: The card number to format
 	/// - parameter   cardType:   The type of the card number
 	/// - returns: The properly spaced credit card number
-	open func formattedCardNumber(_ cardNumber: String, cardType: SPHClutchCardType) -> String {
+	open func formattedCardNumber(_ cardNumber: String, cardType: SPHCardType) -> String {
         let formattedString = self.formattedCardNumberForProcessing(cardNumber).truncate(19, trailing: "")
         
 		// Stupid AMEX uses their own weird format

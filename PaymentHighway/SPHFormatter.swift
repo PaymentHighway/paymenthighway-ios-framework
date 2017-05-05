@@ -1,6 +1,6 @@
 //
-//  SPHClutchFormatter.swift
-//  Clutch
+//  SPHFormatter.swift
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 01/04/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -47,7 +47,7 @@ open class TextPattern {
 		self.text = text
 		self.matched = matched
 		self.current = text[text.startIndex]
-		next()
+		_ = next()
 	}
 	
 	/// Move to the next character index and process it
@@ -57,7 +57,7 @@ open class TextPattern {
 		
 		current = text[text.characters.index(text.startIndex, offsetBy: index)]
 		if current == "?" {
-			next()
+			_ = next()
 			mustFullfill = false
 			rewindIndex = index
 		}
@@ -98,7 +98,7 @@ public func ==(lhs: TextPattern, rhs: TextPattern) -> Bool {
 }
 
 
-open class SPHClutchFormatter {
+open class SPHFormatter {
 	/// The patterns array holds all the variables that make up a pattern
 	var patterns: [TextMatcher] = []
 	

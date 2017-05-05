@@ -1,6 +1,6 @@
 //
-//  SPHClutchTextField.swift
-//  Clutch
+//  SPHTextField.swift
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 01/04/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
@@ -11,7 +11,7 @@ import UIKit
 
 
 /// The possible states for a text field to have
-public enum SPHClutchTextFieldState: Int {
+public enum SPHTextFieldState: Int {
     /// Is empty and not validated yet
     case empty = 0
     /// The field was validated and has a valid value
@@ -20,14 +20,14 @@ public enum SPHClutchTextFieldState: Int {
     case invalid = 2
 }
 
-open class SPHClutchTextField: UITextField {
+open class SPHTextField: UITextField {
 	/// The inset to apply to inside the text field's content
 	open var inset: Inset = Inset(5, 5)
     
     /// State Handling
-    open var fieldState: SPHClutchTextFieldState = .empty {
+    open var fieldState: SPHTextFieldState = .empty {
         didSet {
-            if fieldState == SPHClutchTextFieldState.invalid  {
+            if fieldState == SPHTextFieldState.invalid  {
                self.layer.borderColor = UIColor.red.cgColor
             } else {
                 self.layer.borderColor = UIColor(hexInt: 0xa6b9dc).cgColor
@@ -60,7 +60,7 @@ open class SPHClutchTextField: UITextField {
 
 // MARK: Custom Fields
 
-open class SPHClutchCreditCardTextField: SPHClutchTextField {
+open class SPHCreditCardTextField: SPHTextField {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         

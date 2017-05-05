@@ -1,6 +1,6 @@
 //
 //  SecureSigner.swift
-//  Clutch
+//  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 06/03/2017.
 //  Copyright © 2017 Solinor Oy. All rights reserved.

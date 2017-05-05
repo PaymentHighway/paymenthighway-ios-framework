@@ -1,13 +1,13 @@
 //
 //  AppDelegate.swift
-//  ClutchDemo
+//  PaymentHighwayDemo
 //
 //  Created by Nico Hämäläinen on 01/04/15.
 //  Copyright (c) 2015 Solinor Oy. All rights reserved.
 //
 
 import UIKit
-import Clutch
+import PaymentHighway
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,12 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let accountId = "test"
         let merchantId = "test_merchantId"
         
-        SPHClutch.initSharedInstance(
+        SPH.initSharedInstance(
             merchantId: merchantId,
             accountId: accountId,
             mobileApiAddress: serviceUrl
         )
-        SPHClutchTextField.appearance().backgroundColor = UIColor.red
+        SPHTextField.appearance().backgroundColor = UIColor.red
 		
 		return true
 	}
