@@ -51,7 +51,6 @@ import UIKit
         super.viewDidLoad()
 
         scrollContainer.bounces = false
-        KeyboardAvoiding.avoidingView = self.scrollContainer
 
         let bundle = Bundle(for: SPH.self)
         
@@ -107,6 +106,11 @@ import UIKit
             for: .touchUpInside)
         
         setupLocalization()
+        
+        // Keyboard notifications
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(SPHAddCardViewController.keyboardWillChangeFrame(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -115,6 +119,14 @@ import UIKit
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+    
+    // MARK: - Layout
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        scrollContainer.contentOffset.y = keyboardHeight
     }
     
     func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
@@ -223,5 +235,25 @@ import UIKit
         }
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Keyboard Notification Actions
+    
+    private var keyboardHeight: CGFloat = 0 {
+        didSet(oldHeight) {
+            if keyboardHeight != oldHeight {
+                view.setNeedsLayout()
+            }
+        }
+    }
+    
+    @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+        guard let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        
+        keyboardHeight = max(view.superview!.frame.maxY - keyboardFrame.minY, 0)
+        print("keyboard height: \(keyboardHeight)")
+        self.view.layoutIfNeeded()
     }
 }

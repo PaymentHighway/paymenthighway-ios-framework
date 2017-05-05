@@ -51,8 +51,6 @@
 		945B17081B467FC300158A40 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; };
 		945B17091B467FC300158A40 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94C095551B464F5A0017D024 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; };
-		BF08947E1EB9BEC300A96DB5 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */; };
-		BF08947F1EB9BEC300A96DB5 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,8 +254,6 @@
 		94C095521B464F5A0017D024 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		94C095531B464F5A0017D024 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		94C095541B464F5A0017D024 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
-		BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
-		BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,7 +327,6 @@
 		03788D471AC978DD007FC30F /* PaymentHighway */ = {
 			isa = PBXGroup;
 			children = (
-				BF08947B1EB9BEA500A96DB5 /* Vendor */,
 				03788D6B1AC988C6007FC30F /* Utilities */,
 				03788D611AC978F8007FC30F /* Classes */,
 				03C92A301ACC225900422831 /* Views */,
@@ -615,15 +610,6 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		BF08947B1EB9BEA500A96DB5 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				BF08947C1EB9BEC300A96DB5 /* KeyboardAvoiding.swift */,
-				BF08947D1EB9BEC300A96DB5 /* KeyboardDismissingView.swift */,
-			);
-			name = Vendor;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -884,12 +870,10 @@
 				03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */,
 				03788D6D1AC988D5007FC30F /* Extensions.swift in Sources */,
 				03F9E0621E6DA70B0059B7F2 /* Networking.swift in Sources */,
-				BF08947F1EB9BEC300A96DB5 /* KeyboardDismissingView.swift in Sources */,
 				6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */,
 				03F9E0611E6DA70B0059B7F2 /* Router.swift in Sources */,
 				03C92A341ACC235400422831 /* SPHFormatter.swift in Sources */,
 				0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */,
-				BF08947E1EB9BEC300A96DB5 /* KeyboardAvoiding.swift in Sources */,
 				03C92A641ACC29E900422831 /* SPHFormLabel.swift in Sources */,
 				03C92A321ACC226C00422831 /* SPHTextField.swift in Sources */,
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
