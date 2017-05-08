@@ -50,7 +50,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //scrollView.bounces = false
+        scrollView.bounces = false
 
         let bundle = Bundle(for: SPH.self)
         
@@ -127,6 +127,7 @@ import UIKit
         super.viewWillLayoutSubviews()
         
         visualEffectView.frame = view.bounds
+        scrollView.contentInset.bottom = keyboardHeight
         scrollView.contentOffset.y = keyboardHeight
     }
     
