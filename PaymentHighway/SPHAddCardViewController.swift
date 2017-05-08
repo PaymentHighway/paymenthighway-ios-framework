@@ -22,6 +22,7 @@ import UIKit
     @IBOutlet weak var navCancel: UIButton!
 
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var topContentConstraint: NSLayoutConstraint!
     
     var visualEffectView: UIView!
     
@@ -30,6 +31,7 @@ import UIKit
     internal var errorHandler : (NSError) -> () = {print($0)}
     
     let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor
+    let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
 
     fileprivate var iqKeyboardManagerEnabledCachedValue = false
     
@@ -125,6 +127,8 @@ import UIKit
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+
+        topContentConstraint.constant = scrollView.frame.height - scrollContentHeight
         
         visualEffectView.frame = view.bounds
         scrollView.contentInset.bottom = keyboardHeight
