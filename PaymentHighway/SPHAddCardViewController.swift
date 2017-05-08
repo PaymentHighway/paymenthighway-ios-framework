@@ -21,7 +21,7 @@ import UIKit
     @IBOutlet weak var addCardButton: UIButton!
     @IBOutlet weak var navCancel: UIButton!
 
-    @IBOutlet weak var scrollContainer: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     internal var transactionId = ""
     internal var successHandler : (String) -> () = {print($0)}
@@ -37,7 +37,6 @@ import UIKit
     
     func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         // Override default behavior for popover on small screens
-        print(controller.presentedViewController)
         let navcon = controller.presentedViewController as! UINavigationController
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
         visualEffectView.frame = navcon.view.bounds
@@ -50,7 +49,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scrollContainer.bounces = false
+        //scrollView.bounces = false
 
         let bundle = Bundle(for: SPH.self)
         
@@ -126,7 +125,7 @@ import UIKit
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        scrollContainer.contentOffset.y = keyboardHeight
+        scrollView.contentOffset.y = keyboardHeight
     }
     
     func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
@@ -253,7 +252,6 @@ import UIKit
         }
         
         keyboardHeight = max(view.superview!.frame.maxY - keyboardFrame.minY, 0)
-        print("keyboard height: \(keyboardHeight)")
         self.view.layoutIfNeeded()
     }
 }
