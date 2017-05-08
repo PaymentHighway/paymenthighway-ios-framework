@@ -37,8 +37,8 @@ import UIKit
     internal var successHandler : (String) -> () = {print($0)}
     internal var errorHandler : (NSError) -> () = {print($0)}
     
-    let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
-    let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
+    private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
+    private let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
 
     fileprivate var iqKeyboardManagerEnabledCachedValue = false
     
@@ -162,33 +162,28 @@ import UIKit
         }
     }
     
-    func updateCardNumberValidity(_ sphField: SPHTextField)
-    {
+    func updateCardNumberValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidCardNumber)
     }
     
-    func updateExpirationValidity(_ sphField: SPHTextField)
-    {
+    func updateExpirationValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidExpirationDate)
     }
     
-    func updateSecurityCodeValidity(_ sphField: SPHTextField)
-    {
+    func updateSecurityCodeValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidSecurityCode)
     }
     
-    func updateAllValidityFields()
-    {
+    func updateAllValidityFields(){
         updateCardNumberValidity(cardNumberField)
         updateExpirationValidity(cardExpiryDateField)
         updateSecurityCodeValidity(cardSecurityCodeField)
     }
     
-    func allFieldsValid() -> Bool
-    {
+    func allFieldsValid() -> Bool{
         return cardNumberField.fieldState == SPHTextFieldState.valid &&
-        cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
-        cardSecurityCodeField.fieldState == SPHTextFieldState.valid
+               cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
+               cardSecurityCodeField.fieldState == SPHTextFieldState.valid
     }
     
     func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
@@ -235,11 +230,10 @@ import UIKit
         if !allFieldsValid() {
             return
         } else {
-        
-        let month = cardExpiryDateField.text!.components(separatedBy: "/")[0]
-        let year = "20" + cardExpiryDateField.text!.components(separatedBy: "/")[1]
-        
-        SPH.sharedInstance.addCard(transactionId, pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
+            let month = cardExpiryDateField.text!.components(separatedBy: "/")[0]
+            let year = "20" + cardExpiryDateField.text!.components(separatedBy: "/")[1]
+            
+            SPH.sharedInstance.addCard(transactionId, pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
         }
         
         self.dismiss(animated: true, completion: nil)
