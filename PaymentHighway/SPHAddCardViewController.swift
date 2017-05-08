@@ -127,14 +127,15 @@ import UIKit
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-
-        topContentConstraint.constant = scrollView.frame.height - scrollContentHeight
         
         visualEffectView.frame = view.bounds
+        buttonGradientLayer.frame  = addCardButton.layer.bounds
+        
+        // adjust scrollView's contect size such that the input can be moved up when the keyboard shows
+        topContentConstraint.constant = scrollView.frame.height - scrollContentHeight
         scrollView.contentInset.bottom = keyboardHeight
         scrollView.contentOffset.y = keyboardHeight
         
-        buttonGradientLayer.frame  = addCardButton.layer.bounds
     }
     
     func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
@@ -212,18 +213,16 @@ import UIKit
     }
     
     func addCardButtonTapped(_ sender: AnyObject) {
-        if let gradient = self.addCardButton.layer.sublayers!.first as? CAGradientLayer {
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .beginFromCurrentState,
-                animations: {
-                    gradient.colors = [UIColor(hexInt: 0x3c89cf).cgColor, UIColor(hexInt: 0x4f9ee5).cgColor]
-                },
-                completion: { finished in
-                    UIView.animate(withDuration: 0.25, animations: {
-                        gradient.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
-                    }) 
-                }
-            )
-        }
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: .beginFromCurrentState,
+            animations: {
+                self.buttonGradientLayer.colors = [UIColor(hexInt: 0x3c89cf).cgColor, UIColor(hexInt: 0x4f9ee5).cgColor]
+            },
+            completion: { finished in
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.buttonGradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
+                }) 
+            }
+        )
         
         updateAllValidityFields()
 
@@ -236,7 +235,7 @@ import UIKit
             SPH.sharedInstance.addCard(transactionId, pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
         }
         
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: Keyboard Notification Actions
