@@ -22,7 +22,9 @@ import UIKit
     @IBOutlet weak var navCancel: UIButton!
 
     @IBOutlet weak var scrollView: UIScrollView!
-
+    
+    var visualEffectView: UIView!
+    
     internal var transactionId = ""
     internal var successHandler : (String) -> () = {print($0)}
     internal var errorHandler : (NSError) -> () = {print($0)}
@@ -38,8 +40,7 @@ import UIKit
     func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         // Override default behavior for popover on small screens
         let navcon = controller.presentedViewController as! UINavigationController
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
-        visualEffectView.frame = navcon.view.bounds
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
         navcon.view.insertSubview(visualEffectView, at: 0)
         return navcon
     }
@@ -125,6 +126,7 @@ import UIKit
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
+        visualEffectView.frame = view.bounds
         scrollView.contentOffset.y = keyboardHeight
     }
     
