@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PaymentHighway"
-  s.version      = "1.0.5"
+  s.version      = "1.0.6"
   s.summary      = "Solinor Payment Highway framework for iOS."
   s.description  = <<-DESC
 		   This is the Solinor Payment Highway iOS SDK. Solinor Payment Highway is the smoothest service for accepting card payments, one-click payments, recurring charging and for tailor made payment solutions.
