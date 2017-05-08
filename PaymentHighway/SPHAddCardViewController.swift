@@ -24,13 +24,20 @@ import UIKit
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topContentConstraint: NSLayoutConstraint!
     
-    var visualEffectView: UIView!
+    private var visualEffectView: UIView!
+    private var buttonGradientLayer:CAGradientLayer = {
+        let gradientLayer  = CAGradientLayer()
+        gradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.cornerRadius = 4.0
+        return gradientLayer
+    }()
     
     internal var transactionId = ""
     internal var successHandler : (String) -> () = {print($0)}
     internal var errorHandler : (NSError) -> () = {print($0)}
     
-    let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor
+    let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
     let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
 
     fileprivate var iqKeyboardManagerEnabledCachedValue = false
@@ -90,17 +97,10 @@ import UIKit
         }
         
         // Setup button
-        
-        let gradientLayer    = CAGradientLayer()
-        gradientLayer.frame  = addCardButton.layer.bounds
-        gradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.cornerRadius = 4.0
-        
         addCardButton.layer.cornerRadius = 4.0
         addCardButton.layer.masksToBounds = true
         addCardButton.addTarget(self, action: #selector(SPHAddCardViewController.addCardButtonTapped(_:)), for: .touchUpInside)
-        addCardButton.layer.insertSublayer(gradientLayer, at: 0)
+        addCardButton.layer.insertSublayer(buttonGradientLayer, at: 0)
         
         // Setup cancel
         
@@ -133,6 +133,8 @@ import UIKit
         visualEffectView.frame = view.bounds
         scrollView.contentInset.bottom = keyboardHeight
         scrollView.contentOffset.y = keyboardHeight
+        
+        buttonGradientLayer.frame  = addCardButton.layer.bounds
     }
     
     func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
