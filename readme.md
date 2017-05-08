@@ -21,8 +21,8 @@ MIT
 
 * Manual installation instructions
 * iOS SDK should validate that the received certificate is signed by Certificate Authority (CA should be bundled with SDK)
-* Remove IQKeyboardManager and do a custom solution.
-* Support landscape orientation
+* ~~Remove IQKeyboardManager and do a custom solution.~~
+* ~~Support landscape orientation~~
 * ~~Remove SwiftyJson~~
 * ~~CocoaPods Release~~
 
