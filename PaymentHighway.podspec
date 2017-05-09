@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
   s.frameworks  = "Foundation", "UIKit"
 
   s.dependency "Alamofire", "~> 4.4.0"
-  s.dependency "SwiftyJSON", "~> 3.1.4"
   s.dependency "CryptoSwift", "~> 0.6.9"
 
 end
