@@ -21,13 +21,24 @@ import UIKit
     @IBOutlet weak var addCardButton: UIButton!
     @IBOutlet weak var navCancel: UIButton!
 
-    @IBOutlet weak var scrollContainer: UIScrollView!
-
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var topContentConstraint: NSLayoutConstraint!
+    
+    private var visualEffectView: UIView!
+    private var buttonGradientLayer:CAGradientLayer = {
+        let gradientLayer  = CAGradientLayer()
+        gradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.cornerRadius = 4.0
+        return gradientLayer
+    }()
+    
     internal var transactionId = ""
     internal var successHandler : (String) -> () = {print($0)}
     internal var errorHandler : (NSError) -> () = {print($0)}
     
-    let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor
+    private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
+    private let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
 
     fileprivate var iqKeyboardManagerEnabledCachedValue = false
     
@@ -37,10 +48,8 @@ import UIKit
     
     func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         // Override default behavior for popover on small screens
-        print(controller.presentedViewController)
         let navcon = controller.presentedViewController as! UINavigationController
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
-        visualEffectView.frame = navcon.view.bounds
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
         navcon.view.insertSubview(visualEffectView, at: 0)
         return navcon
     }
@@ -50,8 +59,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scrollContainer.bounces = false
-        KeyboardAvoiding.avoidingView = self.scrollContainer
+        scrollView.bounces = false
 
         let bundle = Bundle(for: SPH.self)
         
@@ -89,17 +97,10 @@ import UIKit
         }
         
         // Setup button
-        
-        let gradientLayer    = CAGradientLayer()
-        gradientLayer.frame  = addCardButton.layer.bounds
-        gradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.cornerRadius = 4.0
-        
         addCardButton.layer.cornerRadius = 4.0
         addCardButton.layer.masksToBounds = true
         addCardButton.addTarget(self, action: #selector(SPHAddCardViewController.addCardButtonTapped(_:)), for: .touchUpInside)
-        addCardButton.layer.insertSublayer(gradientLayer, at: 0)
+        addCardButton.layer.insertSublayer(buttonGradientLayer, at: 0)
         
         // Setup cancel
         
@@ -107,6 +108,11 @@ import UIKit
             for: .touchUpInside)
         
         setupLocalization()
+        
+        // Keyboard notifications
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(SPHAddCardViewController.keyboardWillChangeFrame(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -115,6 +121,21 @@ import UIKit
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+    
+    // MARK: - Layout
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        visualEffectView.frame = view.bounds
+        buttonGradientLayer.frame  = addCardButton.layer.bounds
+        
+        // adjust scrollView's contect size such that the input can be moved up when the keyboard shows
+        topContentConstraint.constant = scrollView.frame.height - scrollContentHeight
+        scrollView.contentInset.bottom = keyboardHeight
+        scrollView.contentOffset.y = keyboardHeight
+        
     }
     
     func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
@@ -142,33 +163,28 @@ import UIKit
         }
     }
     
-    func updateCardNumberValidity(_ sphField: SPHTextField)
-    {
+    func updateCardNumberValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidCardNumber)
     }
     
-    func updateExpirationValidity(_ sphField: SPHTextField)
-    {
+    func updateExpirationValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidExpirationDate)
     }
     
-    func updateSecurityCodeValidity(_ sphField: SPHTextField)
-    {
+    func updateSecurityCodeValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidSecurityCode)
     }
     
-    func updateAllValidityFields()
-    {
+    func updateAllValidityFields(){
         updateCardNumberValidity(cardNumberField)
         updateExpirationValidity(cardExpiryDateField)
         updateSecurityCodeValidity(cardSecurityCodeField)
     }
     
-    func allFieldsValid() -> Bool
-    {
+    func allFieldsValid() -> Bool{
         return cardNumberField.fieldState == SPHTextFieldState.valid &&
-        cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
-        cardSecurityCodeField.fieldState == SPHTextFieldState.valid
+               cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
+               cardSecurityCodeField.fieldState == SPHTextFieldState.valid
     }
     
     func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
@@ -197,31 +213,47 @@ import UIKit
     }
     
     func addCardButtonTapped(_ sender: AnyObject) {
-        if let gradient = self.addCardButton.layer.sublayers!.first as? CAGradientLayer {
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .beginFromCurrentState,
-                animations: {
-                    gradient.colors = [UIColor(hexInt: 0x3c89cf).cgColor, UIColor(hexInt: 0x4f9ee5).cgColor]
-                },
-                completion: { finished in
-                    UIView.animate(withDuration: 0.25, animations: {
-                        gradient.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
-                    }) 
-                }
-            )
-        }
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: .beginFromCurrentState,
+            animations: {
+                self.buttonGradientLayer.colors = [UIColor(hexInt: 0x3c89cf).cgColor, UIColor(hexInt: 0x4f9ee5).cgColor]
+            },
+            completion: { finished in
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.buttonGradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
+                }) 
+            }
+        )
         
         updateAllValidityFields()
 
         if !allFieldsValid() {
             return
         } else {
-        
-        let month = cardExpiryDateField.text!.components(separatedBy: "/")[0]
-        let year = "20" + cardExpiryDateField.text!.components(separatedBy: "/")[1]
-        
-        SPH.sharedInstance.addCard(transactionId, pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
+            let month = cardExpiryDateField.text!.components(separatedBy: "/")[0]
+            let year = "20" + cardExpiryDateField.text!.components(separatedBy: "/")[1]
+            
+            SPH.sharedInstance.addCard(transactionId, pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
         }
         
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Keyboard Notification Actions
+    
+    private var keyboardHeight: CGFloat = 0 {
+        didSet(oldHeight) {
+            if keyboardHeight != oldHeight {
+                view.setNeedsLayout()
+            }
+        }
+    }
+    
+    @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+        guard let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        
+        keyboardHeight = max(view.superview!.frame.maxY - keyboardFrame.minY, 0)
+        self.view.layoutIfNeeded()
     }
 }
