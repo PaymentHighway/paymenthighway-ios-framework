@@ -3,7 +3,7 @@
 //  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 06/03/2017.
-//  Copyright © 2017 Solinor Oy. All rights reserved.
+//  Copyright © 2017 Payment Highway Oy. All rights reserved.
 //
 
 import Foundation

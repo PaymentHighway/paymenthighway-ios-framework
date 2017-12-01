@@ -3,7 +3,7 @@
 //  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 30/03/15.
-//  Copyright (c) 2015 Solinor Oy. All rights reserved.
+//  Copyright (c) 2015 Payment Highway Oy. All rights reserved.
 //
 
 import Foundation
@@ -13,7 +13,7 @@ import CryptoSwift
 // MARK: Card Types
 
 public struct PaymentHighwayDomains {
-    static let Default = "fi.solinor.clutch.errordomain"
+    static let Default = "io.paymenthighway.errordomain"
 }
 
 /// The recognized card types in the system
