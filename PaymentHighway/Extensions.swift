@@ -29,10 +29,10 @@ internal extension String {
 	/// - returns: The found substring
 	subscript (r: Range<Int>) -> String {
 		get {
-			let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
-			let endIndex = self.characters.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
+			let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+			let endIndex = self.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
 			
-			return self[(startIndex ..< endIndex)]
+			return String(self[(startIndex ..< endIndex)])
 		}
 	}
     /// Returns matches for given regexp
@@ -61,13 +61,9 @@ internal extension String {
     
     /// Truncates the string to length number of characters and
     /// appends optional trailing string if longer
-    /// Source: https://gist.github.com/aorcsik/c8210a84f163b1b644c0
-    func truncate(_ length: Int, trailing: String? = nil) -> String {
-        if self.characters.count > length {
-            return self.substring(to: self.characters.index(self.startIndex, offsetBy: length)) + (trailing ?? "")
-        } else {
-            return self
-        }
+    /// Source: https://gist.github.com/budidino/8585eecd55fd4284afaaef762450f98e
+    func truncate(length: Int, trailing: String? = nil) -> String {
+        return (self.count > length) ? self.prefix(length) + (trailing ?? "") : self
     }
 	
 }
@@ -80,7 +76,7 @@ internal extension UIColor {
 	/// - parameter red:   The red color value
 	/// - parameter green: The green color value
 	/// - parameter blue:  The blue color value
-	convenience init(red: Int, green: Int, blue: Int) {
+	@objc convenience init(red: Int, green: Int, blue: Int) {
 		assert(red >= 0 && red <= 255, "Invalid red component")
 		assert(green >= 0 && green <= 255, "Invalid green component")
 		assert(blue >= 0 && blue <= 255, "Invalid blue component")
@@ -90,7 +86,7 @@ internal extension UIColor {
 	
 	/// Convenience method for initializing with a 0xFFFFFF-0x000000 color value
 	/// - parameter hexInt: The hexadecimal integer color value
-	convenience init(hexInt: Int) {
+	@objc convenience init(hexInt: Int) {
 		self.init(red: (hexInt >> 16) & 0xff, green: (hexInt >> 8) & 0xff, blue: hexInt & 0xff)
 	}
 }
@@ -99,7 +95,7 @@ internal extension UIColor {
 
 public extension UIViewController {
 	
-    public func presentSPHAddCardViewController(_ source: UIViewController, animated: Bool, transactionId : String, success: @escaping (String) -> (), error: @escaping (NSError) -> (), completion: (() -> Void)?) {
+    @objc public func presentSPHAddCardViewController(_ source: UIViewController, animated: Bool, transactionId : String, success: @escaping (String) -> (), error: @escaping (NSError) -> (), completion: (() -> Void)?) {
 		let storyboard = UIStoryboard(name: "SPH", bundle: Bundle(for: SPH.self))
 		let controller = storyboard.instantiateViewController(withIdentifier: "SPHAddCardForm") as! SPHAddCardViewController
         controller.transactionId = transactionId

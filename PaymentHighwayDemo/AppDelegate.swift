@@ -14,16 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let serviceUrl = "http://54.194.196.206:8081"
         let accountId = "test"
         let merchantId = "test_merchantId"
         
         SPH.initSharedInstance(
             merchantId: merchantId,
             accountId: accountId,
-            mobileApiAddress: serviceUrl
+            serverType: StagingServer.self
         )
         SPHTextField.appearance().backgroundColor = UIColor.red
 		

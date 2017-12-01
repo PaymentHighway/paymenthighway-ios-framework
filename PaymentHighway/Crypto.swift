@@ -68,12 +68,11 @@ public func encryptWithRsaAes(_ data: String, certificateBase64Der: String) -> (
     
     do {
         // Create AES encryptor
-        let aes = try AES(key: keyAes, iv: iv, blockMode: .CBC, padding: PKCS7())
-        
+        let aes = try AES(key: keyAes, blockMode: .CBC(iv: iv), padding: .pkcs7)
+
         // Encrypt given data
         let encryptedData = try aes.encrypt(Array(data.utf8))
-        
-        
+
         // Create encryption key
         guard let publicKey = loadDER(Data(base64Encoded: certificateBase64Der, options: [])!) else {
             return nil

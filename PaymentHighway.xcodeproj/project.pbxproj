@@ -51,6 +51,7 @@
 		945B17081B467FC300158A40 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; };
 		945B17091B467FC300158A40 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94C095551B464F5A0017D024 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; };
+		D098A48D1FD16D4200FDD7DB /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098A4841FD16D4200FDD7DB /* ServerType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,6 +255,7 @@
 		94C095521B464F5A0017D024 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		94C095531B464F5A0017D024 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		94C095541B464F5A0017D024 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		D098A4841FD16D4200FDD7DB /* ServerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +465,7 @@
 		03F9E0631E6DA70F0059B7F2 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D098A4841FD16D4200FDD7DB /* ServerType.swift */,
 				03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */,
 				03F9E05E1E6DA70B0059B7F2 /* Router.swift */,
 				03F9E05F1E6DA70B0059B7F2 /* Networking.swift */,
@@ -875,6 +878,7 @@
 				03C92A341ACC235400422831 /* SPHFormatter.swift in Sources */,
 				0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */,
 				03C92A641ACC29E900422831 /* SPHFormLabel.swift in Sources */,
+				D098A48D1FD16D4200FDD7DB /* ServerType.swift in Sources */,
 				03C92A321ACC226C00422831 /* SPHTextField.swift in Sources */,
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
 				03788D641AC9793D007FC30F /* SPH.swift in Sources */,

@@ -53,9 +53,9 @@ open class TextPattern {
 	/// Move to the next character index and process it
 	open func next() -> Bool {
 		index += 1
-		if index >= text.characters.count { return true }
+		if index >= text.count { return true }
 		
-		current = text[text.characters.index(text.startIndex, offsetBy: index)]
+		current = text[text.index(text.startIndex, offsetBy: index)]
 		if current == "?" {
 			_ = next()
 			mustFullfill = false
@@ -69,7 +69,7 @@ open class TextPattern {
 	open func rewind() -> Bool {
 		if index > rewindIndex && rewindIndex > 0 {
 			index = rewindIndex
-			current = text[text.characters.index(text.startIndex, offsetBy: rewindIndex)]
+			current = text[text.index(text.startIndex, offsetBy: rewindIndex)]
 			return true
 		}
 		
@@ -121,7 +121,7 @@ open class SPHFormatter {
 		var collect = Array<TextPattern>()
 		var index = 0
 		var text = source
-		for char in text.characters {
+		for char in text {
 			var consumed = false
 			var lastChar: Character?
 			for pattern in Array(pending.reversed()) {
@@ -133,15 +133,15 @@ open class SPHFormatter {
 						continue //it is matching on the same pattern, so skip it
 					}
 					if pattern.next() {
-						let range = text.characters.index(text.startIndex, offsetBy: pattern.start)...text.characters.index(text.startIndex, offsetBy: index)
+						let range = text.index(text.startIndex, offsetBy: pattern.start)...text.index(text.startIndex, offsetBy: index)
 						//println("text range: \(text[range])")
 						if let match = pattern.matched {
 							let src = text[range]
-							let srcLen = src.characters.count
-							let replace = match(src,text,pattern.start)
+							let srcLen = src.count
+							let replace = match(String(src),text,pattern.start)
 							if replace.attributes != nil {
 								text.replaceSubrange(range, with: replace.text)
-								let replaceLen = replace.text.characters.count
+								let replaceLen = replace.text.count
 								index -= (srcLen-replaceLen)
 								lastChar = char
 								pattern.length = replaceLen

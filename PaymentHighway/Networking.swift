@@ -13,12 +13,11 @@ internal class Networking {
     let sessionManager: Alamofire.SessionManager
     let requestAdapter: NetworkingRequestAdapter
     
-    init(merchantId: String, accountId: String, serviceUrl: String) {
+    init(merchantId: String, accountId: String) {
         // Create request adapter
         requestAdapter = NetworkingRequestAdapter(
             merchantId: merchantId,
-            accountId: accountId,
-            serviceUrl: serviceUrl
+            accountId: accountId
         )
         
         // Create session manager
