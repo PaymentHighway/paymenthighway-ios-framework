@@ -322,6 +322,5 @@ open class SPH {
             print("Failed to get response: \(error)")
         })
         
-        }
     }
-
+}
