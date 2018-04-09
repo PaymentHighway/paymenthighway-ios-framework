@@ -3,7 +3,7 @@
 //  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 30/03/15.
-//  Copyright (c) 2015 Solinor Oy. All rights reserved.
+//  Copyright (c) 2015 Payment Highway Oy. All rights reserved.
 //
 
 import Foundation
@@ -13,7 +13,7 @@ import CryptoSwift
 // MARK: Card Types
 
 public struct PaymentHighwayDomains {
-    static let Default = "fi.solinor.clutch.errordomain"
+    static let Default = "io.paymenthighway.errordomain"
 }
 
 /// The recognized card types in the system
@@ -86,25 +86,25 @@ public enum SPHCardType: Int, CustomStringConvertible {
 open class SPH {
     
 	/// The singleton accessor
-	open class var sharedInstance: SPH {
-        struct Static {
-            static let instance: SPH = SPH()
-        }
-        
-        return Static.instance
-	}
+    static open let sharedInstance: SPH = SPH()
     
     fileprivate var lastExpirationDateLength = 0
     
+    internal var serviceBaseURL: String?
     internal var networking: Networking?
 	
 	// MARK: Initializers
 	
 	public init() { /* Nothing to do here */ }
 	
-    open class func initSharedInstance(merchantId: String, accountId: String, mobileApiAddress: String) {
-        SPH.sharedInstance.networking = Networking(merchantId: merchantId, accountId: accountId, serviceUrl: mobileApiAddress)
+    open class func initSharedInstance(merchantId: String, accountId: String, serverType: ServerType.Type) {
+        SPH.sharedInstance.serviceBaseURL = serverType.baseURL
+        SPH.sharedInstance.networking = Networking(merchantId: merchantId, accountId: accountId)
 	}
+
+    open func baseURL() -> String {
+        return SPH.sharedInstance.serviceBaseURL!
+    }
 
 	// MARK: Card Recognition and Validation
 	
@@ -128,7 +128,7 @@ open class SPH {
 		}
 		
 		let formattedString: String = self.formattedCardNumberForProcessing(cardNumber)
-		if formattedString.characters.count < 9 {
+		if formattedString.count < 9 {
 			return .invalid
 		}
 		
@@ -150,7 +150,7 @@ open class SPH {
 	/// - returns: true if the number passes, false if not
 	open func isValidCardNumber(_ cardNumber: String) -> Bool {
 		let formattedString = self.formattedCardNumberForProcessing(cardNumber)
-		if formattedString.characters.count < 9 {
+		if formattedString.count < 9 {
 			return false
 		}
         
@@ -180,7 +180,7 @@ open class SPH {
 	/// - parameter   cardType:   The type of the card number
 	/// - returns: The properly spaced credit card number
 	open func formattedCardNumber(_ cardNumber: String, cardType: SPHCardType) -> String {
-        let formattedString = self.formattedCardNumberForProcessing(cardNumber).truncate(19, trailing: "")
+        let formattedString = self.formattedCardNumberForProcessing(cardNumber).truncate(length: 19, trailing: "")
         
 		// Stupid AMEX uses their own weird format
 		var regexpString = "(\\d{1,4})"
@@ -202,7 +202,7 @@ open class SPH {
     
     open func isValidExpirationDate(_ expirationDate: String) -> Bool {
         
-        if(expirationDate.characters.count == 5)
+        if(expirationDate.count == 5)
         {
             let month = expirationDate.components(separatedBy: "/")[0]
             let year = "20" + expirationDate.components(separatedBy: "/")[1]
@@ -228,7 +228,7 @@ open class SPH {
     
     open func formattedExpirationDate(_ expirationDate: String) -> String {
         var onlyDigitsExpirationDate = formattedExpirationDateForProcessing(expirationDate)
-        let length = onlyDigitsExpirationDate.characters.count
+        let length = onlyDigitsExpirationDate.count
         
         var text = ""
         
@@ -247,33 +247,33 @@ open class SPH {
             } else {
                 if Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12
                 {
-                    onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.characters.index(before: onlyDigitsExpirationDate.endIndex))
+                    onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
                     text = onlyDigitsExpirationDate
                 } else {
                     text = "\(onlyDigitsExpirationDate)/"
                 }
             }
         case 3:
-            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.characters.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
+            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
             text = onlyDigitsExpirationDate
         case 4:
-            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.characters.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
+            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
             text = onlyDigitsExpirationDate
         case 5:
-            onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.characters.index(before: onlyDigitsExpirationDate.endIndex))
-            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.characters.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
+            onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
+            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
             text = onlyDigitsExpirationDate
         default:
             text = ""
         }
         
-        lastExpirationDateLength = text.characters.count
+        lastExpirationDateLength = text.count
         
         return text
     }
     
     open func isValidSecurityCode(_ securityCode: String) -> Bool {
-        return self.formattedSecurityCodeForProcessing(securityCode).characters.count > 0
+        return self.formattedSecurityCodeForProcessing(securityCode).count > 0
     }
     
     open func formattedSecurityCodeForProcessing(_ securityCode: String) -> String {
@@ -283,11 +283,11 @@ open class SPH {
     open func formattedSecurityCode(_ securityCode: String) -> String {
         var onlyDigitsSecurityCode = formattedSecurityCodeForProcessing(securityCode)
         var text = ""
-        switch onlyDigitsSecurityCode.characters.count
+        switch onlyDigitsSecurityCode.count
         {
             case 0...4 : text = onlyDigitsSecurityCode
             case 5 :
-                onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.characters.index(before: onlyDigitsSecurityCode.endIndex))
+                onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.index(before: onlyDigitsSecurityCode.endIndex))
                 text = onlyDigitsSecurityCode
             default : text = ""
         }
@@ -322,6 +322,5 @@ open class SPH {
             print("Failed to get response: \(error)")
         })
         
-        }
     }
-
+}

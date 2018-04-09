@@ -3,7 +3,7 @@
 //  PaymentHighway
 //
 //  Created by Atlas Rome on 09/04/15.
-//  Copyright (c) 2015 Solinor Oy. All rights reserved.
+//  Copyright (c) 2015 Payment Highway Oy. All rights reserved.
 //
 
 import UIKit
@@ -33,9 +33,9 @@ import UIKit
         return gradientLayer
     }()
     
-    internal var transactionId = ""
-    internal var successHandler : (String) -> () = {print($0)}
-    internal var errorHandler : (NSError) -> () = {print($0)}
+    @objc internal var transactionId = ""
+    @objc internal var successHandler : (String) -> () = {print($0)}
+    @objc internal var errorHandler : (NSError) -> () = {print($0)}
     
     private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
     private let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
@@ -138,7 +138,7 @@ import UIKit
         
     }
     
-    func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
+    @objc func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
         if let sphField = textView as? SPHTextField{
             sphField.text = SPH.sharedInstance.formattedCardNumber(sphField.text!, cardType: SPH.sharedInstance.cardTypeForCardNumber(SPH.sharedInstance.formattedCardNumberForProcessing(sphField.text!)))
             
@@ -146,7 +146,7 @@ import UIKit
         }
     }
     
-    func formatExpirationDateFieldOnTheFly(_ textView: AnyObject){
+    @objc func formatExpirationDateFieldOnTheFly(_ textView: AnyObject){
         if let sphField = textView as? SPHTextField{
             sphField.text = SPH.sharedInstance.formattedExpirationDate(sphField.text!)
             
@@ -155,7 +155,7 @@ import UIKit
     }
     
     
-    func formatSecurityCodeFieldOnTheFly(_ textView: AnyObject){
+    @objc func formatSecurityCodeFieldOnTheFly(_ textView: AnyObject){
         if let sphField = textView as? SPHTextField{
             sphField.text = SPH.sharedInstance.formattedSecurityCode(sphField.text!)
             
@@ -163,31 +163,31 @@ import UIKit
         }
     }
     
-    func updateCardNumberValidity(_ sphField: SPHTextField){
+    @objc func updateCardNumberValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidCardNumber)
     }
     
-    func updateExpirationValidity(_ sphField: SPHTextField){
+    @objc func updateExpirationValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidExpirationDate)
     }
     
-    func updateSecurityCodeValidity(_ sphField: SPHTextField){
+    @objc func updateSecurityCodeValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidSecurityCode)
     }
     
-    func updateAllValidityFields(){
+    @objc func updateAllValidityFields(){
         updateCardNumberValidity(cardNumberField)
         updateExpirationValidity(cardExpiryDateField)
         updateSecurityCodeValidity(cardSecurityCodeField)
     }
     
-    func allFieldsValid() -> Bool{
+    @objc func allFieldsValid() -> Bool{
         return cardNumberField.fieldState == SPHTextFieldState.valid &&
                cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
                cardSecurityCodeField.fieldState == SPHTextFieldState.valid
     }
     
-    func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
+    @objc func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
         if validityFunction(sphField.text!) == true {
             sphField.fieldState = SPHTextFieldState.valid
         } else {
@@ -195,7 +195,7 @@ import UIKit
         }
     }
     
-    func setupLocalization() {
+    @objc func setupLocalization() {
         let bundle = Bundle(for: SPH.self)
         cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: bundle, value: "",comment: "The text shown above the credit card number field")
         cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the expiry date field")
@@ -207,12 +207,12 @@ import UIKit
     
     // MARK: UI Events
     
-    func navCancelButtonTapped(_ sender: AnyObject) {
+    @objc func navCancelButtonTapped(_ sender: AnyObject) {
         errorHandler(NSError(domain: PaymentHighwayDomains.Default , code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
         self.dismiss(animated: true, completion: nil)
     }
     
-    func addCardButtonTapped(_ sender: AnyObject) {
+    @objc func addCardButtonTapped(_ sender: AnyObject) {
         UIView.animate(withDuration: 0.25, delay: 0.0, options: .beginFromCurrentState,
             animations: {
                 self.buttonGradientLayer.colors = [UIColor(hexInt: 0x3c89cf).cgColor, UIColor(hexInt: 0x4f9ee5).cgColor]

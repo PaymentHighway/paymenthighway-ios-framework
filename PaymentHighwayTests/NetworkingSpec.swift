@@ -3,7 +3,7 @@
 //  PaymentHighway
 //
 //  Created by Juha Salo on 23/05/15.
-//  Copyright (c) 2015 Solinor Oy. All rights reserved.
+//  Copyright (c) 2015 Payment Highway Oy. All rights reserved.
 //
 
 import Foundation

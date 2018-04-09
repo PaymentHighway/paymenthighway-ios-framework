@@ -3,7 +3,7 @@
 //  PaymentHighwayDemo
 //
 //  Created by Nico Hämäläinen on 01/04/15.
-//  Copyright (c) 2015 Solinor Oy. All rights reserved.
+//  Copyright (c) 2015 Payment Highway Oy. All rights reserved.
 //
 
 import UIKit
@@ -14,16 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let serviceUrl = "http://54.194.196.206:8081"
         let accountId = "test"
         let merchantId = "test_merchantId"
         
         SPH.initSharedInstance(
             merchantId: merchantId,
             accountId: accountId,
-            mobileApiAddress: serviceUrl
+            serverType: StagingServer.self
         )
         SPHTextField.appearance().backgroundColor = UIColor.red
 		

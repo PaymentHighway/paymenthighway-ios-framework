@@ -3,7 +3,7 @@
 //  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 06/03/2017.
-//  Copyright © 2017 Solinor Oy. All rights reserved.
+//  Copyright © 2017 Payment Highway Oy. All rights reserved.
 //
 
 import Foundation
@@ -13,12 +13,11 @@ internal class Networking {
     let sessionManager: Alamofire.SessionManager
     let requestAdapter: NetworkingRequestAdapter
     
-    init(merchantId: String, accountId: String, serviceUrl: String) {
+    init(merchantId: String, accountId: String) {
         // Create request adapter
         requestAdapter = NetworkingRequestAdapter(
             merchantId: merchantId,
-            accountId: accountId,
-            serviceUrl: serviceUrl
+            accountId: accountId
         )
         
         // Create session manager

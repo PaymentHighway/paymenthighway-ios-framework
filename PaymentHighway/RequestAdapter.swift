@@ -3,7 +3,7 @@
 //  PaymentHighway
 //
 //  Created by Nico Hämäläinen on 06/03/2017.
-//  Copyright © 2017 Solinor Oy. All rights reserved.
+//  Copyright © 2017 Payment Highway Oy. All rights reserved.
 //
 
 import Foundation
@@ -12,12 +12,10 @@ import Alamofire
 internal class NetworkingRequestAdapter: RequestAdapter {
     let merchantId: String
     let accountId: String
-    let serviceUrl: String
     
-    init(merchantId: String, accountId: String, serviceUrl: String) {
+    init(merchantId: String, accountId: String) {
         self.merchantId = merchantId
         self.accountId = accountId
-        self.serviceUrl = serviceUrl
     }
     
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
