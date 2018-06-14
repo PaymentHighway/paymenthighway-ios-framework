@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import CryptoSwift
+
 
 // MARK: Card Types
 
@@ -87,8 +87,6 @@ open class SPH {
     
 	/// The singleton accessor
     static open let sharedInstance: SPH = SPH()
-    
-    fileprivate var lastExpirationDateLength = 0
     
     internal var serviceBaseURL: String?
     internal var networking: Networking?
@@ -226,7 +224,7 @@ open class SPH {
         return formattedCardNumberForProcessing(expirationDate)
     }
     
-    open func formattedExpirationDate(_ expirationDate: String) -> String {
+    open func formattedExpirationDate(_ expirationDate: String, _ lastExpirationDateLength: Int) -> String {
         var onlyDigitsExpirationDate = formattedExpirationDateForProcessing(expirationDate)
         let length = onlyDigitsExpirationDate.count
         
@@ -234,7 +232,7 @@ open class SPH {
         
         switch length {
         case 1:
-            if(2...9 ~= Int(onlyDigitsExpirationDate)!)
+            if (2...9 ~= Int(onlyDigitsExpirationDate)!)
             {
                 text = "0\(onlyDigitsExpirationDate)/"
             } else {
@@ -266,8 +264,6 @@ open class SPH {
         default:
             text = ""
         }
-        
-        lastExpirationDateLength = text.count
         
         return text
     }

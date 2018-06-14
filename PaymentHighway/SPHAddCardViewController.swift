@@ -40,6 +40,8 @@ import UIKit
     private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
     private let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
 
+    private var lastExpirationDateLength = 0
+    
     fileprivate var iqKeyboardManagerEnabledCachedValue = false
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -148,8 +150,8 @@ import UIKit
     
     @objc func formatExpirationDateFieldOnTheFly(_ textView: AnyObject){
         if let sphField = textView as? SPHTextField{
-            sphField.text = SPH.sharedInstance.formattedExpirationDate(sphField.text!)
-            
+            sphField.text = SPH.sharedInstance.formattedExpirationDate(sphField.text!, lastExpirationDateLength)
+            lastExpirationDateLength = sphField.text?.count ?? 0
             updateExpirationValidity(sphField)
         }
     }
