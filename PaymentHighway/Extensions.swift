@@ -46,13 +46,14 @@ internal extension String {
         let results = regex.matches(in: nsString as String,
             options: [], range: NSMakeRange(0, nsString.length))
             
-		
         var strings = [String]()
         
         for result in results {
             for i in 1 ..< result.numberOfRanges {
                 let range = result.rangeAt(i)
-                strings.append(nsString.substring(with: range))
+                if range.location != NSNotFound {
+                    strings.append(nsString.substring(with: range))
+                }
             }
         }
         
