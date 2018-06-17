@@ -224,7 +224,7 @@ open class SPH {
         return formattedCardNumberForProcessing(expirationDate)
     }
     
-    open func formattedExpirationDate(_ expirationDate: String, _ lastExpirationDateLength: Int) -> String {
+    open func formattedExpirationDate(_ expirationDate: String, _ deleting: Bool = false) -> String {
         var onlyDigitsExpirationDate = formattedExpirationDateForProcessing(expirationDate)
         let length = onlyDigitsExpirationDate.count
         
@@ -239,17 +239,13 @@ open class SPH {
                 text = onlyDigitsExpirationDate
             }
         case 2:
-            if (lastExpirationDateLength == 3)
+            if (deleting && expirationDate.count == 2) ||
+               (Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12)
             {
+                onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
                 text = onlyDigitsExpirationDate
             } else {
-                if Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12
-                {
-                    onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
-                    text = onlyDigitsExpirationDate
-                } else {
-                    text = "\(onlyDigitsExpirationDate)/"
-                }
+                text = "\(onlyDigitsExpirationDate)/"
             }
         case 3:
             onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))

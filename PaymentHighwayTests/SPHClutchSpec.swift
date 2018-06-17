@@ -36,21 +36,23 @@ class SPHSpec: QuickSpec {
 		
 		let invalidCards = ["123", "0935835", "82378493", "000000"]
         
-        let expirationDateFormats = ["" : ("",0),
-            "0" : ("0", 0),
-            "00" : ("0", 0),
-            "1" : ("1", 0),
-            "11" : ("11/", 1), // lastExpirationDateLength fundamental
-            "12" : ("12", 3), // for these 2 cases only
-            "13" : ("1", 0),
-            "23" : ("2", 0),
-            "10/1" : ("10/1", 0),
-            "10/" : ("10/", 0),
-            "8" : ("08/", 0),
-            "10/13" : ("10/13", 0),
-            "10/134" : ("10/13", 0),
-            "10/1334" : ("", 0),
-            "aas/df1" : ("1", 0)]
+        let expirationDateFormats = ["" : ("",false),
+            "0" : ("0", false),
+            "00" : ("0", false),
+            "1" : ("1", false),
+            "11" : ("11/", false),
+            "12" : ("1", true), // deleting case
+            "11/" : ("11/", false),
+            "12/" : ("12/", true), // deleting case
+            "13" : ("1", false),
+            "23" : ("2", false),
+            "10/1" : ("10/1", false),
+            "10/" : ("10/", false),
+            "8" : ("08/", false),
+            "10/13" : ("10/13", false),
+            "10/134" : ("10/13", false),
+            "10/1334" : ("", false),
+            "aas/df1" : ("1", false)]
         
         let securityCodeFormats = ["" : "",
             "0" : "0",
@@ -136,8 +138,8 @@ class SPHSpec: QuickSpec {
         
         describe("Expiration date formatting") {
             it("should format dates as expected") {
-                for (given, (expected, lastExpirationDateLength)) in expirationDateFormats {
-                    let actual = SPH.sharedInstance.formattedExpirationDate(given, lastExpirationDateLength)
+                for (given, (expected, deleting)) in expirationDateFormats {
+                    let actual = SPH.sharedInstance.formattedExpirationDate(given, deleting)
                     expect(actual).to(equal(expected))
                 }
             }
