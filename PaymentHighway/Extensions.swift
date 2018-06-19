@@ -37,7 +37,7 @@ internal extension String {
     /// Returns matches for given regexp
     /// - parameter regex: The pattern to evaluate
     /// - returns: Found matches as an array
-    func matchesForRegex(_ regex: String!) -> [String] {
+    func matchesForRegex(_ regex: String) -> [String] {
         
         guard let regex = try? NSRegularExpression(pattern: regex, options: []) else { return [] }
         let nsString = self as NSString
@@ -102,7 +102,8 @@ public extension UIViewController {
                                                       error: @escaping (NSError) -> Void,
                                                       completion: (() -> Void)?) {
 		let storyboard = UIStoryboard(name: "SPH", bundle: Bundle(for: SPH.self))
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "SPHAddCardForm") as? SPHAddCardViewController else { return }
+        // swiftlint:disable force_cast
+        let controller = storyboard.instantiateViewController(withIdentifier: "SPHAddCardForm") as! SPHAddCardViewController
         controller.transactionId = transactionId
         controller.successHandler = success
         controller.errorHandler = error

@@ -92,9 +92,8 @@ internal class Networking {
         let jsonCardData = ["expiry_month": expiryMonth, "expiry_year": expiryYear, "cvc" : cvc, "pan" : pan]
         
         guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonCardData, options: []),
-              let data = String(data: jsonData, encoding: .utf8) else { return }
-        
-        guard let encryptedCardData = encryptWithRsaAes(data, certificateBase64Der: certificateBase64Der) else {
+              let data = String(data: jsonData, encoding: .utf8),
+              let encryptedCardData = encryptWithRsaAes(data, certificateBase64Der: certificateBase64Der) else {
             failure(NSError(domain: "io.paymenthighway.ios", code: 5, userInfo: ["errorReason" : "Could not encrypt data during network.tokenize."]))
             return
         }

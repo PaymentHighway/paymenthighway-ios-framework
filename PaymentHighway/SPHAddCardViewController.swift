@@ -34,8 +34,8 @@ import UIKit
     }()
     
     internal var transactionId = ""
-    internal var successHandler : (String) -> () = {print($0)}
-    internal var errorHandler : (NSError) -> () = {print($0)}
+    internal var successHandler : (String) -> Void = {print($0)}
+    internal var errorHandler : (NSError) -> Void = {print($0)}
     
     private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor
     private let scrollContentHeight:CGFloat = 330
@@ -190,7 +190,7 @@ import UIKit
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidSecurityCode)
     }
     
-    func updateAllValidityFields(){
+    func updateAllValidityFields() {
         updateCardNumberValidity(cardNumberField)
         updateExpirationValidity(cardExpiryDateField)
         updateSecurityCodeValidity(cardSecurityCodeField)
