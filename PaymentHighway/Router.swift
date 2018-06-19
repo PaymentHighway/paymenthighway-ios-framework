@@ -50,17 +50,14 @@ internal enum NetworkingRouter: URLRequestConvertible {
         // Don't forward these two calls to the payment highway service
         case .transactionId, .transactionToken:
             url = URL(string: path)!
-            break
         // But forward everything else there
         default:
             url = URL(string: serviceBaseURL.appending(path))!
-            break
         }
         
         switch self {
         case .tokenizeTransaction(_, let parameters):
-            httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-            break
+            httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         default:
             break
         }

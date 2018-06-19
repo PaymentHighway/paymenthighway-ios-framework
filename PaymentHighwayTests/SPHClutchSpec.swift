@@ -22,57 +22,63 @@ let SPHAccountID = "test"
 let SPHSignatureKeyId = "testKey"
 let SPHSignatureSecret = "testSecret"
 
+// Test Data
+let validCards: [SPHCardType: [String]] = [
+    .americanExpress: ["378282246310005", "371449635398431", "378734493671000"],
+    .dinersClub:      ["30569309025904", "38520000023237"],
+    .discover:        ["6011111111111117", "6011000990139424"],
+    .jcb:             ["3530111333300000", "3566002020360505"],
+    .masterCard:      ["5555555555554444", "5105105105105100"],
+    .visa:            ["4444333322221111", "4012888888881881", "4222222222222"]
+]
+
+let invalidCards = ["123", "0935835", "82378493", "000000"]
+
+let expirationDateFormats = [
+    "" : ("", false),
+    "0" : ("0", false),
+    "00" : ("0", false),
+    "1" : ("1", false),
+    "11" : ("11/", false),
+    "12" : ("1", true), // deleting case
+    "11/" : ("11/", false),
+    "12/" : ("12/", true), // deleting case
+    "13" : ("1", false),
+    "23" : ("2", false),
+    "10/1" : ("10/1", false),
+    "10/" : ("10/", false),
+    "8" : ("08/", false),
+    "10/13" : ("10/13", false),
+    "10/134" : ("10/13", false),
+    "10/1334" : ("", false),
+    "aas/df1" : ("1", false)
+]
+
+let securityCodeFormats = [
+    "" : "",
+    "0" : "0",
+    "00" : "00",
+    "000" : "000",
+    "0000" : "0000",
+    "00000" : "0000",
+    "41234" : "4123",
+    "123412344234" : "",
+    " 1 43 / 2k k nkm" : "1432"
+]
+
+// swiftlint:disable function_body_length
 class SPHSpec: QuickSpec {
-	override func spec() {
-		// Test Data
-		let validCards: [SPHCardType: [String]] = [
-			.americanExpress: ["378282246310005", "371449635398431", "378734493671000"],
-			.dinersClub:      ["30569309025904", "38520000023237"],
-			.discover:        ["6011111111111117", "6011000990139424"],
-			.jcb:             ["3530111333300000", "3566002020360505"],
-			.masterCard:      ["5555555555554444", "5105105105105100"],
-			.visa:            ["4444333322221111", "4012888888881881", "4222222222222"],
-		]
-		
-		let invalidCards = ["123", "0935835", "82378493", "000000"]
-        
-        let expirationDateFormats = ["" : ("",false),
-            "0" : ("0", false),
-            "00" : ("0", false),
-            "1" : ("1", false),
-            "11" : ("11/", false),
-            "12" : ("1", true), // deleting case
-            "11/" : ("11/", false),
-            "12/" : ("12/", true), // deleting case
-            "13" : ("1", false),
-            "23" : ("2", false),
-            "10/1" : ("10/1", false),
-            "10/" : ("10/", false),
-            "8" : ("08/", false),
-            "10/13" : ("10/13", false),
-            "10/134" : ("10/13", false),
-            "10/1334" : ("", false),
-            "aas/df1" : ("1", false)]
-        
-        let securityCodeFormats = ["" : "",
-            "0" : "0",
-            "00" : "00",
-            "000" : "000",
-            "0000" : "0000",
-            "00000" : "0000",
-            "41234" : "4123",
-            "123412344234" : "",
-            " 1 43 / 2k k nkm" : "1432"]
-        
-		// Reset PaymentHighway credentials before testsuite
-		beforeSuite {
+    override func spec() {
+
+        // Reset PaymentHighway credentials before testsuite
+        beforeSuite {
             SPH.initSharedInstance(
                 merchantId: SPHMerchantID,
                 accountId: SPHAccountID,
                 serverType:SPHServiceURL.self
             )
-			return
-		}
+            return
+        }
         
         describe("Card Formatting for processing") {
             it("should remove illegal characters") {
@@ -84,44 +90,43 @@ class SPHSpec: QuickSpec {
                 expect(actualCardNumber).to(equal("378282246310005"))
             }
         }
-		
-		// MARK: Card Recognition
-		
-		describe("Card Recognition") {
-			it("should recognize basic card types from their numbers") {
-				for (cardType, cardNumbers) in validCards {
-					for cardNumber in cardNumbers {
-						let foundType = SPH.sharedInstance.cardTypeForCardNumber(cardNumber)
-						expect(foundType.rawValue).to(equal(cardType.rawValue))
-					}
-				}
-			}
-			
-			it("shouldn't recognize invalid card numbers as any type") {
-				for cardNumber in invalidCards {
-					expect(SPH.sharedInstance.cardTypeForCardNumber(cardNumber)).to(equal(SPHCardType.invalid))
-				}
-			}
-		}
-		
         
-		// MARK: Credit Card Validation
-		
-		describe("Card Validation") {
-			it("should validate cards properly") {
-				for (_, cardNumbers) in validCards {
-					for cardNumber in cardNumbers {
-						let isValid = SPH.sharedInstance.isValidCardNumber(cardNumber)
-						expect(isValid).to(beTrue())
-					}
-				}
-				
-				for cardNumber in invalidCards {
-					let isValid = SPH.sharedInstance.isValidCardNumber(cardNumber)
-					expect(isValid).to(beFalse())
-				}
-			}
-		}
+        // MARK: Card Recognition
+        
+        describe("Card Recognition") {
+            it("should recognize basic card types from their numbers") {
+                for (cardType, cardNumbers) in validCards {
+                    for cardNumber in cardNumbers {
+                        let foundType = SPH.sharedInstance.cardTypeForCardNumber(cardNumber)
+                        expect(foundType.rawValue).to(equal(cardType.rawValue))
+                    }
+                }
+            }
+            
+            it("shouldn't recognize invalid card numbers as any type") {
+                for cardNumber in invalidCards {
+                    expect(SPH.sharedInstance.cardTypeForCardNumber(cardNumber)).to(equal(SPHCardType.invalid))
+                }
+            }
+        }
+        
+        // MARK: Credit Card Validation
+        
+        describe("Card Validation") {
+            it("should validate cards properly") {
+                for (_, cardNumbers) in validCards {
+                    for cardNumber in cardNumbers {
+                        let isValid = SPH.sharedInstance.isValidCardNumber(cardNumber)
+                        expect(isValid).to(beTrue())
+                    }
+                }
+                
+                for cardNumber in invalidCards {
+                    let isValid = SPH.sharedInstance.isValidCardNumber(cardNumber)
+                    expect(isValid).to(beFalse())
+                }
+            }
+        }
         
         describe("Card Formatting") {
             it("should format cards properly with general rule") {
@@ -155,5 +160,5 @@ class SPHSpec: QuickSpec {
                 }
             }
         }
-	}
+    }
 }

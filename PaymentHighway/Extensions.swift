@@ -19,7 +19,6 @@ public struct Inset {
 	}
 }
 
-
 // MARK: Strings
 
 internal extension String {
@@ -27,10 +26,10 @@ internal extension String {
 	/// Get a given substring of a string
 	/// - parameter r: The range of the substring wanted
 	/// - returns: The found substring
-	subscript (r: Range<Int>) -> String {
+	subscript (range: Range<Int>) -> String {
 		get {
-			let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
-			let endIndex = self.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
+			let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
+			let endIndex = self.index(startIndex, offsetBy: range.upperBound - range.lowerBound)
 			
 			return String(self[(startIndex ..< endIndex)])
 		}
@@ -40,17 +39,17 @@ internal extension String {
     /// - returns: Found matches as an array
     func matchesForRegex(_ regex: String!) -> [String] {
         
-        let regex = try! NSRegularExpression(pattern: regex,
-            options: [])
+        guard let regex = try? NSRegularExpression(pattern: regex, options: []) else { return [] }
         let nsString = self as NSString
         let results = regex.matches(in: nsString as String,
-            options: [], range: NSMakeRange(0, nsString.length))
-            
+                                    options: [],
+                                    range: NSRange(location: 0, length: nsString.length))
+        
         var strings = [String]()
         
         for result in results {
-            for i in 1 ..< result.numberOfRanges {
-                let range = result.range(at: i)
+            for index in 1 ..< result.numberOfRanges {
+                let range = result.range(at: index)
                 if range.location != NSNotFound {
                     strings.append(nsString.substring(with: range))
                 }
@@ -96,21 +95,26 @@ internal extension UIColor {
 
 public extension UIViewController {
 	
-    @objc public func presentSPHAddCardViewController(_ source: UIViewController, animated: Bool, transactionId : String, success: @escaping (String) -> (), error: @escaping (NSError) -> (), completion: (() -> Void)?) {
+    @objc public func presentSPHAddCardViewController(_ source: UIViewController,
+                                                      animated: Bool,
+                                                      transactionId : String,
+                                                      success: @escaping (String) -> Void,
+                                                      error: @escaping (NSError) -> Void,
+                                                      completion: (() -> Void)?) {
 		let storyboard = UIStoryboard(name: "SPH", bundle: Bundle(for: SPH.self))
-		let controller = storyboard.instantiateViewController(withIdentifier: "SPHAddCardForm") as! SPHAddCardViewController
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "SPHAddCardForm") as? SPHAddCardViewController else { return }
         controller.transactionId = transactionId
         controller.successHandler = success
         controller.errorHandler = error
         
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = UIModalPresentationStyle.popover
-        let ppc = nav.popoverPresentationController!
+        let navigation = UINavigationController(rootViewController: controller)
+        navigation.modalPresentationStyle = UIModalPresentationStyle.popover
+        let ppc = navigation.popoverPresentationController!
         let minimunSize = controller.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         controller.preferredContentSize = CGSize(width: minimunSize.width, height: minimunSize.height)
         ppc.delegate = controller
         ppc.sourceView = source.view
-		self.present(nav, animated: animated, completion: completion)
+		self.present(navigation, animated: animated, completion: completion)
 	}
 	
 }

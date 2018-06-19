@@ -25,7 +25,7 @@ public class SecureSigner {
     
     public func sign(method: String, uri: String, keyValues: [(String, String)], body: String) -> String {
         let stringToSign = "\(method)\n\(uri)\n\(createKeyValueString(keyValues: keyValues))\n\(body.trimmingCharacters(in: .whitespacesAndNewlines))"
-        let hmac = try! HMAC(key: signatureSecret, variant: HMAC.Variant.sha256).authenticate(Array(stringToSign.utf8))
+        guard let hmac = try? HMAC(key: signatureSecret, variant: HMAC.Variant.sha256).authenticate(Array(stringToSign.utf8)) else { return "" }
         return Data(bytes: hmac).toHexString()
     }
     

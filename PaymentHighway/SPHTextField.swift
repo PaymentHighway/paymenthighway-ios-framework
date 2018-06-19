@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 /// The possible states for a text field to have
 public enum SPHTextFieldState: Int {
     /// Is empty and not validated yet
@@ -27,7 +26,7 @@ open class SPHTextField: UITextField {
     /// State Handling
     open var fieldState: SPHTextFieldState = .empty {
         didSet {
-            if fieldState == SPHTextFieldState.invalid  {
+            if fieldState == SPHTextFieldState.invalid {
                self.layer.borderColor = UIColor.red.cgColor
             } else {
                 self.layer.borderColor = UIColor(hexInt: 0xa6b9dc).cgColor
@@ -56,7 +55,6 @@ open class SPHTextField: UITextField {
 		return bounds.insetBy(dx: inset.x, dy: inset.y)
 	}
 }
-
 
 // MARK: Custom Fields
 

@@ -27,10 +27,10 @@ internal class NetworkingRequestAdapter: RequestAdapter {
         request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
         let date = Date()
-        let formatter = DateFormatter();
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-        formatter.timeZone = TimeZone(abbreviation: "UTC");
-        let utcTimeZoneStr = formatter.string(from: date);
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        let utcTimeZoneStr = formatter.string(from: date)
         
         request.addValue(utcTimeZoneStr, forHTTPHeaderField: "SPH-Timestamp")
 

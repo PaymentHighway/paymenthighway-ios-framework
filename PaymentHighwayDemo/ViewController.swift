@@ -55,4 +55,3 @@ class ViewController: UIViewController {
             failure: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"})
     }
 }
-
