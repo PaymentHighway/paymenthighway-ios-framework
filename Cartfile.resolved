@@ -1,4 +1,4 @@
-github "Alamofire/Alamofire" "4.4.0"
-github "Quick/Nimble" "v7.0.3"
-github "Quick/Quick" "v1.1.0"
-github "krzyzanowskim/CryptoSwift" "0.8.0"
+github "Alamofire/Alamofire" "4.7.2"
+github "Quick/Nimble" "v7.1.1"
+github "Quick/Quick" "v1.3.0"
+github "krzyzanowskim/CryptoSwift" "0.9.0"

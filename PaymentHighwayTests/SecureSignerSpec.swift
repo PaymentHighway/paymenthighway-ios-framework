@@ -17,9 +17,7 @@ class SecureSignerSpec: QuickSpec {
             SPH.initSharedInstance(
                 merchantId: SPHMerchantID,
                 accountId: SPHAccountID,
-                signatureKeyId: SPHSignatureKeyId,
-                signatureSecret: SPHSignatureSecret,
-                mobileApiAddress: SPHServiceURL
+                serverType:SPHServiceURL.self
             )
         }
         

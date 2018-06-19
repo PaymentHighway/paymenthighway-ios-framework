@@ -9,26 +9,37 @@
 import Foundation
 import Quick
 import Nimble
-import PaymentHighway
+@testable import PaymentHighway
 import Alamofire
+
+struct ResponseResultInfo: Decodable {
+    let code: Int
+    let message: String
+}
+
+struct ResponseResult: Decodable {
+    let result: ResponseResultInfo
+}
+
+func getCodeFromResponse(_ json: String) -> Int? {
+    guard let data = json.data(using: .utf8) else { return nil }
+    guard let response = try? JSONDecoder().decode(ResponseResult.self, from: data) else { return nil }
+    return response.result.code
+}
 
 class NetworkingSpec: QuickSpec {
     override func spec() {
         let merchantId = "test_merchantId"
         let accountId = "test"
-        let signatureKey = "testKey"
-        let signatureSecret = "testSecret"
         let serviceUrl = "http://54.194.196.206:8081"
         
-        let networking = SPHNetworking(merchantId: merchantId, accountId: accountId, signatureKeyId: signatureKey, signatureSecret: signatureSecret, hostname: serviceUrl)
-        
-        // let MobileBackendAddress = "http://54.194.196.206:8081"
+        let networking = Networking(merchantId: merchantId, accountId: accountId)
         
         describe("transactionId") {
             it("we should get ID"){
                 var receivedMessage = ""
                 
-                networking.transactionId(success: {(message) in receivedMessage = message}, failure: {(error) in print("error \(error)")})
+                networking.transactionId(hostname: serviceUrl, success: {(message) in receivedMessage = message}, failure: {(error) in print("error \(error)")})
             
                 expect(receivedMessage).toEventually(contain("-"), timeout: 3)
             }
@@ -40,13 +51,13 @@ class NetworkingSpec: QuickSpec {
                 var transactionId = ""
                 var receivedKey = ""
                 
-                networking.transactionId(success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
+                networking.transactionId(hostname: serviceUrl, success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
                 
                 expect(transactionId).toEventually(contain("-"), timeout: 3)
                 
                 networking.transactionKey(transactionId: transactionId, success: {(message) in receivedKey = message}, failure: {(error) in print("error \(error)")})
                 
-                expect(receivedKey).toEventually(contain("MII"), timeout: 3)
+                expect(receivedKey).toEventually(contain("MII"), timeout: 5)
             }
         }
         
@@ -54,9 +65,9 @@ class NetworkingSpec: QuickSpec {
             it("we should be able to tokenize card"){
                 var transactionId = ""
                 var receivedKey = ""
-                var receivedResponse = "not empty"
+                var receivedCode: Int = 999
                 
-                networking.transactionId(success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
+                networking.transactionId(hostname: serviceUrl, success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
                 
                 expect(transactionId).toEventually(contain("-"), timeout: 3)
                 
@@ -64,10 +75,18 @@ class NetworkingSpec: QuickSpec {
                 
                 expect(receivedKey).toEventually(contain("MII"), timeout: 3)
                 
-                networking.tokenizeTransaction(transactionId: transactionId, expiryMonth: "11", expiryYear: "2017", cvc: "024", pan: "4153013999700024", certificateBase64Der: receivedKey, success: {(message) in receivedResponse = message}, failure: {(error) in print("error \(error)")})
-
-                expect(receivedResponse).toEventually(contain(networking.tokenisationSuccessResultString), timeout: 5)
-
+                networking.tokenizeTransaction(transactionId: transactionId,
+                                               expiryMonth: "11",
+                                               expiryYear: "2023",
+                                               cvc: "024",
+                                               pan: "4153013999700024",
+                                               certificateBase64Der: receivedKey,
+                                               success: {(message) in
+                                                    guard let code = getCodeFromResponse(message) else { return }
+                                                    receivedCode = code
+                                               },
+                                               failure: {(error) in print("error \(error)")})
+                expect(receivedCode).toEventually(equal(100), timeout: 5)
             }
         }
         
@@ -75,19 +94,19 @@ class NetworkingSpec: QuickSpec {
             it("we should be able to get token"){
                 var transactionId = ""
                 var receivedKey = ""
-                var receivedResponse = ""
+                var receivedCode: Int?
                 var receivedToken = ""
                 
-                networking.transactionId(success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
+                networking.transactionId(hostname: serviceUrl, success: {(message) in transactionId = message}, failure: {(error) in print("error \(error)")})
                 expect(transactionId).toEventually(contain("-"), timeout: 3)
                 
                 networking.transactionKey(transactionId: transactionId, success: {(message) in receivedKey = message}, failure: {(error) in print("error \(error)")})
                 expect(receivedKey).toEventually(contain("MII"), timeout: 3)
                 
-                networking.tokenizeTransaction(transactionId: transactionId, expiryMonth: "11", expiryYear: "2017", cvc: "024", pan: "4153013999700024", certificateBase64Der: receivedKey, success: {(message) in receivedResponse = message}, failure: {(error) in print("error \(error)")})
-                expect(receivedResponse).toEventually(contain(networking.tokenisationSuccessResultString), timeout: 5)
-                
-                networking.transactionToken(transactionId: transactionId, success: {(message) in receivedToken = message}, failure: {(error) in print("error \(error)")})
+                networking.tokenizeTransaction(transactionId: transactionId, expiryMonth: "11", expiryYear: "2023", cvc: "024", pan: "4153013999700024", certificateBase64Der: receivedKey, success: {(message) in receivedCode = getCodeFromResponse(message)}, failure: {(error) in print("error \(error)")})
+                expect(receivedCode).toEventually(equal(100), timeout: 5)
+
+                networking.transactionToken(hostname: serviceUrl, transactionId: transactionId, success: {(message) in receivedToken = message}, failure: {(error) in print("error \(error)")})
                 expect(receivedToken).toEventually(contain("-"), timeout: 5)
             }
         }

@@ -14,7 +14,9 @@ import Alamofire
 
 // Test values
 
-let SPHServiceURL = "http://54.194.196.206:8081"
+struct SPHServiceURL: ServerType {
+    public static var baseURL: String { return  "https://v1-hub-staging.sph-test-solinor.com/" }
+}
 let SPHMerchantID = "test_merchantId"
 let SPHAccountID = "test"
 let SPHSignatureKeyId = "testKey"
@@ -34,20 +36,23 @@ class SPHSpec: QuickSpec {
 		
 		let invalidCards = ["123", "0935835", "82378493", "000000"]
         
-        let expirationDateFormats = ["" : "",
-            "0" : "0",
-            "00" : "0",
-            "1" : "1",
-            "11" : "11/",
-            "13" : "1",
-            "23" : "2",
-            "10/1" : "10/1", // try removing this one and run tests
-            "10/" : "10/", // formatter has a state
-            "8" : "08/",
-            "10/13" : "10/13",
-            "10/134" : "10/13",
-            "10/1334" : "",
-            "aas/df1" : "1"]
+        let expirationDateFormats = ["" : ("",false),
+            "0" : ("0", false),
+            "00" : ("0", false),
+            "1" : ("1", false),
+            "11" : ("11/", false),
+            "12" : ("1", true), // deleting case
+            "11/" : ("11/", false),
+            "12/" : ("12/", true), // deleting case
+            "13" : ("1", false),
+            "23" : ("2", false),
+            "10/1" : ("10/1", false),
+            "10/" : ("10/", false),
+            "8" : ("08/", false),
+            "10/13" : ("10/13", false),
+            "10/134" : ("10/13", false),
+            "10/1334" : ("", false),
+            "aas/df1" : ("1", false)]
         
         let securityCodeFormats = ["" : "",
             "0" : "0",
@@ -64,9 +69,7 @@ class SPHSpec: QuickSpec {
             SPH.initSharedInstance(
                 merchantId: SPHMerchantID,
                 accountId: SPHAccountID,
-                signatureKeyId: SPHSignatureKeyId,
-                signatureSecret: SPHSignatureSecret,
-                mobileApiAddress: SPHServiceURL
+                serverType:SPHServiceURL.self
             )
 			return
 		}
@@ -106,7 +109,7 @@ class SPHSpec: QuickSpec {
 		
 		describe("Card Validation") {
 			it("should validate cards properly") {
-				for (cardType, cardNumbers) in validCards {
+				for (_, cardNumbers) in validCards {
 					for cardNumber in cardNumbers {
 						let isValid = SPH.sharedInstance.isValidCardNumber(cardNumber)
 						expect(isValid).to(beTrue())
@@ -135,8 +138,8 @@ class SPHSpec: QuickSpec {
         
         describe("Expiration date formatting") {
             it("should format dates as expected") {
-                for (given, expected) in expirationDateFormats {
-                    let actual = SPH.sharedInstance.formattedExpirationDate(given)
+                for (given, (expected, deleting)) in expirationDateFormats {
+                    let actual = SPH.sharedInstance.formattedExpirationDate(given, deleting)
                     expect(actual).to(equal(expected))
                 }
             }

@@ -8,7 +8,7 @@
 
 import UIKit
 
- class SPHAddCardViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+ class SPHAddCardViewController: UIViewController, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var cardNumberLabel: SPHFormLabel!
     @IBOutlet weak var cardExpiryDateLabel: SPHFormLabel!
@@ -40,6 +40,8 @@ import UIKit
     private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
     private let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
 
+    private var cardExpiryDateDeleting = false
+    
     fileprivate var iqKeyboardManagerEnabledCachedValue = false
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -52,6 +54,14 @@ import UIKit
         visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
         navcon.view.insertSubview(visualEffectView, at: 0)
         return navcon
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: .utf8) { 
+	        let isBackSpace = strcmp(char, "\\b")
+	        cardExpiryDateDeleting = (isBackSpace == -92) ? true : false
+        }
+        return true
     }
     
     // MARK: View Lifecycle
@@ -109,6 +119,10 @@ import UIKit
         
         setupLocalization()
         
+        // cardExpiryDateField need to detect if is deleting
+        
+        cardExpiryDateField.delegate = self
+        
         // Keyboard notifications
         
         let notificationCenter = NotificationCenter.default
@@ -147,9 +161,8 @@ import UIKit
     }
     
     @objc func formatExpirationDateFieldOnTheFly(_ textView: AnyObject){
-        if let sphField = textView as? SPHTextField{
-            sphField.text = SPH.sharedInstance.formattedExpirationDate(sphField.text!)
-            
+        if let sphField = textView as? SPHTextField, let text = sphField.text {
+            sphField.text = SPH.sharedInstance.formattedExpirationDate(text, cardExpiryDateDeleting)
             updateExpirationValidity(sphField)
         }
     }
