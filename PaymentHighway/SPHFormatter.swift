@@ -173,7 +173,7 @@ open class SPHFormatter {
 		//we have our patterns, let's build a stylized string
 		let attributedText = NSMutableAttributedString(string: text)
 		for pattern in collect {
-			attributedText.setAttributes((pattern.attributes as! [String: AnyObject]), range: NSMakeRange(pattern.start, pattern.length))
+			attributedText.setAttributes((pattern.attributes as! [NSAttributedStringKey: AnyObject]), range: NSMakeRange(pattern.start, pattern.length))
 		}
 		return attributedText
 	}

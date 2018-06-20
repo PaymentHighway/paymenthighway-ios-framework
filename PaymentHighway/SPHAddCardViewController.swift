@@ -33,9 +33,9 @@ import UIKit
         return gradientLayer
     }()
     
-    @objc internal var transactionId = ""
-    @objc internal var successHandler : (String) -> () = {print($0)}
-    @objc internal var errorHandler : (NSError) -> () = {print($0)}
+    internal var transactionId = ""
+    internal var successHandler : (String) -> () = {print($0)}
+    internal var errorHandler : (NSError) -> () = {print($0)}
     
     private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
     private let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
@@ -176,31 +176,31 @@ import UIKit
         }
     }
     
-    @objc func updateCardNumberValidity(_ sphField: SPHTextField){
+    func updateCardNumberValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidCardNumber)
     }
     
-    @objc func updateExpirationValidity(_ sphField: SPHTextField){
+    func updateExpirationValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidExpirationDate)
     }
     
-    @objc func updateSecurityCodeValidity(_ sphField: SPHTextField){
+    func updateSecurityCodeValidity(_ sphField: SPHTextField){
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidSecurityCode)
     }
     
-    @objc func updateAllValidityFields(){
+    func updateAllValidityFields(){
         updateCardNumberValidity(cardNumberField)
         updateExpirationValidity(cardExpiryDateField)
         updateSecurityCodeValidity(cardSecurityCodeField)
     }
     
-    @objc func allFieldsValid() -> Bool{
+    func allFieldsValid() -> Bool{
         return cardNumberField.fieldState == SPHTextFieldState.valid &&
                cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
                cardSecurityCodeField.fieldState == SPHTextFieldState.valid
     }
     
-    @objc func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
+    func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
         if validityFunction(sphField.text!) == true {
             sphField.fieldState = SPHTextFieldState.valid
         } else {
@@ -208,7 +208,7 @@ import UIKit
         }
     }
     
-    @objc func setupLocalization() {
+    func setupLocalization() {
         let bundle = Bundle(for: SPH.self)
         cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: bundle, value: "",comment: "The text shown above the credit card number field")
         cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the expiry date field")

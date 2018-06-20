@@ -50,7 +50,7 @@ internal extension String {
         
         for result in results {
             for i in 1 ..< result.numberOfRanges {
-                let range = result.rangeAt(i)
+                let range = result.range(at: i)
                 if range.location != NSNotFound {
                     strings.append(nsString.substring(with: range))
                 }
@@ -77,7 +77,7 @@ internal extension UIColor {
 	/// - parameter red:   The red color value
 	/// - parameter green: The green color value
 	/// - parameter blue:  The blue color value
-	@objc convenience init(red: Int, green: Int, blue: Int) {
+	convenience init(red: Int, green: Int, blue: Int) {
 		assert(red >= 0 && red <= 255, "Invalid red component")
 		assert(green >= 0 && green <= 255, "Invalid green component")
 		assert(blue >= 0 && blue <= 255, "Invalid blue component")
@@ -87,7 +87,7 @@ internal extension UIColor {
 	
 	/// Convenience method for initializing with a 0xFFFFFF-0x000000 color value
 	/// - parameter hexInt: The hexadecimal integer color value
-	@objc convenience init(hexInt: Int) {
+	convenience init(hexInt: Int) {
 		self.init(red: (hexInt >> 16) & 0xff, green: (hexInt >> 8) & 0xff, blue: hexInt & 0xff)
 	}
 }
