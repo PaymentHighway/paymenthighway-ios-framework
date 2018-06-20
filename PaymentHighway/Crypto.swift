@@ -26,14 +26,14 @@ private func loadDER(_ publicKeyFileContent: Data) -> SecKey? {
     let policy = SecPolicyCreateBasicX509()
     var unmanagedTrust : SecTrust? = nil
     let status = SecTrustCreateWithCertificates(certificate!, policy, &unmanagedTrust)
-    if (status != 0) {
-        print("SecTrustCreateWithCertificates fail. Error Code: \(status)");
+    if status != 0 {
+        print("SecTrustCreateWithCertificates fail. Error Code: \(status)")
         return nil
     }
     let trust = unmanagedTrust!
     let evaluateStatus = SecTrustEvaluate(trust, nil)
-    if (evaluateStatus != 0) {
-        print("SecTrustEvaluate fail. Error Code: \(evaluateStatus)");
+    if evaluateStatus != 0 {
+        print("SecTrustEvaluate fail. Error Code: \(evaluateStatus)")
         return nil
     }
     return SecTrustCopyPublicKey(trust)
@@ -45,15 +45,20 @@ private func encryptWithData(_ content :Data, publicKey :SecKey) -> Data? {
     let encryptedData = NSMutableData()
     let blockCount = Int(ceil(Double(content.count) / Double(blockSize)))
 
-    for i in 0..<blockCount {
+    for index in 0..<blockCount {
         var cipherLen = SecKeyGetBlockSize(publicKey)
         var cipher = [UInt8](repeating: 0, count: Int(cipherLen))
-        let bufferSize = min(blockSize,(content.count - i * blockSize))
-        let buffer = content.subdata(in: Range.init(uncheckedBounds: (lower: i*blockSize, upper: bufferSize)))
-        let status = SecKeyEncrypt(publicKey, SecPadding.OAEP, (buffer as NSData).bytes.bindMemory(to: UInt8.self, capacity: buffer.count), buffer.count, &cipher, &cipherLen)
-        if (status == noErr){
+        let bufferSize = min(blockSize, (content.count - index * blockSize))
+        let buffer = content.subdata(in: Range.init(uncheckedBounds: (lower: index * blockSize, upper: bufferSize)))
+        let status = SecKeyEncrypt(publicKey,
+                                   SecPadding.OAEP,
+                                   (buffer as NSData).bytes.bindMemory(to: UInt8.self, capacity: buffer.count),
+                                   buffer.count,
+                                   &cipher,
+                                   &cipherLen)
+        if status == noErr {
             encryptedData.append(cipher, length: Int(cipherLen))
-        }else{
+        } else {
             print("SecKeyEncrypt fail. Error Code: \(status)")
             return nil
         }
@@ -61,8 +66,8 @@ private func encryptWithData(_ content :Data, publicKey :SecKey) -> Data? {
     return encryptedData as Data
 }
 
-public func encryptWithRsaAes(_ data: String, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)?
-{
+public func encryptWithRsaAes(_ data: String, certificateBase64Der: String) -> (encryptedBase64Message: String, encryptedBase64Key: String, iv: String)? {
+    
     let keyAes = AES.randomIV(AES.blockSize)
     let iv = AES.randomIV(AES.blockSize)
     
@@ -94,4 +99,3 @@ public func encryptWithRsaAes(_ data: String, certificateBase64Der: String) -> (
 
     return nil
 }
-

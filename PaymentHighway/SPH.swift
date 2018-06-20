@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: Card Types
 
 public struct PaymentHighwayDomains {
@@ -59,8 +58,7 @@ public enum SPHCardType: Int, CustomStringConvertible {
 		
 		if let regexp = regexp {
 			return NSPredicate(format: "SELF MATCHES %@", regexp)
-		}
-		else {
+		} else {
 			return NSPredicate(value: false)
 		}
 	}
@@ -153,11 +151,11 @@ open class SPH {
 		}
         
 		let asciiOffset: UInt8 = 48
-		let digits = Array(Array(formattedString.utf8).reversed()).map{$0 - asciiOffset}
+		let digits = Array(Array(formattedString.utf8).reversed()).map {$0 - asciiOffset}
 		
 		let convert: (UInt8) -> (UInt8) = {
-			let n = $0 * 2
-			return n > 9 ? n - 9 : n
+			let num = $0 * 2
+			return num > 9 ? num - 9 : num
 		}
 		
 		var sum: UInt8 = 0
@@ -200,20 +198,17 @@ open class SPH {
     
     open func isValidExpirationDate(_ expirationDate: String) -> Bool {
         
-        if(expirationDate.count == 5)
-        {
+        if expirationDate.count == 5 {
             let month = expirationDate.components(separatedBy: "/")[0]
             let year = "20" + expirationDate.components(separatedBy: "/")[1]
          
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMyyyy"
             
-            let currentDate = dateFormatter.string(from: Date())
-                        
-            if let givenDate = dateFormatter.date(from: month + year) {
-                if givenDate.compare(dateFormatter.date(from: currentDate)! ) != ComparisonResult.orderedAscending { //TODO: there might more easier way to do this..
+            if let givenDate = dateFormatter.date(from: month + year),
+               let currentDate = dateFormatter.date(from: dateFormatter.string(from: Date())),
+               givenDate.compare(currentDate) != ComparisonResult.orderedAscending {
                     return true
-                }
             }
         }
         
@@ -232,16 +227,14 @@ open class SPH {
         
         switch length {
         case 1:
-            if (2...9 ~= Int(onlyDigitsExpirationDate)!)
-            {
+            if 2...9 ~= Int(onlyDigitsExpirationDate)! {
                 text = "0\(onlyDigitsExpirationDate)/"
             } else {
                 text = onlyDigitsExpirationDate
             }
         case 2:
             if (deleting && expirationDate.count == 2) ||
-               (Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12)
-            {
+               (Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12) {
                 onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
                 text = onlyDigitsExpirationDate
             } else {
@@ -267,7 +260,7 @@ open class SPH {
     open func isValidSecurityCode(_ securityCode: String) -> Bool {
         return self.formattedSecurityCodeForProcessing(securityCode).count > 0
     }
-    
+
     open func formattedSecurityCodeForProcessing(_ securityCode: String) -> String {
         return formattedCardNumberForProcessing(securityCode)
     }
@@ -275,39 +268,52 @@ open class SPH {
     open func formattedSecurityCode(_ securityCode: String) -> String {
         var onlyDigitsSecurityCode = formattedSecurityCodeForProcessing(securityCode)
         var text = ""
-        switch onlyDigitsSecurityCode.count
-        {
-            case 0...4 : text = onlyDigitsSecurityCode
-            case 5 :
-                onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.index(before: onlyDigitsSecurityCode.endIndex))
-                text = onlyDigitsSecurityCode
-            default : text = ""
+        switch onlyDigitsSecurityCode.count {
+        case 0...4 :
+            text = onlyDigitsSecurityCode
+        case 5 :
+            onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.index(before: onlyDigitsSecurityCode.endIndex))
+            text = onlyDigitsSecurityCode
+        default : text = ""
         }
         return text
     }
     
-    open func transactionId(hostname: String, success: @escaping (String) -> (), failure: @escaping (Error) -> ()) -> () {
+    open func transactionId(hostname: String, success: @escaping (String) -> Void, failure: @escaping (Error) -> Void) {
         networking!.transactionId(hostname: hostname, success: success, failure: failure)
     }
     
-    open func transactionToken(hostname: String, transactionId: String, success: @escaping (String) -> (), failure: @escaping (Error) -> ()) -> () {
+    open func transactionToken(hostname: String, transactionId: String, success: @escaping (String) -> Void, failure: @escaping (Error) -> Void) {
         networking!.transactionToken(hostname: hostname, transactionId: transactionId, success: success, failure: failure)
     }
     
-    open func addCard(_ transactionId: String, pan: String, cvc: String, expiryMonth: String, expiryYear: String, success: @escaping (String) -> (), failure: @escaping (NSError) -> ()) -> () {
+    open func addCard(_ transactionId: String,
+                      pan: String,
+                      cvc: String,
+                      expiryMonth: String,
+                      expiryYear: String,
+                      success: @escaping (String) -> Void,
+                      failure: @escaping (NSError) -> Void) {
         
-        func handleReceivedTokenisationResult(_ result: String) -> () {
+        func handleReceivedTokenisationResult(_ result: String) {
             success(result)
         }
         
-        func handleFailure(_ error: NSError) -> () {
+        func handleFailure(_ error: NSError) {
             print("Failed to receive key")
             failure(error)
         }
         
-        func handleReceivedKeySuccess(_ key: String) -> () {
+        func handleReceivedKeySuccess(_ key: String) {
             print("Received key \(key)")
-            networking!.tokenizeTransaction(transactionId: transactionId, expiryMonth: expiryMonth, expiryYear: expiryYear, cvc: cvc, pan: pan, certificateBase64Der: key, success: {success($0)}, failure: {failure($0 as NSError)})
+            networking!.tokenizeTransaction(transactionId: transactionId,
+                                            expiryMonth: expiryMonth,
+                                            expiryYear: expiryYear,
+                                            cvc: cvc,
+                                            pan: pan,
+                                            certificateBase64Der: key,
+                                            success: {success($0)},
+                                            failure: {failure($0 as NSError)})
         }
         
         networking!.transactionKey(transactionId: transactionId, success: handleReceivedKeySuccess, failure: { error in

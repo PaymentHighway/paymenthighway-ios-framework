@@ -33,8 +33,7 @@ internal class Networking {
                 case .success(let json):
                     if let json = json as? [String: Any], let id = json["id"] as? String {
                         success(id)
-                    }
-                    else {
+                    } else {
                         failure(NSError(domain: "io.paymenthighway.ios", code: 100, userInfo: nil))
                     }
                 case .failure(let error):
@@ -52,8 +51,7 @@ internal class Networking {
                 case .success(let json):
                     if let json = json as? [String: Any], let token = json["token"] as? String {
                         success(token)
-                    }
-                    else {
+                    } else {
                         failure(NSError(domain: "io.paymenthighway.ios", code: 100, userInfo: nil))
                     }
                 case .failure(let error):
@@ -71,8 +69,7 @@ internal class Networking {
                 case .success(let json):
                     if let json = json as? [String: Any], let key = json["key"] as? String {
                         success(key)
-                    }
-                    else {
+                    } else {
                         failure(NSError(domain: "io.paymenthighway.ios", code: 100, userInfo: nil))
                     }
                 case .failure(let error):
@@ -83,14 +80,20 @@ internal class Networking {
     }
     
     // (sph)/mobile/(transactionId)/tokenize
-    func tokenizeTransaction(transactionId: String, expiryMonth: String, expiryYear: String, cvc: String, pan: String, certificateBase64Der: String, success: @escaping (String) -> (), failure: @escaping (Error) -> Void) {
+    func tokenizeTransaction(transactionId: String,
+                             expiryMonth: String,
+                             expiryYear: String,
+                             cvc: String,
+                             pan: String,
+                             certificateBase64Der: String,
+                             success: @escaping (String) -> Void,
+                             failure: @escaping (Error) -> Void) {
         // Encrypt card data
         let jsonCardData = ["expiry_month": expiryMonth, "expiry_year": expiryYear, "cvc" : cvc, "pan" : pan]
         
-        guard let encryptedCardData = encryptWithRsaAes(
-            String(data: try! JSONSerialization.data(withJSONObject: jsonCardData, options: []), encoding: .utf8)!,
-            certificateBase64Der: certificateBase64Der
-        ) else {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonCardData, options: []),
+              let data = String(data: jsonData, encoding: .utf8),
+              let encryptedCardData = encryptWithRsaAes(data, certificateBase64Der: certificateBase64Der) else {
             failure(NSError(domain: "io.paymenthighway.ios", code: 5, userInfo: ["errorReason" : "Could not encrypt data during network.tokenize."]))
             return
         }

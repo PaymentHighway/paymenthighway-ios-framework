@@ -34,12 +34,12 @@ import UIKit
     }()
     
     internal var transactionId = ""
-    internal var successHandler : (String) -> () = {print($0)}
-    internal var errorHandler : (NSError) -> () = {print($0)}
+    internal var successHandler : (String) -> Void = {print($0)}
+    internal var errorHandler : (NSError) -> Void = {print($0)}
     
-    private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor // TODO: It's not nice to have magic color codes
-    private let scrollContentHeight:CGFloat = 330 // TODO: It's not nice to have magic numbers
-
+    private let correctBorderColor = UIColor(hexInt: 0xa6b9dc).cgColor
+    private let scrollContentHeight:CGFloat = 330
+    
     private var cardExpiryDateDeleting = false
     
     fileprivate var iqKeyboardManagerEnabledCachedValue = false
@@ -48,9 +48,10 @@ import UIKit
         return UIModalPresentationStyle.overFullScreen
     }
     
-    func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+    func presentationController(_ controller: UIPresentationController,
+                                viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         // Override default behavior for popover on small screens
-        let navcon = controller.presentedViewController as! UINavigationController
+        guard let navcon = controller.presentedViewController as? UINavigationController else { return nil }
         visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
         navcon.view.insertSubview(visualEffectView, at: 0)
         return navcon
@@ -82,7 +83,6 @@ import UIKit
             field?.inset = Inset(44, 0)
             
             field?.keyboardType = UIKeyboardType.numberPad
-            
             
             var iconImage: UIImage? = nil
             let iconImageView = UIImageView(frame: CGRect.zero)
@@ -126,7 +126,10 @@ import UIKit
         // Keyboard notifications
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(SPHAddCardViewController.keyboardWillChangeFrame(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(SPHAddCardViewController.keyboardWillChangeFrame(_:)),
+                                       name: .UIKeyboardWillChangeFrame,
+                                       object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -152,55 +155,54 @@ import UIKit
         
     }
     
-    @objc func formatCardNumberFieldOnTheFly(_ textView: AnyObject){
-        if let sphField = textView as? SPHTextField{
-            sphField.text = SPH.sharedInstance.formattedCardNumber(sphField.text!, cardType: SPH.sharedInstance.cardTypeForCardNumber(SPH.sharedInstance.formattedCardNumberForProcessing(sphField.text!)))
-            
+    @objc func formatCardNumberFieldOnTheFly(_ textView: AnyObject) {
+        if let sphField = textView as? SPHTextField, let text = sphField.text {
+            let cardType = SPH.sharedInstance.cardTypeForCardNumber(SPH.sharedInstance.formattedCardNumberForProcessing(text))
+            sphField.text = SPH.sharedInstance.formattedCardNumber(text, cardType: cardType)
             updateCardNumberValidity(sphField)
         }
     }
     
-    @objc func formatExpirationDateFieldOnTheFly(_ textView: AnyObject){
+    @objc func formatExpirationDateFieldOnTheFly(_ textView: AnyObject) {
         if let sphField = textView as? SPHTextField, let text = sphField.text {
             sphField.text = SPH.sharedInstance.formattedExpirationDate(text, cardExpiryDateDeleting)
             updateExpirationValidity(sphField)
         }
     }
     
-    
-    @objc func formatSecurityCodeFieldOnTheFly(_ textView: AnyObject){
-        if let sphField = textView as? SPHTextField{
+    @objc func formatSecurityCodeFieldOnTheFly(_ textView: AnyObject) {
+        if let sphField = textView as? SPHTextField {
             sphField.text = SPH.sharedInstance.formattedSecurityCode(sphField.text!)
             
             updateSecurityCodeValidity(sphField)
         }
     }
     
-    func updateCardNumberValidity(_ sphField: SPHTextField){
+    func updateCardNumberValidity(_ sphField: SPHTextField) {
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidCardNumber)
     }
     
-    func updateExpirationValidity(_ sphField: SPHTextField){
+    func updateExpirationValidity(_ sphField: SPHTextField) {
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidExpirationDate)
     }
     
-    func updateSecurityCodeValidity(_ sphField: SPHTextField){
+    func updateSecurityCodeValidity(_ sphField: SPHTextField) {
         genericUpdateCodeValidity(sphField, validityFunction: SPH.sharedInstance.isValidSecurityCode)
     }
     
-    func updateAllValidityFields(){
+    func updateAllValidityFields() {
         updateCardNumberValidity(cardNumberField)
         updateExpirationValidity(cardExpiryDateField)
         updateSecurityCodeValidity(cardSecurityCodeField)
     }
     
-    func allFieldsValid() -> Bool{
+    func allFieldsValid() -> Bool {
         return cardNumberField.fieldState == SPHTextFieldState.valid &&
                cardExpiryDateField.fieldState == SPHTextFieldState.valid &&
                cardSecurityCodeField.fieldState == SPHTextFieldState.valid
     }
     
-    func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool){
+    func genericUpdateCodeValidity(_ sphField: SPHTextField, validityFunction: (String) -> Bool) {
         if validityFunction(sphField.text!) == true {
             sphField.fieldState = SPHTextFieldState.valid
         } else {
@@ -210,18 +212,18 @@ import UIKit
     
     func setupLocalization() {
         let bundle = Bundle(for: SPH.self)
-        cardNumberLabel.text = NSLocalizedString("CreditCardNumber", tableName: nil, bundle: bundle, value: "",comment: "The text shown above the credit card number field")
-        cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the expiry date field")
-        cardSecurityCodeLabel.text = NSLocalizedString("CreditCardSecurityCode", tableName: nil, bundle: bundle, value: "", comment: "The text shown above the security code field")
-        addCardButton.setTitle(NSLocalizedString("AddCardButtonTitle", tableName: nil, bundle: bundle, value: "", comment: "The text shown on the 'add card' button"), for: UIControlState())
-        cardExpiryDateField.placeholder = NSLocalizedString("MM/YY", tableName: nil, bundle: bundle, value: "", comment: "Expiration date placeholder.")
-
+        cardNumberLabel.text = NSLocalizedString("CreditCardNumber", bundle: bundle, comment: "The text shown above the credit card number field")
+        cardExpiryDateLabel.text = NSLocalizedString("CreditCardExpiryDate", bundle: bundle, comment: "The text shown above the expiry date field")
+        cardSecurityCodeLabel.text = NSLocalizedString("CreditCardSecurityCode", bundle: bundle, comment: "The text shown above the security code field")
+        let title = NSLocalizedString("AddCardButtonTitle", bundle: bundle, comment: "The text shown on the 'add card' button")
+        addCardButton.setTitle(title, for: UIControlState())
+        cardExpiryDateField.placeholder = NSLocalizedString("MM/YY", bundle: bundle, comment: "Expiration date placeholder.")
     }
     
     // MARK: UI Events
     
     @objc func navCancelButtonTapped(_ sender: AnyObject) {
-        errorHandler(NSError(domain: PaymentHighwayDomains.Default , code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
+        errorHandler(NSError(domain: PaymentHighwayDomains.Default, code: 2, userInfo: ["errorReason" : "User tapped cancel on the navbar."]))
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -230,7 +232,7 @@ import UIKit
             animations: {
                 self.buttonGradientLayer.colors = [UIColor(hexInt: 0x3c89cf).cgColor, UIColor(hexInt: 0x4f9ee5).cgColor]
             },
-            completion: { finished in
+            completion: { _ in
                 UIView.animate(withDuration: 0.25, animations: {
                     self.buttonGradientLayer.colors = [UIColor(hexInt: 0x4f9ee5).cgColor, UIColor(hexInt: 0x3c89cf).cgColor]
                 }) 
@@ -245,7 +247,13 @@ import UIKit
             let month = cardExpiryDateField.text!.components(separatedBy: "/")[0]
             let year = "20" + cardExpiryDateField.text!.components(separatedBy: "/")[1]
             
-            SPH.sharedInstance.addCard(transactionId, pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!), cvc: cardSecurityCodeField.text!, expiryMonth: month, expiryYear: year, success: successHandler, failure: errorHandler)
+            SPH.sharedInstance.addCard(transactionId,
+                                       pan: SPH.sharedInstance.formattedCardNumberForProcessing(cardNumberField.text!),
+                                       cvc: cardSecurityCodeField.text!,
+                                       expiryMonth: month,
+                                       expiryYear: year,
+                                       success: successHandler,
+                                       failure: errorHandler)
         }
         
         dismiss(animated: true, completion: nil)
