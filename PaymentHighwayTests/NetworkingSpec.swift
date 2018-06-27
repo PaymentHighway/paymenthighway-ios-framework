@@ -12,21 +12,6 @@ import Nimble
 @testable import PaymentHighway
 import Alamofire
 
-struct ResponseResultInfo: Decodable {
-    let code: Int
-    let message: String
-}
-
-struct ResponseResult: Decodable {
-    let result: ResponseResultInfo
-}
-
-func getCodeFromResponse(_ json: String) -> Int? {
-    guard let data = json.data(using: .utf8) else { return nil }
-    guard let response = try? JSONDecoder().decode(ResponseResult.self, from: data) else { return nil }
-    return response.result.code
-}
-
 // swiftlint:disable function_body_length
 class NetworkingSpec: QuickSpec {
     override func spec() {
@@ -87,8 +72,8 @@ class NetworkingSpec: QuickSpec {
                                                pan: "4153013999700024",
                                                certificateBase64Der: receivedKey,
                                                success: {(message) in
-                                                    guard let code = getCodeFromResponse(message) else { return }
-                                                    receivedCode = code
+                                                guard let apiResult: ApiResult = Decoder.decode(fromJson: message) else { return }
+                                                    receivedCode = apiResult.result.code
                                                },
                                                failure: {(error) in print("error \(error)")})
                 expect(receivedCode).toEventually(equal(100), timeout: 5)
@@ -117,7 +102,10 @@ class NetworkingSpec: QuickSpec {
                                                cvc: "024",
                                                pan: "4153013999700024",
                                                certificateBase64Der: receivedKey,
-                                               success: {(message) in receivedCode = getCodeFromResponse(message)},
+                                               success: { (message) in
+                                                 guard let apiResult: ApiResult = Decoder.decode(fromJson: message) else { return }
+                                                 receivedCode = apiResult.result.code
+                                               },
                                                failure: {(error) in print("error \(error)")})
                 
                 expect(receivedCode).toEventually(equal(100), timeout: 5)

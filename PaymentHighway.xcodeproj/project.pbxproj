@@ -41,6 +41,41 @@
 		04B48B551B3305AB00616048 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04B48B571B3305AB00616048 /* InfoPlist.strings */; };
 		04B48B5A1B3305AB00616048 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04B48B5C1B3305AB00616048 /* InfoPlist.strings */; };
 		04B48B5D1B33085200616048 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04B48B4D1B3305AA00616048 /* Localizable.strings */; };
+		37C823F520EE48B0007EDD90 /* TransactionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823F420EE48B0007EDD90 /* TransactionKey.swift */; };
+		37C823FF20EE4D66007EDD90 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823FE20EE4D66007EDD90 /* ApiResult.swift */; };
+		37C8240120EE5410007EDD90 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240020EE5410007EDD90 /* Decoder.swift */; };
+		37C8240320EE5902007EDD90 /* EmptyJsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240220EE5902007EDD90 /* EmptyJsonData.swift */; };
+		37C8240620EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240520EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift */; };
+		37C8240A20EF44D5007EDD90 /* BackendAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterTest.swift */; };
+		37C8240C20EF47AA007EDD90 /* BackendAdapterTestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterTestError.swift */; };
+		37C8240E20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240D20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift */; };
+		37D6BB3C20E278D1003800EE /* PaymentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6BB3B20E278D1003800EE /* PaymentContext.swift */; };
+		37D6BB3E20E27915003800EE /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6BB3D20E27915003800EE /* CardBrand.swift */; };
+		37F49D6420E4BAED0062ED1C /* PaymentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6320E4BAED0062ED1C /* PaymentConfig.swift */; };
+		37F49D6620E4BB090062ED1C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6520E4BB090062ED1C /* Result.swift */; };
+		37F49D6920E4BD300062ED1C /* ExpirationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6820E4BD300062ED1C /* ExpirationDate.swift */; };
+		37F49D6B20E4BD5F0062ED1C /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6A20E4BD5F0062ED1C /* CardData.swift */; };
+		37F49D6D20E4BDC20062ED1C /* TransactionId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6C20E4BDC20062ED1C /* TransactionId.swift */; };
+		37F49D7020E4BE880062ED1C /* BackendAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */; };
+		37F49D7220E4BEBD0062ED1C /* CardAddError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7120E4BEBD0062ED1C /* CardAddError.swift */; };
+		37F49D7520E4C27A0062ED1C /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */; };
+		37F49D7A20E569420062ED1C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7920E569420062ED1C /* String+Extensions.swift */; };
+		37F49D8820E5FC070062ED1C /* CardDataSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8720E5FC070062ED1C /* CardDataSpec.swift */; };
+		37F49D8B20E60F4B0062ED1C /* ExpirationDateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8A20E60F4B0062ED1C /* ExpirationDateSpec.swift */; };
+		37F49D8D20E62FB60062ED1C /* PaymentContextSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */; };
+		37F49D9020EA3EEE0062ED1C /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8F20EA3EEE0062ED1C /* Properties.swift */; };
+		37F49D9220EA572F0062ED1C /* PaymentHighway_production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */; };
+		37F49D9420EA57D70062ED1C /* PaymentHighway_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F49D9320EA57D70062ED1C /* PaymentHighway_staging.plist */; };
+		37F49D9720EB5DC10062ED1C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D9620EB5DC10062ED1C /* Endpoint.swift */; };
+		37F49D9920EB6E710062ED1C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D9820EB6E710062ED1C /* NetworkError.swift */; };
+		37F49D9B20EB963E0062ED1C /* EndpointSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D9A20EB963E0062ED1C /* EndpointSpec.swift */; };
+		37F49DA820EBDBC10062ED1C /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F49D9E20EBDB9A0062ED1C /* OHHTTPStubs.framework */; };
+		37F49DA920EBDC1E0062ED1C /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37F49D9E20EBDB9A0062ED1C /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37F49DAB20ECBAAB0062ED1C /* PaymentHighwayEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49DAA20ECBAAB0062ED1C /* PaymentHighwayEndpoint.swift */; };
+		37F49DAE20ECC3E70062ED1C /* PaymentHighwayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49DAD20ECC3E70062ED1C /* PaymentHighwayService.swift */; };
+		37F49DB020ECCBD30062ED1C /* IdBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49DAF20ECCBD30062ED1C /* IdBase.swift */; };
+		37F49DB220ECCD270062ED1C /* MerchantId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49DB120ECCD270062ED1C /* MerchantId.swift */; };
+		37F49DB420ECCD570062ED1C /* AccountId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49DB320ECCD570062ED1C /* AccountId.swift */; };
 		6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFD1FEA1AD6C02D001DF798 /* SPHAddCardViewController.swift */; };
 		945B16F81B467EFD00158A40 /* PaymentHighway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; };
 		945B16F91B467EFD00158A40 /* PaymentHighway.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03788D451AC978DD007FC30F /* PaymentHighway.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -132,6 +167,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				37F49DA920EBDC1E0062ED1C /* OHHTTPStubs.framework in CopyFiles */,
 				03134FFF1ACAEBBE00EFBD3F /* PaymentHighway.framework in CopyFiles */,
 				03134FFD1ACAEABD00EFBD3F /* Quick.framework in CopyFiles */,
 				03134FFE1ACAEABD00EFBD3F /* Nimble.framework in CopyFiles */,
@@ -247,6 +283,40 @@
 		04B48B631B33096E00616048 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		04B48B651B3309A100616048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04B48B661B3309A200616048 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37C823F420EE48B0007EDD90 /* TransactionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionKey.swift; sourceTree = "<group>"; };
+		37C823FE20EE4D66007EDD90 /* ApiResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResult.swift; sourceTree = "<group>"; };
+		37C8240020EE5410007EDD90 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		37C8240220EE5902007EDD90 /* EmptyJsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyJsonData.swift; sourceTree = "<group>"; };
+		37C8240520EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHighwayServiceSpec.swift; sourceTree = "<group>"; };
+		37C8240820EF437A007EDD90 /* BackendAdapterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterTest.swift; sourceTree = "<group>"; };
+		37C8240B20EF47AA007EDD90 /* BackendAdapterTestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterTestError.swift; sourceTree = "<group>"; };
+		37C8240D20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterTestEndpoint.swift; sourceTree = "<group>"; };
+		37D6BB3B20E278D1003800EE /* PaymentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentContext.swift; sourceTree = "<group>"; };
+		37D6BB3D20E27915003800EE /* CardBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrand.swift; sourceTree = "<group>"; };
+		37F49D6320E4BAED0062ED1C /* PaymentConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfig.swift; sourceTree = "<group>"; };
+		37F49D6520E4BB090062ED1C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		37F49D6820E4BD300062ED1C /* ExpirationDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationDate.swift; sourceTree = "<group>"; };
+		37F49D6A20E4BD5F0062ED1C /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
+		37F49D6C20E4BDC20062ED1C /* TransactionId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionId.swift; sourceTree = "<group>"; };
+		37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapter.swift; sourceTree = "<group>"; };
+		37F49D7120E4BEBD0062ED1C /* CardAddError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddError.swift; sourceTree = "<group>"; };
+		37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
+		37F49D7920E569420062ED1C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		37F49D8720E5FC070062ED1C /* CardDataSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSpec.swift; sourceTree = "<group>"; };
+		37F49D8A20E60F4B0062ED1C /* ExpirationDateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationDateSpec.swift; sourceTree = "<group>"; };
+		37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentContextSpec.swift; sourceTree = "<group>"; };
+		37F49D8F20EA3EEE0062ED1C /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
+		37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PaymentHighway_production.plist; sourceTree = "<group>"; };
+		37F49D9320EA57D70062ED1C /* PaymentHighway_staging.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PaymentHighway_staging.plist; sourceTree = "<group>"; };
+		37F49D9620EB5DC10062ED1C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		37F49D9820EB6E710062ED1C /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		37F49D9A20EB963E0062ED1C /* EndpointSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSpec.swift; sourceTree = "<group>"; };
+		37F49D9E20EBDB9A0062ED1C /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
+		37F49DAA20ECBAAB0062ED1C /* PaymentHighwayEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHighwayEndpoint.swift; sourceTree = "<group>"; };
+		37F49DAD20ECC3E70062ED1C /* PaymentHighwayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHighwayService.swift; sourceTree = "<group>"; };
+		37F49DAF20ECCBD30062ED1C /* IdBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdBase.swift; sourceTree = "<group>"; };
+		37F49DB120ECCD270062ED1C /* MerchantId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantId.swift; sourceTree = "<group>"; };
+		37F49DB320ECCD570062ED1C /* AccountId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountId.swift; sourceTree = "<group>"; };
 		6FFD1FEA1AD6C02D001DF798 /* SPHAddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPHAddCardViewController.swift; sourceTree = "<group>"; };
 		94C095521B464F5A0017D024 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		94C095531B464F5A0017D024 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -270,6 +340,7 @@
 			files = (
 				0456BD5E1AEFB34500218197 /* Alamofire.framework in Frameworks */,
 				03788D511AC978DD007FC30F /* PaymentHighway.framework in Frameworks */,
+				37F49DA820EBDBC10062ED1C /* OHHTTPStubs.framework in Frameworks */,
 				03788D751ACAA53B007FC30F /* Nimble.framework in Frameworks */,
 				03788D7D1ACABDD6007FC30F /* Quick.framework in Frameworks */,
 			);
@@ -291,6 +362,7 @@
 		03575C721E60318B00C77AE4 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				37F49D9E20EBDB9A0062ED1C /* OHHTTPStubs.framework */,
 				03575C6F1E60317F00C77AE4 /* IQKeyboardManagerSwift.framework */,
 				94C095521B464F5A0017D024 /* CryptoSwift.framework */,
 				94C095531B464F5A0017D024 /* Nimble.framework */,
@@ -324,6 +396,10 @@
 		03788D471AC978DD007FC30F /* PaymentHighway */ = {
 			isa = PBXGroup;
 			children = (
+				37F49DAC20ECC3CF0062ED1C /* Services */,
+				37F49D8E20EA3E430062ED1C /* Properties */,
+				03F9E0631E6DA70F0059B7F2 /* Network */,
+				37D6BB3220E274A0003800EE /* Public */,
 				03788D6B1AC988C6007FC30F /* Utilities */,
 				03788D611AC978F8007FC30F /* Classes */,
 				03C92A301ACC225900422831 /* Views */,
@@ -349,6 +425,11 @@
 		03788D541AC978DD007FC30F /* PaymentHighwayTests */ = {
 			isa = PBXGroup;
 			children = (
+				37C8240720EF42E7007EDD90 /* BackendAdapterTest */,
+				37C8240420EF4055007EDD90 /* Services */,
+				37F49D9A20EB963E0062ED1C /* EndpointSpec.swift */,
+				37F49D9520EB5C2D0062ED1C /* Public */,
+				37F49D8920E5FDA90062ED1C /* Models */,
 				03788D781ACAA559007FC30F /* ClassTests */,
 				03788D771ACAA551007FC30F /* UtilityTests */,
 				03788D551AC978DD007FC30F /* Supporting Files */,
@@ -380,7 +461,7 @@
 				0456BD5A1AEE5B5800218197 /* Crypto.swift */,
 				03788D6C1AC988D5007FC30F /* Extensions.swift */,
 				03F9E0081E6D5B710059B7F2 /* SecureSigner.swift */,
-				03F9E0631E6DA70F0059B7F2 /* Networking */,
+				37F49D7920E569420062ED1C /* String+Extensions.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -456,15 +537,18 @@
 			name = Library;
 			sourceTree = "<group>";
 		};
-		03F9E0631E6DA70F0059B7F2 /* Networking */ = {
+		03F9E0631E6DA70F0059B7F2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				D098A4841FD16D4200FDD7DB /* ServerType.swift */,
 				03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */,
 				03F9E05E1E6DA70B0059B7F2 /* Router.swift */,
 				03F9E05F1E6DA70B0059B7F2 /* Networking.swift */,
+				37F49D9620EB5DC10062ED1C /* Endpoint.swift */,
+				37F49D9820EB6E710062ED1C /* NetworkError.swift */,
+				37F49DAA20ECBAAB0062ED1C /* PaymentHighwayEndpoint.swift */,
 			);
-			name = Networking;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		0448524A1B396FC90034D0CA /* Alamofire */ = {
@@ -597,6 +681,99 @@
 				044852851B396FC90034D0CA /* ValidationTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		37C8240420EF4055007EDD90 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				37C8240520EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		37C8240720EF42E7007EDD90 /* BackendAdapterTest */ = {
+			isa = PBXGroup;
+			children = (
+				37C8240820EF437A007EDD90 /* BackendAdapterTest.swift */,
+				37C8240B20EF47AA007EDD90 /* BackendAdapterTestError.swift */,
+				37C8240D20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift */,
+			);
+			path = BackendAdapterTest;
+			sourceTree = "<group>";
+		};
+		37D6BB3220E274A0003800EE /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				37F49D7320E4C0A80062ED1C /* UI */,
+				37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */,
+				37F49D6720E4BCE00062ED1C /* Models */,
+				37D6BB3B20E278D1003800EE /* PaymentContext.swift */,
+				37D6BB3D20E27915003800EE /* CardBrand.swift */,
+				37F49D6520E4BB090062ED1C /* Result.swift */,
+				37F49D7120E4BEBD0062ED1C /* CardAddError.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		37F49D6720E4BCE00062ED1C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				37F49D6320E4BAED0062ED1C /* PaymentConfig.swift */,
+				37F49D6820E4BD300062ED1C /* ExpirationDate.swift */,
+				37F49D6A20E4BD5F0062ED1C /* CardData.swift */,
+				37F49D6C20E4BDC20062ED1C /* TransactionId.swift */,
+				37F49DAF20ECCBD30062ED1C /* IdBase.swift */,
+				37F49DB120ECCD270062ED1C /* MerchantId.swift */,
+				37F49DB320ECCD570062ED1C /* AccountId.swift */,
+				37C823F420EE48B0007EDD90 /* TransactionKey.swift */,
+				37C823FE20EE4D66007EDD90 /* ApiResult.swift */,
+				37C8240020EE5410007EDD90 /* Decoder.swift */,
+				37C8240220EE5902007EDD90 /* EmptyJsonData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		37F49D7320E4C0A80062ED1C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		37F49D8920E5FDA90062ED1C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				37F49D8A20E60F4B0062ED1C /* ExpirationDateSpec.swift */,
+				37F49D8720E5FC070062ED1C /* CardDataSpec.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		37F49D8E20EA3E430062ED1C /* Properties */ = {
+			isa = PBXGroup;
+			children = (
+				37F49D8F20EA3EEE0062ED1C /* Properties.swift */,
+				37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */,
+				37F49D9320EA57D70062ED1C /* PaymentHighway_staging.plist */,
+			);
+			name = Properties;
+			sourceTree = "<group>";
+		};
+		37F49D9520EB5C2D0062ED1C /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */,
+			);
+			name = Public;
+			sourceTree = "<group>";
+		};
+		37F49DAC20ECC3CF0062ED1C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				37F49DAD20ECC3E70062ED1C /* PaymentHighwayService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		6FFD1FE91AD6C01A001DF798 /* Controllers */ = {
@@ -800,9 +977,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				044852971B3970A10034D0CA /* Media.xcassets in Resources */,
+				37F49D9420EA57D70062ED1C /* PaymentHighway_staging.plist in Resources */,
 				04B48B4B1B3305AA00616048 /* Localizable.strings in Resources */,
 				03791CD41AD6960300FD80AC /* SPH.storyboard in Resources */,
 				04B48B551B3305AB00616048 /* InfoPlist.strings in Resources */,
+				37F49D9220EA572F0062ED1C /* PaymentHighway_production.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,18 +1057,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C8240120EE5410007EDD90 /* Decoder.swift in Sources */,
+				37F49D9020EA3EEE0062ED1C /* Properties.swift in Sources */,
+				37F49DAB20ECBAAB0062ED1C /* PaymentHighwayEndpoint.swift in Sources */,
 				03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */,
+				37F49D6420E4BAED0062ED1C /* PaymentConfig.swift in Sources */,
+				37F49DB020ECCBD30062ED1C /* IdBase.swift in Sources */,
 				03788D6D1AC988D5007FC30F /* Extensions.swift in Sources */,
+				37D6BB3C20E278D1003800EE /* PaymentContext.swift in Sources */,
 				03F9E0621E6DA70B0059B7F2 /* Networking.swift in Sources */,
 				6FFD1FEB1AD6C02D001DF798 /* SPHAddCardViewController.swift in Sources */,
+				37C823FF20EE4D66007EDD90 /* ApiResult.swift in Sources */,
+				37F49D7520E4C27A0062ED1C /* AddCardViewController.swift in Sources */,
+				37F49DAE20ECC3E70062ED1C /* PaymentHighwayService.swift in Sources */,
+				37F49D6620E4BB090062ED1C /* Result.swift in Sources */,
 				03F9E0611E6DA70B0059B7F2 /* Router.swift in Sources */,
+				37F49D7020E4BE880062ED1C /* BackendAdapter.swift in Sources */,
+				37F49D6920E4BD300062ED1C /* ExpirationDate.swift in Sources */,
+				37F49D6D20E4BDC20062ED1C /* TransactionId.swift in Sources */,
+				37F49D7A20E569420062ED1C /* String+Extensions.swift in Sources */,
 				03C92A341ACC235400422831 /* SPHFormatter.swift in Sources */,
+				37D6BB3E20E27915003800EE /* CardBrand.swift in Sources */,
 				0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */,
+				37F49DB220ECCD270062ED1C /* MerchantId.swift in Sources */,
 				03C92A641ACC29E900422831 /* SPHFormLabel.swift in Sources */,
+				37C8240320EE5902007EDD90 /* EmptyJsonData.swift in Sources */,
+				37F49DB420ECCD570062ED1C /* AccountId.swift in Sources */,
 				D098A48D1FD16D4200FDD7DB /* ServerType.swift in Sources */,
 				03C92A321ACC226C00422831 /* SPHTextField.swift in Sources */,
+				37F49D6B20E4BD5F0062ED1C /* CardData.swift in Sources */,
+				37F49D7220E4BEBD0062ED1C /* CardAddError.swift in Sources */,
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
+				37F49D9920EB6E710062ED1C /* NetworkError.swift in Sources */,
 				03788D641AC9793D007FC30F /* SPH.swift in Sources */,
+				37C823F520EE48B0007EDD90 /* TransactionKey.swift in Sources */,
+				37F49D9720EB5DC10062ED1C /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,9 +1099,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F49D8820E5FC070062ED1C /* CardDataSpec.swift in Sources */,
 				03788D861ACABEC5007FC30F /* SPHClutchSpec.swift in Sources */,
+				37C8240A20EF44D5007EDD90 /* BackendAdapterTest.swift in Sources */,
 				03F9E0141E6D63B00059B7F2 /* SecureSignerSpec.swift in Sources */,
+				37C8240E20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift in Sources */,
+				37F49D8B20E60F4B0062ED1C /* ExpirationDateSpec.swift in Sources */,
 				04B48B421B29BB3A00616048 /* NetworkingSpec.swift in Sources */,
+				37C8240620EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift in Sources */,
+				37C8240C20EF47AA007EDD90 /* BackendAdapterTestError.swift in Sources */,
+				37F49D8D20E62FB60062ED1C /* PaymentContextSpec.swift in Sources */,
+				37F49D9B20EB963E0062ED1C /* EndpointSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,7 +1256,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1102,7 +1312,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1135,8 +1345,9 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				INFOPLIST_FILE = PaymentHighway/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D PH_STAGING";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1163,8 +1374,9 @@
 				);
 				INFOPLIST_FILE = PaymentHighway/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D PH_PRODUCTION";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1188,7 +1400,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = PaymentHighwayTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1208,7 +1420,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PaymentHighwayTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.paymenthighway.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
