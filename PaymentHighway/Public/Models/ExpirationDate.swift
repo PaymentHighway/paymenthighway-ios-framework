@@ -11,24 +11,40 @@ import Foundation
 public struct ExpirationDate {
     let month: String
     let year: String
+    
+    init(month: String, year: String) {
+        self.month = month
+        self.year = year
+    }
+    
+    init?(expirationDate: String) {
+        guard let (month, year) = ExpirationDate.expirationDateComponents(from: expirationDate) else { return nil }
+        self.month = month
+        self.year = year
+    }
 }
 
 extension ExpirationDate {
     
+    fileprivate static func expirationDateComponents(from expirationDate: String) -> (month: String, year: String)? {
+        guard expirationDate.count == 5 else { return nil }
+        let components =  expirationDate.components(separatedBy: "/")
+        guard components.count == 2 else { return nil }
+        let month = components[0]
+        let year = "20" + components[1]
+        return (month, year)
+    }
+    
     static func isValid(expirationDate: String) -> Bool {
+        guard let (month, year) = expirationDateComponents(from: expirationDate) else { return false }
         
-        if expirationDate.count == 5 {
-            let month = expirationDate.components(separatedBy: "/")[0]
-            let year = "20" + expirationDate.components(separatedBy: "/")[1]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMyyyy"
-            
-            if let givenDate = dateFormatter.date(from: month + year),
-                let currentDate = dateFormatter.date(from: dateFormatter.string(from: Date())),
-                givenDate.compare(currentDate) != ComparisonResult.orderedAscending {
-                return true
-            }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMyyyy"
+        
+        if let givenDate = dateFormatter.date(from: month + year),
+            let currentDate = dateFormatter.date(from: dateFormatter.string(from: Date())),
+            givenDate.compare(currentDate) != ComparisonResult.orderedAscending {
+            return true
         }
         
         return false

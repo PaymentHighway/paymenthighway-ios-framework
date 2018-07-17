@@ -12,6 +12,12 @@ public struct CardData {
     let pan: String
     let cvc: String
     let expirationDate: ExpirationDate
+    
+    init(pan: String, cvc: String, expirationDate: ExpirationDate) {
+        self.pan = pan.decimalDigits
+        self.cvc = cvc
+        self.expirationDate = expirationDate
+    }
 }
 
 public extension CardData {
@@ -67,12 +73,13 @@ public extension CardData {
     /// - parameter   cardNumber: The card number to format
     /// - parameter   cardType:   The type of the card number
     /// - returns: The properly spaced credit card number
-    static func format(cardNumber: String, cardBrand: CardBrand) -> String {
+    static func format(cardNumber: String, cardBrand: CardBrand?) -> String {
         let formattedString = cardNumber.decimalDigits.truncate(length: 19, trailing: "")
         
         // AMEX uses their own weird format
         var regexpString = "(\\d{1,4})"
-        if cardBrand == .americanExpress {
+        if let cardBrand = cardBrand,
+           cardBrand == .americanExpress {
             regexpString = "(\\d{1,4})(\\d{1,6})?(\\d{1,5})?"
         }
         

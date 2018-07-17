@@ -65,8 +65,13 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
                                                                              BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
         switch result {
         case .success(let apiResult):
-            print("apiResult \(apiResult.result.code)")
-            backendAdapter.cardAdded(transactionId: transactionId, completion: completion)
+            if apiResult.result.code == 100 {
+                backendAdapter.cardAdded(transactionId: transactionId, completion: completion)
+            } else {
+                print("Error in tokenizeTransaction \(apiResult.result.code) \(apiResult.result.message)")
+                let resultError = backendAdapter.systemError(error: NetworkError.internalError(apiResult.result.code, apiResult.result.message))
+                completion(.failure(resultError))
+            }
         case .failure(let tokenizeTransactionError):
             let resultError = backendAdapter.systemError(error: tokenizeTransactionError)
             completion(.failure(resultError))
