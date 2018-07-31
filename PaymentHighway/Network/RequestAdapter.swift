@@ -24,7 +24,9 @@ internal class NetworkingRequestAdapter: RequestAdapter {
         request.addValue(merchantId, forHTTPHeaderField: "SPH-Merchant")
         request.addValue(accountId, forHTTPHeaderField: "SPH-Account")
         request.addValue(NSUUID().uuidString.lowercased(), forHTTPHeaderField: "SPH-Request-ID")
-        request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        if request.value(forHTTPHeaderField: "Content-Type") == nil {
+            request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        }
         
         let date = Date()
         let formatter = DateFormatter()
