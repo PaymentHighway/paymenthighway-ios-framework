@@ -8,6 +8,8 @@
 
 open class SecurityCodeTextField: TextField {
     
+    var cardBrand: () -> CardBrand? = { () in return nil }
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         textFieldIcon = .securityCode
@@ -15,8 +17,8 @@ open class SecurityCodeTextField: TextField {
         format = { (text) in
             return CardData.format(securityCode: text)
         }
-        validate = { (text) in
-            return CardData.isValid(securityCode: text)
+        validate = { [weak self] (text) in
+            return CardData.isValid(securityCode: text, cardBrand: self?.cardBrand())
         }
     }
 }

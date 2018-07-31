@@ -21,6 +21,7 @@ import UIKit
         cardNumberTextField.validationDelegate = self
         expirationDateTextField.validationDelegate = self
         securityCodeTextField.validationDelegate = self
+        securityCodeTextField.cardBrand = { [weak self] () in CardData.cardBrand(cardNumber: self?.cardNumberTextField.text ?? "")}
         // ATM disabled. Need to find a solution how to show powered by ...
         // that would be covered from the keyboard
         // cardNumberTextField.becomeFirstResponder()
