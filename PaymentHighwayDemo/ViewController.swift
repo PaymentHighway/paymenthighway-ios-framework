@@ -9,49 +9,43 @@
 import UIKit
 import PaymentHighway
 
-class ViewController: UIViewController {
-	
+class ViewController: UIViewController, AddCardDelegate {
+
+    var presenter: Presenter!
+    var paymentContext: PaymentContext<BackendAdapterTest>!
+
+    let merchantId = MerchantId(id: "test_merchantId")
+    let accountId = AccountId(id: "test")
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId)
+        paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterTest())
+        presenter = Presenter()
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
+    private func executeAddCard(card: CardData) {
+        paymentContext.addCard(card: card) { (result) in
+            switch result {
+            case .success(let transactionToken):
+                self.logForUser.text = "AddCard success, transaction token:\(transactionToken)\n\(self.logForUser.text ?? "")"
+            case .failure(let error):
+                self.logForUser.text = "AddCard error:\(error)\n\(self.logForUser.text ?? "")"
+            }
+        }
+    }
+    
     @IBOutlet weak var logForUser: UITextView!
   
     @IBAction func addCard(_ sender: UIButton) {
-        
-        let hostname = "http://54.194.196.206:8081" // development
-        
-        logForUser.text = "Add card-button pushed.\n\(logForUser.text)"
-                
-        SPH.sharedInstance.transactionId(
-            hostname: hostname,
-            success: {
-                let txId = $0
-                self.presentSPHAddCardViewController(
-                    self,
-                    animated: true,
-                    transactionId : txId,
-                    success: {
-                        self.logForUser.text = "\($0)\n\(self.logForUser.text)"
-                        SPH.sharedInstance.transactionToken(
-                            hostname: hostname,
-                            transactionId: txId,
-                            success: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"},
-                            failure: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"})
-                    },
-                    error: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"},
-                    completion: {self.logForUser.text = "User completed the form.\n\(self.logForUser.text)"})
-            },
-            failure: {self.logForUser.text = "\($0)\n\(self.logForUser.text)"})
+        presenter.showAddCard(root: self, delegate: self)
+    }
+    
+    func cancel() {
+        self.logForUser.text = "AddCard cancel\n\(self.logForUser.text ?? "")"
+    }
+    
+    func addCard(_ card: CardData) {
+         self.executeAddCard(card: card)
     }
 }

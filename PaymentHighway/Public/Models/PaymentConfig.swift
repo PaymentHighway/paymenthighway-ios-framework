@@ -11,4 +11,9 @@ import Foundation
 public struct PaymentConfig {
     let merchantId: MerchantId
     let accountId: AccountId
+    
+    public init(merchantId: MerchantId, accountId: AccountId) {
+        self.merchantId = merchantId
+        self.accountId = accountId
+    }
 }

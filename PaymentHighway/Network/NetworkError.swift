@@ -17,4 +17,5 @@ public enum NetworkError: Error {
     case requestError(Error)
     case unexpectedStatusCode(HTTPURLResponse)
     case dataError(String?)
+    case internalError(Int, String)
 }
