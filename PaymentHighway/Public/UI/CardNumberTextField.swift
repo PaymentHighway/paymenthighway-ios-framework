@@ -10,7 +10,7 @@ open class CardNumberTextField: TextField {
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        textFieldIcon = .cardNumber
+        textFieldType = .cardNumber
         placeholder = NSLocalizedString("CreditCardNumber", bundle:  Bundle(for: type(of: self)), comment: "The text shown above the credit card number field")
         format = { (text) in
             let cardBrand = CardData.cardBrand(cardNumber: text)

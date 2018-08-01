@@ -16,17 +16,35 @@ import UIKit
     
     weak var validationDelegate: TextFieldValidationDelegate?
     
+    var theme: Theme = DefaultTheme.instance {
+        didSet {
+            cardNumberTextField.theme = theme
+            expirationDateTextField.theme = theme
+            securityCodeTextField.theme = theme
+            setNeedsDisplay()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = theme.primaryBackgroundColor
         cardNumberTextField.validationDelegate = self
         expirationDateTextField.validationDelegate = self
         securityCodeTextField.validationDelegate = self
         securityCodeTextField.cardBrand = { [weak self] () in CardData.cardBrand(cardNumber: self?.cardNumberTextField.text ?? "")}
-        // ATM disabled. Need to find a solution how to show powered by ...
-        // that would be covered from the keyboard
-        // cardNumberTextField.becomeFirstResponder()
     }
     
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if newWindow != nil {
+            if theme.showKeyboard {
+                // Need to find a better solution detectiong when the view end the animation then becomeFirstResponder should be set
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(20), execute: {
+                    self.cardNumberTextField.becomeFirstResponder()
+                })
+            }
+        }
+    }
     var isValid: Bool {
         return cardNumberTextField.isValid &&
                expirationDateTextField.isValid &&
@@ -43,7 +61,7 @@ import UIKit
     
     private func moveToNextInvalid(current: TextField) {
         
-        func runBecomeFirstResponder(_ textField: TextField) {
+        func setBecomeFirstResponder(_ textField: TextField) {
             if textField.isValid == false {
                 textField.becomeFirstResponder()
             }
@@ -51,9 +69,9 @@ import UIKit
         
         switch current {
         case cardNumberTextField:
-            runBecomeFirstResponder(expirationDateTextField)
+            setBecomeFirstResponder(expirationDateTextField)
         case expirationDateTextField:
-            runBecomeFirstResponder(securityCodeTextField)
+            setBecomeFirstResponder(securityCodeTextField)
         default:
             break
         }

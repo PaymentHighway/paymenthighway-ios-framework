@@ -10,8 +10,9 @@ import UIKit
 import PaymentHighway
 
 class ViewController: UIViewController, AddCardDelegate {
-
-    var presenter: Presenter!
+    private let viewHeight: CGFloat = 300
+    
+    var presenter: Presenter?
     var paymentContext: PaymentContext<BackendAdapterTest>!
 
     let merchantId = MerchantId(id: "test_merchantId")
@@ -21,7 +22,6 @@ class ViewController: UIViewController, AddCardDelegate {
 		super.viewDidLoad()
         let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId)
         paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterTest())
-        presenter = Presenter()
 	}
 	
     private func executeAddCard(card: CardData) {
@@ -38,14 +38,25 @@ class ViewController: UIViewController, AddCardDelegate {
     @IBOutlet weak var logForUser: UITextView!
   
     @IBAction func addCard(_ sender: UIButton) {
-        presenter.showAddCard(root: self, delegate: self)
+        guard presenter == nil else { return }
+        let vcAddCard = AddCardViewController(theme: DefaultTheme.instance)
+        
+        vcAddCard.addCardDelegate = self
+        presenter = Presenter.addCardPresenter(theme: DefaultTheme.instance)
+        presenter!.present(root: self, presentedViewController: vcAddCard)
+    }
+    
+    private func dismiss() {
+        self.presenter = nil
     }
     
     func cancel() {
         self.logForUser.text = "AddCard cancel\n\(self.logForUser.text ?? "")"
+        self.presenter = nil
     }
     
     func addCard(_ card: CardData) {
-         self.executeAddCard(card: card)
+        self.executeAddCard(card: card)
+        self.presenter = nil
     }
 }

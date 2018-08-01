@@ -6,7 +6,7 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
-enum PresentationScale {
+public enum PresentationType {
     case fullScreen
     case halfScreen
     case custom(CGFloat)

@@ -60,7 +60,7 @@ extension CardBrand {
     
     var cvcLength: [Int] {
         switch self {
-        case .americanExpress: return [3,4]
+        case .americanExpress: return [3, 4]
         default: return [3]
         }
     }
