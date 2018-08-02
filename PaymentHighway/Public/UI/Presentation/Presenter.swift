@@ -8,57 +8,44 @@
 
 import UIKit
 
-// swiftlint:disable  weak_delegate
-public class Presenter {
+public class Presenter: NSObject, UIViewControllerTransitioningDelegate {
 
-    private var presentationHandler: PresentationHandler
-    private let viewHeight: CGFloat = 450
+    let presentationType: PresentationType
+    var presentedViewController: UIViewController?
     
-    public init() {
-        presentationHandler = PresentationHandler()
+    public init(presentationType: PresentationType) {
+        self.presentationType = presentationType
+        super.init()
     }
     
-    public func showAddCard(root: UIViewController, title: String? = nil, delegate: AddCardDelegate) {
+    deinit {
+        dismissPresentedController(animated: false)
+    }
+    
+    public static func addCardPresenter(theme: Theme) -> Presenter {
+        return Presenter(presentationType: theme.addCardPresentationType)
+    }
+    
+    public func present(root: UIViewController, presentedViewController: UIViewController) {
         
-        guard presentationHandler.presentationDelegate == nil else { return }
+        let navigation = UINavigationController(rootViewController: presentedViewController)
         
-        let vcAddCard = AddCardViewController()
-
-        let navigation = UINavigationController(rootViewController: vcAddCard)
-        
-        presentationHandler.createDelegate(scale: .custom(viewHeight), delegate: delegate)
-        vcAddCard.addCardDelegate = presentationHandler
-        vcAddCard.title = title
-
         navigation.modalPresentationStyle = .custom
-        navigation.transitioningDelegate = presentationHandler.presentationDelegate
+        navigation.transitioningDelegate = self
+        dismissPresentedController(animated: false)
+        self.presentedViewController = presentedViewController
         root.present(navigation, animated: true)
     }
-}
-
-private class PresentationHandler: AddCardDelegate {
     
-    var presentationDelegate: PresentationDelegate?
-    
-    weak var delegate: AddCardDelegate?
-    
-    func clean() {
-        presentationDelegate = nil
-        delegate = nil
+    public func dismissPresentedController(animated: Bool, completion: (() -> Void)? = nil) {
+        presentedViewController?.dismiss(animated: animated, completion: completion)
     }
     
-    func cancel() {
-        delegate?.cancel()
-        clean()
-    }
-    
-    func addCard(_ card: CardData) {
-        delegate?.addCard(card)
-        clean()
-    }
-    
-    func createDelegate(scale: PresentationScale, delegate: AddCardDelegate) {
-        self.delegate = delegate
-        self.presentationDelegate = PresentationDelegate(scale: scale)
+    public func presentationController(forPresented presented: UIViewController,
+                                       presenting: UIViewController?,
+                                       source: UIViewController) -> UIPresentationController? {
+        let presentationController = PresentationController(presentedViewController: presented, presenting: presenting)
+        presentationController.presentationType = presentationType
+        return presentationController
     }
 }

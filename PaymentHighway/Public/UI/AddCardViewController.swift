@@ -20,18 +20,23 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
     var addCardButton: UIBarButtonItem!
     var cancelButton: UIBarButtonItem!
     
-    weak var addCardDelegate: AddCardDelegate?
+    var theme: Theme
     
-    public init() {
+    public weak var addCardDelegate: AddCardDelegate?
+    
+    public init(theme: Theme = DefaultTheme.instance) {
+        self.theme = theme
         super.init(nibName: "AddCardView", bundle: Bundle(for: type(of: self)))
-        
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddCardViewController.cancelPressed(_:)))
         navigationItem.leftBarButtonItem = cancelButton
         
         let addCardButtonTitle = NSLocalizedString("AddCardButtonTitle",
                                                    bundle: Bundle(for: type(of: self)),
                                                    comment: "The text shown on the 'add card' button")
-        addCardButton = UIBarButtonItem(title: addCardButtonTitle, style: .plain, target: self, action: #selector(AddCardViewController.addCardPressed(_:)))
+        addCardButton = UIBarButtonItem(title: addCardButtonTitle,
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(AddCardViewController.addCardPressed(_:)))
         navigationItem.rightBarButtonItem = addCardButton
         addCardButton.isEnabled = false
     }
@@ -43,6 +48,7 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
     public override func viewDidLoad() {
         super.viewDidLoad()
         addCardView.validationDelegate = self
+        addCardView.theme = theme
     }
     
     func isValidDidChange(_ isValid: Bool, _ textField: TextField?) {
@@ -70,6 +76,5 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
             addCardDelegate?.cancel()
         }
         addCardView.endEditing(true)
-        dismiss(animated: true, completion: nil)
     }
 }

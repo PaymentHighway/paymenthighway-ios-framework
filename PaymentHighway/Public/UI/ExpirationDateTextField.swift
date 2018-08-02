@@ -12,7 +12,7 @@ open class ExpirationDateTextField: TextField, UITextFieldDelegate {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        textFieldIcon = .expirationDate
+        textFieldType = TextFieldType.expirationDate
         delegate = self
         placeholder = NSLocalizedString("MM/YY", bundle: Bundle(for: type(of: self)), comment: "Expiration date placeholder.")
         format = { [weak self] (text) in

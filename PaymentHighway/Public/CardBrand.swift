@@ -9,7 +9,6 @@
 import Foundation
 
 public enum CardBrand {
-    case unknown
     case visa
     case masterCard
     case americanExpress
@@ -25,11 +24,9 @@ public enum CardBrand {
 
 extension CardBrand {
     /// Returns the correct NSPredicate for validating a card type
-    static func matcherPredicateForType(_ cardBrand: CardBrand) -> NSPredicate {
+    var matcherPredicate: NSPredicate {
         var regexp: String?
-        switch cardBrand {
-        case .unknown:
-            break
+        switch self {
         case .visa:
             regexp = "^4[0-9]{6,}$"
         case .masterCard:
@@ -49,13 +46,30 @@ extension CardBrand {
         }
         return NSPredicate(value: false)
     }
+    
+    var panLength: [Int] {
+        switch self {
+        case .visa: return [13, 16]
+        case .masterCard: return [16]
+        case .americanExpress: return [15]
+        case .discover: return [16]
+        case .jcb: return [16]
+        case .dinersClub: return [14]
+        }
+    }
+    
+    var cvcLength: [Int] {
+        switch self {
+        case .americanExpress: return [3, 4]
+        default: return [3]
+        }
+    }
 }
 
 extension CardBrand: CustomStringConvertible {
     /// Printable
     public var description: String {
         switch self {
-        case .unknown: return "Unknown"
         case .visa: return "Visa"
         case .masterCard: return "MasterCard"
         case .americanExpress: return "AmericanExpress"

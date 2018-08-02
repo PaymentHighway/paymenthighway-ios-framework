@@ -26,14 +26,16 @@ public extension CardData {
     ///
     /// - parameter cardNumber: The card number string
     static func cardBrand(cardNumber: String) -> CardBrand? {
-        let valid = isValid(cardNumber: cardNumber)
+        let cardNumberDigits = cardNumber.decimalDigits
+        let valid = isValid(cardNumber: cardNumberDigits)
         guard valid else { return nil }        
-        var foundCardBrand: CardBrand = .unknown
+        var foundCardBrand: CardBrand? = nil
         for cardBrand in CardBrand.allCases {
-            let predicate = CardBrand.matcherPredicateForType(cardBrand)
-            if predicate.evaluate(with: cardNumber) == true {
-                foundCardBrand = cardBrand
-                break
+            if cardBrand.matcherPredicate.evaluate(with: cardNumberDigits) == true {
+                if cardBrand.panLength.contains(cardNumberDigits.count) {
+                    foundCardBrand = cardBrand
+                    break
+                }
             }
         }
         
@@ -93,8 +95,9 @@ public extension CardData {
         return matches.joined(separator: " ")
     }
     
-    static func isValid(securityCode: String) -> Bool {
-        return securityCode.decimalDigits.count > 0
+    static func isValid(securityCode: String, cardBrand: CardBrand?) -> Bool {
+        guard let cardBrand = cardBrand else { return false }
+        return  cardBrand.cvcLength.contains(securityCode.decimalDigits.count)
     }
     
     static func format(securityCode: String) -> String {

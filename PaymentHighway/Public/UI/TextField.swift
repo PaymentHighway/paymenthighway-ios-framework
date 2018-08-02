@@ -8,14 +8,23 @@
 
 import UIKit
 
+private let defaultAdjustPlaceholderY: CGFloat = 4
+
+private let imageTag = 8899
+
 open class TextField: UITextField {
 
-    private var theme: TextFieldTheme = TextFieldTheme()
+    lazy var adjustX: CGFloat = theme.textAdjustX
+    
+    var theme: Theme = DefaultTheme.instance {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     var isValid: Bool = false {
         didSet {
             validationDelegate?.isValidDidChange(isValid, self)
-            theme.isValid = isValid
         }
     }
     
@@ -28,14 +37,14 @@ open class TextField: UITextField {
     private var placeholderLabel = UILabel()
     
     private var placeholderHeight : CGFloat {
-        return theme.placeholderInsets.y + placeholderFont().lineHeight
+        return defaultAdjustPlaceholderY + placeholderFont().lineHeight
     }
     
-    private func placeholderFont() -> UIFont! {
-        if isFirstResponder || text!.isNotEmpty, let font = font {
-            return UIFont(name: font.fontName, size: font.pointSize * theme.placeholderFontScale)
+    private func placeholderFont() -> UIFont {
+        if isFirstResponder || text!.isNotEmpty {
+            return UIFont(name: theme.font.fontName, size: theme.font.pointSize * theme.placeholderFontScale)!
         }
-        return font
+        return theme.font
     }
     
     override public init(frame: CGRect) {
@@ -49,8 +58,9 @@ open class TextField: UITextField {
     }
     
     private func initialize() {
-        rounded = true
         keyboardType = UIKeyboardType.numberPad
+        font = theme.font
+        backgroundColor = theme.secondaryBackgroundColor
         addTarget(self, action: #selector(TextField.formatAndValidateTextField(_:)), for: UIControlEvents.editingChanged)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textFieldDidEndEditing),
@@ -105,29 +115,27 @@ open class TextField: UITextField {
     
     open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         if isFirstResponder || text!.isNotEmpty {
-            return CGRect(x: theme.placeholderInsets.x, y: theme.placeholderInsets.y, width: bounds.width, height: placeholderHeight)
+            return CGRect(x: adjustX, y: defaultAdjustPlaceholderY, width: bounds.width, height: placeholderHeight)
         } else {
             return textRect(forBounds: bounds)
         }
     }
 
     open func animateViewsForTextEntry() {
-        UIView.animate(withDuration: theme.animationDuration, animations: {
-            self.updateBorder()
-            self.updatePlaceholder()
+        UIView.animate(withDuration: theme.placeholderAnimationDuration, animations: {
+            self.updateUI()
         })
     }
     
     open func animateViewsForTextDisplay() {
-        UIView.animate(withDuration: theme.animationDuration, animations: {
-            self.updateBorder()
-            self.updatePlaceholder()
+        UIView.animate(withDuration: theme.placeholderAnimationDuration, animations: {
+            self.updateUI()
         })
     }
     
     open func drawViewsForRect(_ rect: CGRect) {
-        updateBorder()
-        updatePlaceholder()
+        updateTextImage()
+        updateUI()
         addSubview(placeholderLabel)
     }
     
@@ -139,40 +147,48 @@ open class TextField: UITextField {
         // Don't draw any placeholders
     }
     
-    open var rounded: Bool = false {
-        didSet {
-            theme.rounded = rounded
-            setBorderStyle()
-        }
-    }
-
-    open var textFieldIcon: TextFieldIcon? {
-        didSet {
-            guard let cardIcon = textFieldIcon else { return }
-            theme.placeholderInsets = Inset(self.frame.height+theme.placeholderInsets.x, theme.placeholderInsets.y)
-            theme.textFieldInsets = Inset(self.frame.height+theme.textFieldInsets.x, theme.textFieldInsets.y)
-            addSubview(cardIcon.getImageView(height: self.frame.height))
-        }
-    }
+    open var textFieldType: TextFieldType?
     
     // MARK: Layout
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         if isFirstResponder ||
            (text?.isNotEmpty ?? false) {
-            return  bounds.offsetBy(dx: theme.textFieldInsets.x, dy: theme.textFieldInsets.y + placeholderHeight/2)
+            return  bounds.offsetBy(dx: adjustX, dy: placeholderHeight/2)
         }
-        return  bounds.offsetBy(dx: theme.textFieldInsets.x, dy: theme.textFieldInsets.y)
+        return  bounds.offsetBy(dx: adjustX, dy: 0)
     }
 
     open override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return textRect(forBounds: bounds)
     }
     
+    private func updateTextImage() {
+        guard let textFieldType = textFieldType,
+              theme.textImages.contains(textFieldType) else { return }
+        
+        if let oldImage = self.viewWithTag(imageTag) {
+            oldImage.removeFromSuperview()
+        }
+        if let image = theme.textImageView(textFieldType: textFieldType, height: self.frame.height) {
+            adjustX = self.frame.height
+            image.tag = imageTag
+            addSubview(image)
+        } else {
+            adjustX = theme.textAdjustX
+        }
+    }
+    
+    private func updateUI() {
+        updateBorder()
+        updatePlaceholder()
+        textColor = theme.textColor(isValid: isValid, isActive: isFirstResponder)
+    }
+    
     private func updatePlaceholder() {
         placeholderLabel.frame = placeholderRect(forBounds: bounds)
         placeholderLabel.text = placeholder
         placeholderLabel.font = placeholderFont()
-        placeholderLabel.textColor = theme.getPlaceholderLabelColor(isFirstResponder)
+        placeholderLabel.textColor = theme.placeholderLabelColor(isValid: isValid, isActive: isFirstResponder)
         placeholderLabel.textAlignment = textAlignment
     }
     
@@ -183,7 +199,7 @@ open class TextField: UITextField {
     
     private func updateBorder() {
         setBorderStyle()
-        layer.borderColor = theme.getBorderColor(isFirstResponder).cgColor
+        layer.borderColor = theme.borderColor(isValid: isValid, isActive: isFirstResponder).cgColor
     }
     
 }

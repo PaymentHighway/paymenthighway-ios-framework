@@ -10,14 +10,17 @@ open class CardNumberTextField: TextField {
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        textFieldIcon = .cardNumber
+        textFieldType = .cardNumber
         placeholder = NSLocalizedString("CreditCardNumber", bundle:  Bundle(for: type(of: self)), comment: "The text shown above the credit card number field")
         format = { (text) in
-            let cardBrand = CardData.cardBrand(cardNumber: text.decimalDigits)
+            let cardBrand = CardData.cardBrand(cardNumber: text)
             return CardData.format(cardNumber: text, cardBrand: cardBrand)
         }
         validate = { (text) in
-            return CardData.isValid(cardNumber: text)
+            if CardData.cardBrand(cardNumber: text) != nil {
+                return true
+            }
+            return false
         }
     }
     

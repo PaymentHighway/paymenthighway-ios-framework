@@ -10,9 +10,23 @@ import UIKit
 
 class PresentationController: UIPresentationController {
     
-    var scale: PresentationScale = .fullScreen
+    var presentationType: PresentationType = .fullScreen
     
     var dimmingView: UIView?
+    
+    override init(presentedViewController: UIViewController, presenting: UIViewController?) {
+        super.init(presentedViewController: presentedViewController, presenting: presenting)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(PresentationController.keyboardWillShow(notification:)),
+                                               name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(PresentationController.keyboardWillHide(notification:)),
+                                               name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     private func createBlurView() -> UIView {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: containerView!.bounds.width, height: containerView!.bounds.height))
@@ -25,7 +39,7 @@ class PresentationController: UIPresentationController {
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
-        switch scale {
+        switch presentationType {
         case .custom(let height):
             return CGRect(x: 0, y: containerView!.bounds.height - height, width: containerView!.bounds.width, height: height)
         case .halfScreen:
@@ -65,5 +79,49 @@ class PresentationController: UIPresentationController {
             dimmingView?.removeFromSuperview()
             dimmingView = nil
         }
+    }
+    
+    public func getTranslationFrame(keyboardFrame: CGRect, presentedFrame: CGRect) -> CGRect {
+        let keyboardTop = UIScreen.main.bounds.height - keyboardFrame.size.height
+        let presentedViewBottom = presentedFrame.origin.y + presentedFrame.height
+        let offset = presentedViewBottom - keyboardTop
+        if offset > 0.0 {
+            let y = presentedFrame.origin.y>=offset ? presentedFrame.origin.y-offset : 0
+            let height = presentedFrame.origin.y>=offset ? presentedFrame.size.height : presentedFrame.size.height-(offset-presentedFrame.origin.y)
+            return CGRect(x: presentedFrame.origin.x, y: y, width: presentedFrame.size.width, height: height)
+        }
+        return presentedFrame
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardFrame = notification.keyboardEndFrame() {
+            let presentedFrame = frameOfPresentedViewInContainerView
+            let translatedFrame = getTranslationFrame(keyboardFrame: keyboardFrame, presentedFrame: presentedFrame)
+            if translatedFrame != presentedFrame {
+                UIView.animate(withDuration: notification.keyboardAnimationDuration() ?? 0.25, animations: {
+                    self.presentedView?.frame = translatedFrame
+                })
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide (notification: Notification) {
+        let presentedFrame = frameOfPresentedViewInContainerView
+        if self.presentedView?.frame !=  presentedFrame {
+            UIView.animate(withDuration: notification.keyboardAnimationDuration() ?? 0.25, animations: {
+                self.presentedView?.frame = presentedFrame
+            })
+        }
+    }
+}
+
+extension Notification {
+    
+    func keyboardEndFrame () -> CGRect? {
+        return (self.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+    }
+    
+    func keyboardAnimationDuration () -> Double? {
+        return (self.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
     }
 }
