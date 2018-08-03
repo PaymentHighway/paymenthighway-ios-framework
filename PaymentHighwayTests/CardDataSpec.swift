@@ -22,6 +22,18 @@ let validCardBrands: [CardBrand: [String]] = [
 
 let invalidCardBrands = ["123", "0935835", "82378493", "000000", "9944333322221111"]
 
+let securityCodeFormats = [
+    "" : "",
+    "0" : "0",
+    "00" : "00",
+    "000" : "000",
+    "0000" : "0000",
+    "00000" : "0000",
+    "41234" : "4123",
+    "123412344234" : "",
+    " 1 43 / 2k k nkm" : "1432"
+]
+
 class CardDataSpec: QuickSpec {
     
     override func spec() {
@@ -97,7 +109,7 @@ class CardDataSpec: QuickSpec {
         describe("Security code formatting") {
             it("Format security code as expected") {
                 for (given, expected) in securityCodeFormats {
-                    let actual = SPH.sharedInstance.formattedSecurityCode(given)
+                    let actual = CardData.format(securityCode: given)
                     expect(actual).to(equal(expected))
                 }
             }

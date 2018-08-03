@@ -14,8 +14,6 @@ private let defaultSecondaryActiveForegroundColor = UIColor(hexInt: 0x636f84)
 private let defaultErrorForegroundColor = UIColor(hexInt: 0xe80f0f)
 private let defaultErrorActiveForegroundColor = UIColor(hexInt: 0x993333)
 
-private let defaultPlaceholderInset = Inset(2, 4)
-private let defaultTextFieldInsets = Inset(2, 0)
 private let defaulRoundedBorderRadius: CGFloat = 20
 private let defaultPlaceholderFontScale: CGFloat = 0.7
 private let defaulBorderWidth: CGFloat = 1.5

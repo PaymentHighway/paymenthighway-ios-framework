@@ -15,16 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let accountId = "test"
-        let merchantId = "test_merchantId"
-        
-        SPH.initSharedInstance(
-            merchantId: merchantId,
-            accountId: accountId,
-            serverType: StagingServer.self
-        )
-        SPHTextField.appearance().backgroundColor = UIColor.red
-		
 		return true
 	}
 
