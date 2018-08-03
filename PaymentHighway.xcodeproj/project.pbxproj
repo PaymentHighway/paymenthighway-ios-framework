@@ -402,7 +402,9 @@
 		03788D471AC978DD007FC30F /* PaymentHighway */ = {
 			isa = PBXGroup;
 			children = (
-				37D6BB3220E274A0003800EE /* Public */,
+				3718E751211445DC007C577A /* Core */,
+				37F49D6720E4BCE00062ED1C /* Models */,
+				37F49D7320E4C0A80062ED1C /* UI */,
 				37F49DAC20ECC3CF0062ED1C /* Services */,
 				37F49D8E20EA3E430062ED1C /* Properties */,
 				03F9E0631E6DA70F0059B7F2 /* Network */,
@@ -653,6 +655,27 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
+		3718E751211445DC007C577A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */,
+				37D6BB3B20E278D1003800EE /* PaymentContext.swift */,
+				37D6BB3D20E27915003800EE /* CardBrand.swift */,
+				37F49D6520E4BB090062ED1C /* Result.swift */,
+				37F49D7120E4BEBD0062ED1C /* CardAddError.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		3718E75221144626007C577A /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				3718E71C21109F08007C577A /* Theme.swift */,
+				3718E726211190B7007C577A /* DefaultTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		3721E30320FE423100D64276 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,20 +704,6 @@
 			path = BackendAdapterTest;
 			sourceTree = "<group>";
 		};
-		37D6BB3220E274A0003800EE /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				37F49D7320E4C0A80062ED1C /* UI */,
-				37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */,
-				37F49D6720E4BCE00062ED1C /* Models */,
-				37D6BB3B20E278D1003800EE /* PaymentContext.swift */,
-				37D6BB3D20E27915003800EE /* CardBrand.swift */,
-				37F49D6520E4BB090062ED1C /* Result.swift */,
-				37F49D7120E4BEBD0062ED1C /* CardAddError.swift */,
-			);
-			path = Public;
-			sourceTree = "<group>";
-		};
 		37F49D6720E4BCE00062ED1C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,6 +725,7 @@
 		37F49D7320E4C0A80062ED1C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3718E75221144626007C577A /* Theme */,
 				3721E30320FE423100D64276 /* Presentation */,
 				37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */,
 				37E6138121071B1700618A4F /* AddCardView.swift */,
@@ -726,8 +736,6 @@
 				3721E2FF20FD328F00D64276 /* CardNumberTextField.swift */,
 				3721E30120FD494500D64276 /* SecurityCodeTextField.swift */,
 				3718E6F821104117007C577A /* AddCardView.xib */,
-				3718E71C21109F08007C577A /* Theme.swift */,
-				3718E726211190B7007C577A /* DefaultTheme.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
