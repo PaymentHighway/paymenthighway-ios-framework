@@ -39,6 +39,13 @@ let expirationDateValidTest = [
     "12/29" : true
 ]
 
+let expirationDateInitTest = [
+    "1/1" : ("01", "2001"),
+    "13/20" : nil,
+    "12/20" : ("12", "2020"),
+    "12/2012" : ("12", "2012")
+]
+
 class ExpirationDateSpec: QuickSpec {
 
     override func spec() {
@@ -57,6 +64,20 @@ class ExpirationDateSpec: QuickSpec {
                 for (expirationDate, expectedValid) in expirationDateValidTest {
                     let isValid = ExpirationDate.isValid(expirationDate: expirationDate)
                     expect(isValid).to(equal(expectedValid))
+                }
+            }
+        }
+
+        describe("Expiration date init") {
+            it("should expiration dates initialized as expected") {
+                for (expirationDate, expected) in expirationDateInitTest {
+                    let result = ExpirationDate(expirationDate: expirationDate)
+                    if result == nil {
+                        expect(expected).to(beNil())
+                    } else {
+                        expect(result!.month).to(equal(expected!.0))
+                        expect(result!.year).to(equal(expected!.1))
+                    }
                 }
             }
         }

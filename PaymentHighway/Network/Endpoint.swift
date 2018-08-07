@@ -8,26 +8,80 @@
 
 import Alamofire
 
-public protocol ResponseChecker {
-    func checkResponse(_ httpUrlResponse: HTTPURLResponse?, _ data: Any) -> NetworkError?
+public typealias URLResponseChecker = (_ httpUrlResponse: HTTPURLResponse?, _ jsonString: String) -> NetworkError?
+
+func defaultURLResponseChecker(_ httpUrlResponse: HTTPURLResponse?, _ jsonString: String) -> NetworkError? {
+    var errorResult: NetworkError? = .unknown
+    guard let httpUrlResponse = httpUrlResponse else { return errorResult }
+    switch httpUrlResponse.statusCode {
+    case 200..<300:
+        if !jsonString.isEmpty,
+            let dataResponse = jsonString.data(using: .utf8),
+            let responseData = try? JSONDecoder().decode(ApiResult.self, from: dataResponse),
+            responseData.result.code != ApiResult.success {
+            errorResult = NetworkError.internalError(responseData.result.code, responseData.result.message)
+        } else {
+            errorResult = nil
+        }
+    case 400..<500:
+        errorResult = NetworkError.clientError(httpUrlResponse.statusCode)
+    case 500..<600:
+        errorResult = NetworkError.serverError(httpUrlResponse.statusCode)
+    default:
+        errorResult = NetworkError.unexpectedStatusCode(httpUrlResponse)
+    }
+    return errorResult
 }
 
-public protocol Endpoint: URLConvertible, ResponseChecker {
+/// Basic network abstraction on top of Alamofire to define custom endpoint
+///
+public protocol Endpoint: URLConvertible {
+    
+    /// Endpoint base URL
     var baseURL: URL { get }
+    
+    /// Optional endpoint path
     var path: String? { get }
+
+    /// Optional endpoint parameters
+    /// Default alamofire `JSONEncoding` is used
+    ///
+    /// - seealso: Alamofire `JSONEncoding`
     var parameters: Parameters? { get }
+    
+    /// Optional endpoint query parameters
     var queryParameters: [URLQueryItem]? { get }
+    
+    /// Optional Alamofire RequestAdapter
+    ///
+    /// - seealso: Alamofire `RequestAdapter`
     var requestAdapter: RequestAdapter? { get }
+    
+    /// Alamofire session manager
+    ///
+    /// - seealso: Alamofire `SessionManager`
     var sessionManager: SessionManager { get }
     
-    var responseChecker: ResponseChecker { get }
+    /// Provide function for the url response checker
+    ///
+    var urlResponseChecker: URLResponseChecker { get }
     
-    func checkResponse(_ httpUrlResponse: HTTPURLResponse?, _ data: Any) -> NetworkError?
+    /// REST get: json result is decoded to given type
+    ///
+    /// - parameters completion: callback with `Result`
+    func getJson<DataType: Decodable> (completion: @escaping (Result<DataType, NetworkError>) -> Void)
+
+    /// REST post: json result is decoded to given type
+    ///
+    /// - parameters completion: callback with `Result`
+    func post<DataType: Decodable>(completion: @escaping (Result<DataType, NetworkError>) -> Void)
 }
 
 public extension Endpoint {
     
-    var responseChecker: ResponseChecker { return self }
+    var urlResponseChecker: URLResponseChecker {
+        return defaultURLResponseChecker
+    }
     
     var parameters: Parameters? {
         return nil
@@ -70,22 +124,6 @@ public extension Endpoint {
         return sessionManagerResult
     }
     
-    func checkResponse(_ httpUrlResponse: HTTPURLResponse?, _ data: Any) -> NetworkError? {
-        var errorResult: NetworkError? = .unknown
-        guard let httpUrlResponse = httpUrlResponse else { return errorResult }
-        switch httpUrlResponse.statusCode {
-        case 200..<300:
-            errorResult = nil
-        case 400..<500:
-            errorResult = NetworkError.clientError(httpUrlResponse.statusCode)
-        case 500..<600:
-            errorResult = NetworkError.serverError(httpUrlResponse.statusCode)
-        default:
-            errorResult = NetworkError.unexpectedStatusCode(httpUrlResponse)
-        }
-        return errorResult
-    }
-    
     private func execRequest<DataType: Decodable> (_ method: Alamofire.HTTPMethod, completion: @escaping (Result<DataType, NetworkError>) -> Void) {
         sessionManager.request(self,
                                method: method,
@@ -93,7 +131,7 @@ public extension Endpoint {
                                encoding: JSONEncoding.default).responseString { response in
             switch response.result {
             case .success(let jsonString):
-                if let error = self.checkResponse(response.response, jsonString) {
+                if let error = self.urlResponseChecker(response.response, jsonString) {
                     completion(.failure(error))
                     return
                 }

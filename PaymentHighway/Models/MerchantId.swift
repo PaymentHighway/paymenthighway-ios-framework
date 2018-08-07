@@ -6,6 +6,8 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
+/// Struct to hold marchant id
+///
 public struct MerchantId: IdBase {
     public let id: String
     

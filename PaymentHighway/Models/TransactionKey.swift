@@ -6,8 +6,8 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
-import Foundation
-
+/// Struct to hold transaction key
+///
 public struct TransactionKey: Decodable {
     public let key: String
 }

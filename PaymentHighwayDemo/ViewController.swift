@@ -12,8 +12,8 @@ import PaymentHighway
 class ViewController: UIViewController, AddCardDelegate {
     private let viewHeight: CGFloat = 300
     
-    var presenter: Presenter?
-    var paymentContext: PaymentContext<BackendAdapterTest>!
+    var presenter: Presenter<AddCardViewController>?
+    var paymentContext: PaymentContext<BackendAdapterExample>!
 
     let merchantId = MerchantId(id: "test_merchantId")
     let accountId = AccountId(id: "test")
@@ -21,7 +21,7 @@ class ViewController: UIViewController, AddCardDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId)
-        paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterTest())
+        paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterExample())
 	}
 	
     private func executeAddCard(card: CardData) {
@@ -29,7 +29,9 @@ class ViewController: UIViewController, AddCardDelegate {
             switch result {
             case .success(let transactionToken):
                 self.logForUser.text = "AddCard success, transaction token:\(transactionToken)\n\(self.logForUser.text ?? "")"
+                self.presenter = nil
             case .failure(let error):
+                self.presenter?.presentedViewController?.showError(message: "\(error)")
                 self.logForUser.text = "AddCard error:\(error)\n\(self.logForUser.text ?? "")"
             }
         }
@@ -57,6 +59,5 @@ class ViewController: UIViewController, AddCardDelegate {
     
     func addCard(_ card: CardData) {
         self.executeAddCard(card: card)
-        self.presenter = nil
     }
 }

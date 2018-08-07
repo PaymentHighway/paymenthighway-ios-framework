@@ -1,5 +1,5 @@
 //
-//  BackendAdapterTestError.swift
+//  BackendAdapterExampleError.swift
 //  PaymentHighwayTests
 //
 //  Created by Stefano Pironato on 06/07/2018.
@@ -8,7 +8,7 @@
 
 import PaymentHighway
 
-enum BackendAdapterTestError: Error {
+enum BackendAdapterExampleError: Error {
     case networkError(NetworkError)
     case systemError(Error)
 }

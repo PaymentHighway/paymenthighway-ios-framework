@@ -8,8 +8,7 @@
 import Foundation
 
 // MARK: Colors
-
-internal extension UIColor {
+extension UIColor {
 	
 	/// Convenience method for initializing with 0-255 color values
 	/// - parameter red:   The red color value

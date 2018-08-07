@@ -43,17 +43,17 @@
 		3721E30520FE457400D64276 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3721E30420FE457400D64276 /* PresentationController.swift */; };
 		3721E30F20FE4A3200D64276 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3721E30E20FE4A3200D64276 /* Presenter.swift */; };
 		3728D1682100E15C00D04860 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728D1672100E15C00D04860 /* TextField.swift */; };
-		3753237B2109CCF700C0B67C /* BackendAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterTest.swift */; };
-		3753237C2109CCFA00C0B67C /* BackendAdapterTestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterTestError.swift */; };
-		3753237D2109CCFE00C0B67C /* BackendAdapterTestEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240D20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift */; };
+		3753237B2109CCF700C0B67C /* BackendAdapterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */; };
+		3753237C2109CCFA00C0B67C /* BackendAdapterExampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */; };
+		3753237D2109CCFE00C0B67C /* BackendAdapterExampleEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240D20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift */; };
 		37C823F520EE48B0007EDD90 /* TransactionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823F420EE48B0007EDD90 /* TransactionKey.swift */; };
 		37C823FF20EE4D66007EDD90 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823FE20EE4D66007EDD90 /* ApiResult.swift */; };
 		37C8240120EE5410007EDD90 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240020EE5410007EDD90 /* Decoder.swift */; };
 		37C8240320EE5902007EDD90 /* EmptyJsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240220EE5902007EDD90 /* EmptyJsonData.swift */; };
 		37C8240620EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240520EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift */; };
-		37C8240A20EF44D5007EDD90 /* BackendAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterTest.swift */; };
-		37C8240C20EF47AA007EDD90 /* BackendAdapterTestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterTestError.swift */; };
-		37C8240E20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240D20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift */; };
+		37C8240A20EF44D5007EDD90 /* BackendAdapterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */; };
+		37C8240C20EF47AA007EDD90 /* BackendAdapterExampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */; };
+		37C8240E20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240D20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift */; };
 		37D6BB3C20E278D1003800EE /* PaymentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6BB3B20E278D1003800EE /* PaymentContext.swift */; };
 		37D6BB3E20E27915003800EE /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6BB3D20E27915003800EE /* CardBrand.swift */; };
 		37E6138221071B1700618A4F /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6138121071B1700618A4F /* AddCardView.swift */; };
@@ -63,7 +63,6 @@
 		37F49D6B20E4BD5F0062ED1C /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6A20E4BD5F0062ED1C /* CardData.swift */; };
 		37F49D6D20E4BDC20062ED1C /* TransactionId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6C20E4BDC20062ED1C /* TransactionId.swift */; };
 		37F49D7020E4BE880062ED1C /* BackendAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */; };
-		37F49D7220E4BEBD0062ED1C /* CardAddError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7120E4BEBD0062ED1C /* CardAddError.swift */; };
 		37F49D7520E4C27A0062ED1C /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */; };
 		37F49D7A20E569420062ED1C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7920E569420062ED1C /* String+Extensions.swift */; };
 		37F49D8820E5FC070062ED1C /* CardDataSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8720E5FC070062ED1C /* CardDataSpec.swift */; };
@@ -294,9 +293,9 @@
 		37C8240020EE5410007EDD90 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		37C8240220EE5902007EDD90 /* EmptyJsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyJsonData.swift; sourceTree = "<group>"; };
 		37C8240520EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHighwayServiceSpec.swift; sourceTree = "<group>"; };
-		37C8240820EF437A007EDD90 /* BackendAdapterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterTest.swift; sourceTree = "<group>"; };
-		37C8240B20EF47AA007EDD90 /* BackendAdapterTestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterTestError.swift; sourceTree = "<group>"; };
-		37C8240D20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterTestEndpoint.swift; sourceTree = "<group>"; };
+		37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterExample.swift; sourceTree = "<group>"; };
+		37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterExampleError.swift; sourceTree = "<group>"; };
+		37C8240D20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterExampleEndpoint.swift; sourceTree = "<group>"; };
 		37D6BB3B20E278D1003800EE /* PaymentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentContext.swift; sourceTree = "<group>"; };
 		37D6BB3D20E27915003800EE /* CardBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrand.swift; sourceTree = "<group>"; };
 		37E6138121071B1700618A4F /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
@@ -306,7 +305,6 @@
 		37F49D6A20E4BD5F0062ED1C /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
 		37F49D6C20E4BDC20062ED1C /* TransactionId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionId.swift; sourceTree = "<group>"; };
 		37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapter.swift; sourceTree = "<group>"; };
-		37F49D7120E4BEBD0062ED1C /* CardAddError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddError.swift; sourceTree = "<group>"; };
 		37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		37F49D7920E569420062ED1C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		37F49D8720E5FC070062ED1C /* CardDataSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSpec.swift; sourceTree = "<group>"; };
@@ -430,7 +428,6 @@
 			isa = PBXGroup;
 			children = (
 				3718E74421142B99007C577A /* Network */,
-				37C8240720EF42E7007EDD90 /* BackendAdapterTest */,
 				37C8240420EF4055007EDD90 /* Services */,
 				37F49D9520EB5C2D0062ED1C /* Public */,
 				37F49D8920E5FDA90062ED1C /* Models */,
@@ -451,6 +448,7 @@
 		03788D6B1AC988C6007FC30F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				37C8240020EE5410007EDD90 /* Decoder.swift */,
 				0456BD5A1AEE5B5800218197 /* Crypto.swift */,
 				03788D6C1AC988D5007FC30F /* UIColor+Extensions.swift */,
 				03F9E0081E6D5B710059B7F2 /* SecureSigner.swift */,
@@ -474,6 +472,7 @@
 		03C92A3A1ACC26B700422831 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				37C8240720EF42E7007EDD90 /* BackendAdapterExample */,
 				03C92A3D1ACC26B700422831 /* AppDelegate.swift */,
 				03C92A3F1ACC26B700422831 /* ViewController.swift */,
 				03C92A411ACC26B700422831 /* Main.storyboard */,
@@ -662,7 +661,6 @@
 				37D6BB3B20E278D1003800EE /* PaymentContext.swift */,
 				37D6BB3D20E27915003800EE /* CardBrand.swift */,
 				37F49D6520E4BB090062ED1C /* Result.swift */,
-				37F49D7120E4BEBD0062ED1C /* CardAddError.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -694,14 +692,14 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
-		37C8240720EF42E7007EDD90 /* BackendAdapterTest */ = {
+		37C8240720EF42E7007EDD90 /* BackendAdapterExample */ = {
 			isa = PBXGroup;
 			children = (
-				37C8240820EF437A007EDD90 /* BackendAdapterTest.swift */,
-				37C8240B20EF47AA007EDD90 /* BackendAdapterTestError.swift */,
-				37C8240D20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift */,
+				37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */,
+				37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */,
+				37C8240D20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift */,
 			);
-			path = BackendAdapterTest;
+			path = BackendAdapterExample;
 			sourceTree = "<group>";
 		};
 		37F49D6720E4BCE00062ED1C /* Models */ = {
@@ -716,7 +714,6 @@
 				37F49DB320ECCD570062ED1C /* AccountId.swift */,
 				37C823F420EE48B0007EDD90 /* TransactionKey.swift */,
 				37C823FE20EE4D66007EDD90 /* ApiResult.swift */,
-				37C8240020EE5410007EDD90 /* Decoder.swift */,
 				37C8240220EE5902007EDD90 /* EmptyJsonData.swift */,
 			);
 			path = Models;
@@ -1083,7 +1080,6 @@
 				D098A48D1FD16D4200FDD7DB /* ServerType.swift in Sources */,
 				37F49D6B20E4BD5F0062ED1C /* CardData.swift in Sources */,
 				3718E7292111CE40007C577A /* TextFieldType.swift in Sources */,
-				37F49D7220E4BEBD0062ED1C /* CardAddError.swift in Sources */,
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
 				37F49D9920EB6E710062ED1C /* NetworkError.swift in Sources */,
 				37C823F520EE48B0007EDD90 /* TransactionKey.swift in Sources */,
@@ -1096,11 +1092,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F49D8820E5FC070062ED1C /* CardDataSpec.swift in Sources */,
-				37C8240A20EF44D5007EDD90 /* BackendAdapterTest.swift in Sources */,
-				37C8240E20EF47F7007EDD90 /* BackendAdapterTestEndpoint.swift in Sources */,
+				37C8240A20EF44D5007EDD90 /* BackendAdapterExample.swift in Sources */,
+				37C8240E20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift in Sources */,
 				37F49D8B20E60F4B0062ED1C /* ExpirationDateSpec.swift in Sources */,
 				37C8240620EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift in Sources */,
-				37C8240C20EF47AA007EDD90 /* BackendAdapterTestError.swift in Sources */,
+				37C8240C20EF47AA007EDD90 /* BackendAdapterExampleError.swift in Sources */,
 				37F49D8D20E62FB60062ED1C /* PaymentContextSpec.swift in Sources */,
 				37F49D9B20EB963E0062ED1C /* EndpointSpec.swift in Sources */,
 			);
@@ -1112,9 +1108,9 @@
 			files = (
 				03C92A401ACC26B700422831 /* ViewController.swift in Sources */,
 				03C92A3E1ACC26B700422831 /* AppDelegate.swift in Sources */,
-				3753237B2109CCF700C0B67C /* BackendAdapterTest.swift in Sources */,
-				3753237D2109CCFE00C0B67C /* BackendAdapterTestEndpoint.swift in Sources */,
-				3753237C2109CCFA00C0B67C /* BackendAdapterTestError.swift in Sources */,
+				3753237B2109CCF700C0B67C /* BackendAdapterExample.swift in Sources */,
+				3753237D2109CCFE00C0B67C /* BackendAdapterExampleEndpoint.swift in Sources */,
+				3753237C2109CCFA00C0B67C /* BackendAdapterExampleError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

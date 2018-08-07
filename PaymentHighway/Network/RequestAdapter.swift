@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-internal class NetworkingRequestAdapter: RequestAdapter {
+class NetworkingRequestAdapter: RequestAdapter {
     let merchantId: String
     let accountId: String
     

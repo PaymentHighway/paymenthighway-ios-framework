@@ -8,11 +8,18 @@
 
 import Foundation
 
+/// Struct to hold card info
+///
 public struct CardData {
     let pan: String
     let cvc: String
     let expirationDate: ExpirationDate
     
+    /// init
+    ///
+    /// - parameter pan: The card number
+    /// - parameter cvc: The card security code
+    /// - parameter expirationDate: The card expiration date
     init(pan: String, cvc: String, expirationDate: ExpirationDate) {
         self.pan = pan.decimalDigits
         self.cvc = cvc
@@ -45,7 +52,8 @@ public extension CardData {
     /// Validate a given credit card number using the Luhn algorithm
     ///
     /// - parameter   cardNumber: The card number to validate
-    /// - returns: true if the number passes, false if not
+    /// - returns: true if the credit card is valid
+    ///
     static func isValid(cardNumber: String) -> Bool {
         let formattedString = cardNumber.decimalDigits
         guard formattedString.count >= 9 else { return false }
@@ -73,8 +81,9 @@ public extension CardData {
     /// Format a given card number to a neat string
     ///
     /// - parameter   cardNumber: The card number to format
-    /// - parameter   cardType:   The type of the card number
-    /// - returns: The properly spaced credit card number
+    /// - parameter   cardBrand: The card brand
+    /// - returns: The formatted credit card number properly spaced
+    ///
     static func format(cardNumber: String, cardBrand: CardBrand?) -> String {
         let formattedString = cardNumber.decimalDigits.truncate(length: 19, trailing: "")
         
@@ -95,6 +104,12 @@ public extension CardData {
         return matches.joined(separator: " ")
     }
     
+    /// Validate a given security code
+    /// Need the card brand to understand the lenght of the security code
+    ///
+    /// - parameter   securityCode: the security code
+    /// - returns: true secure code is valid
+    ///
     static func isValid(securityCode: String, cardBrand: CardBrand?) -> Bool {
         guard let cardBrand = cardBrand else { return false }
         return  cardBrand.cvcLength.contains(securityCode.decimalDigits.count)

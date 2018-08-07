@@ -6,6 +6,8 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
+/// Specialized text field for collecting credit number.
+///
 open class CardNumberTextField: TextField {
     
     public required init?(coder aDecoder: NSCoder) {

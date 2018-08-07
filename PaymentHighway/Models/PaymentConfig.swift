@@ -8,8 +8,14 @@
 
 import Foundation
 
+/// Payment Highway configuration
+///
 public struct PaymentConfig {
+    
+    /// Merchant identifier
     let merchantId: MerchantId
+
+    /// Account identifier
     let accountId: AccountId
     
     public init(merchantId: MerchantId, accountId: AccountId) {
