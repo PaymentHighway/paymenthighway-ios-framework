@@ -6,9 +6,16 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
+/// Enumeration of the specialized text fields UI elements for card entry
+///
 public enum TextFieldType {
+    /// Card number text field
     case cardNumber
+    
+    /// Expiration date text field
     case expirationDate
+
+    /// Security code text field
     case securityCode
 }
 

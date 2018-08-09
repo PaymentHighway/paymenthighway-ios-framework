@@ -6,38 +6,117 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
+/// Interface to define the look and feel of Payment Highway UI Elements
+///
 public protocol Theme: class {
 
+    /// Animation duration for the placeholder label
+    ///
     var placeholderAnimationDuration: Double { get set }
-    var textFieldRounded: Bool { get set }
-    var placeholderFontScale: CGFloat { get set }
-    var roundedBorderRadius: CGFloat { get set }
     
+    /// If true make the TextField rounded.
+    ///
+    /// - seealso: roundedBorderRadius
+    ///
+    var textFieldRounded: Bool { get set }
+
+    /// Border Radius when the TextField is rounded
+    ///
+    var roundedBorderRadius: CGFloat { get set }
+
+    /// Placeholder label font scale.
+    ///
+    /// Text field when focused or not empty show the placeholder label above the text with a smaller font
+    var placeholderFontScale: CGFloat { get set }
+    
+    /// Border width
+    ///
     var borderWidth: CGFloat { get set }
+    
+    /// Helper to return border radius depending if Text Field is rounded
+    ///
+    /// - seealso: default implementation of borderRadius
     var borderRadius: CGFloat { get }
     
+    /// Helper to return border radius depending if value is valid and active/focused
+    ///
+    /// - parameter isValid: true if TextField data is valid
+    /// - parameter isActive: true if TextField has focus
+    /// - returns: border color
+    /// - seealso: default implementation of borderColor
     func borderColor(isValid: Bool, isActive: Bool) -> UIColor
+    
+    /// Helper to returns placeholder label color depending if value is valid and active/focused
+    ///
+    /// - parameter isValid: true if TextField data is valid
+    /// - parameter isActive: true if TextField has focus
+    /// - returns: placeholder label color
+    /// - seealso: default implementation of placeholderLabelColor
     func placeholderLabelColor(isValid: Bool, isActive: Bool) -> UIColor
+    
+    /// Helper to returns text color depending if value is valid and active/focused
+    ///
+    /// - parameter isValid: true if TextField data is valid
+    /// - parameter isActive: true if TextField has focus
+    /// - returns: text color
+    /// - seealso: default implementation of textColor
     func textColor(isValid: Bool, isActive: Bool) -> UIColor
+    
+    /// Returns Text Field image
+    ///
+    /// - parameter textFieldType: `TextFieldType`
+    /// - parameter height: image height
+    /// - parameter cardBrand: cardBrand if available
+    /// - seealso: TextFieldType and CardBrand
+    /// - seealso: default implementation of textImageView
     func textImageView(textFieldType: TextFieldType, height: CGFloat, cardBrand: CardBrand?) -> UIImageView?
     
+    /// returns which TextFields will have image
+    ///
     var textImages: [TextFieldType] { get set }
-    var textAdjustX: CGFloat { get set }
     
+    /// X padding for Text Field
+    ///
+    var textPaddingX: CGFloat { get set }
+    
+    /// View background color
+    ///
     var primaryBackgroundColor: UIColor { get set }
+    
+    /// Background color for all subviews like TextFields
+    ///
     var secondaryBackgroundColor: UIColor { get set }
 
+    /// Text color for any text field in a view
+    ///
     var primaryForegroundColor: UIColor { get set }
+
+    /// Text color for any text field in a view when is active/focused
+    ///
     var primaryActiveForegroundColor: UIColor { get set }
+    
+    /// Border color for any text field in a view
+    ///
     var secondaryForegroundColor: UIColor { get set }
+
+    /// Border color for any text field in a view when is active/focused
+    ///
     var secondaryActiveForegroundColor: UIColor { get set }
+    
+    /// Text and Border color for any text field in case of error
+    ///
     var errorForegroundColor: UIColor { get set }
+
+    /// Text and Border color for any text field in case of error when is active/focused
+    ///
     var errorActiveForegroundColor: UIColor { get set }
     
+    /// If true show automatically the keyboard with focus in the first text field
+    ///
     var showKeyboard: Bool { get set }
     
-    var addCardPresentationType: PresentationType { get set }
-    
+    /// Font used in the views
+    ///
     var font: UIFont { get set }
 }
 

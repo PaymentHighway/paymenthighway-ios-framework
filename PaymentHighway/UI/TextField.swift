@@ -12,12 +12,15 @@ private let defaultAdjustPlaceholderY: CGFloat = 4
 
 private let imageTag = 8899
 
-open class TextField: UITextField {
+/// TextField is the base class for the specialized text fields UI elements for collecting credit card information.
+///
+open class TextField: UITextField, UITextFieldDelegate {
 
-    lazy var adjustX: CGFloat = theme.textAdjustX
+    lazy var paddingX: CGFloat = theme.textPaddingX
     
     var theme: Theme = DefaultTheme.instance {
         didSet {
+            initializeTheme()
             setNeedsDisplay()
         }
     }
@@ -28,10 +31,17 @@ open class TextField: UITextField {
         }
     }
     
-    weak var validationDelegate: TextFieldValidationDelegate?
+    /// Optional validation delegate
+    ///
+    /// - seealso: `TextFieldValidationDelegate`
+    public weak var validationDelegate: TextFieldValidationDelegate?
 
+    /// Text formatter: default implementation no formatting
+    ///
     open var format: (String) -> String = { (text) in text }
 
+    /// Text validation: default implementation invalid
+    ///
     open var validate: (String) -> Bool = { (_) in return false }
 
     private var placeholderLabel = UILabel()
@@ -57,34 +67,26 @@ open class TextField: UITextField {
         initialize()
     }
     
-    private func initialize() {
-        keyboardType = UIKeyboardType.numberPad
+    private func initializeTheme() {
         font = theme.font
         backgroundColor = theme.secondaryBackgroundColor
+    }
+    
+    private func initialize() {
+        self.delegate = self
+        keyboardType = UIKeyboardType.numberPad
+        initializeTheme()
         addTarget(self, action: #selector(TextField.formatAndValidateTextField(_:)), for: UIControlEvents.editingChanged)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(textFieldDidEndEditing),
-                                               name: .UITextFieldTextDidEndEditing,
-                                               object: self)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(textFieldDidBeginEditing),
-                                               name: .UITextFieldTextDidBeginEditing,
-                                               object: self)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc open func textFieldDidBeginEditing() {
+    open func textFieldDidBeginEditing(_ textField: UITextField) {
         animateViewsForTextEntry()
     }
     
-    @objc open func textFieldDidEndEditing() {
+    open func textFieldDidEndEditing(_ textField: UITextField) {
         animateViewsForTextDisplay()
     }
-    
+
     @objc func formatAndValidateTextField(_ textView: AnyObject) {
         let newText = format(self.text ?? "")
         isValid = validate(newText) 
@@ -115,7 +117,7 @@ open class TextField: UITextField {
     
     open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         if isFirstResponder || text!.isNotEmpty {
-            return CGRect(x: adjustX, y: defaultAdjustPlaceholderY, width: bounds.width, height: placeholderHeight)
+            return CGRect(x: paddingX, y: defaultAdjustPlaceholderY, width: bounds.width, height: placeholderHeight)
         } else {
             return textRect(forBounds: bounds)
         }
@@ -153,9 +155,9 @@ open class TextField: UITextField {
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         if isFirstResponder ||
            (text?.isNotEmpty ?? false) {
-            return  bounds.offsetBy(dx: adjustX, dy: placeholderHeight/2)
+            return  bounds.offsetBy(dx: paddingX, dy: placeholderHeight/2)
         }
-        return  bounds.offsetBy(dx: adjustX, dy: 0)
+        return  bounds.offsetBy(dx: paddingX, dy: 0)
     }
 
     open override func editingRect(forBounds bounds: CGRect) -> CGRect {
@@ -170,11 +172,11 @@ open class TextField: UITextField {
             oldImage.removeFromSuperview()
         }
         if let image = theme.textImageView(textFieldType: textFieldType, height: self.frame.height) {
-            adjustX = self.frame.height
+            paddingX = self.frame.height
             image.tag = imageTag
             addSubview(image)
         } else {
-            adjustX = theme.textAdjustX
+            paddingX = theme.textPaddingX
         }
     }
     

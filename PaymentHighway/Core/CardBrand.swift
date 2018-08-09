@@ -8,22 +8,38 @@
 
 import Foundation
 
+/// Card brands to which a payment card can belong.
+///
 public enum CardBrand {
+    
+    /// Visa card
     case visa
+    
+    /// MasterCard card
     case masterCard
+    
+    /// American Express card
     case americanExpress
+    
+    /// Discover card
     case discover
+    
+    /// JCB card
     case jcb
+    
+    /// Dinners Club card
     case dinersClub
     
-    static var allCases: [CardBrand] {
+    /// return array with all card brands
+    public static var allCases: [CardBrand] {
         return [.visa, .masterCard, .americanExpress, .discover, .jcb, .dinersClub]
     }
 
 }
 
 extension CardBrand {
-    /// Returns the correct NSPredicate for validating a card type
+    
+    /// Returns the correct predicate for validating a card brand
     var matcherPredicate: NSPredicate {
         var regexp: String?
         switch self {
@@ -47,6 +63,7 @@ extension CardBrand {
         return NSPredicate(value: false)
     }
     
+    /// Returns the correct card number length for validating card brand
     var panLength: [Int] {
         switch self {
         case .visa: return [13, 16]
@@ -58,6 +75,7 @@ extension CardBrand {
         }
     }
     
+    /// Returns the correct security code length for validating card brand
     var cvcLength: [Int] {
         switch self {
         case .americanExpress: return [3, 4]
@@ -67,15 +85,15 @@ extension CardBrand {
 }
 
 extension CardBrand: CustomStringConvertible {
-    /// Printable
+    /// Card brand printable
     public var description: String {
         switch self {
         case .visa: return "Visa"
-        case .masterCard: return "MasterCard"
-        case .americanExpress: return "AmericanExpress"
+        case .masterCard: return "Mastercard"
+        case .americanExpress: return "American Express"
         case .discover: return "Discover"
         case .jcb: return "JCB"
-        case .dinersClub: return "DinersClub"
+        case .dinersClub: return "Diners Club"
         }
     }
 }

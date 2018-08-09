@@ -8,16 +8,33 @@
 
 import Foundation
 
+/// `PaymentContext` manage all the functionality around a payment like addCard.
+///
 public class PaymentContext<BackendAdpaterType: BackendAdapter> {
     
     let backendAdapter: BackendAdpaterType
     let phService: PaymentHighwayService
     
+    /// This is required to initialize `PaymentContext`
+    ///
+    /// - parameter config: The configuration of the `PaymentContext`
+    /// - parameter backendAdapter: Provide your BackendAdpater implementation
+    /// - seealso: PaymentConfig
+    /// - seealso: BackendAdapter
+    /// - seealso: Result
+    ///
     public init(config: PaymentConfig, backendAdapter: BackendAdpaterType) {
         self.backendAdapter = backendAdapter
         self.phService = PaymentHighwayService(merchantId: config.merchantId, accountId: config.accountId)
     }
 
+    /// This add a new Payment Card.
+    ///
+    /// - parameter card: Card to be added
+    /// - parameter completion: Callback closure with the result of the operation
+    /// - seealso: CardData
+    /// - seealso: Result
+    ///
     public func addCard(card: CardData,
                         completion: @escaping (Result<BackendAdpaterType.CardAddedType, BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
         backendAdapter.getTransactionId { [weak self] (resultTransactionId) in
@@ -65,7 +82,7 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
                                                                              BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
         switch result {
         case .success(let apiResult):
-            if apiResult.result.code == 100 {
+            if apiResult.result.code == ApiResult.success {
                 backendAdapter.cardAdded(transactionId: transactionId, completion: completion)
             } else {
                 print("Error in tokenizeTransaction \(apiResult.result.code) \(apiResult.result.message)")

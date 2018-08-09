@@ -5,17 +5,7 @@
 //  Copyright (c) 2014年 ZERO. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import CryptoSwift
-
-public enum PaymentHighwayCryptoError: Error {
-    case invalid
-}
-
-public func getRequestId() -> String {
-    return NSUUID().uuidString.lowercased()
-}
 
 /// Returns Optional SecKeyRef from given certificate in DER-format.
 ///

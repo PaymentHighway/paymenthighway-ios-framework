@@ -6,6 +6,8 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
+/// Specialized text field for collecting security code.
+///
 open class SecurityCodeTextField: TextField {
     
     var cardBrand: () -> CardBrand? = { () in return nil }

@@ -8,19 +8,22 @@
 
 import Alamofire
 
-enum PaymentHighwayEndpoint : Endpoint {
-    
-    var baseURL: URL {
-        let url = URL(string: PaymentHighwayProperties.baseURL)
-        precondition(url != nil)
-        return url!
-    }
+enum PaymentHighwayEndpoint {
     
     // (ph)/mobile/(transactionId)/key
     case transactionKey(merchantId: MerchantId, accountId: AccountId, transactionId: TransactionId)
     
     //(ph)/mobile/(transactionId)/tokenize
     case tokenizeTransaction(merchantId: MerchantId, accountId: AccountId, transactionId: TransactionId, parameters: [String: Any])
+}
+
+extension PaymentHighwayEndpoint : Endpoint {
+ 
+    var baseURL: URL {
+        let url = URL(string: PaymentHighwayProperties.baseURL)
+        precondition(url != nil)
+        return url!
+    }
     
     var path: String? {
         switch self {

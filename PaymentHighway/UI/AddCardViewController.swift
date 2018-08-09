@@ -13,32 +13,35 @@ public protocol AddCardDelegate: class {
     func addCard(_ card: CardData)
 }
 
-public class AddCardViewController: UIViewController, TextFieldValidationDelegate, UIPopoverPresentationControllerDelegate {
+/// View controller to manage a credit card entry.
+/// It renders a 'Cancel' and 'Add card' buttons so it must be presented inside a `UINavigationController`.
+///
+/// `Presenter` helper can be used to show the View Controller.
+///
+/// User can fill out the form and on submission card data will be provided to addCard delegate.
+/// User can cancel the form and proper delegate call is performed.
+///
+public class AddCardViewController: UIViewController, TextFieldValidationDelegate {
     
     @IBOutlet var addCardView: AddCardView!
     
     var addCardButton: UIBarButtonItem!
     var cancelButton: UIBarButtonItem!
     
-    var theme: Theme
+    var theme: Theme {
+        didSet {
+            addCardView?.theme = theme
+        }
+    }
     
+    /// The add card delegate
     public weak var addCardDelegate: AddCardDelegate?
     
-    public init(theme: Theme = DefaultTheme.instance) {
+    /// Initializes a new `AddCardViewController` with thecprovided theme.
+    ///
+    public init(theme: Theme) {
         self.theme = theme
         super.init(nibName: "AddCardView", bundle: Bundle(for: type(of: self)))
-        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddCardViewController.cancelPressed(_:)))
-        navigationItem.leftBarButtonItem = cancelButton
-        
-        let addCardButtonTitle = NSLocalizedString("AddCardButtonTitle",
-                                                   bundle: Bundle(for: type(of: self)),
-                                                   comment: "The text shown on the 'add card' button")
-        addCardButton = UIBarButtonItem(title: addCardButtonTitle,
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(AddCardViewController.addCardPressed(_:)))
-        navigationItem.rightBarButtonItem = addCardButton
-        addCardButton.isEnabled = false
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -47,12 +50,23 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddCardViewController.cancelPressed(_:)))
+        navigationItem.leftBarButtonItem = cancelButton
+        
+        handleRightBarButton(spinner: false)
+       
         addCardView.validationDelegate = self
-        addCardView.theme = theme
+        addCardView?.theme = theme
     }
     
-    func isValidDidChange(_ isValid: Bool, _ textField: TextField?) {
+    public func isValidDidChange(_ isValid: Bool, _ textField: TextField?) {
         self.addCardButton.isEnabled = isValid
+    }
+    
+    public func showError(message: String) {
+        enableUserInput(enabled: true)
+        addCardView.showError(message: message)
     }
     
     @objc func cancelPressed(_ sender: UIBarButtonItem) {
@@ -69,12 +83,39 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
         }
     }
     
+    private func enableUserInput(enabled: Bool) {
+        handleRightBarButton(spinner: !enabled)
+        addCardView.isUserInteractionEnabled = enabled
+        cancelButton.isEnabled = enabled
+    }
+    
     private func finish(_ card: CardData? = nil) {
         if let card = card {
+            enableUserInput(enabled: false)
             addCardDelegate?.addCard(card)
         } else {
             addCardDelegate?.cancel()
         }
         addCardView.endEditing(true)
+    }
+    
+    private func handleRightBarButton(spinner: Bool = false) {
+        navigationItem.rightBarButtonItem = nil
+        if spinner == false {
+            let addCardButtonTitle = NSLocalizedString("AddCardButtonTitle",
+                                                       bundle: Bundle(for: type(of: self)),
+                                                       comment: "The text shown on the 'add card' button")
+            addCardButton = UIBarButtonItem(title: addCardButtonTitle,
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(AddCardViewController.addCardPressed(_:)))
+            addCardButton.isEnabled = addCardView.isValid
+        } else {
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            activityIndicator.hidesWhenStopped = false
+            activityIndicator.startAnimating()
+            addCardButton = UIBarButtonItem(customView: activityIndicator)
+        }
+        navigationItem.rightBarButtonItem = addCardButton
     }
 }

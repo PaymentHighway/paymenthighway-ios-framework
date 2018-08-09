@@ -6,7 +6,9 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
-open class ExpirationDateTextField: TextField, UITextFieldDelegate {
+/// Specialized text field for collecting expiration date.
+///
+open class ExpirationDateTextField: TextField {
 
     private var cardExpiryDateDeleting = false
 

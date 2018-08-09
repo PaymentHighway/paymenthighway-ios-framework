@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class Presenter: NSObject, UIViewControllerTransitioningDelegate {
+public class Presenter<ViewControllerType: UIViewController>: NSObject, UIViewControllerTransitioningDelegate {
 
-    let presentationType: PresentationType
-    var presentedViewController: UIViewController?
+    public let presentationType: PresentationType
+    public var presentedViewController: ViewControllerType?
     
     public init(presentationType: PresentationType) {
         self.presentationType = presentationType
@@ -22,11 +22,7 @@ public class Presenter: NSObject, UIViewControllerTransitioningDelegate {
         dismissPresentedController(animated: false)
     }
     
-    public static func addCardPresenter(theme: Theme) -> Presenter {
-        return Presenter(presentationType: theme.addCardPresentationType)
-    }
-    
-    public func present(root: UIViewController, presentedViewController: UIViewController) {
+    public func present(root: UIViewController, presentedViewController: ViewControllerType) {
         
         let navigation = UINavigationController(rootViewController: presentedViewController)
         
