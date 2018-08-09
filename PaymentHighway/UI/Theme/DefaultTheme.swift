@@ -7,12 +7,12 @@
 //
 
 private let defaulBackgroundColor = UIColor.white
-private let defaultPrimaryForegroundColor = UIColor(hexInt: 0xa6b9dc)
-private let defaultPrimaryActiveForegroundColor = UIColor(hexInt: 0x000000)
-private let defaultSecondaryForegroundColor = UIColor(hexInt: 0xa6b9dc)
-private let defaultSecondaryActiveForegroundColor = UIColor(hexInt: 0x636f84)
-private let defaultErrorForegroundColor = UIColor(hexInt: 0xe80f0f)
-private let defaultErrorActiveForegroundColor = UIColor(hexInt: 0x993333)
+private let defaultPrimaryForegroundColor = UIColor(hexInt: 0x000000)
+private let defaultPrimaryActiveForegroundColor = UIColor(hexInt: 0x808080)
+private let defaultSecondaryForegroundColor = defaultPrimaryForegroundColor
+private let defaultSecondaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
+private let defaultErrorForegroundColor = UIColor(hexInt:  0x993333)
+private let defaultErrorActiveForegroundColor = UIColor(hexInt: 0xe80f0f)
 
 private let defaulRoundedBorderRadius: CGFloat = 20
 private let defaultPlaceholderFontScale: CGFloat = 0.7
@@ -22,7 +22,6 @@ private let defaultFontSize: CGFloat = 13.0
 private let defaultTextImages: [TextFieldType] = [.cardNumber, .expirationDate, .securityCode]
 private let defaultTextPaddingX: CGFloat = 20.0
 private let defaultShowKeyboard = false
-private let defaultAddCardPresentationType: PresentationType = .custom(280)
 
 /// Default implementation of the Theme
 ///
@@ -35,78 +34,92 @@ open class DefaultTheme : Theme {
 
     /// Animation duration for the placeholder label
     ///
-    open var placeholderAnimationDuration: Double = defaulPlaceholderAnimationDuration
+    public var placeholderAnimationDuration: Double
     
     /// If true make the TextField rounded.
     ///
     /// - seealso: roundedBorderRadius
     ///
-    open var textFieldRounded: Bool = true
+    public var textFieldRounded: Bool
     
     /// Border Radius when the TextField is rounded
     ///
-    open var roundedBorderRadius: CGFloat = defaulRoundedBorderRadius
+    public var roundedBorderRadius: CGFloat
 
     /// Placeholder label font scale.
     ///
     /// Text field when focused or not empty show the placeholder label above the text with a smaller font
-    open var placeholderFontScale: CGFloat = defaultPlaceholderFontScale
+    public var placeholderFontScale: CGFloat
     
     /// Border width
     ///
-    open var borderWidth: CGFloat = defaulBorderWidth
+    public var borderWidth: CGFloat
     
     /// returns which TextFields will have image
     ///
-    open var textImages: [TextFieldType] = defaultTextImages
+    public var textImages: [TextFieldType]
     
     /// X padding for Text Field
     ///
-    open var textPaddingX: CGFloat = defaultTextPaddingX
+    public var textPaddingX: CGFloat
     
     /// View background color
     ///
-    open var primaryBackgroundColor: UIColor = defaulBackgroundColor
+    public var primaryBackgroundColor: UIColor
     
     /// Background color for all subviews like TextFields
     ///
-    open var secondaryBackgroundColor: UIColor = defaulBackgroundColor
+    public var secondaryBackgroundColor: UIColor
     
     /// Text color for any text field in a view
     ///
-    open var primaryForegroundColor: UIColor = defaultPrimaryForegroundColor
+    public var primaryForegroundColor: UIColor
     
     /// Text color for any text field in a view when is active/focused
     ///
-    open var primaryActiveForegroundColor: UIColor = defaultPrimaryActiveForegroundColor
+    public var primaryActiveForegroundColor: UIColor
     
     /// Border color for any text field in a view
     ///
-    open var secondaryForegroundColor: UIColor = defaultSecondaryForegroundColor
+    public var secondaryForegroundColor: UIColor
     
     /// Border color for any text field in a view when is active/focused
     ///
-    open var secondaryActiveForegroundColor: UIColor = defaultSecondaryActiveForegroundColor
+    public var secondaryActiveForegroundColor: UIColor
     
     /// Text and Border color for any text field in case of error
     ///
-    open var errorForegroundColor: UIColor = defaultErrorForegroundColor
+    public var errorForegroundColor: UIColor
  
     /// Text and Border color for any text field in case of error when is active/focused
     ///
-    open var errorActiveForegroundColor: UIColor = defaultErrorActiveForegroundColor
+    public var errorActiveForegroundColor: UIColor
     
     /// If true show automatically the keyboard with focus in the first text field
     ///
-    open var showKeyboard: Bool = defaultShowKeyboard
-    
-    /// Add Card ViewController `PresentationType`
-    ///
-    open var addCardPresentationType: PresentationType = defaultAddCardPresentationType
+    public var showKeyboard: Bool
 
     /// Font used in the views
     ///
-    open var font: UIFont = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
+    public var font: UIFont
     
-    public init() {}
+    public init() {
+        self.placeholderAnimationDuration = defaulPlaceholderAnimationDuration
+        self.textFieldRounded = true
+        self.roundedBorderRadius = defaulRoundedBorderRadius
+        self.placeholderFontScale = defaultPlaceholderFontScale
+        self.borderWidth = defaulBorderWidth
+        self.textImages = defaultTextImages
+        self.textPaddingX = defaultTextPaddingX
+        self.primaryBackgroundColor = defaulBackgroundColor
+        self.secondaryBackgroundColor = defaulBackgroundColor
+        self.primaryForegroundColor = defaultPrimaryForegroundColor
+        self.primaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
+        self.secondaryForegroundColor = defaultSecondaryForegroundColor
+        self.secondaryActiveForegroundColor = defaultSecondaryActiveForegroundColor
+        self.errorForegroundColor = defaultErrorForegroundColor
+        self.errorActiveForegroundColor = defaultErrorActiveForegroundColor
+        self.showKeyboard = defaultShowKeyboard
+        self.font = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
+    }
 }

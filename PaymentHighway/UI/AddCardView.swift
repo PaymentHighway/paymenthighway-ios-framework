@@ -24,25 +24,30 @@ class AddCardView: UIView, TextFieldValidationDelegate {
     
     var theme: Theme = DefaultTheme.instance {
         didSet {
-            cardNumberTextField.theme = theme
-            expirationDateTextField.theme = theme
-            securityCodeTextField.theme = theme
+            initializeTheme()
             setNeedsDisplay()
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = theme.primaryBackgroundColor
         cardNumberTextField.validationDelegate = self
         expirationDateTextField.validationDelegate = self
         securityCodeTextField.validationDelegate = self
         securityCodeTextField.cardBrand = { [weak self] () in CardData.cardBrand(cardNumber: self?.cardNumberTextField.text ?? "")}
         errorLabel.alpha = 0
+        initializeTheme()
+    }
+    
+    private func initializeTheme() {
+        backgroundColor = theme.primaryBackgroundColor
         errorLabel.font = theme.font
-        // Invert the color of the normal error in the normal ui element
+        // Invert the error color
         errorLabel.backgroundColor = theme.errorForegroundColor
         errorLabel.textColor = theme.secondaryBackgroundColor
+        cardNumberTextField.theme = theme
+        expirationDateTextField.theme = theme
+        securityCodeTextField.theme = theme
     }
     
     override func willMove(toWindow newWindow: UIWindow?) {

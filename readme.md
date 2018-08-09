@@ -1,6 +1,6 @@
 # Overview
 
-This is the Solinor Payment Highway (SPH) iOS SDK.
+This is the Payment Highway iOS SDK.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ Currently installation via Carthage and CocoaPods is supported.
 
 Create a "Cartfile"-file in the root of your project and add a line within:
 ```
-github "solinor/paymenthighway-ios-framework" "v-1.0.6"
+github "paymenthighway/paymenthighway-ios-framework" "v-1.0.6"
 ```
 
 Run the following command to integrate the required frameworks to your project.
@@ -63,8 +63,6 @@ end
 # Use
 
 See the demo project included how to use the framework.
-
-In short, you need to import PaymentHighway, initialize the framework (for instance in `AppDelegate`, check the demo) and present `SPHAddCardViewController` when you want to show SPH dialog.
 
 # Problems
 

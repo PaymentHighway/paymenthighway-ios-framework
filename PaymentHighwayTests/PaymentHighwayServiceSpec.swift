@@ -20,11 +20,11 @@ class PaymentHighwayServiceSpec: QuickSpec {
         let accountId = AccountId(id: "test")
         let cardTest = CardData(pan: "4153013999700024", cvc: "024", expirationDate: ExpirationDate(month: "11", year: "2023")!)
 
-        var backendAdapter: BackendAdapterTest!
+        var backendAdapter: BackendAdapterExample!
         var paymentHighwayService: PaymentHighwayService!
         
         beforeEach {
-            backendAdapter = BackendAdapterTest()
+            backendAdapter = BackendAdapterExample()
             paymentHighwayService = PaymentHighwayService(merchantId: merchantId, accountId: accountId)
         }
         

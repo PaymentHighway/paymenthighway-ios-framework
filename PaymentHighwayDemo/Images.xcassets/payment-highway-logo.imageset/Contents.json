@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "payment-highway-logo.png"
+      "filename" : "payment-highway-logo.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "payment-highway-logo@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "payment-highway-logo@3x.png",
       "scale" : "3x"
     }
   ],

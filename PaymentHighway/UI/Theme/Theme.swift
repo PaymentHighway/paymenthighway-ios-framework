@@ -115,10 +115,6 @@ public protocol Theme: class {
     ///
     var showKeyboard: Bool { get set }
     
-    /// Add Card ViewController `PresentationType`
-    ///
-    var addCardPresentationType: PresentationType { get set }
-    
     /// Font used in the views
     ///
     var font: UIFont { get set }

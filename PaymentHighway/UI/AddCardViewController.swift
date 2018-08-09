@@ -28,15 +28,18 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
     var addCardButton: UIBarButtonItem!
     var cancelButton: UIBarButtonItem!
     
-    var theme: Theme
+    var theme: Theme {
+        didSet {
+            addCardView?.theme = theme
+        }
+    }
     
     /// The add card delegate
     public weak var addCardDelegate: AddCardDelegate?
     
-    /// Initializes a new `AddCardViewController` with the optional provided theme.
-    /// If theme is not passed then eht DefaultTheme is used.
+    /// Initializes a new `AddCardViewController` with thecprovided theme.
     ///
-    public init(theme: Theme = DefaultTheme.instance) {
+    public init(theme: Theme) {
         self.theme = theme
         super.init(nibName: "AddCardView", bundle: Bundle(for: type(of: self)))
     }
@@ -54,7 +57,7 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
         handleRightBarButton(spinner: false)
        
         addCardView.validationDelegate = self
-        addCardView.theme = theme
+        addCardView?.theme = theme
     }
     
     public func isValidDidChange(_ isValid: Bool, _ textField: TextField?) {
@@ -87,8 +90,8 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
     }
     
     private func finish(_ card: CardData? = nil) {
-        enableUserInput(enabled: false)
         if let card = card {
+            enableUserInput(enabled: false)
             addCardDelegate?.addCard(card)
         } else {
             addCardDelegate?.cancel()

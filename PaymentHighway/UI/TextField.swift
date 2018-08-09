@@ -20,6 +20,7 @@ open class TextField: UITextField, UITextFieldDelegate {
     
     var theme: Theme = DefaultTheme.instance {
         didSet {
+            initializeTheme()
             setNeedsDisplay()
         }
     }
@@ -66,11 +67,15 @@ open class TextField: UITextField, UITextFieldDelegate {
         initialize()
     }
     
+    private func initializeTheme() {
+        font = theme.font
+        backgroundColor = theme.secondaryBackgroundColor
+    }
+    
     private func initialize() {
         self.delegate = self
         keyboardType = UIKeyboardType.numberPad
-        font = theme.font
-        backgroundColor = theme.secondaryBackgroundColor
+        initializeTheme()
         addTarget(self, action: #selector(TextField.formatAndValidateTextField(_:)), for: UIControlEvents.editingChanged)
     }
     

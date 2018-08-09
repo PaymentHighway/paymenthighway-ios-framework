@@ -22,10 +22,6 @@ public class Presenter<ViewControllerType: UIViewController>: NSObject, UIViewCo
         dismissPresentedController(animated: false)
     }
     
-    public static func addCardPresenter(theme: Theme) -> Presenter {
-        return Presenter(presentationType: theme.addCardPresentationType)
-    }
-    
     public func present(root: UIViewController, presentedViewController: ViewControllerType) {
         
         let navigation = UINavigationController(rootViewController: presentedViewController)
