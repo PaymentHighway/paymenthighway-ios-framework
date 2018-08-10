@@ -39,7 +39,7 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
     
     /// Initializes a new `AddCardViewController` with thecprovided theme.
     ///
-    public init(theme: Theme) {
+    public init(theme: Theme = DefaultTheme.instance) {
         self.theme = theme
         super.init(nibName: "AddCardView", bundle: Bundle(for: type(of: self)))
     }
@@ -52,12 +52,18 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
         super.viewDidLoad()
         
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddCardViewController.cancelPressed(_:)))
+        cancelButton.setTitleTextAttributes([.foregroundColor: theme.highlightColor], for: .normal)
+        cancelButton.setTitleTextAttributes([.foregroundColor: theme.highlightDisableColor], for: .disabled)
         navigationItem.leftBarButtonItem = cancelButton
         
         handleRightBarButton(spinner: false)
        
         addCardView.validationDelegate = self
         addCardView?.theme = theme
+
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = theme.secondaryBackgroundColor
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.primaryForegroundColor, .font: theme.emphasisFont]
     }
     
     public func isValidDidChange(_ isValid: Bool, _ textField: TextField?) {
@@ -110,6 +116,9 @@ public class AddCardViewController: UIViewController, TextFieldValidationDelegat
                                             target: self,
                                             action: #selector(AddCardViewController.addCardPressed(_:)))
             addCardButton.isEnabled = addCardView.isValid
+            addCardButton.setTitleTextAttributes([.foregroundColor: theme.highlightColor], for: .normal)
+            addCardButton.setTitleTextAttributes([.foregroundColor: theme.highlightDisableColor], for: .disabled)
+
         } else {
             let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             activityIndicator.hidesWhenStopped = false

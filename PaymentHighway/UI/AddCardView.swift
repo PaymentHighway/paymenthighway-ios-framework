@@ -24,7 +24,7 @@ class AddCardView: UIView, TextFieldValidationDelegate {
     
     var theme: Theme = DefaultTheme.instance {
         didSet {
-            initializeTheme()
+            setTheme()
             setNeedsDisplay()
         }
     }
@@ -36,10 +36,10 @@ class AddCardView: UIView, TextFieldValidationDelegate {
         securityCodeTextField.validationDelegate = self
         securityCodeTextField.cardBrand = { [weak self] () in CardData.cardBrand(cardNumber: self?.cardNumberTextField.text ?? "")}
         errorLabel.alpha = 0
-        initializeTheme()
+        setTheme()
     }
     
-    private func initializeTheme() {
+    private func setTheme() {
         backgroundColor = theme.primaryBackgroundColor
         errorLabel.font = theme.font
         // Invert the error color

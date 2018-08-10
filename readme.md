@@ -1,6 +1,6 @@
 # Overview
 
-This is the Payment Highway iOS SDK.
+This is the [Payment Highway](https://www.paymenthighway.io) iOS SDK.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ This is the Payment Highway iOS SDK.
 
 You will need to have a custom mobile application backend that handles session id and token management.
 
-In client side you need to implement the BackendAdapter interface. Payment Highway iOS framework includes `endpoint` helper. See endpoint and a BackendAdapter implemetation example in the BackendAdapterExample forlder.
+See the demo project included for a BackendAdapter example.
 
 ## License
 MIT
