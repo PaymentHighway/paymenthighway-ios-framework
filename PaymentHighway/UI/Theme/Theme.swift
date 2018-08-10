@@ -114,7 +114,19 @@ public protocol Theme: class {
     /// If true show automatically the keyboard with focus in the first text field
     ///
     var showKeyboard: Bool { get set }
+
+    /// Color used in all the important ui elements like buttons
+    ///
+    var highlightColor: UIColor { get set }
+   
+    /// Color used in all the important ui elements like buttons when disabled
+    ///
+    var highlightDisableColor: UIColor { get set }
     
+    /// Font used for all the bold text in the views
+    ///
+    var emphasisFont: UIFont { get set }
+
     /// Font used in the views
     ///
     var font: UIFont { get set }

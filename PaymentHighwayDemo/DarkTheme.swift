@@ -21,5 +21,7 @@ class DarkTheme: DefaultTheme {
         secondaryActiveForegroundColor = primaryActiveForegroundColor
         errorForegroundColor = UIColor(hexInt: 0xa0d7ce)
         errorActiveForegroundColor = UIColor(hexInt: 0x90e2bc)
+        highlightColor = UIColor(hexInt: 0x3366ff)
+        highlightDisableColor = UIColor.darkGray
     }
 }

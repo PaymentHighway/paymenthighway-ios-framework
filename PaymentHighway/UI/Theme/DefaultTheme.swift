@@ -13,6 +13,8 @@ private let defaultSecondaryForegroundColor = defaultPrimaryForegroundColor
 private let defaultSecondaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
 private let defaultErrorForegroundColor = UIColor(hexInt:  0x993333)
 private let defaultErrorActiveForegroundColor = UIColor(hexInt: 0xe80f0f)
+private let defaultHighlightColor = UIColor(hexInt: 0x007AFF)
+private let defaultHighlightDisableColor = UIColor.gray
 
 private let defaulRoundedBorderRadius: CGFloat = 20
 private let defaultPlaceholderFontScale: CGFloat = 0.7
@@ -99,6 +101,18 @@ open class DefaultTheme : Theme {
     ///
     public var showKeyboard: Bool
 
+    /// Color used in all the important ui elements like buttons
+    ///
+    public var highlightColor: UIColor
+    
+    /// Color used in all the important ui elements like buttons when disabled
+    ///
+    public var highlightDisableColor: UIColor
+    
+    /// Font used for all the bold text in the views
+    ///
+    public var emphasisFont: UIFont
+    
     /// Font used in the views
     ///
     public var font: UIFont
@@ -120,6 +134,9 @@ open class DefaultTheme : Theme {
         self.errorForegroundColor = defaultErrorForegroundColor
         self.errorActiveForegroundColor = defaultErrorActiveForegroundColor
         self.showKeyboard = defaultShowKeyboard
+        self.highlightColor = defaultHighlightColor
+        self.highlightDisableColor = defaultHighlightDisableColor
+        self.emphasisFont = UIFont.systemFont(ofSize: defaultFontSize+1, weight: .bold)
         self.font = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
     }
 }

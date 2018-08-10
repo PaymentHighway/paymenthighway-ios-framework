@@ -81,7 +81,6 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.backgroundColor = theme.primaryBackgroundColor
     }
 
     // MARK: UITableViewDelegate
@@ -101,18 +100,18 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
             cell.textLabel?.text = rowItem.title
             cell.accessoryType = .disclosureIndicator
             cell.detailTextLabel?.text = rowItem.details
-            cell.backgroundColor = theme.secondaryBackgroundColor
-            cell.textLabel?.textColor = theme.primaryForegroundColor
         }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cellItem = MainRowItem(rawValue: indexPath.row) else { return }
-        switch cellItem {
-        case .addCardView: presentAddCardViewController(presentationType: presentationType)
-        case .settings: presentSettingsViewController()
-        }
+        DispatchQueue.main.async(execute: {
+            switch cellItem {
+            case .addCardView: self.presentAddCardViewController(presentationType: self.presentationType)
+            case .settings: self.presentSettingsViewController()
+            }
+        })
     }
     
     // MARK: AddCardDelegate
@@ -127,7 +126,7 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
         self.executeAddCard(card: card)
     }
 
-    // MARK: AddCardDelegate
+    // MARK: SettingsDelegate
     
     func presentationTypeDidChange(presentationType: PresentationType) {
         self.presentationType = presentationType
@@ -143,10 +142,10 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
     private func presentAddCardViewController(presentationType: PresentationType) {
         guard presenter == nil else { return }
         
-        let vcAddCard = AddCardViewController(theme: theme)
-        vcAddCard.addCardDelegate = self
+        let addCardViewController = AddCardViewController(theme: theme)
+        addCardViewController.addCardDelegate = self
         presenter = Presenter(presentationType: presentationType)
-        presenter!.present(root: self, presentedViewController: vcAddCard)
+        presenter!.present(presentingViewController: self, presentedViewController: addCardViewController)
     }
     
     private func presentSettingsViewController() {

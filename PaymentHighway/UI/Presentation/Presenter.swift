@@ -22,7 +22,7 @@ public class Presenter<ViewControllerType: UIViewController>: NSObject, UIViewCo
         dismissPresentedController(animated: false)
     }
     
-    public func present(root: UIViewController, presentedViewController: ViewControllerType) {
+    public func present(presentingViewController: UIViewController, presentedViewController: ViewControllerType) {
         
         let navigation = UINavigationController(rootViewController: presentedViewController)
         
@@ -30,7 +30,7 @@ public class Presenter<ViewControllerType: UIViewController>: NSObject, UIViewCo
         navigation.transitioningDelegate = self
         dismissPresentedController(animated: false)
         self.presentedViewController = presentedViewController
-        root.present(navigation, animated: true)
+        presentingViewController.present(navigation, animated: true)
     }
     
     public func dismissPresentedController(animated: Bool, completion: (() -> Void)? = nil) {
