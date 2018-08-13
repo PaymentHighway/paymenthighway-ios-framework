@@ -2,8 +2,7 @@
 //  RequestAdapter.swift
 //  PaymentHighway
 //
-//  Created by Nico Hämäläinen on 06/03/2017.
-//  Copyright © 2017 Payment Highway Oy. All rights reserved.
+//  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
 import Foundation

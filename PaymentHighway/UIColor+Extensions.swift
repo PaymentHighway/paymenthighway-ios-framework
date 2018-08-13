@@ -2,8 +2,7 @@
 //  Extensions.swift
 //  PaymentHighway
 //
-//  Created by Nico Hämäläinen on 30/03/15.
-//  Copyright (c) 2015 Payment Highway Oy. All rights reserved.
+//  Copyright (c) 2018 Payment Highway Oy. All rights reserved.
 //
 import Foundation
 
