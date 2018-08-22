@@ -380,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				03575C721E60318B00C77AE4 /* Carthage */,
-				03C92A711ACC2DB000422831 /* Library */,
+				03C92A711ACC2DB000422831 /* Sdk */,
 				03C92A3A1ACC26B700422831 /* Demo */,
 				03788D761ACAA53E007FC30F /* Frameworks */,
 				03788D461AC978DD007FC30F /* Products */,
@@ -494,13 +494,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		03C92A711ACC2DB000422831 /* Library */ = {
+		03C92A711ACC2DB000422831 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
 				03788D471AC978DD007FC30F /* PaymentHighway */,
 				03788D541AC978DD007FC30F /* PaymentHighwayTests */,
 			);
-			name = Library;
+			name = Sdk;
 			sourceTree = "<group>";
 		};
 		03F9E0631E6DA70F0059B7F2 /* Network */ = {

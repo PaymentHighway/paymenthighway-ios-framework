@@ -71,7 +71,7 @@ class BackendAdapterMock: BackendAdapter {
         }
     }
     
-    func systemError(error: Error) -> ErrorTest {
+    func mapError(error: Error) -> ErrorTest {
         return .systemError(error)
     }
 

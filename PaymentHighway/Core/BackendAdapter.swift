@@ -19,9 +19,9 @@ public protocol BackendAdapter {
     /// Associated type for the backend adpater error
     associatedtype BackendAdapterErrorType : Error
     
-    /// Convert a domain/system error in a own backend adapter error
-    func systemError(error: Error) -> BackendAdapterErrorType
-
+    /// Map a domain/system error in a backend adapter error
+    func mapError(error: Error) -> BackendAdapterErrorType
+    
     /// Get the transaction id
     ///
     /// Customer need to implement REST API to get from own backend a transaction id
