@@ -5,17 +5,7 @@
 //  Copyright (c) 2014年 ZERO. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import CryptoSwift
-
-public enum PaymentHighwayCryptoError: Error {
-    case invalid
-}
-
-public func getRequestId() -> String {
-    return NSUUID().uuidString.lowercased()
-}
 
 /// Returns Optional SecKeyRef from given certificate in DER-format.
 ///
@@ -73,13 +63,14 @@ public func encryptWithRsaAes(_ data: String, certificateBase64Der: String) -> (
     
     do {
         // Create AES encryptor
-        let aes = try AES(key: keyAes, blockMode: .CBC(iv: iv), padding: .pkcs7)
+        let aes = try AES(key: keyAes, blockMode: CBC(iv: iv), padding: .pkcs7)
 
         // Encrypt given data
         let encryptedData = try aes.encrypt(Array(data.utf8))
 
         // Create encryption key
-        guard let publicKey = loadDER(Data(base64Encoded: certificateBase64Der, options: [])!) else {
+        guard let certificateData = Data(base64Encoded: certificateBase64Der),
+              let publicKey = loadDER(certificateData) else {
             return nil
         }
         
