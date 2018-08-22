@@ -21,17 +21,9 @@ class PaymentHighwayService {
         PaymentHighwayEndpoint.transactionKey(merchantId: merchantId,
                                               accountId: accountId,
                                               transactionId: transactionId)
-                              .getJson {(result: Result<TransactionKey, NetworkError>) in
-            switch result {
-            case .success(let transactionKey):
-                completion(.success(transactionKey))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+                               .getJson(completion: completion)
     }
     
-    // (sph)/mobile/(transactionId)/tokenize
     func tokenizeTransaction(
         transactionId: TransactionId,
         cardData: CardData,
@@ -62,14 +54,6 @@ class PaymentHighwayService {
         ]
         
         PaymentHighwayEndpoint.tokenizeTransaction(merchantId: merchantId, accountId: accountId, transactionId: transactionId, parameters: parameters)
-                              .post {(result: Result<ApiResult, NetworkError>) in
-            switch result {
-            case .success(let apiResult):
-                completion(.success(apiResult))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-        
+                              .post(completion: completion)
     }
 }

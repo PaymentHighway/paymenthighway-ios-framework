@@ -174,7 +174,6 @@ class SettingsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("tableView \(indexPath.section)")
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         if let sectionItem = SettingsSection(rawValue: indexPath.section),
            sectionItem.rows.count > indexPath.row,

@@ -37,61 +37,55 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
     public func addCard(card: CardData,
                         completion: @escaping (Result<BackendAdpaterType.CardAddedType, BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
         backendAdapter.getTransactionId { [weak self] (resultTransactionId) in
-            self?.getTransactionIdCompletionHandler(result: resultTransactionId, card: card, completion: completion)
-        }
-    }
-    
-    private func getTransactionIdCompletionHandler(result: Result<TransactionId, BackendAdpaterType.BackendAdapterErrorType>,
-                                                   card: CardData,
-                                                   completion: @escaping (Result<BackendAdpaterType.CardAddedType,
-                                                                          BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
-        switch result {
-        case .success(let transactionId):
-            phService.transactionKey(transactionId: transactionId) { [weak self] (resultTransactionKey) in
-                self?.transactionKeyCompletionHandler(result: resultTransactionKey, transactionId: transactionId, card: card, completion: completion)
+            switch resultTransactionId {
+            case .success(let transactionId):
+                self?.getTransactionIdHandler(transactionId: transactionId, card: card, completion: completion)
+            case .failure(let transactionIdError):
+                completion(.failure(transactionIdError))
             }
-        case .failure(let transactionIdError):
-            completion(.failure(transactionIdError))
         }
     }
     
-    private func transactionKeyCompletionHandler(result: Result<TransactionKey, NetworkError>,
-                                                 transactionId: TransactionId,
-                                                 card: CardData,
-                                                 completion: @escaping (Result<BackendAdpaterType.CardAddedType,
-                                                                        BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
-        switch result {
-        case .success(let transactionKey):
-            // call phservice.tokenizeTransaction
-            phService.tokenizeTransaction(transactionId: transactionId,
-                                          cardData: card,
-                                          transactionKey: transactionKey) { [weak self] (apiResult) in
-                self?.tokenizeTransactionCompletionHandler(result: apiResult, transactionId: transactionId, completion: completion)
+    private func getTransactionIdHandler(transactionId: TransactionId,
+                                         card: CardData,
+                                         completion: @escaping (Result<BackendAdpaterType.CardAddedType,
+                                                                       BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
+        phService.transactionKey(transactionId: transactionId) { [weak self] (resultTransactionKey) in
+            guard let strongSelf = self else { return }
+            switch resultTransactionKey {
+            case .success(let transactionKey):
+                strongSelf.transactionKeyHandler(transactionKey: transactionKey, transactionId: transactionId, card: card, completion: completion)
+            case .failure(let transactionKeyError):
+                completion(.failure(strongSelf.backendAdapter.mapError(error: transactionKeyError)))
             }
-            
-        case .failure(let transactionKeyError):
-            let resultError = backendAdapter.systemError(error: transactionKeyError)
-            completion(.failure(resultError))
         }
     }
     
-    private func tokenizeTransactionCompletionHandler(result: Result<ApiResult, NetworkError>,
-                                                      transactionId: TransactionId,
-                                                      completion: @escaping (Result<BackendAdpaterType.CardAddedType,
-                                                                             BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
-        switch result {
-        case .success(let apiResult):
-            if apiResult.result.code == ApiResult.success {
-                backendAdapter.cardAdded(transactionId: transactionId, completion: completion)
-            } else {
-                print("Error in tokenizeTransaction \(apiResult.result.code) \(apiResult.result.message)")
-                let resultError = backendAdapter.systemError(error: NetworkError.internalError(apiResult.result.code, apiResult.result.message))
+    private func transactionKeyHandler(transactionKey: TransactionKey,
+                                       transactionId: TransactionId,
+                                       card: CardData,
+                                       completion: @escaping (Result<BackendAdpaterType.CardAddedType,
+                                                                     BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
+
+        phService.tokenizeTransaction(transactionId: transactionId,
+                                      cardData: card,
+                                      transactionKey: transactionKey) { [weak self] (resultApiResult) in
+            guard let strongSelf = self else { return }
+
+            switch resultApiResult {
+            case .success(let apiResult):
+                if apiResult.result.code == ApiResult.success {
+                    strongSelf.backendAdapter.cardAdded(transactionId: transactionId, completion: completion)
+                } else {
+                    print("Error in tokenizeTransaction \(apiResult.result.code) \(apiResult.result.message)")
+                    let resultError = strongSelf.backendAdapter.mapError(error: NetworkError.internalError(apiResult.result.code, apiResult.result.message))
+                    completion(.failure(resultError))
+                }
+            case .failure(let tokenizeTransactionError):
+                let resultError = strongSelf.backendAdapter.mapError(error: tokenizeTransactionError)
                 completion(.failure(resultError))
             }
-        case .failure(let tokenizeTransactionError):
-            let resultError = backendAdapter.systemError(error: tokenizeTransactionError)
-            completion(.failure(resultError))
-        }
-    }
 
+        }
+    }    
 }

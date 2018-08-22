@@ -36,7 +36,7 @@ class BackendAdapterExample: BackendAdapter {
         }
     }
     
-    func systemError(error: Error) -> BackendAdapterExampleError {
+    func mapError(error: Error) -> BackendAdapterExampleError {
         return .systemError(error)
     }
     
