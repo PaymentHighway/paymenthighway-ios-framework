@@ -33,7 +33,7 @@ class AddCardView: UIView, TextFieldValidationDelegate {
         cardNumberTextField.validationDelegate = self
         expirationDateTextField.validationDelegate = self
         securityCodeTextField.validationDelegate = self
-        securityCodeTextField.cardBrand = { [weak self] () in CardData.cardBrand(cardNumber: self?.cardNumberTextField.text ?? "")}
+        securityCodeTextField.cardBrand = { [weak self] () in CardBrand.from(cardNumber: self?.cardNumberTextField.text ?? "")}
         errorLabel.alpha = 0
         setTheme()
     }
