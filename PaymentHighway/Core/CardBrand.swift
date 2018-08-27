@@ -39,43 +39,22 @@ public enum CardBrand {
 // swiftlint:disable force_try
 extension CardBrand {
     
-    /// Returns the correct predicate for validating a card brand
-    var matcherPredicate: NSPredicate {
-        var regexp: String
-        switch self {
-        case .visa:
-            regexp = "^4[0-9]{6,}$"
-        case .mastercard:
-            regexp = "^5[1-5][0-9]{5,}$"
-        case .americanExpress:
-            regexp = "^3[47][0-9]{5,}$"
-        case .discover:
-            regexp = "^6(?:011|5[0-9]{2})[0-9]{3,}$"
-        case .jcb:
-            regexp = "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$"
-        case .dinersClub:
-            regexp = "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$"
-        }
-        
-        return NSPredicate(format: "SELF MATCHES %@", regexp)
-    }
-    
-    /// Returns the pattern for recognise a card brand
+    /// Returns the pattern to recognise a card brand
     fileprivate var pattern: NSRegularExpression {
         var regexp: String
         switch self {
         case .visa:
             regexp = "^4[0-9]"
         case .mastercard:
-            regexp = "^5[1-5][0-9]"
+            regexp = "^(?:5[1-5]|2[2-7])"
         case .americanExpress:
-            regexp = "^3[47][0-9]"
+            regexp = "^3[47]"
         case .discover:
-            regexp = "^6(?:011|5[0-9]{2})"
+            regexp = "^(?:6[045]|622)"
         case .jcb:
-            regexp = "^(?:2131|1800|35[0-9]{3})"
+            regexp = "^35"
         case .dinersClub:
-            regexp = "^3(?:0[0-5]|[68][0-9])"
+            regexp = "^3[0689]"
         }
         return try! NSRegularExpression(pattern: regexp)
     }
@@ -91,11 +70,7 @@ extension CardBrand {
     }
     
     func isValid(cardNumber: String) -> Bool {
-        let cardNumberDigits = cardNumber.decimalDigits
-        if self.panLength.contains(cardNumberDigits.count) {
-            return self.matcherPredicate.evaluate(with: cardNumberDigits)
-        }
-        return false
+        return self.panLength.contains(cardNumber.count)
     }
     
     /// Returns the correct card number length for validating card brand
