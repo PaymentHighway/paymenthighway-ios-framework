@@ -93,39 +93,27 @@ extension ExpirationDate {
     ///
     public static func format(expirationDate: String, deleting: Bool = false) -> String {
         var onlyDigitsExpirationDate = expirationDate.decimalDigits
-        let length = onlyDigitsExpirationDate.count
-        
-        var text = ""
-        
-        switch length {
+        switch onlyDigitsExpirationDate.count {
         case 1:
             if 2...9 ~= Int(onlyDigitsExpirationDate)! {
-                text = "0\(onlyDigitsExpirationDate)/"
-            } else {
-                text = onlyDigitsExpirationDate
+                onlyDigitsExpirationDate = "0\(onlyDigitsExpirationDate)/"
             }
         case 2:
-            if (deleting && expirationDate.count == 2) ||
-                (Int(onlyDigitsExpirationDate)! < 1 || Int(onlyDigitsExpirationDate)! > 12) {
+            let digitsAsInt = Int(onlyDigitsExpirationDate)!
+            if (deleting && expirationDate.count == 2) || (digitsAsInt < 1 || digitsAsInt > 12) {
                 onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
-                text = onlyDigitsExpirationDate
             } else {
-                text = "\(onlyDigitsExpirationDate)/"
+                onlyDigitsExpirationDate = "\(onlyDigitsExpirationDate)/"
             }
-        case 3:
-            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
-            text = onlyDigitsExpirationDate
-        case 4:
-            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
-            text = onlyDigitsExpirationDate
         case 5:
             onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
+            fallthrough
+        case 3, 4:
             onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
-            text = onlyDigitsExpirationDate
         default:
-            text = ""
+            onlyDigitsExpirationDate = ""
         }
         
-        return text
+        return onlyDigitsExpirationDate
     }
 }

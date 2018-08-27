@@ -3,6 +3,7 @@ disabled_rules:
     - colon   
     - large_tuple        
     - function_parameter_count
+    - fallthrough
     
 excluded:
   - Carthage

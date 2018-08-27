@@ -28,26 +28,6 @@ public struct CardData {
 
 public extension CardData {
     
-    /// Recognize the card brand of a credit card number
-    ///
-    /// - parameter cardNumber: The card number string
-    static func cardBrand(cardNumber: String) -> CardBrand? {
-        let cardNumberDigits = cardNumber.decimalDigits
-        let valid = isValid(cardNumber: cardNumberDigits)
-        guard valid else { return nil }        
-        var foundCardBrand: CardBrand? = nil
-        for cardBrand in CardBrand.allCases {
-            if cardBrand.matcherPredicate.evaluate(with: cardNumberDigits) == true {
-                if cardBrand.panLength.contains(cardNumberDigits.count) {
-                    foundCardBrand = cardBrand
-                    break
-                }
-            }
-        }
-        
-        return foundCardBrand
-    }
-    
     /// Validate a given credit card number using the Luhn algorithm
     ///
     /// - parameter   cardNumber: The card number to validate
@@ -55,51 +35,33 @@ public extension CardData {
     ///
     static func isValid(cardNumber: String) -> Bool {
         let formattedString = cardNumber.decimalDigits
-        guard formattedString.count >= 9 else { return false }
         
-        let asciiOffset: UInt8 = 48
-        let digits = Array(Array(formattedString.utf8).reversed()).map {$0 - asciiOffset}
-        
-        let convert: (UInt8) -> (UInt8) = {
-            let num = $0 * 2
-            return num > 9 ? num - 9 : num
-        }
-        
-        var sum: UInt8 = 0
-        for (index, digit) in digits.enumerated() {
-            if index & 1 == 1 {
-                sum += convert(digit)
-            } else {
-                sum += digit
+        guard let cardBrand = CardBrand.from(cardNumber: formattedString),
+              cardBrand.isValid(cardNumber: formattedString) else { return false }
+
+        var sum = 0
+        let reversedCharacters = formattedString.reversed().map { String($0) }
+        for (idx, element) in reversedCharacters.enumerated() {
+            guard let digit = Int(element) else { return false }
+            switch ((idx % 2 == 1), digit) {
+            case (true, 9): sum += 9
+            case (true, 0...8): sum += (digit * 2) % 9
+            default: sum += digit
             }
         }
-        
         return sum % 10 == 0
     }
     
     /// Format a given card number to a neat string
     ///
     /// - parameter   cardNumber: The card number to format
-    /// - parameter   cardBrand: The card brand
     /// - returns: The formatted credit card number properly spaced
     ///
-    static func format(cardNumber: String, cardBrand: CardBrand?) -> String {
+    static func format(cardNumber: String) -> String {
         let formattedString = cardNumber.decimalDigits.truncate(length: 19, trailing: "")
         
-        // AMEX uses their own weird format
-        var regexpString = "(\\d{1,4})"
-        if let cardBrand = cardBrand,
-           cardBrand == .americanExpress {
-            regexpString = "(\\d{1,4})(\\d{1,6})?(\\d{1,5})?"
-        }
-        
-        // Create and check regexp matches
-        // let regexp  = try! NSRegularExpression(pattern: regexpString, options: [])
-        // var groups  = [String]()
-        
-        let matches = formattedString.matchesForRegex(regexpString)
-        
-        // Glue them together
+        guard let cardBrand = CardBrand.from(cardNumber: formattedString) else { return formattedString }
+        let matches = formattedString.matchesForRegex(cardBrand.formatRegExp)
         return matches.joined(separator: " ")
     }
     
@@ -116,15 +78,13 @@ public extension CardData {
     
     static func format(securityCode: String) -> String {
         var onlyDigitsSecurityCode = securityCode.decimalDigits
-        var text = ""
         switch onlyDigitsSecurityCode.count {
         case 0...4 :
-            text = onlyDigitsSecurityCode
+            break
         case 5 :
             onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.index(before: onlyDigitsSecurityCode.endIndex))
-            text = onlyDigitsSecurityCode
-        default : text = ""
+        default : onlyDigitsSecurityCode = ""
         }
-        return text
+        return onlyDigitsSecurityCode
     }
 }

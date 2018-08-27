@@ -15,11 +15,11 @@ let validCardBrands: [CardBrand: [String]] = [
     .dinersClub:      ["30569309025904", "38520000023237"],
     .discover:        ["6011111111111117", "6011000990139424"],
     .jcb:             ["3530111333300000", "3566002020360505"],
-    .masterCard:      ["5555555555554444", "5105105105105100"],
+    .mastercard:      ["5555555555554444", "5105105105105100"],
     .visa:            ["4444333322221111", "4012888888881881", "4222222222222"]
 ]
 
-let invalidCardBrands = ["123", "0935835", "82378493", "000000", "9944333322221111"]
+let invalidCardBrands = ["378282246310006", "371449635398432", "305693090259043", "371449635398432", "4242424242424240", "9944333322221111"]
 
 let securityCodeFormats = [
     "" : "",
@@ -33,6 +33,7 @@ let securityCodeFormats = [
     " 1 43 / 2k k nkm" : "1432"
 ]
 
+// swiftlint:disable function_body_length
 class CardDataSpec: QuickSpec {
     
     override func spec() {
@@ -55,7 +56,8 @@ class CardDataSpec: QuickSpec {
             it("should recognize basic card types from their numbers") {
                 for (cardBrand, cardNumbers) in validCardBrands {
                     for cardNumber in cardNumbers {
-                        if let foundCardBrand = CardData.cardBrand(cardNumber: cardNumber) {
+                        // Should recognise brand with just a first part of the card number (5 for jcb)22
+                        if let foundCardBrand = CardBrand.from(cardNumber: String(cardNumber.prefix(5))) {
                             expect(foundCardBrand).to(equal(cardBrand))
                         } else {
                             fail("Card brand \(cardBrand) not found")
@@ -66,7 +68,7 @@ class CardDataSpec: QuickSpec {
             
             it("shouldn't recognize invalid card numbers as any type") {
                 for cardNumber in invalidCardBrands {
-                    expect(CardData.cardBrand(cardNumber: cardNumber)).to(beNil())
+                    expect(CardData.isValid(cardNumber: cardNumber)).to(beFalse())
                 }
             }
         }
@@ -93,14 +95,19 @@ class CardDataSpec: QuickSpec {
         }
         
         describe("Card Formatting") {
-            it("should format cards properly with general rule") {
-                let actualCardNumber = CardData.format(cardNumber: "5555555555554444", cardBrand: .visa)
+            it("should format VISA") {
+                let actualCardNumber = CardData.format(cardNumber: "5555555555554444")
                 expect(actualCardNumber).to(equal("5555 5555 5555 4444"))
             }
-            it("should format AMEX using special rule") {
-                let actualCardNumber = CardData.format(cardNumber: "378282246310005", cardBrand: .americanExpress)
+            it("should format AMEX") {
+                let actualCardNumber = CardData.format(cardNumber: "378282246310005")
                 expect(actualCardNumber).to(equal("3782 822463 10005"))
             }
+            it("should format DINNER") {
+                let actualCardNumber = CardData.format(cardNumber: "30569309025904")
+                expect(actualCardNumber).to(equal("3056 930902 5904"))
+            }
+            
         }
         
         // MARK: Security code formatting
