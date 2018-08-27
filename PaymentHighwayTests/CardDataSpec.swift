@@ -56,8 +56,8 @@ class CardDataSpec: QuickSpec {
             it("should recognize basic card types from their numbers") {
                 for (cardBrand, cardNumbers) in validCardBrands {
                     for cardNumber in cardNumbers {
-                        // Should recognise brand with just a first part of the card number (5 for jcb)22
-                        if let foundCardBrand = CardBrand.from(cardNumber: String(cardNumber.prefix(5))) {
+                        // Should recognise brand with just 2 card digits
+                        if let foundCardBrand = CardBrand.from(cardNumber: String(cardNumber.prefix(2))) {
                             expect(foundCardBrand).to(equal(cardBrand))
                         } else {
                             fail("Card brand \(cardBrand) not found")

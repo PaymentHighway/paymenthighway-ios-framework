@@ -427,9 +427,9 @@
 		03788D541AC978DD007FC30F /* PaymentHighwayTests */ = {
 			isa = PBXGroup;
 			children = (
+				37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */,
 				3718E74421142B99007C577A /* Network */,
 				37C8240420EF4055007EDD90 /* Services */,
-				37F49D9520EB5C2D0062ED1C /* Public */,
 				37F49D8920E5FDA90062ED1C /* Models */,
 				03788D551AC978DD007FC30F /* Supporting Files */,
 			);
@@ -755,14 +755,6 @@
 				37F49D9320EA57D70062ED1C /* PaymentHighway_staging.plist */,
 			);
 			name = Properties;
-			sourceTree = "<group>";
-		};
-		37F49D9520EB5C2D0062ED1C /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */,
-			);
-			name = Public;
 			sourceTree = "<group>";
 		};
 		37F49DAC20ECC3CF0062ED1C /* Services */ = {
