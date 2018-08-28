@@ -37,7 +37,7 @@ public extension CardData {
         let formattedString = cardNumber.decimalDigits
         
         guard let cardBrand = CardBrand.from(cardNumber: formattedString),
-              cardBrand.isValid(cardNumber: formattedString) else { return false }
+              cardBrand.panLength.contains(formattedString.count) else { return false }
 
         var sum = 0
         let reversedCharacters = formattedString.reversed().map { String($0) }
@@ -58,9 +58,9 @@ public extension CardData {
     /// - returns: The formatted credit card number properly spaced
     ///
     static func format(cardNumber: String) -> String {
-        let formattedString = cardNumber.decimalDigits.truncate(length: 19, trailing: "")
-        
-        guard let cardBrand = CardBrand.from(cardNumber: formattedString) else { return formattedString }
+        guard let cardBrand = CardBrand.from(cardNumber: cardNumber) else { return cardNumber }
+        let maxLen = cardBrand.panLength.max()!
+        let formattedString = cardNumber.decimalDigits.truncate(length: maxLen, trailing: "")
         let matches = formattedString.matchesForRegex(cardBrand.formatRegExp)
         return matches.joined(separator: " ")
     }

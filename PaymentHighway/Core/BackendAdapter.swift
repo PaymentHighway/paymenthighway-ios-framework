@@ -30,8 +30,8 @@ public protocol BackendAdapter {
 
     /// Card added
     ///
-    /// Customer need to implement REST API to notify to own backend that a card has been added.
+    /// Customer need to implement REST API to notify to own backend that operation to add card is completed.
     /// Backend might return data in order to perform a payment like a transaction token
     /// - note: Endpoint helper can be used for the REST api implementation
-    func cardAdded(transactionId: TransactionId, completion: @escaping (Result<CardAddedType, BackendAdapterErrorType>) -> Void)
+    func addCardCompleted(transactionId: TransactionId, completion: @escaping (Result<CardAddedType, BackendAdapterErrorType>) -> Void)
 }

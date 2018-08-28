@@ -69,10 +69,6 @@ extension CardBrand {
         return result.isEmpty ? nil : result[0]
     }
     
-    func isValid(cardNumber: String) -> Bool {
-        return self.panLength.contains(cardNumber.count)
-    }
-    
     /// Returns the correct card number length for validating card brand
     var panLength: [Int] {
         switch self {

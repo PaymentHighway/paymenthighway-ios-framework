@@ -95,7 +95,7 @@ class PaymentHighwayServiceSpec: QuickSpec {
                                                                           transactionKey: transactionKey) { (tokenizeTransactionResult) in
                                     if case .success(let apiResult) = tokenizeTransactionResult {
                                         if apiResult.result.code == 100 {
-                                            backendAdapter.cardAdded(transactionId: transactionId) { (cardAddedResult) in
+                                            backendAdapter.addCardCompleted(transactionId: transactionId) { (cardAddedResult) in
                                                 if case .success(let transactionToken) = cardAddedResult {
                                                     receivedTransactionToken = transactionToken
                                                 }

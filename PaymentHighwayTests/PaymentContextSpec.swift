@@ -65,7 +65,7 @@ class BackendAdapterMock: BackendAdapter {
         }
     }
     
-    func cardAdded(transactionId: TransactionId, completion: @escaping (Result<String, ErrorTest>) -> Void) {
+    func addCardCompleted(transactionId: TransactionId, completion: @escaping (Result<String, ErrorTest>) -> Void) {
         timer(withTimeInterval: 1) { () in
             completion(self.cardAddedResult)
         }
