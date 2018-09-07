@@ -35,7 +35,7 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
     /// - seealso: Result
     ///
     public func addCard(card: CardData,
-                        completion: @escaping (Result<BackendAdpaterType.CardAddedType, BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
+                        completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType, BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
         backendAdapter.getTransactionId { [weak self] (resultTransactionId) in
             switch resultTransactionId {
             case .success(let transactionId):
@@ -48,7 +48,7 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
     
     private func getTransactionIdHandler(transactionId: TransactionId,
                                          card: CardData,
-                                         completion: @escaping (Result<BackendAdpaterType.CardAddedType,
+                                         completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
                                                                        BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
         phService.transactionKey(transactionId: transactionId) { [weak self] (resultTransactionKey) in
             guard let strongSelf = self else { return }
@@ -64,7 +64,7 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
     private func transactionKeyHandler(transactionKey: TransactionKey,
                                        transactionId: TransactionId,
                                        card: CardData,
-                                       completion: @escaping (Result<BackendAdpaterType.CardAddedType,
+                                       completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
                                                                      BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
 
         phService.tokenizeTransaction(transactionId: transactionId,

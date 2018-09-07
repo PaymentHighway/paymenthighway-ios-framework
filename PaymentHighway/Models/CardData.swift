@@ -34,13 +34,13 @@ public extension CardData {
     /// - returns: true if the credit card is valid
     ///
     static func isValid(cardNumber: String) -> Bool {
-        let formattedString = cardNumber.decimalDigits
+        let onlyDigitsCardNumber = cardNumber.decimalDigits
         
-        guard let cardBrand = CardBrand.from(cardNumber: formattedString),
-              cardBrand.panLength.contains(formattedString.count) else { return false }
+        guard let cardBrand = CardBrand.from(cardNumber: onlyDigitsCardNumber),
+              cardBrand.panLength.contains(onlyDigitsCardNumber.count) else { return false }
 
         var sum = 0
-        let reversedCharacters = formattedString.reversed().map { String($0) }
+        let reversedCharacters = onlyDigitsCardNumber.reversed().map { String($0) }
         for (idx, element) in reversedCharacters.enumerated() {
             guard let digit = Int(element) else { return false }
             switch ((idx % 2 == 1), digit) {

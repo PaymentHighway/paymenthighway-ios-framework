@@ -33,7 +33,7 @@
 		37011B23211B003E0073BBCB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37011B21211B00350073BBCB /* SettingsViewController.swift */; };
 		37011B25211C22460073BBCB /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37011B24211C22460073BBCB /* DarkTheme.swift */; };
 		37160540210760B1007B57A6 /* PresentationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3716053F210760B1007B57A6 /* PresentationType.swift */; };
-		3718E6E5210EFA79007C577A /* TextFieldValidationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718E6E4210EFA79007C577A /* TextFieldValidationDelegate.swift */; };
+		3718E6E5210EFA79007C577A /* ValidationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718E6E4210EFA79007C577A /* ValidationDelegate.swift */; };
 		3718E6F921104117007C577A /* AddCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3718E6F821104117007C577A /* AddCardView.xib */; };
 		3718E71D21109F08007C577A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718E71C21109F08007C577A /* Theme.swift */; };
 		3718E727211190B7007C577A /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718E726211190B7007C577A /* DefaultTheme.swift */; };
@@ -277,7 +277,7 @@
 		37011B21211B00350073BBCB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		37011B24211C22460073BBCB /* DarkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
 		3716053F210760B1007B57A6 /* PresentationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationType.swift; sourceTree = "<group>"; };
-		3718E6E4210EFA79007C577A /* TextFieldValidationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidationDelegate.swift; sourceTree = "<group>"; };
+		3718E6E4210EFA79007C577A /* ValidationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationDelegate.swift; sourceTree = "<group>"; };
 		3718E6F821104117007C577A /* AddCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCardView.xib; sourceTree = "<group>"; };
 		3718E71C21109F08007C577A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3718E726211190B7007C577A /* DefaultTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTheme.swift; sourceTree = "<group>"; };
@@ -729,7 +729,7 @@
 				37E6138121071B1700618A4F /* AddCardView.swift */,
 				3718E7282111CE40007C577A /* TextFieldType.swift */,
 				3728D1672100E15C00D04860 /* TextField.swift */,
-				3718E6E4210EFA79007C577A /* TextFieldValidationDelegate.swift */,
+				3718E6E4210EFA79007C577A /* ValidationDelegate.swift */,
 				3721E2FD20FD264200D64276 /* ExpirationDateTextField.swift */,
 				3721E2FF20FD328F00D64276 /* CardNumberTextField.swift */,
 				3721E30120FD494500D64276 /* SecurityCodeTextField.swift */,
@@ -1058,7 +1058,7 @@
 				37F49D6620E4BB090062ED1C /* Result.swift in Sources */,
 				3721E30020FD328F00D64276 /* CardNumberTextField.swift in Sources */,
 				37160540210760B1007B57A6 /* PresentationType.swift in Sources */,
-				3718E6E5210EFA79007C577A /* TextFieldValidationDelegate.swift in Sources */,
+				3718E6E5210EFA79007C577A /* ValidationDelegate.swift in Sources */,
 				37F49D7020E4BE880062ED1C /* BackendAdapter.swift in Sources */,
 				37F49D6920E4BD300062ED1C /* ExpirationDate.swift in Sources */,
 				37F49D6D20E4BDC20062ED1C /* TransactionId.swift in Sources */,

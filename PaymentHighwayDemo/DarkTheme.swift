@@ -11,7 +11,7 @@ import PaymentHighway
 class DarkTheme: DefaultTheme {
     override init() {
         super.init()
-        textFieldRounded = false
+        borderRadius = 0
         textImages = []
         primaryBackgroundColor = UIColor(hexInt: 0x31698a)
         secondaryBackgroundColor = UIColor(hexInt: 0x6897bb)

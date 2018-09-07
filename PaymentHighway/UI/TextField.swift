@@ -33,7 +33,7 @@ open class TextField: UITextField, UITextFieldDelegate {
     /// Optional validation delegate
     ///
     /// - seealso: `TextFieldValidationDelegate`
-    public weak var validationDelegate: TextFieldValidationDelegate?
+    public weak var validationDelegate: ValidationDelegate?
 
     /// Text formatter: default implementation no formatting
     ///

@@ -16,7 +16,7 @@ open class CardNumberTextField: TextField {
         format = { (text) in
             return CardData.format(cardNumber: text)
         }
-        validate = { (text) in
+        validate = { (text) in  
             return CardData.isValid(cardNumber: text)
         }
     }

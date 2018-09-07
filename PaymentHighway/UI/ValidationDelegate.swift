@@ -1,15 +1,15 @@
 //
-//  TextFieldValidationDelegate.swift
+//  ValidationDelegate.swift
 //  PaymentHighway
 //
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
-/// Text Field validation delegate
+/// Validation delegate
 ///
-public protocol TextFieldValidationDelegate: class {
+public protocol ValidationDelegate: class {
     
-    /// Called every time that isValid did change
+    /// Called every time the related item validation did change
     ///
     func isValidDidChange(_ isValid: Bool, _ textField: TextField?)
 }

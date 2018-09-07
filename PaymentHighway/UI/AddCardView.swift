@@ -10,7 +10,7 @@ import UIKit
 private let showErrorAnimation = 0.8
 private let delayHidingError = 800
 
-class AddCardView: UIView, TextFieldValidationDelegate {
+class AddCardView: UIView, ValidationDelegate {
     
     @IBOutlet weak var cardNumberTextField: CardNumberTextField!
     @IBOutlet weak var expirationDateTextField: ExpirationDateTextField!
@@ -19,7 +19,7 @@ class AddCardView: UIView, TextFieldValidationDelegate {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var topLabelConstraint: NSLayoutConstraint!
 
-    weak var validationDelegate: TextFieldValidationDelegate?
+    weak var validationDelegate: ValidationDelegate?
     
     var theme: Theme = DefaultTheme.instance {
         didSet {

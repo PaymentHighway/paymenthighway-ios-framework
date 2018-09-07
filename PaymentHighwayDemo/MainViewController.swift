@@ -123,7 +123,18 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
     }
     
     func addCard(_ card: CardData) {
-        self.executeAddCard(card: card)
+        paymentContext.addCard(card: card) { (result) in
+            switch result {
+            case .success(let transactionToken):
+                self.presenter?.dismissPresentedController(animated: true) { () in
+                    self.presenter = nil
+                    let alert = simpleAlert(message: "Received transaction token: \(transactionToken.token)", seconds: 2)
+                    self.present(alert, animated: true)
+                }
+            case .failure(let error):
+                self.presenter?.presentedViewController?.showError(message: "\(error)")
+            }
+        }
     }
 
     // MARK: SettingsDelegate
@@ -154,18 +165,4 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
         present(navigationController, animated: true)
     }
     
-    private func executeAddCard(card: CardData) {
-        paymentContext.addCard(card: card) { (result) in
-            switch result {
-            case .success(let transactionToken):
-                self.presenter?.dismissPresentedController(animated: true) { () in
-                    self.presenter = nil
-                    let alert = simpleAlert(message: "Received transaction token: \(transactionToken.token)", seconds: 2)
-                    self.present(alert, animated: true)
-                }
-            case .failure(let error):
-                self.presenter?.presentedViewController?.showError(message: "\(error)")
-            }
-        }
-    }
 }

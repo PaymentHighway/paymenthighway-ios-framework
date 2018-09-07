@@ -13,15 +13,9 @@ public protocol Theme: class {
     ///
     var placeholderAnimationDuration: Double { get set }
     
-    /// If true make the TextField rounded.
+    /// Border Radius to make Text Field rounded
     ///
-    /// - seealso: roundedBorderRadius
-    ///
-    var textFieldRounded: Bool { get set }
-
-    /// Border Radius when the TextField is rounded
-    ///
-    var roundedBorderRadius: CGFloat { get set }
+    var borderRadius: CGFloat { get set }
 
     /// Placeholder label font scale.
     ///
@@ -31,35 +25,6 @@ public protocol Theme: class {
     /// Border width
     ///
     var borderWidth: CGFloat { get set }
-    
-    /// Helper to return border radius depending if Text Field is rounded
-    ///
-    /// - seealso: default implementation of borderRadius
-    var borderRadius: CGFloat { get }
-    
-    /// Helper to return border radius depending if value is valid and active/focused
-    ///
-    /// - parameter isValid: true if TextField data is valid
-    /// - parameter isActive: true if TextField has focus
-    /// - returns: border color
-    /// - seealso: default implementation of borderColor
-    func borderColor(isValid: Bool, isActive: Bool) -> UIColor
-    
-    /// Helper to returns placeholder label color depending if value is valid and active/focused
-    ///
-    /// - parameter isValid: true if TextField data is valid
-    /// - parameter isActive: true if TextField has focus
-    /// - returns: placeholder label color
-    /// - seealso: default implementation of placeholderLabelColor
-    func placeholderLabelColor(isValid: Bool, isActive: Bool) -> UIColor
-    
-    /// Helper to returns text color depending if value is valid and active/focused
-    ///
-    /// - parameter isValid: true if TextField data is valid
-    /// - parameter isActive: true if TextField has focus
-    /// - returns: text color
-    /// - seealso: default implementation of textColor
-    func textColor(isValid: Bool, isActive: Bool) -> UIColor
     
     /// Returns Text Field image
     ///
@@ -109,19 +74,19 @@ public protocol Theme: class {
     /// Text and Border color for any text field in case of error when is active/focused
     ///
     var errorActiveForegroundColor: UIColor { get set }
+
+    /// Color used in all the important ui elements like buttons
+    ///
+    var highlightColor: UIColor { get set }
+    
+    /// Color used in all the important ui elements like buttons when disabled
+    ///
+    var highlightDisableColor: UIColor { get set }
     
     /// If true show automatically the keyboard with focus in the first text field
     ///
     var showKeyboard: Bool { get set }
 
-    /// Color used in all the important ui elements like buttons
-    ///
-    var highlightColor: UIColor { get set }
-   
-    /// Color used in all the important ui elements like buttons when disabled
-    ///
-    var highlightDisableColor: UIColor { get set }
-    
     /// Font used for all the bold text in the views
     ///
     var emphasisFont: UIFont { get set }
@@ -142,26 +107,25 @@ extension Theme {
         iconImageView.contentMode = UIViewContentMode.scaleAspectFit
         return iconImageView
     }
+}
 
-    public var borderRadius: CGFloat {
-        return textFieldRounded ? roundedBorderRadius : 0
-    }
+extension Theme {
     
-    public func textColor(isValid: Bool, isActive: Bool) -> UIColor {
+    func textColor(isValid: Bool, isActive: Bool) -> UIColor {
         if isValid {
             return isActive ? primaryActiveForegroundColor : primaryForegroundColor
         }
         return isActive ? errorActiveForegroundColor : errorForegroundColor
     }
     
-    public func borderColor(isValid: Bool, isActive: Bool) -> UIColor {
+    func borderColor(isValid: Bool, isActive: Bool) -> UIColor {
         if isValid {
             return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
         }
         return isActive ? errorActiveForegroundColor : errorForegroundColor
     }
     
-    public func placeholderLabelColor(isValid: Bool, isActive: Bool) -> UIColor {
+    func placeholderLabelColor(isValid: Bool, isActive: Bool) -> UIColor {
         if isValid {
             return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
         }

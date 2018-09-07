@@ -37,15 +37,9 @@ open class DefaultTheme : Theme {
     ///
     public var placeholderAnimationDuration: Double
     
-    /// If true make the TextField rounded.
+    /// Border Radius to make Text Field rounded
     ///
-    /// - seealso: roundedBorderRadius
-    ///
-    public var textFieldRounded: Bool
-    
-    /// Border Radius when the TextField is rounded
-    ///
-    public var roundedBorderRadius: CGFloat
+    public var borderRadius: CGFloat
 
     /// Placeholder label font scale.
     ///
@@ -96,10 +90,6 @@ open class DefaultTheme : Theme {
     ///
     public var errorActiveForegroundColor: UIColor
     
-    /// If true show automatically the keyboard with focus in the first text field
-    ///
-    public var showKeyboard: Bool
-
     /// Color used in all the important ui elements like buttons
     ///
     public var highlightColor: UIColor
@@ -108,6 +98,10 @@ open class DefaultTheme : Theme {
     ///
     public var highlightDisableColor: UIColor
     
+    /// If true show automatically the keyboard with focus in the first text field
+    ///
+    public var showKeyboard: Bool
+
     /// Font used for all the bold text in the views
     ///
     public var emphasisFont: UIFont
@@ -118,8 +112,7 @@ open class DefaultTheme : Theme {
     
     public init() {
         self.placeholderAnimationDuration = defaulPlaceholderAnimationDuration
-        self.textFieldRounded = true
-        self.roundedBorderRadius = defaulRoundedBorderRadius
+        self.borderRadius = defaulRoundedBorderRadius
         self.placeholderFontScale = defaultPlaceholderFontScale
         self.borderWidth = defaulBorderWidth
         self.textImages = defaultTextImages
@@ -132,9 +125,9 @@ open class DefaultTheme : Theme {
         self.secondaryActiveForegroundColor = defaultSecondaryActiveForegroundColor
         self.errorForegroundColor = defaultErrorForegroundColor
         self.errorActiveForegroundColor = defaultErrorActiveForegroundColor
-        self.showKeyboard = defaultShowKeyboard
         self.highlightColor = defaultHighlightColor
         self.highlightDisableColor = defaultHighlightDisableColor
+        self.showKeyboard = defaultShowKeyboard
         self.emphasisFont = UIFont.systemFont(ofSize: defaultFontSize+1, weight: .bold)
         self.font = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
     }

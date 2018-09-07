@@ -20,7 +20,7 @@ public protocol AddCardDelegate: class {
 /// User can fill out the form and on submission card data will be provided to addCard delegate.
 /// User can cancel the form and proper delegate call is performed.
 ///
-public class AddCardViewController: UIViewController, TextFieldValidationDelegate {
+public class AddCardViewController: UIViewController, ValidationDelegate {
     
     @IBOutlet var addCardView: AddCardView!
     
