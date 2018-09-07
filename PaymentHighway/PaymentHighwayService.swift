@@ -43,7 +43,6 @@ class PaymentHighwayService {
                 completion(.failure(.dataError("Could not encrypt data during network.tokenize.")))
                 return
         }
-        
         // Create JSON payload
         let parameters: [String : Any] = [
             "encrypted" : encryptedCardData.encryptedBase64Message,
@@ -52,8 +51,8 @@ class PaymentHighwayService {
                 "iv" : encryptedCardData.iv
             ]
         ]
-        
+
         PaymentHighwayEndpoint.tokenizeTransaction(merchantId: merchantId, accountId: accountId, transactionId: transactionId, parameters: parameters)
-                              .post(completion: completion)
+                              .postJson(completion: completion)
     }
 }

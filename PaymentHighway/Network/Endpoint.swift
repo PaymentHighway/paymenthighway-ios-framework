@@ -7,15 +7,14 @@
 
 import Alamofire
 
-public typealias URLResponseChecker = (_ httpUrlResponse: HTTPURLResponse?, _ jsonString: String) -> NetworkError?
+public typealias URLResponseChecker = (_ httpUrlResponse: HTTPURLResponse?, _ data: Data?) -> NetworkError?
 
-func defaultURLResponseChecker(_ httpUrlResponse: HTTPURLResponse?, _ jsonString: String) -> NetworkError? {
+func defaultURLResponseChecker(_ httpUrlResponse: HTTPURLResponse?, _ data: Data?) -> NetworkError? {
     var errorResult: NetworkError? = .unknown
     guard let httpUrlResponse = httpUrlResponse else { return errorResult }
     switch httpUrlResponse.statusCode {
     case 200..<300:
-        if !jsonString.isEmpty,
-            let dataResponse = jsonString.data(using: .utf8),
+        if let dataResponse = data,
             let responseData = try? JSONDecoder().decode(ApiResult.self, from: dataResponse),
             responseData.result.code != ApiResult.success {
             errorResult = NetworkError.internalError(responseData.result.code, responseData.result.message)
@@ -73,7 +72,32 @@ public protocol Endpoint: URLConvertible {
     /// REST post: json result is decoded to given type
     ///
     /// - parameters completion: callback with `Result`
-    func post<DataType: Decodable>(completion: @escaping (Result<DataType, NetworkError>) -> Void)
+    func postJson<DataType: Decodable>(completion: @escaping (Result<DataType, NetworkError>) -> Void)
+    
+    /// REST put: json result is decoded to given type
+    ///
+    /// - parameters completion: callback with `Result`
+    func putJson<DataType: Decodable>(completion: @escaping (Result<DataType, NetworkError>) -> Void)
+    
+    /// REST get: Raw data are returned
+    ///
+    /// - parameters completion: callback with `Result`
+    func get(completion: @escaping (Result<Data, NetworkError>) -> Void)
+    
+    /// REST post: Raw data are returned
+    ///
+    /// - parameters completion: callback with `Result`
+    func post(completion: @escaping (Result<Data, NetworkError>) -> Void)
+    
+    /// REST put: Raw data are returned
+    ///
+    /// - parameters completion: callback with `Result`
+    func put(completion: @escaping (Result<Data, NetworkError>) -> Void)
+    
+    /// REST delete: Raw data are returned
+    ///
+    /// - parameters completion: callback with `Result`
+    func delete(completion: @escaping (Result<Data, NetworkError>) -> Void)
 }
 
 public extension Endpoint {
@@ -127,16 +151,15 @@ public extension Endpoint {
         sessionManager.request(self,
                                method: method,
                                parameters: self.parameters,
-                               encoding: JSONEncoding.default).responseString { response in
+                               encoding: JSONEncoding.default).responseData { response in
             switch response.result {
-            case .success(let jsonString):
-                if let error = self.urlResponseChecker(response.response, jsonString) {
+            case .success(let data):
+                if let error = self.urlResponseChecker(response.response, data) {
                     completion(.failure(error))
                     return
                 }
-                let jsonStringNotEmpty = jsonString.isEmpty ? "{}" : jsonString
-                if let data = jsonStringNotEmpty.data(using: .utf8),
-                    let responseData = try? JSONDecoder().decode(DataType.self, from: data) {
+                let dataNotEmpty: Data = data.count == 0 ? "{}".data(using: .utf8)! : data
+                if let responseData = try? JSONDecoder().decode(DataType.self, from: dataNotEmpty) {
                     completion(.success(responseData))
                 } else {
                     completion(.failure(.invalidJson))
@@ -151,7 +174,45 @@ public extension Endpoint {
         execRequest(.get, completion: completion)
     }
     
-    func post<DataType: Decodable>(completion: @escaping (Result<DataType, NetworkError>) -> Void) {
+    func postJson<DataType: Decodable>(completion: @escaping (Result<DataType, NetworkError>) -> Void) {
         execRequest(.post, completion: completion)
+    }
+    
+    func putJson<DataType: Decodable>(completion: @escaping (Result<DataType, NetworkError>) -> Void) {
+        execRequest(.post, completion: completion)
+    }
+    
+    private func execRequestData(_ method: Alamofire.HTTPMethod, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        sessionManager.request(self,
+                               method: method,
+                               parameters: self.parameters,
+                               encoding: JSONEncoding.default).responseData { response in
+            switch response.result {
+            case .success(let data):
+                if let error = self.urlResponseChecker(response.response, data) {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(data))
+                }
+            case .failure(let error):
+                completion(.failure(.requestError(error)))
+            }
+        }
+    }
+    
+    func get(completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        execRequestData(.get, completion: completion)
+    }
+    
+    func post(completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        execRequest(.post, completion: completion)
+    }
+    
+    func put(completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        execRequest(.post, completion: completion)
+    }
+    
+    func delete(completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        execRequest(.delete, completion: completion)
     }
 }

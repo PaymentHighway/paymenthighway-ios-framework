@@ -77,7 +77,6 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
                 if apiResult.result.code == ApiResult.success {
                     strongSelf.backendAdapter.addCardCompleted(transactionId: transactionId, completion: completion)
                 } else {
-                    print("Error in tokenizeTransaction \(apiResult.result.code) \(apiResult.result.message)")
                     let resultError = strongSelf.backendAdapter.mapError(error: NetworkError.internalError(apiResult.result.code, apiResult.result.message))
                     completion(.failure(resultError))
                 }

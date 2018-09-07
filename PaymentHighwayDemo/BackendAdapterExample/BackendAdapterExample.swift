@@ -26,7 +26,7 @@ class BackendAdapterExample: BackendAdapter {
     }
     
     func addCardCompleted(transactionId: TransactionId, completion: @escaping (Result<TransactionToken, BackendAdapterExampleError>) -> Void) {
-        BackendAdapterExampleEndpoint.transactionToken(transactionId: transactionId).post { (result: Result<TransactionToken, NetworkError>) in
+        BackendAdapterExampleEndpoint.transactionToken(transactionId: transactionId).postJson { (result: Result<TransactionToken, NetworkError>) in
             switch result {
             case .success(let transactionToken):
                 completion(.success(transactionToken))

@@ -155,6 +155,49 @@ class EndpointSpec: QuickSpec {
                 expect(responseResult).toEventually(equal(expectedResult), timeout: 3)
             }
 
+            it("should return success raw data") {
+                
+                let expectedData = "1234567890".data(using: .utf8)!
+                
+                stub(condition: isHost(self.endpoint1URL.host!) && isPath(self.endpoint1URL.path)) { _ in
+                    return OHHTTPStubsResponse(data: expectedData, statusCode: 200, headers: nil)
+                }
+                
+                var responseResult: Data?
+                
+                self.endpoint1.get { (result: PaymentHighway.Result<Data, NetworkError>) in
+                    switch result {
+                    case .success(let value):
+                        responseResult = value
+                    case .failure(let error):
+                        fail("Got unexpected failure error:\(error)")
+                    }
+                }
+                
+                expect(responseResult).toEventually(equal(expectedData), timeout: 3)
+            }
+            
+            it("should return success raw data nill") {
+                
+                stub(condition: isHost(self.endpoint1URL.host!) && isPath(self.endpoint1URL.path)) { _ in
+                    return OHHTTPStubsResponse(data: "".data(using: .utf8)!, statusCode: 200, headers: nil)
+                }
+                
+                var responseOk = false
+                
+                self.endpoint1.get { (result: PaymentHighway.Result<Data, NetworkError>) in
+                    switch result {
+                    case .success(let value):
+                        expect(value.count).to(equal(0))
+                        responseOk = true
+                    case .failure(let error):
+                        fail("Got unexpected failure error:\(error)")
+                    }
+                }
+                
+                expect(responseOk).toEventually(equal(true), timeout: 3)
+            }
+            
             it("should return Error") {
                 
                 stub(condition: isHost(self.endpoint1URL.host!) && isPath(self.endpoint1URL.path)) { _ in
@@ -266,7 +309,7 @@ class EndpointSpec: QuickSpec {
                 }
                 var responseOk = false
                 
-                self.endpoint2.post { (result: PaymentHighway.Result<EmptyJsonData, NetworkError>) in
+                self.endpoint2.postJson { (result: PaymentHighway.Result<EmptyJsonData, NetworkError>) in
                     switch result {
                     case .success:
                         responseOk = true
@@ -283,7 +326,7 @@ class EndpointSpec: QuickSpec {
                     expect(headers[headerKeyId]).to(equal(idTest))
                     expect(headers[headerKeyAge]).to(equal(String(ageTest)))
                 } else {
-                    fail("body or heade empty")
+                    fail("body or header empty")
                 }
             }
         }
