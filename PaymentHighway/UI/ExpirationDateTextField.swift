@@ -22,11 +22,11 @@ open class ExpirationDateTextField: TextField {
         validate = ExpirationDate.isValid
     }
 
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    public override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: .utf8) {
             let isBackSpace = strcmp(char, "\\b")
             cardExpiryDateDeleting = (isBackSpace == -92) ? true : false
         }
-        return true
+        return super.textField(textField, shouldChangeCharactersIn: range, replacementString: string)
     }
 }

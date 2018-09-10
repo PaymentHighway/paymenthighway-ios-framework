@@ -50,26 +50,26 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
                                          card: CardData,
                                          completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
                                                                        BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
-        phService.transactionKey(transactionId: transactionId) { [weak self] (resultTransactionKey) in
+        phService.encryptionKey(transactionId: transactionId) { [weak self] (resultEncryptionKey) in
             guard let strongSelf = self else { return }
-            switch resultTransactionKey {
-            case .success(let transactionKey):
-                strongSelf.transactionKeyHandler(transactionKey: transactionKey, transactionId: transactionId, card: card, completion: completion)
-            case .failure(let transactionKeyError):
-                completion(.failure(strongSelf.backendAdapter.mapError(error: transactionKeyError)))
+            switch resultEncryptionKey {
+            case .success(let encryptionKey):
+                strongSelf.encryptionKeyHandler(encryptionKey: encryptionKey, transactionId: transactionId, card: card, completion: completion)
+            case .failure(let encryptionKeyError):
+                completion(.failure(strongSelf.backendAdapter.mapError(error: encryptionKeyError)))
             }
         }
     }
     
-    private func transactionKeyHandler(transactionKey: TransactionKey,
-                                       transactionId: TransactionId,
-                                       card: CardData,
-                                       completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
+    private func encryptionKeyHandler(encryptionKey: EncryptionKey,
+                                      transactionId: TransactionId,
+                                      card: CardData,
+                                      completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
                                                                      BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
 
         phService.tokenizeTransaction(transactionId: transactionId,
                                       cardData: card,
-                                      transactionKey: transactionKey) { [weak self] (resultApiResult) in
+                                      encryptionKey: encryptionKey) { [weak self] (resultApiResult) in
             guard let strongSelf = self else { return }
 
             switch resultApiResult {

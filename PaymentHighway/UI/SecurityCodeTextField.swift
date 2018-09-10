@@ -19,6 +19,7 @@ open class SecurityCodeTextField: TextField {
             return CardData.format(securityCode: text)
         }
         validate = { [weak self] (text) in
+            self?.maxLength = self?.cardBrand()?.cvcLength.max()
             return CardData.isValid(securityCode: text, cardBrand: self?.cardBrand())
         }
     }

@@ -111,22 +111,19 @@ extension Theme {
 
 extension Theme {
     
-    func textColor(isValid: Bool, isActive: Bool) -> UIColor {
-        if isValid {
-            return isActive ? primaryActiveForegroundColor : primaryForegroundColor
-        }
-        return isActive ? errorActiveForegroundColor : errorForegroundColor
+    func textColor(isActive: Bool) -> UIColor {
+        return isActive ? primaryActiveForegroundColor : primaryForegroundColor
     }
     
-    func borderColor(isValid: Bool, isActive: Bool) -> UIColor {
-        if isValid {
+    func borderColor(isActive: Bool, isValid: Bool?) -> UIColor {
+        if isValid == nil || (isValid! == true) {
             return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
         }
         return isActive ? errorActiveForegroundColor : errorForegroundColor
     }
     
-    func placeholderLabelColor(isValid: Bool, isActive: Bool) -> UIColor {
-        if isValid {
+    func placeholderLabelColor(isActive: Bool, isValid: Bool?) -> UIColor {
+         if isValid == nil || (isValid! == true) {
             return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
         }
         return isActive ? errorActiveForegroundColor : errorForegroundColor

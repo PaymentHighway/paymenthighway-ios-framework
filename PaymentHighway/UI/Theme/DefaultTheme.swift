@@ -6,8 +6,8 @@
 //
 
 private let defaulBackgroundColor = UIColor.white
-private let defaultPrimaryForegroundColor = UIColor(hexInt: 0x000000)
-private let defaultPrimaryActiveForegroundColor = UIColor(hexInt: 0x808080)
+private let defaultPrimaryForegroundColor = UIColor(hexInt: 0x808080)
+private let defaultPrimaryActiveForegroundColor = UIColor(hexInt:  0x000000)
 private let defaultSecondaryForegroundColor = defaultPrimaryForegroundColor
 private let defaultSecondaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
 private let defaultErrorForegroundColor = UIColor(hexInt:  0x993333)

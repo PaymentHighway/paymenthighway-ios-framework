@@ -17,8 +17,8 @@ class PaymentHighwayService {
         self.accountId = accountId
     }
     
-    func transactionKey(transactionId: TransactionId, completion: @escaping (Result<TransactionKey, NetworkError>) -> Void) {
-        PaymentHighwayEndpoint.transactionKey(merchantId: merchantId,
+    func encryptionKey(transactionId: TransactionId, completion: @escaping (Result<EncryptionKey, NetworkError>) -> Void) {
+        PaymentHighwayEndpoint.encryptionKey(merchantId: merchantId,
                                               accountId: accountId,
                                               transactionId: transactionId)
                                .getJson(completion: completion)
@@ -27,7 +27,7 @@ class PaymentHighwayService {
     func tokenizeTransaction(
         transactionId: TransactionId,
         cardData: CardData,
-        transactionKey: TransactionKey,
+        encryptionKey: EncryptionKey,
         completion: @escaping (Result<ApiResult, NetworkError>) -> Void) {
         
         // Encrypt card data
@@ -39,7 +39,7 @@ class PaymentHighwayService {
         
         guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonCardData),
             let data = String(data: jsonData, encoding: .utf8),
-            let encryptedCardData = encryptWithRsaAes(data, certificateBase64Der: transactionKey.key) else {
+            let encryptedCardData = encryptWithRsaAes(data, certificateBase64Der: encryptionKey.key) else {
                 completion(.failure(.dataError("Could not encrypt data during network.tokenize.")))
                 return
         }

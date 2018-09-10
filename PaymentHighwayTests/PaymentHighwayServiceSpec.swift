@@ -43,13 +43,13 @@ class PaymentHighwayServiceSpec: QuickSpec {
             }
             
             it("we should get Transaction Key") {
-                var receivedTransactionKey: TransactionKey = TransactionKey(key: "")
+                var receivedEncryptionKey: EncryptionKey = EncryptionKey(key: "")
                 
                 backendAdapter.getTransactionId { (transactionIdResult) in
                     if case .success(let transactionId) = transactionIdResult {
-                        paymentHighwayService.transactionKey(transactionId: transactionId) { (transactionKeyResult) in
-                            if case .success(let transactionKey) = transactionKeyResult {
-                                receivedTransactionKey = transactionKey
+                        paymentHighwayService.encryptionKey(transactionId: transactionId) { (encryptionKeyResult) in
+                            if case .success(let encryptionKey) = encryptionKeyResult {
+                                receivedEncryptionKey = encryptionKey
                                 return
                             }
                             fail("Transaction key not received")
@@ -57,18 +57,18 @@ class PaymentHighwayServiceSpec: QuickSpec {
                     }
                 }
                 
-                expect(receivedTransactionKey.key).toEventually(contain("MII"), timeout: 5)
+                expect(receivedEncryptionKey.key).toEventually(contain("MII"), timeout: 5)
             }
             
             it("we should tokenize") {
                 var receivedApiResult: ApiResult = ApiResult(result: ApiResultInfo(code: 0, message: ""))
                 backendAdapter.getTransactionId { (transactionIdResult) in
                     if case .success(let transactionId) = transactionIdResult {
-                        paymentHighwayService.transactionKey(transactionId: transactionId) { (transactionKeyResult) in
-                            if case .success(let transactionKey) = transactionKeyResult {
+                        paymentHighwayService.encryptionKey(transactionId: transactionId) { (encryptionKeyResult) in
+                            if case .success(let encryptionKey) = encryptionKeyResult {
                                 paymentHighwayService.tokenizeTransaction(transactionId: transactionId,
                                                                           cardData: cardTest,
-                                                                          transactionKey: transactionKey) { (tokenizeTransactionResult) in
+                                                                          encryptionKey: encryptionKey) { (tokenizeTransactionResult) in
                                     if case .success(let apiResult) = tokenizeTransactionResult {
                                         receivedApiResult = apiResult
                                         return
@@ -88,11 +88,11 @@ class PaymentHighwayServiceSpec: QuickSpec {
                 var receivedTransactionToken = TransactionToken(token: "")
                 backendAdapter.getTransactionId { (transactionIdResult) in
                     if case .success(let transactionId) = transactionIdResult {
-                        paymentHighwayService.transactionKey(transactionId: transactionId) { (transactionKeyResult) in
-                            if case .success(let transactionKey) = transactionKeyResult {
+                        paymentHighwayService.encryptionKey(transactionId: transactionId) { (encryptionKeyResult) in
+                            if case .success(let encryptionKey) = encryptionKeyResult {
                                 paymentHighwayService.tokenizeTransaction(transactionId: transactionId,
                                                                           cardData: cardTest,
-                                                                          transactionKey: transactionKey) { (tokenizeTransactionResult) in
+                                                                          encryptionKey: encryptionKey) { (tokenizeTransactionResult) in
                                     if case .success(let apiResult) = tokenizeTransactionResult {
                                         if apiResult.result.code == 100 {
                                             backendAdapter.addCardCompleted(transactionId: transactionId) { (cardAddedResult) in

@@ -90,8 +90,8 @@ let networkErrorTest: ErrorTest = .networkError("FAILED")
 // swiftlint:disable force_try function_body_length
 class PaymentContextSpec: QuickSpec {
     
-    func addTransactionKeyStub(statusCode: Int32? = nil) {
-        let url = try! PaymentHighwayEndpoint.transactionKey(merchantId: merchantIdTest, accountId: accountIdTest, transactionId: transactionIdTest).asURL()
+    func addEncryptionKeyStub(statusCode: Int32? = nil) {
+        let url = try! PaymentHighwayEndpoint.encryptionKey(merchantId: merchantIdTest, accountId: accountIdTest, transactionId: transactionIdTest).asURL()
         if let statusCode = statusCode {
             stub(condition: isHost(url.host!) && isPath(url.path)) { _ in
                 let obj = ["error": statusCode]
@@ -129,7 +129,7 @@ class PaymentContextSpec: QuickSpec {
         describe("With Payment Context") {
             
             it("we should get success") {
-                self.addTransactionKeyStub()
+                self.addEncryptionKeyStub()
                 self.addTokenizeTransactionStub()
                 var resultTest = ""
                 let paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterMock())
@@ -154,7 +154,7 @@ class PaymentContextSpec: QuickSpec {
             }
             
             it("we should get error from backend adapter cardAdded") {
-                self.addTransactionKeyStub()
+                self.addEncryptionKeyStub()
                 self.addTokenizeTransactionStub()
                 var resultError: ErrorTest = .invalid
                 let paymentContext = PaymentContext(config: paymentConfig,
@@ -168,7 +168,7 @@ class PaymentContextSpec: QuickSpec {
             }
             
             it("we should get error error getting Transaction Key") {
-                self.addTransactionKeyStub(statusCode: 400)
+                self.addEncryptionKeyStub(statusCode: 400)
                 var resultStatusCode = 0
                 let paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterMock())
                 paymentContext.addCard(card: cardDataTest) { result in
@@ -183,7 +183,7 @@ class PaymentContextSpec: QuickSpec {
             }
 
             it("we should get error error in Tokenisation") {
-                self.addTransactionKeyStub()
+                self.addEncryptionKeyStub()
                 self.addTokenizeTransactionStub(statusCode: 401)
                 var resultStatusCode = 0
                 let paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterMock())

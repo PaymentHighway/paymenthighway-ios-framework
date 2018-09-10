@@ -17,6 +17,8 @@ open class TextField: UITextField, UITextFieldDelegate {
 
     lazy var paddingX: CGFloat = theme.textPaddingX
     
+    var maxLength: Int?
+    
     var theme: Theme = DefaultTheme.instance {
         didSet {
             initializeTheme()
@@ -163,6 +165,13 @@ open class TextField: UITextField, UITextFieldDelegate {
         return textRect(forBounds: bounds)
     }
     
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let maxLength = maxLength else { return true }
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+    }
+    
     private func updateTextImage() {
         guard let textFieldType = textFieldType,
               theme.textImages.contains(textFieldType) else { return }
@@ -182,14 +191,14 @@ open class TextField: UITextField, UITextFieldDelegate {
     private func updateUI() {
         updateBorder()
         updatePlaceholder()
-        textColor = theme.textColor(isValid: isValid, isActive: isFirstResponder)
+        textColor = theme.textColor(isActive: isFirstResponder)
     }
     
     private func updatePlaceholder() {
         placeholderLabel.frame = placeholderRect(forBounds: bounds)
         placeholderLabel.text = placeholder
         placeholderLabel.font = placeholderFont()
-        placeholderLabel.textColor = theme.placeholderLabelColor(isValid: isValid, isActive: isFirstResponder)
+        placeholderLabel.textColor = theme.placeholderLabelColor(isActive: isFirstResponder, isValid: checkIfIsValid)
         placeholderLabel.textAlignment = textAlignment
     }
     
@@ -200,7 +209,17 @@ open class TextField: UITextField, UITextFieldDelegate {
     
     private func updateBorder() {
         setBorderStyle()
-        layer.borderColor = theme.borderColor(isValid: isValid, isActive: isFirstResponder).cgColor
+        layer.borderColor = theme.borderColor(isActive: isFirstResponder, isValid: checkIfIsValid).cgColor
     }
     
+    private var firstCheckDone: Bool = false
+    
+    private var checkIfIsValid: Bool? {
+        guard let textLength = text?.lengthOfBytes(using: .utf8), textLength > 0 else { return nil }
+        if !firstCheckDone && isFirstResponder {
+            return nil
+        }
+        firstCheckDone = true
+        return isValid
+    }
 }
