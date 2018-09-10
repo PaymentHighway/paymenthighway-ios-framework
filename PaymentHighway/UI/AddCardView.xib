@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,7 +26,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-s2-eNV" userLabel="Expiry Date Field" customClass="ExpirationDateTextField" customModule="PaymentHighway" customModuleProvider="target">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-s2-eNV" userLabel="Expiry Date Field" customClass="ExpiryDateTextField" customModule="PaymentHighway" customModuleProvider="target">
                     <rect key="frame" x="20" y="119" width="158" height="55"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -85,7 +81,7 @@
             <connections>
                 <outlet property="cardNumberTextField" destination="0lW-sd-fLD" id="Azz-9X-ief"/>
                 <outlet property="errorLabel" destination="FJr-CS-H5L" id="eiq-hc-din"/>
-                <outlet property="expirationDateTextField" destination="Pmy-s2-eNV" id="r3w-fX-hvo"/>
+                <outlet property="expiryDateTextField" destination="Pmy-s2-eNV" id="r3w-fX-hvo"/>
                 <outlet property="securityCodeTextField" destination="L5p-eK-F7F" id="8tj-0G-cOb"/>
                 <outlet property="topLabelConstraint" destination="c58-qc-LBN" id="rwr-6q-bUe"/>
             </connections>

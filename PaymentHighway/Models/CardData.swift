@@ -12,17 +12,17 @@ import Foundation
 public struct CardData {
     let pan: String
     let cvc: String
-    let expirationDate: ExpirationDate
+    let expiryDate: ExpiryDate
     
     /// init
     ///
     /// - parameter pan: The card number
     /// - parameter cvc: The card security code
-    /// - parameter expirationDate: The card expiration date
-    init(pan: String, cvc: String, expirationDate: ExpirationDate) {
+    /// - parameter expiryDate: The card expiration date
+    init(pan: String, cvc: String, expiryDate: ExpiryDate) {
         self.pan = pan.decimalDigits
         self.cvc = cvc
-        self.expirationDate = expirationDate
+        self.expiryDate = expiryDate
     }
 }
 
@@ -76,14 +76,19 @@ public extension CardData {
         return  cardBrand.cvcLength.contains(securityCode.decimalDigits.count)
     }
     
-    static func format(securityCode: String) -> String {
+    static func format(securityCode: String, cardBrand: CardBrand?) -> String {
         var onlyDigitsSecurityCode = securityCode.decimalDigits
-        switch onlyDigitsSecurityCode.count {
-        case 0...4 :
-            break
-        case 5 :
-            onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.index(before: onlyDigitsSecurityCode.endIndex))
-        default : onlyDigitsSecurityCode = ""
+        if let cardBrand = cardBrand, let maxLength = cardBrand.cvcLength.max(), onlyDigitsSecurityCode.count > maxLength {
+            let index = onlyDigitsSecurityCode.index(onlyDigitsSecurityCode.startIndex, offsetBy: maxLength)
+            onlyDigitsSecurityCode = String(onlyDigitsSecurityCode[..<index])
+        } else {
+            switch onlyDigitsSecurityCode.count {
+            case 0...4 :
+                break
+            case 5 :
+                onlyDigitsSecurityCode.remove(at: onlyDigitsSecurityCode.index(before: onlyDigitsSecurityCode.endIndex))
+            default : onlyDigitsSecurityCode = ""
+            }
         }
         return onlyDigitsSecurityCode
     }

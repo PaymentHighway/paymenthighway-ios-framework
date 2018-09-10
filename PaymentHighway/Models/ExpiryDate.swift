@@ -1,5 +1,5 @@
 //
-//  ExpirationDate.swift
+//  ExpiryDate
 //  PaymentHighway
 //
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-/// Struct to hold card expiration date
+/// Struct to hold card expiry date
 ///
-public struct ExpirationDate {
+public struct ExpiryDate {
     let month: String
     let year: String
     
@@ -23,8 +23,8 @@ public struct ExpirationDate {
     /// - returns: nil in case of invalid date
     ///
     public init?(month: String, year: String) {
-        let expirationDate = "\(month)/\(year)"
-        guard let checked = ExpirationDate.expirationDateComponents(from: expirationDate) else { return nil }
+        let expiryDate = "\(month)/\(year)"
+        guard let checked = ExpiryDate.expiryDateComponents(from: expiryDate) else { return nil }
         self.month = checked.month
         self.year = checked.year
     }
@@ -34,20 +34,20 @@ public struct ExpirationDate {
     /// month will formatted as MM
     /// year will formatted as YYYY
     ///
-    /// - parameter expirationDate: raw expiration date, format "M[M]/Y[YYY]"
+    /// - parameter expiryDate: raw expiration date, format "M[M]/Y[YYY]"
     /// - returns: nil in case of invalid date
     ///
-    public init?(expirationDate: String) {
-        guard let (month, year) = ExpirationDate.expirationDateComponents(from: expirationDate) else { return nil }
+    public init?(expiryDate: String) {
+        guard let (month, year) = ExpiryDate.expiryDateComponents(from: expiryDate) else { return nil }
         self.month = month
         self.year = year
     }
 }
 
-extension ExpirationDate {
+extension ExpiryDate {
     
-    fileprivate static func expirationDateComponents(from expirationDate: String, separator: String = "/") -> (month: String, year: String)? {
-        let components =  expirationDate.components(separatedBy: separator)
+    fileprivate static func expiryDateComponents(from expiryDate: String, separator: String = "/") -> (month: String, year: String)? {
+        let components =  expiryDate.components(separatedBy: separator)
         guard components.count == 2 else { return nil }
         guard let monthNumber = Int(components[0]), (1...12).contains(monthNumber) else { return nil }
         let month = String(format: "%02d", monthNumber)
@@ -58,11 +58,11 @@ extension ExpirationDate {
     
     /// Check if expiration date is valid
     ///
-    /// - parameter expirationDate: accepted format "M[M]/Y[YYY]"
+    /// - parameter expiryDate: accepted format "M[M]/Y[YYY]"
     /// - returns: true if expiration date is valid
     ///
-    public static func isValid(expirationDate: String) -> Bool {
-        guard let (month, year) = expirationDateComponents(from: expirationDate) else { return false }
+    public static func isValid(expiryDate: String) -> Bool {
+        guard let (month, year) = expiryDateComponents(from: expiryDate) else { return false }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMyyyy"
@@ -87,33 +87,33 @@ extension ExpirationDate {
     ///             08/2            <del>       08/
     /// ````
     ///
-    /// - parameter expirationDate: input expiration date
+    /// - parameter expiryDate: input expiration date
     /// - parameter deleting: need to know if there has been a delete since format change based on it(check example above)
     /// - returns: expiration date formatted
     ///
-    public static func format(expirationDate: String, deleting: Bool = false) -> String {
-        var onlyDigitsExpirationDate = expirationDate.decimalDigits
-        switch onlyDigitsExpirationDate.count {
+    public static func format(expiryDate: String, deleting: Bool = false) -> String {
+        var onlyDigitsExpiryDate = expiryDate.decimalDigits
+        switch onlyDigitsExpiryDate.count {
         case 1:
-            if 2...9 ~= Int(onlyDigitsExpirationDate)! {
-                onlyDigitsExpirationDate = "0\(onlyDigitsExpirationDate)/"
+            if 2...9 ~= Int(onlyDigitsExpiryDate)! {
+                onlyDigitsExpiryDate = "0\(onlyDigitsExpiryDate)/"
             }
         case 2:
-            let digitsAsInt = Int(onlyDigitsExpirationDate)!
-            if (deleting && expirationDate.count == 2) || (digitsAsInt < 1 || digitsAsInt > 12) {
-                onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
+            let digitsAsInt = Int(onlyDigitsExpiryDate)!
+            if (deleting && expiryDate.count == 2) || (digitsAsInt < 1 || digitsAsInt > 12) {
+                onlyDigitsExpiryDate.remove(at: onlyDigitsExpiryDate.index(before: onlyDigitsExpiryDate.endIndex))
             } else {
-                onlyDigitsExpirationDate = "\(onlyDigitsExpirationDate)/"
+                onlyDigitsExpiryDate = "\(onlyDigitsExpiryDate)/"
             }
         case 5:
-            onlyDigitsExpirationDate.remove(at: onlyDigitsExpirationDate.index(before: onlyDigitsExpirationDate.endIndex))
+            onlyDigitsExpiryDate.remove(at: onlyDigitsExpiryDate.index(before: onlyDigitsExpiryDate.endIndex))
             fallthrough
         case 3, 4:
-            onlyDigitsExpirationDate.insert("/", at: onlyDigitsExpirationDate.index(onlyDigitsExpirationDate.startIndex, offsetBy: 2))
+            onlyDigitsExpiryDate.insert("/", at: onlyDigitsExpiryDate.index(onlyDigitsExpiryDate.startIndex, offsetBy: 2))
         default:
-            onlyDigitsExpirationDate = ""
+            onlyDigitsExpiryDate = ""
         }
         
-        return onlyDigitsExpirationDate
+        return onlyDigitsExpiryDate
     }
 }

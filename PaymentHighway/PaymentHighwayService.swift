@@ -32,8 +32,8 @@ class PaymentHighwayService {
         
         // Encrypt card data
         let jsonCardData = [
-            "expiry_month": cardData.expirationDate.month,
-            "expiry_year": cardData.expirationDate.year,
+            "expiry_month": cardData.expiryDate.month,
+            "expiry_year": cardData.expiryDate.year,
             "cvc" : cardData.cvc,
             "pan" : cardData.pan]
         

@@ -81,9 +81,9 @@ public class AddCardViewController: UIViewController, ValidationDelegate {
     @objc func addCardPressed(_ sender: Any) {
         if let pan = addCardView.cardNumberTextField.text,
            let cvc = addCardView.securityCodeTextField.text,
-           let expirationDateString =  addCardView.expirationDateTextField.text,
-           let expirationDate = ExpirationDate(expirationDate:expirationDateString) {
-            let card = CardData(pan: pan, cvc: cvc, expirationDate: expirationDate)
+           let expiryDateString =  addCardView.expiryDateTextField.text,
+           let expiryDate = ExpiryDate(expiryDate:expiryDateString) {
+            let card = CardData(pan: pan, cvc: cvc, expiryDate: expiryDate)
             finish(card)
         }
     }

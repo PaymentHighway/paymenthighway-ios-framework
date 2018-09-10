@@ -1,5 +1,5 @@
 //
-//  ExpirationDateSpec.swift
+//  ExpiryDateSpec.swift
 //  PaymentHighwayTests
 //
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
@@ -9,7 +9,7 @@ import Quick
 import Nimble
 @testable import PaymentHighway
 
-let expirationDateFormatTest = [
+let expiryDateFormatTest = [
     "" : ("", false),
     "0" : ("0", false),
     "00" : ("0", false),
@@ -29,7 +29,7 @@ let expirationDateFormatTest = [
     "aas/df1" : ("1", false)
 ]
 
-let expirationDateValidTest = [
+let expiryDateValidTest = [
     "" : false,
     "11/" : false,
     "/23" : false,
@@ -38,21 +38,21 @@ let expirationDateValidTest = [
     "12/29" : true
 ]
 
-let expirationDateInitTest = [
+let expiryDateInitTest = [
     "1/1" : ("01", "2001"),
     "13/20" : nil,
     "12/20" : ("12", "2020"),
     "12/2012" : ("12", "2012")
 ]
 
-class ExpirationDateSpec: QuickSpec {
+class ExpiryDateSpec: QuickSpec {
 
     override func spec() {
         
         describe("Expiration date formatting") {
             it("should format dates as expected") {
-                for (given, (expected, deleting)) in expirationDateFormatTest {
-                    let actual = ExpirationDate.format(expirationDate: given, deleting: deleting)
+                for (given, (expected, deleting)) in expiryDateFormatTest {
+                    let actual = ExpiryDate.format(expiryDate: given, deleting: deleting)
                     expect(actual).to(equal(expected))
                 }
             }
@@ -60,8 +60,8 @@ class ExpirationDateSpec: QuickSpec {
 
         describe("Expiration date isValid") {
             it("should expiration dates valid as expected") {
-                for (expirationDate, expectedValid) in expirationDateValidTest {
-                    let isValid = ExpirationDate.isValid(expirationDate: expirationDate)
+                for (expiryDate, expectedValid) in expiryDateValidTest {
+                    let isValid = ExpiryDate.isValid(expiryDate: expiryDate)
                     expect(isValid).to(equal(expectedValid))
                 }
             }
@@ -69,8 +69,8 @@ class ExpirationDateSpec: QuickSpec {
 
         describe("Expiration date init") {
             it("should expiration dates initialized as expected") {
-                for (expirationDate, expected) in expirationDateInitTest {
-                    let result = ExpirationDate(expirationDate: expirationDate)
+                for (expiryDate, expected) in expiryDateInitTest {
+                    let result = ExpiryDate(expiryDate: expiryDate)
                     if result == nil {
                         expect(expected).to(beNil())
                     } else {

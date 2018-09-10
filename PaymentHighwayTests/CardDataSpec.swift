@@ -32,6 +32,14 @@ let securityCodeFormats = [
     "123412344234" : "",
     " 1 43 / 2k k nkm" : "1432"
 ]
+let securityCodeFormatsMastercard = [
+    "" : "",
+    "1" : "1",
+    "12" : "12",
+    "123" : "123",
+    "1234" : "123",
+    "12345" : "123"
+]
 
 // swiftlint:disable function_body_length
 class CardDataSpec: QuickSpec {
@@ -115,7 +123,13 @@ class CardDataSpec: QuickSpec {
         describe("Security code formatting") {
             it("Format security code as expected") {
                 for (given, expected) in securityCodeFormats {
-                    let actual = CardData.format(securityCode: given)
+                    let actual = CardData.format(securityCode: given, cardBrand: nil)
+                    expect(actual).to(equal(expected))
+                }
+            }
+            it("Format security code as expected for MasterCard") {
+                for (given, expected) in securityCodeFormatsMastercard {
+                    let actual = CardData.format(securityCode: given, cardBrand: .mastercard)
                     expect(actual).to(equal(expected))
                 }
             }

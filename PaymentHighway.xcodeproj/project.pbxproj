@@ -60,14 +60,14 @@
 		37E6138221071B1700618A4F /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6138121071B1700618A4F /* AddCardView.swift */; };
 		37F49D6420E4BAED0062ED1C /* PaymentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6320E4BAED0062ED1C /* PaymentConfig.swift */; };
 		37F49D6620E4BB090062ED1C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6520E4BB090062ED1C /* Result.swift */; };
-		37F49D6920E4BD300062ED1C /* ExpirationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6820E4BD300062ED1C /* ExpirationDate.swift */; };
+		37F49D6920E4BD300062ED1C /* ExpiryDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6820E4BD300062ED1C /* ExpiryDate.swift */; };
 		37F49D6B20E4BD5F0062ED1C /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6A20E4BD5F0062ED1C /* CardData.swift */; };
 		37F49D6D20E4BDC20062ED1C /* TransactionId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6C20E4BDC20062ED1C /* TransactionId.swift */; };
 		37F49D7020E4BE880062ED1C /* BackendAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */; };
 		37F49D7520E4C27A0062ED1C /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */; };
 		37F49D7A20E569420062ED1C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D7920E569420062ED1C /* String+Extensions.swift */; };
 		37F49D8820E5FC070062ED1C /* CardDataSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8720E5FC070062ED1C /* CardDataSpec.swift */; };
-		37F49D8B20E60F4B0062ED1C /* ExpirationDateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8A20E60F4B0062ED1C /* ExpirationDateSpec.swift */; };
+		37F49D8B20E60F4B0062ED1C /* ExpiryDateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8A20E60F4B0062ED1C /* ExpiryDateSpec.swift */; };
 		37F49D8D20E62FB60062ED1C /* PaymentContextSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */; };
 		37F49D9020EA3EEE0062ED1C /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8F20EA3EEE0062ED1C /* Properties.swift */; };
 		37F49D9220EA572F0062ED1C /* PaymentHighway_production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */; };
@@ -301,14 +301,14 @@
 		37E6138121071B1700618A4F /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		37F49D6320E4BAED0062ED1C /* PaymentConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfig.swift; sourceTree = "<group>"; };
 		37F49D6520E4BB090062ED1C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		37F49D6820E4BD300062ED1C /* ExpirationDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationDate.swift; sourceTree = "<group>"; };
+		37F49D6820E4BD300062ED1C /* ExpiryDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDate.swift; sourceTree = "<group>"; };
 		37F49D6A20E4BD5F0062ED1C /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
 		37F49D6C20E4BDC20062ED1C /* TransactionId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionId.swift; sourceTree = "<group>"; };
 		37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapter.swift; sourceTree = "<group>"; };
 		37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		37F49D7920E569420062ED1C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		37F49D8720E5FC070062ED1C /* CardDataSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSpec.swift; sourceTree = "<group>"; };
-		37F49D8A20E60F4B0062ED1C /* ExpirationDateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationDateSpec.swift; sourceTree = "<group>"; };
+		37F49D8A20E60F4B0062ED1C /* ExpiryDateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDateSpec.swift; sourceTree = "<group>"; };
 		37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentContextSpec.swift; sourceTree = "<group>"; };
 		37F49D8F20EA3EEE0062ED1C /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PaymentHighway_production.plist; sourceTree = "<group>"; };
@@ -707,7 +707,7 @@
 			isa = PBXGroup;
 			children = (
 				37F49D6320E4BAED0062ED1C /* PaymentConfig.swift */,
-				37F49D6820E4BD300062ED1C /* ExpirationDate.swift */,
+				37F49D6820E4BD300062ED1C /* ExpiryDate.swift */,
 				37F49D6A20E4BD5F0062ED1C /* CardData.swift */,
 				37F49D6C20E4BDC20062ED1C /* TransactionId.swift */,
 				37F49DAF20ECCBD30062ED1C /* IdBase.swift */,
@@ -741,7 +741,7 @@
 		37F49D8920E5FDA90062ED1C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				37F49D8A20E60F4B0062ED1C /* ExpirationDateSpec.swift */,
+				37F49D8A20E60F4B0062ED1C /* ExpiryDateSpec.swift */,
 				37F49D8720E5FC070062ED1C /* CardDataSpec.swift */,
 			);
 			name = Models;
@@ -1060,7 +1060,7 @@
 				37160540210760B1007B57A6 /* PresentationType.swift in Sources */,
 				3718E6E5210EFA79007C577A /* ValidationDelegate.swift in Sources */,
 				37F49D7020E4BE880062ED1C /* BackendAdapter.swift in Sources */,
-				37F49D6920E4BD300062ED1C /* ExpirationDate.swift in Sources */,
+				37F49D6920E4BD300062ED1C /* ExpiryDate.swift in Sources */,
 				37F49D6D20E4BDC20062ED1C /* TransactionId.swift in Sources */,
 				37F49D7A20E569420062ED1C /* String+Extensions.swift in Sources */,
 				37D6BB3E20E27915003800EE /* CardBrand.swift in Sources */,
@@ -1086,7 +1086,7 @@
 				37F49D8820E5FC070062ED1C /* CardDataSpec.swift in Sources */,
 				37C8240A20EF44D5007EDD90 /* BackendAdapterExample.swift in Sources */,
 				37C8240E20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift in Sources */,
-				37F49D8B20E60F4B0062ED1C /* ExpirationDateSpec.swift in Sources */,
+				37F49D8B20E60F4B0062ED1C /* ExpiryDateSpec.swift in Sources */,
 				37C8240620EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift in Sources */,
 				37C8240C20EF47AA007EDD90 /* BackendAdapterExampleError.swift in Sources */,
 				37F49D8D20E62FB60062ED1C /* PaymentContextSpec.swift in Sources */,

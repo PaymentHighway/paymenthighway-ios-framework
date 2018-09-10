@@ -13,7 +13,7 @@ private let delayHidingError = 800
 class AddCardView: UIView, ValidationDelegate {
     
     @IBOutlet weak var cardNumberTextField: CardNumberTextField!
-    @IBOutlet weak var expirationDateTextField: ExpirationDateTextField!
+    @IBOutlet weak var expiryDateTextField: ExpiryDateTextField!
     @IBOutlet weak var securityCodeTextField: SecurityCodeTextField!
     
     @IBOutlet weak var errorLabel: UILabel!
@@ -31,7 +31,7 @@ class AddCardView: UIView, ValidationDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         cardNumberTextField.validationDelegate = self
-        expirationDateTextField.validationDelegate = self
+        expiryDateTextField.validationDelegate = self
         securityCodeTextField.validationDelegate = self
         securityCodeTextField.cardBrand = { [weak self] () in CardBrand.from(cardNumber: self?.cardNumberTextField.text ?? "")}
         errorLabel.alpha = 0
@@ -45,7 +45,7 @@ class AddCardView: UIView, ValidationDelegate {
         errorLabel.backgroundColor = theme.errorForegroundColor
         errorLabel.textColor = theme.secondaryBackgroundColor
         cardNumberTextField.theme = theme
-        expirationDateTextField.theme = theme
+        expiryDateTextField.theme = theme
         securityCodeTextField.theme = theme
     }
     
@@ -62,7 +62,7 @@ class AddCardView: UIView, ValidationDelegate {
     }
     var isValid: Bool {
         return cardNumberTextField.isValid &&
-               expirationDateTextField.isValid &&
+               expiryDateTextField.isValid &&
                securityCodeTextField.isValid
     }
     
@@ -108,8 +108,8 @@ class AddCardView: UIView, ValidationDelegate {
         
         switch current {
         case cardNumberTextField:
-            setBecomeFirstResponder(expirationDateTextField)
-        case expirationDateTextField:
+            setBecomeFirstResponder(expiryDateTextField)
+        case expiryDateTextField:
             if cardNumberTextField.isValid {
                 setBecomeFirstResponder(securityCodeTextField)
             } else {

@@ -15,11 +15,10 @@ open class SecurityCodeTextField: TextField {
         super.init(coder: aDecoder)
         textFieldType = .securityCode
         placeholder = NSLocalizedString("CreditCardSecurityCode", bundle: Bundle(for: type(of: self)), comment: "The text shown above the security code field")
-        format = { (text) in
-            return CardData.format(securityCode: text)
+        format = { [weak self] (text) in
+            return CardData.format(securityCode: text, cardBrand: self?.cardBrand())
         }
         validate = { [weak self] (text) in
-            self?.maxLength = self?.cardBrand()?.cvcLength.max()
             return CardData.isValid(securityCode: text, cardBrand: self?.cardBrand())
         }
     }

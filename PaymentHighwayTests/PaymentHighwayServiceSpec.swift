@@ -17,7 +17,7 @@ class PaymentHighwayServiceSpec: QuickSpec {
     override func spec() {
         let merchantId = MerchantId(id: "test_merchantId")
         let accountId = AccountId(id: "test")
-        let cardTest = CardData(pan: "4153013999700024", cvc: "024", expirationDate: ExpirationDate(month: "11", year: "2023")!)
+        let cardTest = CardData(pan: "4153013999700024", cvc: "024", expiryDate: ExpiryDate(month: "11", year: "2023")!)
 
         var backendAdapter: BackendAdapterExample!
         var paymentHighwayService: PaymentHighwayService!

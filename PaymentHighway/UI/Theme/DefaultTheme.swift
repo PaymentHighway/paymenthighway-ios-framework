@@ -20,7 +20,7 @@ private let defaultPlaceholderFontScale: CGFloat = 0.7
 private let defaulBorderWidth: CGFloat = 1.5
 private let defaulPlaceholderAnimationDuration: Double = 0.25
 private let defaultFontSize: CGFloat = 13.0
-private let defaultTextImages: [TextFieldType] = [.cardNumber, .expirationDate, .securityCode]
+private let defaultTextImages: [TextFieldType] = [.cardNumber, .expiryDate, .securityCode]
 private let defaultTextPaddingX: CGFloat = 20.0
 private let defaultShowKeyboard = false
 

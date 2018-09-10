@@ -12,7 +12,7 @@ public enum TextFieldType {
     case cardNumber
     
     /// Expiration date text field
-    case expirationDate
+    case expiryDate
 
     /// Security code text field
     case securityCode
@@ -22,7 +22,7 @@ extension TextFieldType {
     func iconId(cardBrand: CardBrand?) -> String {
         switch self {
         case .cardNumber: return "cardicon"
-        case .expirationDate: return "calendaricon"
+        case .expiryDate: return "calendaricon"
         case .securityCode: return "lockicon"
         }
     }
