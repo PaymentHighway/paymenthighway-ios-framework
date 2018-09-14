@@ -83,9 +83,15 @@ open class TextField: UITextField, UITextFieldDelegate {
     }
     
     open func textFieldDidEndEditing(_ textField: UITextField) {
+        setShowError()
         animateViewsForTextDisplay()
     }
 
+    open func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        showError = false
+        return true
+    }
+    
     @objc func formatAndValidateTextField(_ textView: AnyObject) {
         let newText = format(self.text ?? "")
         isValid = validate(newText) 
@@ -189,7 +195,7 @@ open class TextField: UITextField, UITextFieldDelegate {
         placeholderLabel.frame = placeholderRect(forBounds: bounds)
         placeholderLabel.text = placeholder
         placeholderLabel.font = placeholderFont()
-        placeholderLabel.textColor = theme.placeholderLabelColor(isActive: isFirstResponder, isValid: checkIfIsValid)
+        placeholderLabel.textColor = theme.placeholderLabelColor(isActive: isFirstResponder, showError: showError)
         placeholderLabel.textAlignment = textAlignment
     }
     
@@ -200,17 +206,16 @@ open class TextField: UITextField, UITextFieldDelegate {
     
     private func updateBorder() {
         setBorderStyle()
-        layer.borderColor = theme.borderColor(isActive: isFirstResponder, isValid: checkIfIsValid).cgColor
+        layer.borderColor = theme.borderColor(isActive: isFirstResponder, showError: showError).cgColor
     }
     
-    private var firstCheckDone: Bool = false
+    private var showError: Bool = false
     
-    private var checkIfIsValid: Bool? {
-        guard let textLength = text?.lengthOfBytes(using: .utf8), textLength > 0 else { return nil }
-        if !firstCheckDone && isFirstResponder {
-            return nil
+    private func setShowError() {
+        guard let textLength = text?.lengthOfBytes(using: .utf8), textLength > 0 else {
+            showError = false
+            return
         }
-        firstCheckDone = true
-        return isValid
+        showError = !isValid
     }
 }

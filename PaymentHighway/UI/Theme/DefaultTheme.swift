@@ -10,8 +10,8 @@ private let defaultPrimaryForegroundColor = UIColor(hexInt: 0x808080)
 private let defaultPrimaryActiveForegroundColor = UIColor(hexInt:  0x000000)
 private let defaultSecondaryForegroundColor = defaultPrimaryForegroundColor
 private let defaultSecondaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
-private let defaultErrorForegroundColor = UIColor(hexInt:  0x993333)
-private let defaultErrorActiveForegroundColor = UIColor(hexInt: 0xe80f0f)
+private let defaultErrorForegroundColor = UIColor(hexInt: 0xe80f0f)
+private let defaultErrorActiveForegroundColor = UIColor(hexInt: 0x993333)
 private let defaultHighlightColor = UIColor(hexInt: 0x007AFF)
 private let defaultHighlightDisableColor = UIColor.gray
 

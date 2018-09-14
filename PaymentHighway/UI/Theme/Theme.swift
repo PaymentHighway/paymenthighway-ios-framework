@@ -115,17 +115,17 @@ extension Theme {
         return isActive ? primaryActiveForegroundColor : primaryForegroundColor
     }
     
-    func borderColor(isActive: Bool, isValid: Bool?) -> UIColor {
-        if isValid == nil || (isValid! == true) {
-            return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
+    func borderColor(isActive: Bool, showError: Bool) -> UIColor {
+        if showError {
+            return isActive ? errorActiveForegroundColor : errorForegroundColor
         }
-        return isActive ? errorActiveForegroundColor : errorForegroundColor
+        return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
     }
     
-    func placeholderLabelColor(isActive: Bool, isValid: Bool?) -> UIColor {
-         if isValid == nil || (isValid! == true) {
-            return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
+    func placeholderLabelColor(isActive: Bool, showError: Bool) -> UIColor {
+        if showError {
+            return isActive ? errorActiveForegroundColor : errorForegroundColor
         }
-        return isActive ? errorActiveForegroundColor : errorForegroundColor
+        return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
     }
 }
