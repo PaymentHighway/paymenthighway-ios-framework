@@ -18,8 +18,8 @@ public struct ExpiryDate {
     /// month will formatted as MM
     /// year will formatted as YYYY
     ///
-    /// - parameter month: month as string: 1 or 2 chars, accepted "1" - "12"
-    /// - parameter year: year as string: 1 to 4 chars. For years <= 999 2000 is added
+    /// - parameter month: 1-2 numeric chars, accepted 1-12
+    /// - parameter year: 1-4 numeric chars. For years <= 999 2000 is adde
     /// - returns: nil in case of invalid date
     ///
     public init?(month: String, year: String) {
@@ -89,7 +89,7 @@ extension ExpiryDate {
     ///
     /// - parameter expiryDate: input expiration date
     /// - parameter deleting: need to know if there has been a delete since format change based on it(check example above)
-    /// - returns: expiration date formatted
+    /// - returns: expiry date formatted
     ///
     public static func format(expiryDate: String, deleting: Bool = false) -> String {
         var onlyDigitsExpiryDate = expiryDate.decimalDigits

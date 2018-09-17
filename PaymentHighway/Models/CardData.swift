@@ -18,7 +18,7 @@ public struct CardData {
     ///
     /// - parameter pan: The card number
     /// - parameter cvc: The card security code
-    /// - parameter expiryDate: The card expiration date
+    /// - parameter expiryDate: The card expiry date
     init(pan: String, cvc: String, expiryDate: ExpiryDate) {
         self.pan = pan.decimalDigits
         self.cvc = cvc
@@ -30,7 +30,7 @@ public extension CardData {
     
     /// Validate a given credit card number using the Luhn algorithm
     ///
-    /// - parameter   cardNumber: The card number to validate
+    /// - parameter cardNumber: The card number to validate
     /// - returns: true if the credit card is valid
     ///
     static func isValid(cardNumber: String) -> Bool {
@@ -54,7 +54,7 @@ public extension CardData {
     
     /// Format a given card number to a neat string
     ///
-    /// - parameter   cardNumber: The card number to format
+    /// - parameter cardNumber: The card number to format
     /// - returns: The formatted credit card number properly spaced
     ///
     static func format(cardNumber: String) -> String {
@@ -68,7 +68,7 @@ public extension CardData {
     /// Validate a given security code
     /// Need the card brand to understand the lenght of the security code
     ///
-    /// - parameter   securityCode: the security code
+    /// - parameter securityCode: the security code to validate
     /// - returns: true secure code is valid
     ///
     static func isValid(securityCode: String, cardBrand: CardBrand?) -> Bool {
@@ -76,6 +76,11 @@ public extension CardData {
         return  cardBrand.cvcLength.contains(securityCode.decimalDigits.count)
     }
     
+    /// Format a given security code
+    ///
+    /// - parameter securityCode: The security code to format
+    /// - returns: The formatted security code
+    ///
     static func format(securityCode: String, cardBrand: CardBrand?) -> String {
         var onlyDigitsSecurityCode = securityCode.decimalDigits
         if let cardBrand = cardBrand, let maxLength = cardBrand.cvcLength.max(), onlyDigitsSecurityCode.count > maxLength {
