@@ -34,6 +34,16 @@ public enum CardBrand {
         return [.visa, .mastercard, .americanExpress, .discover, .jcb, .dinersClub]
     }
 
+    /// Initialize card brand from a credit card number
+    ///
+    /// - parameter cardNumber: The card number string
+    public init?(cardNumber: String) {
+        let cardNumberDigits = cardNumber.decimalDigits
+        let result = CardBrand.allCases.filter { $0.pattern.firstMatch(in: cardNumberDigits,
+                                                                    range: NSRange(location: 0, length: cardNumberDigits.utf8.count)) != nil}
+        guard !result.isEmpty else { return nil }
+        self = result[0]
+    }
 }
 
 // swiftlint:disable force_try
@@ -57,16 +67,6 @@ extension CardBrand {
             regexp = "^3[0689]"
         }
         return try! NSRegularExpression(pattern: regexp)
-    }
-    
-    /// Recognize the card brand of a credit card number
-    ///
-    /// - parameter cardNumber: The card number string
-    static func from(cardNumber: String) -> CardBrand? {
-        let cardNumberDigits = cardNumber.decimalDigits
-        let result = CardBrand.allCases.filter { $0.pattern.firstMatch(in: cardNumberDigits,
-                                                                       range: NSRange(location: 0, length: cardNumberDigits.utf8.count)) != nil}
-        return result.isEmpty ? nil : result[0]
     }
     
     /// Returns the correct card number length for validating card brand

@@ -65,7 +65,7 @@ class CardDataSpec: QuickSpec {
                 for (cardBrand, cardNumbers) in validCardBrands {
                     for cardNumber in cardNumbers {
                         // Should recognise brand with just 2 card digits
-                        if let foundCardBrand = CardBrand.from(cardNumber: String(cardNumber.prefix(2))) {
+                        if let foundCardBrand = CardBrand(cardNumber: String(cardNumber.prefix(2))) {
                             expect(foundCardBrand).to(equal(cardBrand))
                         } else {
                             fail("Card brand \(cardBrand) not found")
