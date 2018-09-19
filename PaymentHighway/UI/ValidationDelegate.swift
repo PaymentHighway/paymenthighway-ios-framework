@@ -9,7 +9,7 @@
 ///
 public protocol ValidationDelegate: class {
     
-    /// Called every time the related item validation did change
+    /// Called every time the related validation state isValid did change
     ///
     func isValidDidChange(_ isValid: Bool, _ textField: TextField?)
 }

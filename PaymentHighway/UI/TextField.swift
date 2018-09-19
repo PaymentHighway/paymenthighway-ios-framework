@@ -30,17 +30,23 @@ open class TextField: UITextField, UITextFieldDelegate {
         }
     }
     
-    /// Optional validation delegate
+    /// Delegate for validation state change
     ///
     /// - seealso: `TextFieldValidationDelegate`
     public weak var validationDelegate: ValidationDelegate?
 
-    /// Text formatter: default implementation no formatting
+    /// Text formatter
+    /// Default implementation does not do any formatting
     ///
+    /// - parameters: the input text
+    /// - returns: the formatted text
     open var format: (String) -> String = { (text) in text }
 
-    /// Text validation: default implementation invalid
+    /// Text validation
+    /// Default implementation return false
     ///
+    /// - parameters: the input text
+    /// - returns: true if is valid
     open var validate: (String) -> Bool = { (_) in return false }
 
     private var placeholderLabel = UILabel()
