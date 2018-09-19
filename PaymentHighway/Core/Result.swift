@@ -5,7 +5,9 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
-/// An enum which is either success with a result value or an error.
+/// Used to represent whether a sdk operation was successful or encountered an error
+/// SuccessType: Type of the value returned for a successful operation
+/// ErrorType: Type of the error
 public enum Result<SuccessType, ErrorType: Error> {
 
     /// Indicates success with a value of the associated type
@@ -40,7 +42,7 @@ public enum Result<SuccessType, ErrorType: Error> {
         }
     }
     
-    /// Returns `true` if self represents a success, `false` otherwise.
+    /// Returns `true` if the result is a success
     public var isSuccess: Bool {
         switch self {
         case .success:
@@ -55,7 +57,7 @@ public enum Result<SuccessType, ErrorType: Error> {
         return !isSuccess
     }
 
-    /// Returns the value from `success` or `throw`s the error.
+    /// Returns `true` if the result is a failure
     public func getOrThrow() throws -> SuccessType {
         switch self {
         case .success(let value):

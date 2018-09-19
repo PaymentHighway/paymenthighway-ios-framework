@@ -5,12 +5,15 @@ This example app demonstrates how to integrate Payment Highway SDK for add card 
 
 ## Mobile Application Backend
 
-For the demo has been implemented a mobile application backend that use the [Payment Highway development sandbox](https://dev.paymenthighway.io/#development-sandbox).
+As the secret Payment Highway credentials cannot be stored within the mobile application, a merchant backend is required for handling the authenticated communications to the service, such as fetching the card tokens and initializing the transactions. This is also where the information regarding the card tokens and payments are stored.
+
+The bundled demo application uses a pre-made dummy merchant backend, which connects to the [Payment Highway development sandbox](https://dev.paymenthighway.io/#development-sandbox). Each merchant needs to implement this backend themselves.
+
 For more info see the code [here]().
 
 In client side you need to implement the BackendAdapter interface. Payment Highway iOS framework includes `endpoint` helper that migh be used for the REST api.
 
-The demo include a implementation example for a `BackendApapter` in the folder `BackendAdapterExample`.
+The demo includes an implementation example for a `BackendAdapter` in the folder `BackendAdapterExample`.
 
 ## Add a credit card
 
@@ -18,7 +21,7 @@ In order to add credit card and get a payment token you need a `PaymentContext`.
 
 PaymentHighway iOS SDK (debug) in connected with the [Payment Highway development sandbox](https://dev.paymenthighway.io/#development-sandbox).
 
-Therefore the demo app use the provided sandbox merchant id and account id.
+Therefore the demo app uses the provided sandbox merchant id and account id.
 
 Example how istantiate a `PaymentContext`:
 ```swift

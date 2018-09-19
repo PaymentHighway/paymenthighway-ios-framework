@@ -7,14 +7,14 @@
 
 import Foundation
 
-/// `PaymentContext` manage all the functionality around a payment like addCard.
+/// `PaymentContext` manages all the functionality the payment context, such as adding a new payment card.
 ///
 public class PaymentContext<BackendAdpaterType: BackendAdapter> {
     
     let backendAdapter: BackendAdpaterType
     let phService: PaymentHighwayService
     
-    /// This is required to initialize `PaymentContext`
+    /// Required to initialize `PaymentContext`
     ///
     /// - parameter config: The configuration of the `PaymentContext`
     /// - parameter backendAdapter: Provide your BackendAdpater implementation
@@ -27,7 +27,7 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
         self.phService = PaymentHighwayService(merchantId: config.merchantId, accountId: config.accountId)
     }
 
-    /// This add a new Payment Card.
+    /// Adds a new Payment Card.
     ///
     /// - parameter card: Card to be added
     /// - parameter completion: Callback closure with the result of the operation
@@ -73,13 +73,8 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
             guard let strongSelf = self else { return }
 
             switch resultApiResult {
-            case .success(let apiResult):
-                if apiResult.result.code == ApiResult.success {
-                    strongSelf.backendAdapter.addCardCompleted(transactionId: transactionId, completion: completion)
-                } else {
-                    let resultError = strongSelf.backendAdapter.mapError(error: NetworkError.internalError(apiResult.result.code, apiResult.result.message))
-                    completion(.failure(resultError))
-                }
+            case .success:
+                strongSelf.backendAdapter.addCardCompleted(transactionId: transactionId, completion: completion)
             case .failure(let tokenizeTransactionError):
                 let resultError = strongSelf.backendAdapter.mapError(error: tokenizeTransactionError)
                 completion(.failure(resultError))

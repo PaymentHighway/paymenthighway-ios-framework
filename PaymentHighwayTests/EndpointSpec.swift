@@ -256,7 +256,7 @@ class EndpointSpec: QuickSpec {
                 
                 var responseOk = false
                 
-                self.endpoint1.getJson { (result: PaymentHighway.Result<EmptyJsonData, NetworkError>) in
+                self.endpoint1.getJson { (result: PaymentHighway.Result<NoData, NetworkError>) in
                     switch result {
                     case .success:
                         responseOk = true
@@ -276,7 +276,7 @@ class EndpointSpec: QuickSpec {
                 
                 var responseOk = false
                 
-                self.endpoint1.getJson { (result: PaymentHighway.Result<EmptyJsonData, NetworkError>) in
+                self.endpoint1.getJson { (result: PaymentHighway.Result<NoData, NetworkError>) in
                     switch result {
                     case .success:
                         responseOk = true
@@ -309,7 +309,7 @@ class EndpointSpec: QuickSpec {
                 }
                 var responseOk = false
                 
-                self.endpoint2.postJson { (result: PaymentHighway.Result<EmptyJsonData, NetworkError>) in
+                self.endpoint2.postJson { (result: PaymentHighway.Result<NoData, NetworkError>) in
                     switch result {
                     case .success:
                         responseOk = true

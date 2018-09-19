@@ -50,7 +50,7 @@
 		37C823F520EE48B0007EDD90 /* EncryptionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823F420EE48B0007EDD90 /* EncryptionKey.swift */; };
 		37C823FF20EE4D66007EDD90 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823FE20EE4D66007EDD90 /* ApiResult.swift */; };
 		37C8240120EE5410007EDD90 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240020EE5410007EDD90 /* Decoder.swift */; };
-		37C8240320EE5902007EDD90 /* EmptyJsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240220EE5902007EDD90 /* EmptyJsonData.swift */; };
+		37C8240320EE5902007EDD90 /* NoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240220EE5902007EDD90 /* NoData.swift */; };
 		37C8240620EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240520EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift */; };
 		37C8240A20EF44D5007EDD90 /* BackendAdapterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */; };
 		37C8240C20EF47AA007EDD90 /* BackendAdapterExampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */; };
@@ -291,7 +291,7 @@
 		37C823F420EE48B0007EDD90 /* EncryptionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKey.swift; sourceTree = "<group>"; };
 		37C823FE20EE4D66007EDD90 /* ApiResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResult.swift; sourceTree = "<group>"; };
 		37C8240020EE5410007EDD90 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
-		37C8240220EE5902007EDD90 /* EmptyJsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyJsonData.swift; sourceTree = "<group>"; };
+		37C8240220EE5902007EDD90 /* NoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoData.swift; sourceTree = "<group>"; };
 		37C8240520EF40C2007EDD90 /* PaymentHighwayServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHighwayServiceSpec.swift; sourceTree = "<group>"; };
 		37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterExample.swift; sourceTree = "<group>"; };
 		37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAdapterExampleError.swift; sourceTree = "<group>"; };
@@ -715,7 +715,7 @@
 				37F49DB320ECCD570062ED1C /* AccountId.swift */,
 				37C823F420EE48B0007EDD90 /* EncryptionKey.swift */,
 				37C823FE20EE4D66007EDD90 /* ApiResult.swift */,
-				37C8240220EE5902007EDD90 /* EmptyJsonData.swift */,
+				37C8240220EE5902007EDD90 /* NoData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1066,7 +1066,7 @@
 				37D6BB3E20E27915003800EE /* CardBrand.swift in Sources */,
 				0456BD5B1AEE5B5800218197 /* Crypto.swift in Sources */,
 				37F49DB220ECCD270062ED1C /* MerchantId.swift in Sources */,
-				37C8240320EE5902007EDD90 /* EmptyJsonData.swift in Sources */,
+				37C8240320EE5902007EDD90 /* NoData.swift in Sources */,
 				37F49DB420ECCD570062ED1C /* AccountId.swift in Sources */,
 				37E6138221071B1700618A4F /* AddCardView.swift in Sources */,
 				D098A48D1FD16D4200FDD7DB /* ServerType.swift in Sources */,

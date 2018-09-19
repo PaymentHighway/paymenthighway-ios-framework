@@ -28,7 +28,7 @@ class PaymentHighwayService {
         transactionId: TransactionId,
         cardData: CardData,
         encryptionKey: EncryptionKey,
-        completion: @escaping (Result<ApiResult, NetworkError>) -> Void) {
+        completion: @escaping (Result<NoData, NetworkError>) -> Void) {
         
         // Encrypt card data
         let jsonCardData = [
@@ -52,7 +52,10 @@ class PaymentHighwayService {
             ]
         ]
 
-        PaymentHighwayEndpoint.tokenizeTransaction(merchantId: merchantId, accountId: accountId, transactionId: transactionId, parameters: parameters)
+        PaymentHighwayEndpoint.tokenizeTransaction(merchantId: merchantId,
+                                                   accountId: accountId,
+                                                   transactionId: transactionId,
+                                                   parameters: parameters)
                               .postJson(completion: completion)
     }
 }

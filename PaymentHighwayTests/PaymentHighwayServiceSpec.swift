@@ -11,7 +11,7 @@ import Nimble
 @testable import PaymentHighway
 import Alamofire
 
-// swiftlint:disable function_body_length cyclomatic_complexity
+// swiftlint:disable function_body_length
 class PaymentHighwayServiceSpec: QuickSpec {
     
     override func spec() {
@@ -61,7 +61,7 @@ class PaymentHighwayServiceSpec: QuickSpec {
             }
             
             it("we should tokenize") {
-                var receivedApiResult: ApiResult = ApiResult(result: ApiResultInfo(code: 0, message: ""))
+                var success: Bool = false
                 backendAdapter.getTransactionId { (transactionIdResult) in
                     if case .success(let transactionId) = transactionIdResult {
                         paymentHighwayService.encryptionKey(transactionId: transactionId) { (encryptionKeyResult) in
@@ -69,23 +69,26 @@ class PaymentHighwayServiceSpec: QuickSpec {
                                 paymentHighwayService.tokenizeTransaction(transactionId: transactionId,
                                                                           cardData: cardTest,
                                                                           encryptionKey: encryptionKey) { (tokenizeTransactionResult) in
-                                    if case .success(let apiResult) = tokenizeTransactionResult {
-                                        receivedApiResult = apiResult
+                                    if case .success = tokenizeTransactionResult {
+                                        success = true
                                         return
                                     }
                                     fail("Tokenize Failed")
-                                                                            
                                 }
                             }
                         }
                     }
                 }
                 
-                expect(receivedApiResult.result.code).toEventually(equal(100), timeout: 5)
+                expect(success).toEventually(equal(true), timeout: 5)
             }
             
             it("we should get token") {
-                var receivedTransactionToken = TransactionToken(token: "")
+                var receivedTransactionToken = TransactionToken(token: "",
+                                                                card: TransactionCard(cardType: "",
+                                                                                      partialPan: "",
+                                                                                      expireMonth: "",
+                                                                                      expireYear: ""))
                 backendAdapter.getTransactionId { (transactionIdResult) in
                     if case .success(let transactionId) = transactionIdResult {
                         paymentHighwayService.encryptionKey(transactionId: transactionId) { (encryptionKeyResult) in
@@ -93,12 +96,10 @@ class PaymentHighwayServiceSpec: QuickSpec {
                                 paymentHighwayService.tokenizeTransaction(transactionId: transactionId,
                                                                           cardData: cardTest,
                                                                           encryptionKey: encryptionKey) { (tokenizeTransactionResult) in
-                                    if case .success(let apiResult) = tokenizeTransactionResult {
-                                        if apiResult.result.code == 100 {
-                                            backendAdapter.addCardCompleted(transactionId: transactionId) { (cardAddedResult) in
-                                                if case .success(let transactionToken) = cardAddedResult {
-                                                    receivedTransactionToken = transactionToken
-                                                }
+                                    if case .success = tokenizeTransactionResult {
+                                        backendAdapter.addCardCompleted(transactionId: transactionId) { (cardAddedResult) in
+                                            if case .success(let transactionToken) = cardAddedResult {
+                                                receivedTransactionToken = transactionToken
                                             }
                                         }
                                     }
@@ -109,6 +110,10 @@ class PaymentHighwayServiceSpec: QuickSpec {
                 }
                 
                 expect(receivedTransactionToken.token).toEventually(contain("-"), timeout: 5)
+                expect(receivedTransactionToken.card.cardType).to(equal("Visa"))
+                expect(receivedTransactionToken.card.partialPan).to(equal("0024"))
+                expect(receivedTransactionToken.card.expireMonth).to(equal("11"))
+                expect(receivedTransactionToken.card.expireYear).to(equal("2023"))
             }
         }
     }

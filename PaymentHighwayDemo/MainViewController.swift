@@ -25,11 +25,24 @@ protocol TableSectionItem: TableRowItem {
     var rows: [TableRowItem] { get }
 }
 
-func simpleAlert(message: String, seconds: Int, completion: @escaping () -> Void = {}) -> UIAlertController {
+func simpleAlert(title: String, message: String, seconds: Int = 0, completion: @escaping () -> Void = {}) -> UIAlertController {
     
-    let alertController = UIAlertController(title: message, message :nil, preferredStyle:.alert)
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(seconds)) {
-        alertController.dismiss(animated: true, completion: completion)
+    let alertController = UIAlertController(title: title, message: nil, preferredStyle:.alert)
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = .left
+    let messageText = NSMutableAttributedString(string: message)
+    let range = NSRange(location: 0, length: message.endIndex.encodedOffset)
+    messageText.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+    messageText.addAttribute(.font, value: UIFont.preferredFont(forTextStyle: .body), range: range)
+    messageText.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+    alertController.setValue(messageText, forKey: "attributedMessage")
+    
+    if seconds == 0 {
+        alertController.addAction(UIAlertAction(title: "OK", style: .default) { (_) in completion()})
+    } else {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(seconds)) {
+            alertController.dismiss(animated: true, completion: completion)
+        }
     }
     return alertController
 }
@@ -128,7 +141,16 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
             case .success(let transactionToken):
                 self.presenter?.dismissPresentedController(animated: true) { () in
                     self.presenter = nil
-                    let alert = simpleAlert(message: "Received transaction token: \(transactionToken.token)", seconds: 2)
+                    let message = """
+                    
+                        Ready for payment:
+                    
+                        token: \(transactionToken.token.suffix(8))...
+                        brand: \(transactionToken.card.cardType)
+                        last digits: \(transactionToken.card.partialPan)
+                        expiry date:\(transactionToken.card.expireMonth)/\(transactionToken.card.expireYear)
+                    """
+                    let alert = simpleAlert(title: "Add Card completed!", message: message)
                     self.present(alert, animated: true)
                 }
             case .failure(let error):

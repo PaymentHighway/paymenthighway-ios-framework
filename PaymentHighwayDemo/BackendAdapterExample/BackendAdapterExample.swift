@@ -8,8 +8,16 @@
 
 import PaymentHighway
 
+struct TransactionCard: Decodable {
+    let cardType: String
+    let partialPan: String
+    let expireMonth: String
+    let expireYear: String
+}
+
 struct TransactionToken: Decodable {
     let token: String
+    let card: TransactionCard
 }
 
 class BackendAdapterExample: BackendAdapter {

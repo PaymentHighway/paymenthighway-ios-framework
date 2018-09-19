@@ -26,7 +26,7 @@ public enum CardBrand {
     /// JCB card
     case jcb
     
-    /// Dinners Club card
+    /// Diners Club card
     case dinersClub
     
     /// return array with all card brands
