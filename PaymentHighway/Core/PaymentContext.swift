@@ -39,33 +39,33 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
         backendAdapter.getTransactionId { [weak self] (resultTransactionId) in
             switch resultTransactionId {
             case .success(let transactionId):
-                self?.getTransactionIdHandler(transactionId: transactionId, card: card, completion: completion)
+                self?.tokenizeCard(transactionId: transactionId, card: card, completion: completion)
             case .failure(let transactionIdError):
                 completion(.failure(transactionIdError))
             }
         }
     }
     
-    private func getTransactionIdHandler(transactionId: TransactionId,
-                                         card: CardData,
-                                         completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
-                                                                       BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
+    private func tokenizeCard(transactionId: TransactionId,
+                              card: CardData,
+                              completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
+                                                     BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
         phService.encryptionKey(transactionId: transactionId) { [weak self] (resultEncryptionKey) in
             guard let strongSelf = self else { return }
             switch resultEncryptionKey {
             case .success(let encryptionKey):
-                strongSelf.encryptionKeyHandler(encryptionKey: encryptionKey, transactionId: transactionId, card: card, completion: completion)
+                strongSelf.performTokenizationRequest(encryptionKey: encryptionKey, transactionId: transactionId, card: card, completion: completion)
             case .failure(let encryptionKeyError):
                 completion(.failure(strongSelf.backendAdapter.mapError(error: encryptionKeyError)))
             }
         }
     }
     
-    private func encryptionKeyHandler(encryptionKey: EncryptionKey,
-                                      transactionId: TransactionId,
-                                      card: CardData,
-                                      completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
-                                                                     BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
+    private func performTokenizationRequest(encryptionKey: EncryptionKey,
+                                            transactionId: TransactionId,
+                                            card: CardData,
+                                            completion: @escaping (Result<BackendAdpaterType.AddCardCompletedType,
+                                                                   BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
 
         phService.tokenizeTransaction(transactionId: transactionId,
                                       cardData: card,
