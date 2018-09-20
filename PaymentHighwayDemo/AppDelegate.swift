@@ -15,16 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let accountId = "test"
-        let merchantId = "test_merchantId"
-        
-        SPH.initSharedInstance(
-            merchantId: merchantId,
-            accountId: accountId,
-            serverType: StagingServer.self
-        )
-        SPHTextField.appearance().backgroundColor = UIColor.red
-		
+        let rootVC = MainViewController()
+        let navController = UINavigationController(rootViewController: rootVC)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = navController
+        window.makeKeyAndVisible()
+        self.window = window
 		return true
 	}
 

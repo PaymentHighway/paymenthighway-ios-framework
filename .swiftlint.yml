@@ -3,6 +3,7 @@ disabled_rules:
     - colon   
     - large_tuple        
     - function_parameter_count
+    - fallthrough
     
 excluded:
   - Carthage
@@ -30,7 +31,8 @@ type_name:
   max_length:
     warning: 40
     error: 50
-  excluded: iPhone
+  excluded: 
+    - PH
 
 identifier_name:
   min_length:
