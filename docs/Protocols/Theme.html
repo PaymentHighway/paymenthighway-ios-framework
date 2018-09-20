@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Theme Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/Theme" class="dashAnchor"></a>
+    <a title="Theme Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PaymentHighway Docs</a> (70% documented)</p>
+        <p class="header-right"><a href="https://github.com/PaymentHighway/paymenthighway-ios-framework"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">PaymentHighway Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Theme Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AddCardViewController.html">AddCardViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CardNumberTextField.html">CardNumberTextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:14PaymentHighway7DecoderC">Decoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultTheme.html">DefaultTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpiryDateTextField.html">ExpiryDateTextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaymentContext.html">PaymentContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Presenter.html">Presenter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SecureSigner.html">SecureSigner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SecurityCodeTextField.html">SecurityCodeTextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextField.html">TextField</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/CardBrand.html">CardBrand</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NetworkError.html">NetworkError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PresentationType.html">PresentationType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TextFieldType.html">TextFieldType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14PaymentHighway17encryptWithRsaAesSS22encryptedBase64Message_SS0gH3KeySS2ivtSgSS_SS011certificateH3DertF">encryptWithRsaAes(_:certificateBase64Der:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/AddCardDelegate.html">AddCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BackendAdapter.html">BackendAdapter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Endpoint.html">Endpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IdBase.html">IdBase</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ServerType.html">ServerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Theme.html">Theme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ValidationDelegate.html">ValidationDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AccountId.html">AccountId</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CardData.html">CardData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EncryptionKey.html">EncryptionKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExpiryDate.html">ExpiryDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MerchantId.html">MerchantId</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:14PaymentHighway6NoDataV">NoData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PaymentConfig.html">PaymentConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TransactionId.html">TransactionId</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14PaymentHighway18URLResponseCheckera">URLResponseChecker</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Theme</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Theme</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>Interface to define the look and feel of Payment Highway UI Elements</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP28placeholderAnimationDurationSdvp"></a>
+                    <a name="//apple_ref/swift/Property/placeholderAnimationDuration" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP28placeholderAnimationDurationSdvp">placeholderAnimationDuration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Animation duration for the placeholder label</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">placeholderAnimationDuration</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP12borderRadius12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/borderRadius" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP12borderRadius12CoreGraphics7CGFloatVvp">borderRadius</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Border Radius to make Text Field rounded</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">borderRadius</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP20placeholderFontScale12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/placeholderFontScale" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP20placeholderFontScale12CoreGraphics7CGFloatVvp">placeholderFontScale</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Placeholder label font scale.</p>
+
+<p>Text field when focused or not empty show the placeholder label above the text with a smaller font</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">placeholderFontScale</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP11borderWidth12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/borderWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP11borderWidth12CoreGraphics7CGFloatVvp">borderWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Border width</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">borderWidth</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP13textImageViewSo07UIImageF0CSgAA13TextFieldTypeO0diJ0_12CoreGraphics7CGFloatV6heightAA9CardBrandOSg04cardP0tF"></a>
+                    <a name="//apple_ref/swift/Method/textImageView(textFieldType:height:cardBrand:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP13textImageViewSo07UIImageF0CSgAA13TextFieldTypeO0diJ0_12CoreGraphics7CGFloatV6heightAA9CardBrandOSg04cardP0tF">textImageView(textFieldType:height:cardBrand:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns Text Field image</p>
+<div class="aside aside-seealso">
+    <p class="aside-title">Seealso</p>
+    TextFieldType and CardBrand
+
+</div>
+<div class="aside aside-seealso">
+    <p class="aside-title">Seealso</p>
+    default implementation of textImageView
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">textImageView</span><span class="p">(</span><span class="nv">textFieldType</span><span class="p">:</span> <span class="kt"><a href="../Enums/TextFieldType.html">TextFieldType</a></span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">cardBrand</span><span class="p">:</span> <span class="kt"><a href="../Enums/CardBrand.html">CardBrand</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIImageView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>textFieldType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Enums/TextFieldType.html">TextFieldType</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>height</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>image height</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cardBrand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>cardBrand if available</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP10textImagesSayAA13TextFieldTypeOGvp"></a>
+                    <a name="//apple_ref/swift/Property/textImages" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP10textImagesSayAA13TextFieldTypeOGvp">textImages</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>returns which TextFields will have image</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">textImages</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/TextFieldType.html">TextFieldType</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP12textPaddingX12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/textPaddingX" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP12textPaddingX12CoreGraphics7CGFloatVvp">textPaddingX</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>X padding for Text Field</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">textPaddingX</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP22primaryBackgroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/primaryBackgroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP22primaryBackgroundColorSo7UIColorCvp">primaryBackgroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>View background color</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">primaryBackgroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP24secondaryBackgroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/secondaryBackgroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP24secondaryBackgroundColorSo7UIColorCvp">secondaryBackgroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background color for all subviews like TextFields</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">secondaryBackgroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP22primaryForegroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/primaryForegroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP22primaryForegroundColorSo7UIColorCvp">primaryForegroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Text color for any text field in a view</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">primaryForegroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP28primaryActiveForegroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/primaryActiveForegroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP28primaryActiveForegroundColorSo7UIColorCvp">primaryActiveForegroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Text color for any text field in a view when is active/focused</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">primaryActiveForegroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP24secondaryForegroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/secondaryForegroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP24secondaryForegroundColorSo7UIColorCvp">secondaryForegroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Border color for any text field in a view</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">secondaryForegroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP30secondaryActiveForegroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/secondaryActiveForegroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP30secondaryActiveForegroundColorSo7UIColorCvp">secondaryActiveForegroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Border color for any text field in a view when is active/focused</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">secondaryActiveForegroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP20errorForegroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/errorForegroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP20errorForegroundColorSo7UIColorCvp">errorForegroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Text and Border color for any text field in case of error</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">errorForegroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP26errorActiveForegroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/errorActiveForegroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP26errorActiveForegroundColorSo7UIColorCvp">errorActiveForegroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Text and Border color for any text field in case of error when is active/focused</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">errorActiveForegroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP14highlightColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/highlightColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP14highlightColorSo7UIColorCvp">highlightColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Color used in all the important ui elements like buttons</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">highlightColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP21highlightDisableColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/highlightDisableColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP21highlightDisableColorSo7UIColorCvp">highlightDisableColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Color used in all the important ui elements like buttons when disabled</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">highlightDisableColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP12showKeyboardSbvp"></a>
+                    <a name="//apple_ref/swift/Property/showKeyboard" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP12showKeyboardSbvp">showKeyboard</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If true show automatically the keyboard with focus in the first text field</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">showKeyboard</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP12emphasisFontSo6UIFontCvp"></a>
+                    <a name="//apple_ref/swift/Property/emphasisFont" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP12emphasisFontSo6UIFontCvp">emphasisFont</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Font used for all the bold text in the views</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">emphasisFont</span><span class="p">:</span> <span class="kt">UIFont</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP4fontSo6UIFontCvp"></a>
+                    <a name="//apple_ref/swift/Property/font" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP4fontSo6UIFontCvp">font</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Font used in the views</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">font</span><span class="p">:</span> <span class="kt">UIFont</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://www.paymenthighway.io" target="_blank" rel="external">Payment Highway</a>. All rights reserved. (Last updated: 2018-09-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
