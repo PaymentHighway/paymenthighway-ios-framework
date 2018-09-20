@@ -52,27 +52,14 @@ $ gem install cocoapods
 To integrate PaymentHighway framework to your project, specify it in your `Podfile`.
 ```
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'PaymentHighway', '1.0.6'
+    pod 'PaymentHighway', '2.0.0.alpha'
 end
 ```
 
 # Use
 
-See the demo project included how to use the framework.
-
-# Problems
-
-## Carthage update fails
-
-If you see the following error during framework installation using Carthage
-
-```
-Code Sign error: No code signing identities found: No valid signing identities (i.e. certificate and private key pair) matching the team ID “(null)” were found.
-CodeSign error: code signing is required for product type 'Framework' in SDK 'iOS 8.4'
-```
-
-then make sure you have iOS distribution license installed (Xcode->Preferences->Accounts->View Details->Signing Identities).
+See the [Demo Project](https://github.com/PaymentHighway/paymenthighway-ios-framework/tree/master/PaymentHighwayDemo) included how to use the framework.

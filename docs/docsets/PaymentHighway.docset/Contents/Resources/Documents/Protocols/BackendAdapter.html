@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BackendAdapter Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/BackendAdapter" class="dashAnchor"></a>
+    <a title="BackendAdapter Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PaymentHighway Docs</a> (70% documented)</p>
+        <p class="header-right"><a href="https://github.com/PaymentHighway/paymenthighway-ios-framework"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">PaymentHighway Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BackendAdapter Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AddCardViewController.html">AddCardViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CardNumberTextField.html">CardNumberTextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:14PaymentHighway7DecoderC">Decoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultTheme.html">DefaultTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpiryDateTextField.html">ExpiryDateTextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaymentContext.html">PaymentContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Presenter.html">Presenter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SecureSigner.html">SecureSigner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SecurityCodeTextField.html">SecurityCodeTextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextField.html">TextField</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/CardBrand.html">CardBrand</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NetworkError.html">NetworkError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PresentationType.html">PresentationType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TextFieldType.html">TextFieldType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14PaymentHighway17encryptWithRsaAesSS22encryptedBase64Message_SS0gH3KeySS2ivtSgSS_SS011certificateH3DertF">encryptWithRsaAes(_:certificateBase64Der:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/AddCardDelegate.html">AddCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BackendAdapter.html">BackendAdapter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Endpoint.html">Endpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IdBase.html">IdBase</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ServerType.html">ServerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Theme.html">Theme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ValidationDelegate.html">ValidationDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AccountId.html">AccountId</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CardData.html">CardData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EncryptionKey.html">EncryptionKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExpiryDate.html">ExpiryDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MerchantId.html">MerchantId</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:14PaymentHighway6NoDataV">NoData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PaymentConfig.html">PaymentConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TransactionId.html">TransactionId</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14PaymentHighway18URLResponseCheckera">URLResponseChecker</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BackendAdapter</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">BackendAdapter</span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway14BackendAdapterP20AddCardCompletedType"></a>
+                    <a name="//apple_ref/swift/Alias/AddCardCompletedType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway14BackendAdapterP20AddCardCompletedType">AddCardCompletedType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Associated type for the card add completed return data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">AddCardCompletedType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway14BackendAdapterP0cD9ErrorType"></a>
+                    <a name="//apple_ref/swift/Alias/BackendAdapterErrorType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway14BackendAdapterP0cD9ErrorType">BackendAdapterErrorType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Associated type for the backend adpater error</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">BackendAdapterErrorType</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway14BackendAdapterP8mapError0cdF4TypeQzs0F0_p5error_tF"></a>
+                    <a name="//apple_ref/swift/Method/mapError(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway14BackendAdapterP8mapError0cdF4TypeQzs0F0_p5error_tF">mapError(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Map a domain/system error in a backend adapter error</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">mapError</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/BackendAdapter.html#/s:14PaymentHighway14BackendAdapterP0cD9ErrorType">BackendAdapterErrorType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway14BackendAdapterP16getTransactionIdyyAA6ResultOyAA0fG0V0cD9ErrorTypeQzGc10completion_tF"></a>
+                    <a name="//apple_ref/swift/Method/getTransactionId(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway14BackendAdapterP16getTransactionIdyyAA6ResultOyAA0fG0V0cD9ErrorTypeQzGc10completion_tF">getTransactionId(completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the transaction id</p>
+
+<p>Fetch Payment Highway transaction ID via the merchant’s own backend.
+The merchant backend gets the ID from Payment Highway using the Init Transaction call.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Endpoint helper can be used for the REST api implementation
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getTransactionId</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TransactionId.html">TransactionId</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/BackendAdapter.html#/s:14PaymentHighway14BackendAdapterP0cD9ErrorType">BackendAdapterErrorType</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway14BackendAdapterP16addCardCompletedyAA13TransactionIdV011transactionI0_yAA6ResultOy03AddfG4TypeQz0cd5ErrorM0QzGc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/addCardCompleted(transactionId:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway14BackendAdapterP16addCardCompletedyAA13TransactionIdV011transactionI0_yAA6ResultOy03AddfG4TypeQz0cd5ErrorM0QzGc10completiontF">addCardCompleted(transactionId:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add card completed</p>
+
+<p>Callback function, which is called once the add card operation has been completed by the user.
+Here one implements the call to the merchant’s backend,
+which then fetches the actual tokenization result,
+the card token and its details from Payment Highway using the provided
+transaction/tokenization ID ( <a href="https://dev.paymenthighway.io/#tokenization">https://dev.paymenthighway.io/#tokenization</a> ) and stores them
+Typically the response from the merchant’s backend consists of the card details
+to display to the user and an identifier for the card, e.g. the card token,
+or some merchant’s internal ID for this payment method.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Endpoint helper can be used for the REST api implementation
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">addCardCompleted</span><span class="p">(</span><span class="nv">transactionId</span><span class="p">:</span> <span class="kt"><a href="../Structs/TransactionId.html">TransactionId</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/BackendAdapter.html#/s:14PaymentHighway14BackendAdapterP20AddCardCompletedType">AddCardCompletedType</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/BackendAdapter.html#/s:14PaymentHighway14BackendAdapterP0cD9ErrorType">BackendAdapterErrorType</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://www.paymenthighway.io" target="_blank" rel="external">Payment Highway</a>. All rights reserved. (Last updated: 2018-09-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
