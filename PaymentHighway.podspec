@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.swift_version = "4.1"
   s.ios.deployment_target = '9.0'
-  s.resources = ["PaymentHighway/*.{storyboard,lproj,xcassets,png}"]
+  s.resources = ["PaymentHighway/**/*.{xib,lproj,xcassets,png}"]
   s.source_files  = "PaymentHighway/**/*.{swift,h}"
   s.frameworks  = "Foundation", "UIKit"
  
