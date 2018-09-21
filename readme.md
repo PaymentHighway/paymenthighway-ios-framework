@@ -18,11 +18,6 @@ See the demo project included for a BackendAdapter example.
 ## License
 MIT
 
-## Todo
-
-* Manual installation instructions
-* iOS SDK should validate that the received certificate is signed by Certificate Authority (CA should be bundled with SDK)
-
 # Install
 
 Currently installation via Carthage and CocoaPods is supported.
@@ -31,7 +26,7 @@ Currently installation via Carthage and CocoaPods is supported.
 
 Create a "Cartfile"-file in the root of your project and add a line within:
 ```
-github "paymenthighway/paymenthighway-ios-framework" "v-1.0.6"
+github "paymenthighway/paymenthighway-ios-framework" "v-2.0.0"
 ```
 
 Run the following command to integrate the required frameworks to your project.
@@ -54,9 +49,9 @@ To integrate PaymentHighway framework to your project, specify it in your `Podfi
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
-
+    
 target '<Your Target Name>' do
-    pod 'PaymentHighway', '2.0.0.alpha'
+    pod 'PaymentHighway', '2.0.0'
 end
 ```
 
