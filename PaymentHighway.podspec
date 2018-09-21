@@ -13,11 +13,13 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/paymenthighway/paymenthighway-ios-framework.git", :tag => "v-#{s.version}" }
   s.requires_arc = true
 
+  s.swift_version = "4.1"
+  s.ios.deployment_target = '9.0'
   s.resources = ["PaymentHighway/*.{storyboard,lproj,xcassets,png}"]
-  s.source_files  = "PaymentHighway", "PaymentHighway/*.{h,swift}"
+  s.source_files  = "PaymentHighway/**/*.{swift,h}"
   s.frameworks  = "Foundation", "UIKit"
-
-  s.dependency "Alamofire", "~> 4.7.2"
-  s.dependency "CryptoSwift", "~> 0.10.0"
+ 
+  s.dependency "Alamofire", "~> 4.7.3"
+  s.dependency "CryptoSwift", "~> 0.12.0"
 
 end
