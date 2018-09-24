@@ -8,6 +8,41 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
+      "line": 10,
+      "symbol": "Environment",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
+      "line": 13,
+      "symbol": "Environment.current",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
+      "line": 18,
+      "symbol": "Environment.sandbox",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
+      "line": 19,
+      "symbol": "Environment.production",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
+      "line": 21,
+      "symbol": "Environment.baseURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Crypto.swift",
       "line": 59,
       "symbol": "encryptWithRsaAes(_:certificateBase64Der:)",
@@ -109,7 +144,7 @@
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Network/ServerType.swift",
       "line": 13,
       "symbol": "ServerType.baseURL",
-      "symbol_kind": "source.lang.swift.decl.var.static",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
