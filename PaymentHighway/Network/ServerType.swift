@@ -10,5 +10,5 @@ import Foundation
 /// Interface to provide endpoint base URL
 ///
 public protocol ServerType {
-    static var baseURL: String { get }
+    var baseURL: String { get }
 }

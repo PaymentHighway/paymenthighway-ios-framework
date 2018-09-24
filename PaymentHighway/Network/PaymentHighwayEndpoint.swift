@@ -19,7 +19,7 @@ enum PaymentHighwayEndpoint {
 extension PaymentHighwayEndpoint : Endpoint {
  
     var baseURL: URL {
-        let url = URL(string: PaymentHighwayProperties.baseURL)
+        let url = URL(string: Environment.current.baseURL)
         precondition(url != nil)
         return url!
     }

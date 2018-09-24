@@ -15,10 +15,6 @@ let merchantIdTest = MerchantId(id: "1234567890")
 let accountIdTest = AccountId(id: "0987654321")
 let transactionIdTest = TransactionId(id: "111222333444555666777888999000")
 
-struct ServerTypeTest: ServerType {
-    public static var baseURL: String { return "https://this.is.the.baseurl.test/" }
-}
-
 protocol MyTestError : Error & Equatable {}
 
 enum ErrorTest: Error {

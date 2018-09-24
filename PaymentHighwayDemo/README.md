@@ -15,6 +15,20 @@ In client side you need to implement the BackendAdapter interface. Payment Highw
 
 The demo includes an implementation example for a `BackendAdapter` in the folder `BackendAdapterExample`.
 
+## Environment
+
+Payment Highway has `sandbox` and `production` environments.
+
+In `DEBUG` mode the default environment is `sandbox`.
+
+You can change the Environment for example in your AppDelegate:
+```swift
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Environment.current = .sandbox
+        return true
+    }
+```
+
 ## Add a credit card
 
 In order to add credit card and get a payment token you need a `PaymentContext`.

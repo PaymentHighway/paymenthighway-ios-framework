@@ -101,7 +101,7 @@ extension Theme {
     public func textImageView(textFieldType: TextFieldType, height: CGFloat, cardBrand: CardBrand? = nil) -> UIImageView? {
         let iconImageView = UIImageView(frame: CGRect.zero)
         iconImageView.image = UIImage(named: textFieldType.iconId(cardBrand: cardBrand),
-                                      in: Bundle(identifier: "io.paymenthighway.PaymentHighway"),
+                                      in: Bundle(for: type(of: self)),
                                       compatibleWith: nil)
         iconImageView.frame = CGRect(x: 0, y: 0, width: height, height: height)
         iconImageView.contentMode = UIViewContentMode.scaleAspectFit

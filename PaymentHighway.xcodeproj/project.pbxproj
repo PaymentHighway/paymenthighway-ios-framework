@@ -69,9 +69,7 @@
 		37F49D8820E5FC070062ED1C /* CardDataSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8720E5FC070062ED1C /* CardDataSpec.swift */; };
 		37F49D8B20E60F4B0062ED1C /* ExpiryDateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8A20E60F4B0062ED1C /* ExpiryDateSpec.swift */; };
 		37F49D8D20E62FB60062ED1C /* PaymentContextSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */; };
-		37F49D9020EA3EEE0062ED1C /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8F20EA3EEE0062ED1C /* Properties.swift */; };
-		37F49D9220EA572F0062ED1C /* PaymentHighway_production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */; };
-		37F49D9420EA57D70062ED1C /* PaymentHighway_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F49D9320EA57D70062ED1C /* PaymentHighway_staging.plist */; };
+		37F49D9020EA3EEE0062ED1C /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D8F20EA3EEE0062ED1C /* Environment.swift */; };
 		37F49D9720EB5DC10062ED1C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D9620EB5DC10062ED1C /* Endpoint.swift */; };
 		37F49D9920EB6E710062ED1C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D9820EB6E710062ED1C /* NetworkError.swift */; };
 		37F49D9B20EB963E0062ED1C /* EndpointSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F49D9A20EB963E0062ED1C /* EndpointSpec.swift */; };
@@ -310,9 +308,7 @@
 		37F49D8720E5FC070062ED1C /* CardDataSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSpec.swift; sourceTree = "<group>"; };
 		37F49D8A20E60F4B0062ED1C /* ExpiryDateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDateSpec.swift; sourceTree = "<group>"; };
 		37F49D8C20E62FB60062ED1C /* PaymentContextSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentContextSpec.swift; sourceTree = "<group>"; };
-		37F49D8F20EA3EEE0062ED1C /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
-		37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PaymentHighway_production.plist; sourceTree = "<group>"; };
-		37F49D9320EA57D70062ED1C /* PaymentHighway_staging.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PaymentHighway_staging.plist; sourceTree = "<group>"; };
+		37F49D8F20EA3EEE0062ED1C /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		37F49D9620EB5DC10062ED1C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		37F49D9820EB6E710062ED1C /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		37F49D9A20EB963E0062ED1C /* EndpointSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSpec.swift; sourceTree = "<group>"; };
@@ -404,7 +400,6 @@
 				37F49D6720E4BCE00062ED1C /* Models */,
 				37F49D7320E4C0A80062ED1C /* UI */,
 				37F49DAC20ECC3CF0062ED1C /* Services */,
-				37F49D8E20EA3E430062ED1C /* Properties */,
 				03F9E0631E6DA70F0059B7F2 /* Network */,
 				03788D6B1AC988C6007FC30F /* Utilities */,
 				03788D481AC978DD007FC30F /* Supporting Files */,
@@ -658,6 +653,7 @@
 		3718E751211445DC007C577A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				37F49D8F20EA3EEE0062ED1C /* Environment.swift */,
 				37F49D6F20E4BE880062ED1C /* BackendAdapter.swift */,
 				37D6BB3B20E278D1003800EE /* PaymentContext.swift */,
 				37D6BB3D20E27915003800EE /* CardBrand.swift */,
@@ -745,16 +741,6 @@
 				37F49D8720E5FC070062ED1C /* CardDataSpec.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		37F49D8E20EA3E430062ED1C /* Properties */ = {
-			isa = PBXGroup;
-			children = (
-				37F49D8F20EA3EEE0062ED1C /* Properties.swift */,
-				37F49D9120EA572F0062ED1C /* PaymentHighway_production.plist */,
-				37F49D9320EA57D70062ED1C /* PaymentHighway_staging.plist */,
-			);
-			name = Properties;
 			sourceTree = "<group>";
 		};
 		37F49DAC20ECC3CF0062ED1C /* Services */ = {
@@ -958,11 +944,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				044852971B3970A10034D0CA /* Media.xcassets in Resources */,
-				37F49D9420EA57D70062ED1C /* PaymentHighway_staging.plist in Resources */,
 				04B48B4B1B3305AA00616048 /* Localizable.strings in Resources */,
 				04B48B551B3305AB00616048 /* InfoPlist.strings in Resources */,
 				3718E6F921104117007C577A /* AddCardView.xib in Resources */,
-				37F49D9220EA572F0062ED1C /* PaymentHighway_production.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,7 +1023,7 @@
 			files = (
 				3718E727211190B7007C577A /* DefaultTheme.swift in Sources */,
 				37C8240120EE5410007EDD90 /* Decoder.swift in Sources */,
-				37F49D9020EA3EEE0062ED1C /* Properties.swift in Sources */,
+				37F49D9020EA3EEE0062ED1C /* Environment.swift in Sources */,
 				37F49DAB20ECBAAB0062ED1C /* PaymentHighwayEndpoint.swift in Sources */,
 				03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */,
 				3721E2FE20FD264200D64276 /* ExpirationDateTextField.swift in Sources */,
