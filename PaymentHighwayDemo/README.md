@@ -17,32 +17,20 @@ The demo includes an implementation example for a `BackendAdapter` in the folder
 
 ## Environment
 
-Payment Highway has `sandbox` and `production` environments.
-
-In `DEBUG` mode the default environment is `sandbox`.
-
-You can change the Environment for example in your AppDelegate:
-```swift
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Environment.current = .sandbox
-        return true
-    }
-```
+Payment Highway provide a [development `sandbox`](https://dev.paymenthighway.io/#development-sandbox) and a `production` environments.
 
 ## Add a credit card
 
 In order to add credit card and get a payment token you need a `PaymentContext`.
 
-PaymentHighway iOS SDK (debug) in connected with the [Payment Highway development sandbox](https://dev.paymenthighway.io/#development-sandbox).
-
-Therefore the demo app uses the provided sandbox merchant id and account id.
+The demo app run in the `sandbox` environment therefore uses the provided [sandbox `merchant id` and `account id`](https://dev.paymenthighway.io/#development-sandbox).
 
 Example how istantiate a `PaymentContext`:
 ```swift
     let merchantId = MerchantId(id: "test_merchantId")
     let accountId = AccountId(id: "test")
 
-    let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId)
+    let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId, environment: Environment.sandbox)
     let paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterExample())
 ```
 

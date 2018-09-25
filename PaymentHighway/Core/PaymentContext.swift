@@ -24,7 +24,7 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
     ///
     public init(config: PaymentConfig, backendAdapter: BackendAdpaterType) {
         self.backendAdapter = backendAdapter
-        self.phService = PaymentHighwayService(merchantId: config.merchantId, accountId: config.accountId)
+        self.phService = PaymentHighwayService(config: config)
     }
 
     /// Adds a new Payment Card.

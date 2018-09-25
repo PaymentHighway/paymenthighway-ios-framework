@@ -15,8 +15,9 @@ import Alamofire
 class PaymentHighwayServiceSpec: QuickSpec {
     
     override func spec() {
-        let merchantId = MerchantId(id: "test_merchantId")
+        let merchantId = MerchantId(id: "   test_merchantId")
         let accountId = AccountId(id: "test")
+        let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId, environment: Environment.sandbox)
         let cardTest = CardData(pan: "4153013999700024", cvc: "024", expiryDate: ExpiryDate(month: "11", year: "2023")!)
 
         var backendAdapter: BackendAdapterExample!
@@ -24,7 +25,7 @@ class PaymentHighwayServiceSpec: QuickSpec {
         
         beforeEach {
             backendAdapter = BackendAdapterExample()
-            paymentHighwayService = PaymentHighwayService(merchantId: merchantId, accountId: accountId)
+            paymentHighwayService = PaymentHighwayService(config: paymentConfig)
         }
         
         describe("with BackendAdapter and PaymentHighwayService") {

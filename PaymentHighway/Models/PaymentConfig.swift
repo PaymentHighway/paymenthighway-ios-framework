@@ -17,8 +17,12 @@ public struct PaymentConfig {
     /// Account identifier
     let accountId: AccountId
     
-    public init(merchantId: MerchantId, accountId: AccountId) {
+    /// Payment Highway API environment
+    let environment: EnvironmentInterface
+    
+    public init(merchantId: MerchantId, accountId: AccountId, environment: EnvironmentInterface) {
         self.merchantId = merchantId
         self.accountId = accountId
+        self.environment = environment
     }
 }

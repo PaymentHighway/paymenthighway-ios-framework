@@ -84,7 +84,7 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId)
+        let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId, environment: Environment.sandbox)
         paymentContext = PaymentContext(config: paymentConfig, backendAdapter: BackendAdapterExample())
         title = "Payment Highway Demo"
         tableView.tableFooterView = UIView()

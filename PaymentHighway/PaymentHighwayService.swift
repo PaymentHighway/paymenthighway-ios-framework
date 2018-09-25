@@ -9,18 +9,14 @@ import Foundation
 
 class PaymentHighwayService {
     
-    private let merchantId: MerchantId
-    private let accountId: AccountId
+    private let config: PaymentConfig
     
-    init(merchantId: MerchantId, accountId: AccountId) {
-        self.merchantId = merchantId
-        self.accountId = accountId
+    init(config: PaymentConfig) {
+        self.config = config
     }
     
     func encryptionKey(transactionId: TransactionId, completion: @escaping (Result<EncryptionKey, NetworkError>) -> Void) {
-        PaymentHighwayEndpoint.encryptionKey(merchantId: merchantId,
-                                              accountId: accountId,
-                                              transactionId: transactionId)
+        PaymentHighwayEndpoint.encryptionKey(config: config, transactionId: transactionId)
                                .getJson(completion: completion)
     }
     
@@ -52,8 +48,7 @@ class PaymentHighwayService {
             ]
         ]
 
-        PaymentHighwayEndpoint.tokenizeTransaction(merchantId: merchantId,
-                                                   accountId: accountId,
+        PaymentHighwayEndpoint.tokenizeTransaction(config: config,
                                                    transactionId: transactionId,
                                                    parameters: parameters)
                               .postJson(completion: completion)

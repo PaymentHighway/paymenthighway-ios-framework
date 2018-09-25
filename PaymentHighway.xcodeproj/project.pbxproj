@@ -87,7 +87,7 @@
 		945B17081B467FC300158A40 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; };
 		945B17091B467FC300158A40 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0456BD5F1AEFB3A100218197 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94C095551B464F5A0017D024 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C095521B464F5A0017D024 /* CryptoSwift.framework */; };
-		D098A48D1FD16D4200FDD7DB /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098A4841FD16D4200FDD7DB /* ServerType.swift */; };
+		D098A48D1FD16D4200FDD7DB /* ServerBaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098A4841FD16D4200FDD7DB /* ServerBaseURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -321,7 +321,7 @@
 		94C095521B464F5A0017D024 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		94C095531B464F5A0017D024 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		94C095541B464F5A0017D024 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
-		D098A4841FD16D4200FDD7DB /* ServerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerType.swift; sourceTree = "<group>"; };
+		D098A4841FD16D4200FDD7DB /* ServerBaseURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerBaseURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,7 +501,7 @@
 		03F9E0631E6DA70F0059B7F2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D098A4841FD16D4200FDD7DB /* ServerType.swift */,
+				D098A4841FD16D4200FDD7DB /* ServerBaseURL.swift */,
 				03F9E05D1E6DA70B0059B7F2 /* RequestAdapter.swift */,
 				37F49D9620EB5DC10062ED1C /* Endpoint.swift */,
 				37F49D9820EB6E710062ED1C /* NetworkError.swift */,
@@ -1053,7 +1053,7 @@
 				37C8240320EE5902007EDD90 /* NoData.swift in Sources */,
 				37F49DB420ECCD570062ED1C /* AccountId.swift in Sources */,
 				37E6138221071B1700618A4F /* AddCardView.swift in Sources */,
-				D098A48D1FD16D4200FDD7DB /* ServerType.swift in Sources */,
+				D098A48D1FD16D4200FDD7DB /* ServerBaseURL.swift in Sources */,
 				37F49D6B20E4BD5F0062ED1C /* CardData.swift in Sources */,
 				3718E7292111CE40007C577A /* TextFieldType.swift in Sources */,
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,

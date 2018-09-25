@@ -77,7 +77,7 @@ let creditCardNumber = "5422 3333 4444 5555"
 let cvcTest = "123"
 let expiryDateTest = ExpiryDate(month: "11", year: "22")
 let cardDataTest = CardData(pan: creditCardNumber, cvc: cvcTest, expiryDate: expiryDateTest!)
-let paymentConfig = PaymentConfig(merchantId: merchantIdTest, accountId: accountIdTest)
+let paymentConfig = PaymentConfig(merchantId: merchantIdTest, accountId: accountIdTest, environment: Environment.sandbox)
 // swiftlint:disable line_length
 let cardKey = "MIIDlTCCAn0CBwDvPs8AcHAwDQYJKoZIhvcNAQELBQAwgZ0xCzAJBgNVBAYTAkZJMRkwFwYDVQQIDBBTb3V0aGVybiBGaW5sYW5kMREwDwYDVQQHDAhIZWxzaW5raTETMBEGA1UECgwKU29saW5vciBPeTEYMBYGA1UECwwPUGF5bWVudCBIaWdod2F5MTEwLwYDVQQDDChTUEggc3RhZ2luZyBtb2JpbGUgQ2VydGlmaWNhdGUgQXV0aG9yaXR5MCAXDTE1MDcwMzEwMDI0NVoYDzIwNjUwNjIwMTAwMjQ1WjB7MQswCQYDVQQGEwJGSTEZMBcGA1UECAwQU291dGhlcm4gRmlubGFuZDERMA8GA1UEBwwISGVsc2lua2kxEzARBgNVBAoMClNvbGlub3IgT3kxGDAWBgNVBAsMD1BheW1lbnQgSGlnaHdheTEPMA0GA1UEAwwGbW9iaWxlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwTNgR67GUJNODCyJ6W8yRFzIN99DG3o7xMiF+ogzbXL/07d32diFTZF3MsuGQjEPg+aoUCgp7ly4dG0GBQi7HdpNYeY1ATdBiWit8FGl9Iu++kBDGbOxyvj1hhlvyem/lNsh0H06oODavXKCjE6NjRMgKTlu69d+ZRSQBbCxx8KAS8ApVy5cSwym8CkfxDvLyBFU+EIsuYXJ6zCpHZmBPiVM2Ev0YpNsIl/C5I25UKqIokiSpLZC3gd0dwyD7H0gJEg/TVL9dhjzKSkYkyVOM9T/W0w4x/jQrm33+1dyzvUw7TBH+Hbiv3BE1qAnSGVHtlzt2gcApKJWI38JqOev6wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAePsPR/zrYcEg1s59htZeghN+2HwkHl0wWHy5YI8EyqnjkFAE+oaYTizNH+Estm0k8DT5X3OIi1iCHg9YEHLZhYgmMkWGCpDKu7PQ5CCvEwz3pQuIfPXUwaiXcMu6HKpHm4xs1ZMOnmEhlk1GQXK5ksegXFhGgXK1BVKuFDNC6ST78GvEcURa0RaZA1Q6EPjpJw84PFP6l8wB2+eZybX9OufjqFSktC5mBbvhB+r9tQ/FNb0LdSmX+zCNS2k4mVSZ9OWT67D/e3XJCCC055mDAB2MEZULOfl3wQG10FU+hGJqN6VPmstGKqCJlSRQKFlBXSmLVYFCUD6gH4jHl2mnL"
 
@@ -87,7 +87,7 @@ let networkErrorTest: ErrorTest = .networkError("FAILED")
 class PaymentContextSpec: QuickSpec {
     
     func addEncryptionKeyStub(statusCode: Int32? = nil) {
-        let url = try! PaymentHighwayEndpoint.encryptionKey(merchantId: merchantIdTest, accountId: accountIdTest, transactionId: transactionIdTest).asURL()
+        let url = try! PaymentHighwayEndpoint.encryptionKey(config: paymentConfig, transactionId: transactionIdTest).asURL()
         if let statusCode = statusCode {
             stub(condition: isHost(url.host!) && isPath(url.path)) { _ in
                 let obj = ["error": statusCode]
@@ -102,7 +102,7 @@ class PaymentContextSpec: QuickSpec {
     }
     
     func addTokenizeTransactionStub(statusCode: Int32? = nil) {
-        let url = try! PaymentHighwayEndpoint.tokenizeTransaction(merchantId: merchantIdTest, accountId: accountIdTest, transactionId: transactionIdTest, parameters: [:]).asURL()
+        let url = try! PaymentHighwayEndpoint.tokenizeTransaction(config: paymentConfig, transactionId: transactionIdTest, parameters: [:]).asURL()
         if let statusCode = statusCode {
             stub(condition: isHost(url.host!) && isPath(url.path)) { _ in
                 let obj = ["error": statusCode]

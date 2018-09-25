@@ -10,31 +10,34 @@ import Alamofire
 enum PaymentHighwayEndpoint {
     
     // (ph)/mobile/(transactionId)/key
-    case encryptionKey(merchantId: MerchantId, accountId: AccountId, transactionId: TransactionId)
+    case encryptionKey(config: PaymentConfig, transactionId: TransactionId)
     
     //(ph)/mobile/(transactionId)/tokenize
-    case tokenizeTransaction(merchantId: MerchantId, accountId: AccountId, transactionId: TransactionId, parameters: [String: Any])
+    case tokenizeTransaction(config: PaymentConfig, transactionId: TransactionId, parameters: [String: Any])
 }
 
 extension PaymentHighwayEndpoint : Endpoint {
  
     var baseURL: URL {
-        let url = URL(string: Environment.current.baseURL)
-        precondition(url != nil)
-        return url!
+        switch self {
+        case .encryptionKey(let config, _):
+            return config.environment.baseURL
+        case .tokenizeTransaction(let config, _, _):
+            return config.environment.baseURL
+        }
     }
     
     var path: String? {
         switch self {
-        case .encryptionKey(_, _, let transactionId):
+        case .encryptionKey(_, let transactionId):
             return "/mobile/\(transactionId.id)/key"
-        case .tokenizeTransaction(_, _, let transactionId, _):
+        case .tokenizeTransaction(_, let transactionId, _):
             return "/mobile/\(transactionId.id)/tokenize"
         }
     }
     
     var parameters: Parameters? {
-        if case .tokenizeTransaction(_, _, _, let parameters) = self {
+        if case .tokenizeTransaction(_, _, let parameters) = self {
             return parameters
         }
         return nil
@@ -42,10 +45,10 @@ extension PaymentHighwayEndpoint : Endpoint {
 
     var requestAdapter: RequestAdapter? {
         switch self {
-        case .encryptionKey(let merchantId, let accountId, _):
-            return NetworkingRequestAdapter(merchantId: merchantId.id, accountId: accountId.id)
-        case .tokenizeTransaction(let merchantId, let accountId, _, _):
-            return NetworkingRequestAdapter(merchantId: merchantId.id, accountId: accountId.id)
+        case .encryptionKey(let config, _):
+            return NetworkingRequestAdapter(merchantId: config.merchantId.id, accountId: config.accountId.id)
+        case .tokenizeTransaction(let config, _, _):
+            return NetworkingRequestAdapter(merchantId: config.merchantId.id, accountId: config.accountId.id)
         }
     }
 }

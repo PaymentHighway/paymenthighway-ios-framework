@@ -7,21 +7,21 @@
 
 import Foundation
 
-public enum Environment: ServerType {
+/// Payment Highway environment interface
+public protocol EnvironmentInterface: ServerBaseURL {}
+
+public enum Environment: EnvironmentInterface {
     
-    #if DEBUG
-    public static var current: Environment = .sandbox
-    #else
-    public static var current: Environment = .production
-    #endif
-    
+    /// Payment Highway sandbox environment for testing
     case sandbox
+
+    /// Payment Highway production environment
     case production
-    
-    public var baseURL: String {
+
+    public var baseURL: URL {
         switch self {
-        case .sandbox: return "https://v1-hub-staging.sph-test-solinor.com/"
-        case .production: return "https://v1.api.paymenthighway.io/"
+        case .sandbox: return  URL(string: "https://v1-hub-staging.sph-test-solinor.com/")!
+        case .production: return URL(string: "https://v1.api.paymenthighway.io/")!
         }
     }
 }
