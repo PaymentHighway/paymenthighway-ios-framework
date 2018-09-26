@@ -58,7 +58,7 @@ It renders a `Cancel` and `Add card` buttons so it must be presented inside a `U
 
 `Presenter` helper can be used to show the View Controller.
 
-AddCardViewController as api showError(message) to show simple toast view with the error message.
+AddCardViewController provide api showError(message) to show simple toast view with the error message.
 
 ### Presenter
 
@@ -129,6 +129,7 @@ Example to create own theme from `DefaultTheme`
 ```swift
 class MyTheme: DefaultTheme {
     override init() {
+        super.init()
         primaryBackgroundColor = UIColor(hexInt: 0x0000ff)
         secondaryBackgroundColor = UIColor(hexInt: 0xff0000)
     }
@@ -137,9 +138,9 @@ class MyTheme: DefaultTheme {
 
 Example to modify the `DefaultTheme`
 ```swift
-let modifiedTheme = DefaultTheme.instance
-modifiedTheme.primaryBackgroundColor = UIColor(hexInt: 0x0000ff)
-secondaryBackgroundColor = UIColor(hexInt: 0xff0000)
+let theme = DefaultTheme.instance
+theme.primaryBackgroundColor = UIColor(hexInt: 0x0000ff)
+theme.secondaryBackgroundColor = UIColor(hexInt: 0xff0000)
 ```
 
 Implementation of own `Theme`

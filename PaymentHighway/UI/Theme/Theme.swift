@@ -94,6 +94,10 @@ public protocol Theme: class {
     /// Font used in the views
     ///
     var font: UIFont { get set }
+
+    /// Expiry date picker enabled
+    ///
+    var expiryDatePicker: Bool { get set }
 }
 
 extension Theme {

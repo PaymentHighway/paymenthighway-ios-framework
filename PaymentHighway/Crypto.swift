@@ -14,7 +14,7 @@ import CryptoSwift
 private func loadDER(_ publicKeyFileContent: Data) -> SecKey? {
     let certificate = SecCertificateCreateWithData(kCFAllocatorDefault, publicKeyFileContent as CFData)
     let policy = SecPolicyCreateBasicX509()
-    var unmanagedTrust : SecTrust? = nil
+    var unmanagedTrust : SecTrust? 
     let status = SecTrustCreateWithCertificates(certificate!, policy, &unmanagedTrust)
     if status != 0 {
         print("SecTrustCreateWithCertificates fail. Error Code: \(status)")

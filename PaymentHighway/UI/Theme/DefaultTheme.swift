@@ -23,6 +23,7 @@ private let defaultFontSize: CGFloat = 13.0
 private let defaultTextImages: [TextFieldType] = [.cardNumber, .expiryDate, .securityCode]
 private let defaultTextPaddingX: CGFloat = 20.0
 private let defaultShowKeyboard = false
+private let defaultExpiryDatePicker = false
 
 /// Default implementation of the Theme
 ///
@@ -110,6 +111,10 @@ open class DefaultTheme : Theme {
     ///
     public var font: UIFont
     
+    /// Expiry date picker enabled
+    ///
+    public var expiryDatePicker: Bool
+    
     public init() {
         self.placeholderAnimationDuration = defaulPlaceholderAnimationDuration
         self.borderRadius = defaulRoundedBorderRadius
@@ -130,5 +135,6 @@ open class DefaultTheme : Theme {
         self.showKeyboard = defaultShowKeyboard
         self.emphasisFont = UIFont.systemFont(ofSize: defaultFontSize+1, weight: .bold)
         self.font = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
+        self.expiryDatePicker = defaultExpiryDatePicker
     }
 }
