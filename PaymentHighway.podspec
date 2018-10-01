@@ -18,7 +18,9 @@ Pod::Spec.new do |s|
   s.resources = ["PaymentHighway/**/*.{xib,lproj,xcassets,png}"]
   s.source_files  = "PaymentHighway/**/*.{swift,h}"
   s.frameworks  = "Foundation", "UIKit"
- 
+  s.resource_bundles = {
+    'PaymentHighway' => ['PaymentHighway/**/*.{xib,lproj,xcassets,png}']
+  } 
   s.dependency "Alamofire", "~> 4.7.3"
   s.dependency "CryptoSwift", "~> 0.12.0"
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>PaymentConfig Structure Reference</title>
+    <title>Environment Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/PaymentConfig" class="dashAnchor"></a>
-    <a title="PaymentConfig Structure Reference"></a>
+    <a name="//apple_ref/swift/Enum/Environment" class="dashAnchor"></a>
+    <a title="Environment Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">PaymentHighway Docs</a> (69% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">PaymentHighway Reference</a>
         <img id="carat" src="../img/carat.png" />
-        PaymentConfig Structure Reference
+        Environment Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -170,14 +170,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>PaymentConfig</h1>
+            <h1>Environment</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PaymentConfig</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Environment</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ServerType.html">ServerType</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Payment Highway configuration</p>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -186,9 +186,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14PaymentHighway0A6ConfigVAcA10MerchantIdV08merchantE0_AA07AccountE0V07accountE0tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(merchantId:accountId:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14PaymentHighway0A6ConfigVAcA10MerchantIdV08merchantE0_AA07AccountE0V07accountE0tcfc">init(merchantId:accountId:)</a>
+                    <a name="/s:14PaymentHighway11EnvironmentO7currentACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/current" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway11EnvironmentO7currentACvpZ">current</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -203,7 +203,106 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">merchantId</span><span class="p">:</span> <span class="kt"><a href="../Structs/MerchantId.html">MerchantId</a></span><span class="p">,</span> <span class="nv">accountId</span><span class="p">:</span> <span class="kt"><a href="../Structs/AccountId.html">AccountId</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">current</span><span class="p">:</span> <span class="kt">Environment</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/current" class="dashAnchor"></a>
+                    <a class="token" href="#/">current</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway11EnvironmentO7sandboxA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/sandbox" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway11EnvironmentO7sandboxA2CmF">sandbox</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">sandbox</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway11EnvironmentO10productionA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/production" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway11EnvironmentO10productionA2CmF">production</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">production</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway11EnvironmentO7baseURLSSvp"></a>
+                    <a name="//apple_ref/swift/Property/baseURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway11EnvironmentO7baseURLSSvp">baseURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">baseURL</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>

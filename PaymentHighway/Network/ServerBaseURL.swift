@@ -9,6 +9,6 @@ import Foundation
 
 /// Interface to provide endpoint base URL
 ///
-public protocol ServerType {
-    static var baseURL: String { get }
+public protocol ServerBaseURL {
+    var baseURL: URL { get }
 }

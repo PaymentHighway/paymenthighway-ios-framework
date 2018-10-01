@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PaymentHighway
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
