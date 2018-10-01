@@ -9,30 +9,9 @@
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
-      "line": 10,
+      "line": 13,
       "symbol": "Environment",
       "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
-      "line": 13,
-      "symbol": "Environment.current",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
-      "line": 18,
-      "symbol": "Environment.sandbox",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Core/Environment.swift",
-      "line": 19,
-      "symbol": "Environment.production",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
@@ -107,8 +86,8 @@
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Models/PaymentConfig.swift",
-      "line": 20,
-      "symbol": "PaymentConfig.init(merchantId:accountId:)",
+      "line": 23,
+      "symbol": "PaymentConfig.init(merchantId:accountId:environment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -134,16 +113,9 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Network/PaymentHighwayEndpoint.swift",
-      "line": null,
-      "symbol": "PaymentHighwayEndpoint",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Network/ServerType.swift",
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/Network/ServerBaseURL.swift",
       "line": 13,
-      "symbol": "ServerType.baseURL",
+      "symbol": "ServerBaseURL.baseURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -233,15 +205,22 @@
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/ExpirationDateTextField.swift",
-      "line": 14,
+      "line": 19,
       "symbol": "ExpiryDateTextField.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/ExpirationDateTextField.swift",
-      "line": 25,
+      "line": 38,
       "symbol": "ExpiryDateTextField.textField(_:shouldChangeCharactersIn:replacementString:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/ExpirationDateTextField.swift",
+      "line": 46,
+      "symbol": "ExpiryDateTextField.canPerformAction(_:withSender:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -269,7 +248,7 @@
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/Presentation/PresentationType.swift",
       "line": 11,
-      "symbol": "PresentationType.custom",
+      "symbol": "PresentationType.custom(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -471,7 +450,7 @@
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/Theme/DefaultTheme.swift",
-      "line": 113,
+      "line": 118,
       "symbol": "DefaultTheme.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
