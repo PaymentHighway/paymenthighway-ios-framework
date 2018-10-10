@@ -299,8 +299,8 @@ class EndpointSpec: QuickSpec {
             }
             
             it("should have http body and headers") {
-                var httpBody: Data? = nil
-                var headers: [String: String]? = nil
+                var httpBody: Data?
+                var headers: [String: String]?
                 
                 stub(condition: isHost(self.endpoint2URL.host!) && isPath(self.endpoint2URL.path)) { request in
                     httpBody = request.ohhttpStubs_httpBody

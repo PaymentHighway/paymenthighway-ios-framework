@@ -18,12 +18,10 @@ extension String {
     /// - parameter r: The range of the substring wanted
     /// - returns: The found substring
     subscript (range: Range<Int>) -> String {
-        get {
-            let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
-            let endIndex = self.index(startIndex, offsetBy: range.upperBound - range.lowerBound)
-            
-            return String(self[(startIndex ..< endIndex)])
-        }
+        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = self.index(startIndex, offsetBy: range.upperBound - range.lowerBound)
+        
+        return String(self[(startIndex ..< endIndex)])
     }
 
     /// Returns matches for given regexp

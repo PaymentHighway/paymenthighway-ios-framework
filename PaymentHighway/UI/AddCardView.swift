@@ -110,10 +110,12 @@ class AddCardView: UIView, ValidationDelegate {
         case cardNumberTextField:
             setBecomeFirstResponder(expiryDateTextField)
         case expiryDateTextField:
-            if cardNumberTextField.isValid {
-                setBecomeFirstResponder(securityCodeTextField)
-            } else {
-                setBecomeFirstResponder(cardNumberTextField)
+            if !theme.expiryDatePicker {
+                if cardNumberTextField.isValid {
+                    setBecomeFirstResponder(securityCodeTextField)
+                } else {
+                    setBecomeFirstResponder(cardNumberTextField)
+                }
             }
         default:
             break

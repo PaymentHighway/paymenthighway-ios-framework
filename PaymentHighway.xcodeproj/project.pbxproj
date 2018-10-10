@@ -47,6 +47,7 @@
 		3753237B2109CCF700C0B67C /* BackendAdapterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */; };
 		3753237C2109CCFA00C0B67C /* BackendAdapterExampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */; };
 		3753237D2109CCFE00C0B67C /* BackendAdapterExampleEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240D20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift */; };
+		37A3CE18215A5C1600BA572A /* ExpiryDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3CE17215A5C1600BA572A /* ExpiryDatePickerView.swift */; };
 		37C823F520EE48B0007EDD90 /* EncryptionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823F420EE48B0007EDD90 /* EncryptionKey.swift */; };
 		37C823FF20EE4D66007EDD90 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823FE20EE4D66007EDD90 /* ApiResult.swift */; };
 		37C8240120EE5410007EDD90 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240020EE5410007EDD90 /* Decoder.swift */; };
@@ -286,6 +287,7 @@
 		3721E30420FE457400D64276 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		3721E30E20FE4A3200D64276 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		3728D1672100E15C00D04860 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		37A3CE17215A5C1600BA572A /* ExpiryDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDatePickerView.swift; sourceTree = "<group>"; };
 		37C823F420EE48B0007EDD90 /* EncryptionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKey.swift; sourceTree = "<group>"; };
 		37C823FE20EE4D66007EDD90 /* ApiResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResult.swift; sourceTree = "<group>"; };
 		37C8240020EE5410007EDD90 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
@@ -730,6 +732,7 @@
 				3721E2FF20FD328F00D64276 /* CardNumberTextField.swift */,
 				3721E30120FD494500D64276 /* SecurityCodeTextField.swift */,
 				3718E6F821104117007C577A /* AddCardView.xib */,
+				37A3CE17215A5C1600BA572A /* ExpiryDatePickerView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1059,6 +1062,7 @@
 				03F9E0091E6D5B710059B7F2 /* SecureSigner.swift in Sources */,
 				37F49D9920EB6E710062ED1C /* NetworkError.swift in Sources */,
 				37C823F520EE48B0007EDD90 /* EncryptionKey.swift in Sources */,
+				37A3CE18215A5C1600BA572A /* ExpiryDatePickerView.swift in Sources */,
 				37F49D9720EB5DC10062ED1C /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
