@@ -8,20 +8,35 @@
 
 import PaymentHighway
 
+extension TextFieldType {
+    func iconId(cardBrand: CardBrand?) -> String {
+        switch self {
+        case .cardNumber: return "ccnumDark"
+        case .expiryDate: return "dateDark"
+        case .securityCode: return "lockDark"
+        }
+    }
+}
+
 class DarkTheme: DefaultTheme {
     override init() {
         super.init()
-        borderRadius = 0
-        textImages = []
-        primaryBackgroundColor = UIColor(hexInt: 0x31698a)
-        secondaryBackgroundColor = UIColor(hexInt: 0x6897bb)
-        primaryForegroundColor = UIColor.darkGray
+        barTintColor = UIColor.black
+        primaryBackgroundColor = UIColor.black
+        secondaryBackgroundColor = UIColor.black
+        primaryForegroundColor = UIColor.white
         primaryActiveForegroundColor = UIColor.white
-        secondaryForegroundColor = primaryForegroundColor
-        secondaryActiveForegroundColor = primaryActiveForegroundColor
-        errorForegroundColor = UIColor(hexInt: 0xa0d7ce)
-        errorActiveForegroundColor = UIColor(hexInt: 0x90e2bc)
-        highlightColor = UIColor(hexInt: 0x3366ff)
-        highlightDisableColor = UIColor.darkGray
+        secondaryForegroundColor = UIColor(hexInt: 0xd261e7)
+        secondaryActiveForegroundColor = secondaryForegroundColor
+    }
+    
+    override func textImageView(textFieldType: TextFieldType, cardBrand: CardBrand? = nil) -> UIView? {
+        let iconImageView = UIImageView(frame: CGRect.zero)
+        iconImageView.image = UIImage(named: textFieldType.iconId(cardBrand: cardBrand),
+                                      in: Bundle(for: type(of: self)),
+                                      compatibleWith: nil)
+        iconImageView.frame = CGRect(x: 0, y: 0, width: textImageHeight, height: textImageHeight)
+        iconImageView.contentMode = UIViewContentMode.scaleAspectFit
+        return iconImageView
     }
 }

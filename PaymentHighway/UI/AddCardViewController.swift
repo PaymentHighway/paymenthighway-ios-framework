@@ -54,14 +54,14 @@ public class AddCardViewController: UIViewController, ValidationDelegate {
         cancelButton.setTitleTextAttributes([.foregroundColor: theme.highlightColor], for: .normal)
         cancelButton.setTitleTextAttributes([.foregroundColor: theme.highlightDisableColor], for: .disabled)
         navigationItem.leftBarButtonItem = cancelButton
-        
+
         handleRightBarButton(spinner: false)
        
         addCardView.validationDelegate = self
         addCardView?.theme = theme
 
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = theme.secondaryBackgroundColor
+        navigationController?.navigationBar.barTintColor = theme.barTintColor
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.primaryForegroundColor, .font: theme.emphasisFont]
     }
     

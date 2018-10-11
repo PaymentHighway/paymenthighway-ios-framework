@@ -11,7 +11,7 @@ open class ExpiryDateTextField: TextField {
 
     private var cardExpiryDateDeleting = false
 
-    lazy var expiryDatePicker: ExpiryDatePickerView = {
+    private lazy var expiryDatePicker: ExpiryDatePickerView = {
         let picker = ExpiryDatePickerView()
         return picker
     }()
