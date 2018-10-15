@@ -101,6 +101,19 @@ public protocol Theme: class {
     /// Expiry date picker enabled
     ///
     var expiryDatePicker: Bool { get set }
+
+    /// Toast position
+    ///
+    var toastPosition: ToastPosition { get set }
+
+    /// Toast radius
+    ///
+    var toastRadius: CGFloat { get set }
+
+    /// Toast padding
+    ///
+    var toastPadding: CGFloat { get set }
+
 }
 
 extension Theme {
@@ -125,5 +138,18 @@ extension Theme {
             return isActive ? errorActiveForegroundColor : errorForegroundColor
         }
         return isActive ? secondaryActiveForegroundColor : secondaryForegroundColor
+    }
+}
+
+extension Theme {
+    func setTheme(_ label: UILabel, text: String?, isEmphasisFont: Bool = false, fontScale: CGFloat? = nil) {
+        var labelFont = isEmphasisFont ? emphasisFont : font
+        if let fontScale = fontScale {
+            labelFont = UIFont(name: labelFont.fontName, size: labelFont.pointSize * fontScale)!
+        }
+        label.text = text
+        label.font = labelFont
+        label.textColor = primaryForegroundColor
+        label.backgroundColor = secondaryBackgroundColor
     }
 }

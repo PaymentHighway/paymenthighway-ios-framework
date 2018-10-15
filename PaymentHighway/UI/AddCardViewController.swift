@@ -8,7 +8,7 @@
 import UIKit
 
 public protocol AddCardDelegate: class {
-    func cancel()
+    func addCardCancelled()
     func addCard(_ card: CardData)
 }
 
@@ -20,18 +20,9 @@ public protocol AddCardDelegate: class {
 /// User can fill out the form and on submission card data will be provided to addCard delegate.
 /// User can cancel the form and proper delegate call is performed.
 ///
-public class AddCardViewController: UIViewController, ValidationDelegate {
+public class AddCardViewController: BaseViewController, ValidationDelegate {
     
-    @IBOutlet var addCardView: AddCardView!
-    
-    var addCardButton: UIBarButtonItem!
-    var cancelButton: UIBarButtonItem!
-    
-    var theme: Theme {
-        didSet {
-            addCardView?.theme = theme
-        }
-    }
+    @IBOutlet weak var addCardView: AddCardView!
     
     /// The add card delegate
     public weak var addCardDelegate: AddCardDelegate?
@@ -39,8 +30,10 @@ public class AddCardViewController: UIViewController, ValidationDelegate {
     /// Initializes a new `AddCardViewController` with thecprovided theme.
     ///
     public init(theme: Theme = DefaultTheme.instance) {
-        self.theme = theme
-        super.init(nibName: "AddCardView", bundle: Bundle(for: type(of: self)))
+        let okButtonLabel = NSLocalizedString("AddCardButtonTitle",
+                                                   bundle: Bundle(for: type(of: self)),
+                                                   comment: "The text shown on the 'add card' button")
+        super.init(theme: theme, nibName: "AddCardViewController", okButtonLabel: okButtonLabel)
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -49,81 +42,44 @@ public class AddCardViewController: UIViewController, ValidationDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddCardViewController.cancelPressed(_:)))
-        cancelButton.setTitleTextAttributes([.foregroundColor: theme.highlightColor], for: .normal)
-        cancelButton.setTitleTextAttributes([.foregroundColor: theme.highlightDisableColor], for: .disabled)
-        navigationItem.leftBarButtonItem = cancelButton
-
-        handleRightBarButton(spinner: false)
-       
+        view.backgroundColor = theme.primaryBackgroundColor
         addCardView.validationDelegate = self
         addCardView?.theme = theme
-
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = theme.barTintColor
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.primaryForegroundColor, .font: theme.emphasisFont]
+        themeDidSet = {
+            self.addCardView.theme = self.theme
+        }
     }
     
     public func isValidDidChange(_ isValid: Bool, _ textField: TextField?) {
-        self.addCardButton.isEnabled = isValid
+        self.okButton.isEnabled = isValid
     }
     
-    public func showError(message: String) {
-        enableUserInput(enabled: true)
-        addCardView.showError(message: message)
-    }
+    public override func showToast(message: String, completion: (() -> Void)? = nil) {
+        super.showToast(message: message) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.enableUserInput(enabled: true, okButtonEnabled: strongSelf.addCardView.isValid)
+            completion?()
+        }
+   }
     
-    @objc func cancelPressed(_ sender: UIBarButtonItem) {
+    @objc override func cancelPressed(_ sender: Any) {
         finish()
     }
     
-    @objc func addCardPressed(_ sender: Any) {
-        if let pan = addCardView.cardNumberTextField.text,
-           let cvc = addCardView.securityCodeTextField.text,
-           let expiryDateString =  addCardView.expiryDateTextField.text,
-           let expiryDate = ExpiryDate(expiryDate:expiryDateString) {
-            let card = CardData(pan: pan, cvc: cvc, expiryDate: expiryDate)
+    @objc override func okPressed(_ sender: Any) {
+        if let card = addCardView.card {
             finish(card)
         }
     }
     
-    private func enableUserInput(enabled: Bool) {
-        handleRightBarButton(spinner: !enabled)
-        addCardView.isUserInteractionEnabled = enabled
-        cancelButton.isEnabled = enabled
-    }
-    
     private func finish(_ card: CardData? = nil) {
         if let card = card {
-            enableUserInput(enabled: false)
+            enableUserInput(enabled: false, okButtonEnabled: addCardView.isValid)
             addCardDelegate?.addCard(card)
         } else {
-            addCardDelegate?.cancel()
+            addCardDelegate?.addCardCancelled()
         }
         addCardView.endEditing(true)
     }
     
-    private func handleRightBarButton(spinner: Bool = false) {
-        navigationItem.rightBarButtonItem = nil
-        if spinner == false {
-            let addCardButtonTitle = NSLocalizedString("AddCardButtonTitle",
-                                                       bundle: Bundle(for: type(of: self)),
-                                                       comment: "The text shown on the 'add card' button")
-            addCardButton = UIBarButtonItem(title: addCardButtonTitle,
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(AddCardViewController.addCardPressed(_:)))
-            addCardButton.isEnabled = addCardView.isValid
-            addCardButton.setTitleTextAttributes([.foregroundColor: theme.highlightColor], for: .normal)
-            addCardButton.setTitleTextAttributes([.foregroundColor: theme.highlightDisableColor], for: .disabled)
-
-        } else {
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-            activityIndicator.hidesWhenStopped = false
-            activityIndicator.startAnimating()
-            addCardButton = UIBarButtonItem(customView: activityIndicator)
-        }
-        navigationItem.rightBarButtonItem = addCardButton
-    }
 }

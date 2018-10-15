@@ -26,6 +26,10 @@ private let defaultTextPaddingX: CGFloat = 24.0
 private let defaultShowKeyboard = false
 private let defaultExpiryDatePicker = false
 
+private let defaultToastPosition: ToastPosition = .top
+private let defaultToastRadius: CGFloat = 0
+private let defaultToastPadding: CGFloat = 0
+
 /// Default implementation of the Theme
 ///
 /// - seealso: `Theme`
@@ -120,6 +124,18 @@ open class DefaultTheme : Theme {
     ///
     public var expiryDatePicker: Bool
     
+    /// Toast position
+    ///
+    public var toastPosition: ToastPosition
+    
+    /// Toast radius
+    ///
+    public var toastRadius: CGFloat
+    
+    /// Toast padding
+    ///
+    public var toastPadding: CGFloat
+    
     public init() {
         placeholderAnimationDuration = defaultPlaceholderAnimationDuration
         borderRadius = defaultRoundedBorderRadius
@@ -142,6 +158,9 @@ open class DefaultTheme : Theme {
         emphasisFont = UIFont.systemFont(ofSize: defaultFontSize+1, weight: .bold)
         font = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
         expiryDatePicker = defaultExpiryDatePicker
+        toastPosition = defaultToastPosition
+        toastRadius = defaultToastRadius
+        toastPadding = defaultToastPadding
     }
     
     open func textImageView(textFieldType: TextFieldType, cardBrand: CardBrand? = nil) -> UIView? {

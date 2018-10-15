@@ -47,6 +47,13 @@
 		3753237B2109CCF700C0B67C /* BackendAdapterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240820EF437A007EDD90 /* BackendAdapterExample.swift */; };
 		3753237C2109CCFA00C0B67C /* BackendAdapterExampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240B20EF47AA007EDD90 /* BackendAdapterExampleError.swift */; };
 		3753237D2109CCFE00C0B67C /* BackendAdapterExampleEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8240D20EF47F7007EDD90 /* BackendAdapterExampleEndpoint.swift */; };
+		379EF966216F701F00A1D255 /* PayWithCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379EF965216F701F00A1D255 /* PayWithCardView.xib */; };
+		379EF968216F749800A1D255 /* PayWithCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379EF967216F749800A1D255 /* PayWithCardViewController.swift */; };
+		379EF98C216FE56900A1D255 /* AddCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379EF98B216FE56900A1D255 /* AddCardViewController.xib */; };
+		379EF9922170722300A1D255 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379EF9912170722300A1D255 /* BaseViewController.swift */; };
+		379EF99421708CE400A1D255 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379EF99321708CE400A1D255 /* Toast.swift */; };
+		379EF9962173C61400A1D255 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379EF9952173C61300A1D255 /* Purchase.swift */; };
+		379EF9982173C6BA00A1D255 /* PurchaseId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379EF9972173C6BA00A1D255 /* PurchaseId.swift */; };
 		37A3CE18215A5C1600BA572A /* ExpiryDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3CE17215A5C1600BA572A /* ExpiryDatePickerView.swift */; };
 		37C823F520EE48B0007EDD90 /* EncryptionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823F420EE48B0007EDD90 /* EncryptionKey.swift */; };
 		37C823FF20EE4D66007EDD90 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C823FE20EE4D66007EDD90 /* ApiResult.swift */; };
@@ -287,6 +294,13 @@
 		3721E30420FE457400D64276 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		3721E30E20FE4A3200D64276 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		3728D1672100E15C00D04860 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		379EF965216F701F00A1D255 /* PayWithCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayWithCardView.xib; sourceTree = "<group>"; };
+		379EF967216F749800A1D255 /* PayWithCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithCardViewController.swift; sourceTree = "<group>"; };
+		379EF98B216FE56900A1D255 /* AddCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCardViewController.xib; sourceTree = "<group>"; };
+		379EF9912170722300A1D255 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		379EF99321708CE400A1D255 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		379EF9952173C61300A1D255 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
+		379EF9972173C6BA00A1D255 /* PurchaseId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseId.swift; sourceTree = "<group>"; };
 		37A3CE17215A5C1600BA572A /* ExpiryDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDatePickerView.swift; sourceTree = "<group>"; };
 		37C823F420EE48B0007EDD90 /* EncryptionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKey.swift; sourceTree = "<group>"; };
 		37C823FE20EE4D66007EDD90 /* ApiResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResult.swift; sourceTree = "<group>"; };
@@ -714,6 +728,8 @@
 				37C823F420EE48B0007EDD90 /* EncryptionKey.swift */,
 				37C823FE20EE4D66007EDD90 /* ApiResult.swift */,
 				37C8240220EE5902007EDD90 /* NoData.swift */,
+				379EF9952173C61300A1D255 /* Purchase.swift */,
+				379EF9972173C6BA00A1D255 /* PurchaseId.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -723,7 +739,10 @@
 			children = (
 				3718E75221144626007C577A /* Theme */,
 				3721E30320FE423100D64276 /* Presentation */,
+				379EF9912170722300A1D255 /* BaseViewController.swift */,
 				37F49D7420E4C27A0062ED1C /* AddCardViewController.swift */,
+				379EF98B216FE56900A1D255 /* AddCardViewController.xib */,
+				3718E6F821104117007C577A /* AddCardView.xib */,
 				37E6138121071B1700618A4F /* AddCardView.swift */,
 				3718E7282111CE40007C577A /* TextFieldType.swift */,
 				3728D1672100E15C00D04860 /* TextField.swift */,
@@ -731,8 +750,10 @@
 				3721E2FD20FD264200D64276 /* ExpirationDateTextField.swift */,
 				3721E2FF20FD328F00D64276 /* CardNumberTextField.swift */,
 				3721E30120FD494500D64276 /* SecurityCodeTextField.swift */,
-				3718E6F821104117007C577A /* AddCardView.xib */,
 				37A3CE17215A5C1600BA572A /* ExpiryDatePickerView.swift */,
+				379EF965216F701F00A1D255 /* PayWithCardView.xib */,
+				379EF967216F749800A1D255 /* PayWithCardViewController.swift */,
+				379EF99321708CE400A1D255 /* Toast.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -946,6 +967,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				379EF98C216FE56900A1D255 /* AddCardViewController.xib in Resources */,
+				379EF966216F701F00A1D255 /* PayWithCardView.xib in Resources */,
 				044852971B3970A10034D0CA /* Media.xcassets in Resources */,
 				04B48B4B1B3305AA00616048 /* Localizable.strings in Resources */,
 				04B48B551B3305AB00616048 /* InfoPlist.strings in Resources */,
@@ -1029,6 +1052,8 @@
 				37F49D9020EA3EEE0062ED1C /* Environment.swift in Sources */,
 				37F49DAB20ECBAAB0062ED1C /* PaymentHighwayEndpoint.swift in Sources */,
 				03F9E0601E6DA70B0059B7F2 /* RequestAdapter.swift in Sources */,
+				379EF9922170722300A1D255 /* BaseViewController.swift in Sources */,
+				379EF9962173C61400A1D255 /* Purchase.swift in Sources */,
 				3721E2FE20FD264200D64276 /* ExpirationDateTextField.swift in Sources */,
 				37F49D6420E4BAED0062ED1C /* PaymentConfig.swift in Sources */,
 				37F49DB020ECCBD30062ED1C /* IdBase.swift in Sources */,
@@ -1040,9 +1065,12 @@
 				37D6BB3C20E278D1003800EE /* PaymentContext.swift in Sources */,
 				3721E30220FD494500D64276 /* SecurityCodeTextField.swift in Sources */,
 				37C823FF20EE4D66007EDD90 /* ApiResult.swift in Sources */,
+				379EF968216F749800A1D255 /* PayWithCardViewController.swift in Sources */,
 				37F49D7520E4C27A0062ED1C /* AddCardViewController.swift in Sources */,
+				379EF99421708CE400A1D255 /* Toast.swift in Sources */,
 				37F49DAE20ECC3E70062ED1C /* PaymentHighwayService.swift in Sources */,
 				37F49D6620E4BB090062ED1C /* Result.swift in Sources */,
+				379EF9982173C6BA00A1D255 /* PurchaseId.swift in Sources */,
 				3721E30020FD328F00D64276 /* CardNumberTextField.swift in Sources */,
 				37160540210760B1007B57A6 /* PresentationType.swift in Sources */,
 				3718E6E5210EFA79007C577A /* ValidationDelegate.swift in Sources */,

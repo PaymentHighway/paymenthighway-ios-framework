@@ -45,6 +45,21 @@ public class PaymentContext<BackendAdpaterType: BackendAdapter> {
             }
         }
     }
+
+    /// Pay with Card.
+    ///
+    /// - parameter purchase: purchase info
+    /// - parameter card: Card used for the payment
+    /// - parameter completion: Callback closure with the result of the operation
+    /// - seealso: Purchase
+    /// - seealso: CardData
+    /// - seealso: Result
+    ///
+//TODO
+//    public func payWithCard(purchase: Purchase, card: CardData,
+//                           completion: @escaping (Result<BackendAdpaterType.PayWithCardCompletedType, BackendAdpaterType.BackendAdapterErrorType>) -> Void) {
+//
+//    }
     
     private func tokenizeCard(transactionId: TransactionId,
                               card: CardData,

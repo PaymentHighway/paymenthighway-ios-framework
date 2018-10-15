@@ -11,6 +11,7 @@ public class Presenter<ViewControllerType: UIViewController>: NSObject, UIViewCo
 
     public let presentationType: PresentationType
     public var presentedViewController: ViewControllerType?
+    private var presentedHeight: CGFloat = 0
     
     public init(presentationType: PresentationType) {
         self.presentationType = presentationType
@@ -29,6 +30,7 @@ public class Presenter<ViewControllerType: UIViewController>: NSObject, UIViewCo
         navigation.transitioningDelegate = self
         dismissPresentedController(animated: false)
         self.presentedViewController = presentedViewController
+        presentedHeight = presentedViewController.view.bounds.height
         presentingViewController.present(navigation, animated: true)
     }
     
@@ -41,6 +43,7 @@ public class Presenter<ViewControllerType: UIViewController>: NSObject, UIViewCo
                                        source: UIViewController) -> UIPresentationController? {
         let presentationController = PresentationController(presentedViewController: presented, presenting: presenting)
         presentationController.presentationType = presentationType
+        presentationController.presentedHeight = presentedHeight
         return presentationController
     }
 }

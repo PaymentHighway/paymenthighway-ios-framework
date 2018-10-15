@@ -14,3 +14,9 @@
 "FillOutFormBelow" = "Täytä lomake";
 
 "MM/YY" = "KK/VV";
+
+/* The text shown on the 'pay with card' button */
+"PayWithCardButtonTitle" = "Pay";
+
+/* Fill in the information on your card */
+"PayWithCardInfo" = "Fill in the information on your card";

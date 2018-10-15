@@ -2,7 +2,6 @@
 //  SettingsViewController.swift
 //  PaymentHighway
 //
-//  Created by Stefano Pironato on 08/08/2018.
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
@@ -87,7 +86,7 @@ class SettingsViewController: UITableViewController {
             if let item = PresenterItem(rawValue: index) {
                 switch item {
                 case .fullScreen: return self.presenterType.isFullScreen
-                case .popupScreen: return self.presenterType.isHalfScreen
+                case .popupScreen: return self.presenterType.isFullView
                 }
             }
             return false
@@ -97,7 +96,7 @@ class SettingsViewController: UITableViewController {
             if let item = PresenterItem(rawValue: index) {
                 switch item {
                 case .fullScreen: presenterType = .fullScreen
-                case .popupScreen: presenterType = .halfScreen
+                case .popupScreen: presenterType = .fullView
                 }
                 delegate?.presentationTypeDidChange(presentationType: presenterType)
             }

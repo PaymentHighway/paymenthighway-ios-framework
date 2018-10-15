@@ -10,6 +10,7 @@ import UIKit
 class PresentationController: UIPresentationController {
     
     var presentationType: PresentationType = .fullScreen
+    var presentedHeight: CGFloat = 0
     
     var dimmingView: UIView?
     
@@ -43,6 +44,11 @@ class PresentationController: UIPresentationController {
             return CGRect(x: 0, y: containerView!.bounds.height - height, width: containerView!.bounds.width, height: height)
         case .halfScreen:
             return CGRect(x: 0, y: containerView!.bounds.height / 2, width: containerView!.bounds.width, height: containerView!.bounds.height / 2)
+        case .fullView:
+            if presentedHeight < containerView!.bounds.height {
+                return CGRect(x: 0, y: containerView!.bounds.height - presentedHeight, width: containerView!.bounds.width, height: presentedHeight)
+            }
+            fallthrough
         case .fullScreen:
             return  containerView!.bounds
         }

@@ -52,3 +52,20 @@ public enum NetworkError: Error {
     /// - parameters message: message error from server
     case internalError(Int, String)
 }
+
+extension NetworkError: CustomStringConvertible {
+    /// A description of the error
+    public var description: String {
+        switch self {
+        case .unknown: return "Unknown error."
+        case .invalidJson: return "Invalid JSON."
+        case .invalidURL(let message): return "Invalid URL: \(message)."
+        case .clientError(let statusCode): return "Client error: \(statusCode)."
+        case .serverError(let statusCode): return "Server error: \(statusCode)."
+        case .requestError(let error): return "Request error: \(error)"
+        case .unexpectedStatusCode(let httpUrlResponse): return "Unexpected Status Code: \(httpUrlResponse.statusCode)"
+        case .dataError(let message): return "Data error: \(message ?? "?")"
+        case .internalError(let code, let message): return "Internal Error: \n\(code) - \(message)"
+        }
+    }
+}

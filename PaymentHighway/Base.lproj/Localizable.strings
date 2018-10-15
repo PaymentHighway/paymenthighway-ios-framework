@@ -14,3 +14,10 @@
 "FillOutFormBelow" = "Fill out the form";
 
 "MM/YY" = "MM/YY";
+
+/* The text shown on the 'pay with card' button */
+"PayWithCardButtonTitle" = "Pay";
+
+/* Fill in the information on your card */
+"PayWithCardInfo" = "Fill in the information on your card";
+

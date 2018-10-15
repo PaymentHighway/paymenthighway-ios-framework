@@ -10,19 +10,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddCardViewController" customModule="PaymentHighway" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddCardView" customModule="PaymentHighway" customModuleProvider="target">
             <connections>
-                <outlet property="addCardView" destination="Uji-te-B93" id="2ZT-5v-GdG"/>
-                <outlet property="view" destination="Uji-te-B93" id="7DT-Oy-Vf4"/>
+                <outlet property="cardNumberTextField" destination="0lW-sd-fLD" id="0GP-kc-AM0"/>
+                <outlet property="expiryDateTextField" destination="Pmy-s2-eNV" id="8ze-5Y-czQ"/>
+                <outlet property="securityCodeTextField" destination="L5p-eK-F7F" id="89p-9W-Tbc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="AddCardView" id="Uji-te-B93" customClass="AddCardView" customModule="PaymentHighway" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleToFill" id="Uji-te-B93">
+            <rect key="frame" x="0.0" y="0.0" width="463" height="174"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="CARD NUMBER" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lW-sd-fLD" userLabel="Card Number Field" customClass="CardNumberTextField" customModule="PaymentHighway" customModuleProvider="target">
-                    <rect key="frame" x="20" y="42" width="335" height="55"/>
+                    <rect key="frame" x="20" y="22" width="423" height="55"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="xCG-p9-v1e"/>
@@ -31,7 +32,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-s2-eNV" userLabel="Expiry Date Field" customClass="ExpiryDateTextField" customModule="PaymentHighway" customModuleProvider="target">
-                    <rect key="frame" x="20" y="119" width="157.5" height="55"/>
+                    <rect key="frame" x="20" y="99" width="201.5" height="55"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="aC6-n1-EXx"/>
@@ -40,59 +41,28 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="CVC" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L5p-eK-F7F" userLabel="Security Code Field" customClass="SecurityCodeTextField" customModule="PaymentHighway" customModuleProvider="target">
-                    <rect key="frame" x="197.5" y="119" width="157.5" height="55"/>
+                    <rect key="frame" x="241.5" y="99" width="201.5" height="55"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJr-CS-H5L">
-                    <rect key="frame" x="0.0" y="-30" width="375" height="50"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="xMp-ib-WF2"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="iXe-ml-4w3">
-                    <rect key="frame" x="37.5" y="603" width="300" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="TOG-Fe-dlH"/>
-                        <constraint firstAttribute="width" constant="300" id="vM8-sm-to2"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="0lW-sd-fLD" firstAttribute="leading" secondItem="lGD-Ug-6Ia" secondAttribute="leading" constant="20" id="45d-fD-by4"/>
                 <constraint firstItem="lGD-Ug-6Ia" firstAttribute="trailing" secondItem="0lW-sd-fLD" secondAttribute="trailing" constant="20" id="AcD-LI-hGE"/>
-                <constraint firstItem="lGD-Ug-6Ia" firstAttribute="bottom" secondItem="iXe-ml-4w3" secondAttribute="bottom" constant="20" id="E1f-ca-01k"/>
                 <constraint firstItem="L5p-eK-F7F" firstAttribute="width" secondItem="Pmy-s2-eNV" secondAttribute="width" id="Ftd-4l-tOJ"/>
-                <constraint firstItem="iXe-ml-4w3" firstAttribute="centerX" secondItem="lGD-Ug-6Ia" secondAttribute="centerX" id="G2f-iB-xHu"/>
                 <constraint firstItem="Pmy-s2-eNV" firstAttribute="leading" secondItem="lGD-Ug-6Ia" secondAttribute="leading" constant="20" id="LNB-ZR-PNr"/>
-                <constraint firstItem="FJr-CS-H5L" firstAttribute="leading" secondItem="lGD-Ug-6Ia" secondAttribute="leading" id="NRq-yn-Cpa"/>
                 <constraint firstItem="L5p-eK-F7F" firstAttribute="centerY" secondItem="Pmy-s2-eNV" secondAttribute="centerY" id="SBe-Nj-fff"/>
                 <constraint firstItem="lGD-Ug-6Ia" firstAttribute="trailing" secondItem="L5p-eK-F7F" secondAttribute="trailing" constant="20" id="UJp-6J-73z"/>
                 <constraint firstItem="0lW-sd-fLD" firstAttribute="top" secondItem="lGD-Ug-6Ia" secondAttribute="top" constant="22" id="a2h-Sx-BND"/>
-                <constraint firstItem="FJr-CS-H5L" firstAttribute="top" secondItem="lGD-Ug-6Ia" secondAttribute="top" constant="-50" id="c58-qc-LBN"/>
                 <constraint firstItem="L5p-eK-F7F" firstAttribute="leading" secondItem="Pmy-s2-eNV" secondAttribute="trailing" constant="20" id="dQn-Ru-NUq"/>
                 <constraint firstItem="Pmy-s2-eNV" firstAttribute="top" secondItem="0lW-sd-fLD" secondAttribute="bottom" constant="22" id="h4f-03-dg8"/>
                 <constraint firstItem="L5p-eK-F7F" firstAttribute="height" secondItem="Pmy-s2-eNV" secondAttribute="height" id="icO-O5-vXS"/>
-                <constraint firstItem="lGD-Ug-6Ia" firstAttribute="trailing" secondItem="FJr-CS-H5L" secondAttribute="trailing" id="qPB-aK-CIZ"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="lGD-Ug-6Ia"/>
-            <connections>
-                <outlet property="cardNumberTextField" destination="0lW-sd-fLD" id="Azz-9X-ief"/>
-                <outlet property="errorLabel" destination="FJr-CS-H5L" id="eiq-hc-din"/>
-                <outlet property="expiryDateTextField" destination="Pmy-s2-eNV" id="r3w-fX-hvo"/>
-                <outlet property="securityCodeTextField" destination="L5p-eK-F7F" id="8tj-0G-cOb"/>
-                <outlet property="topLabelConstraint" destination="c58-qc-LBN" id="rwr-6q-bUe"/>
-            </connections>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="62" y="-694"/>
         </view>
     </objects>
-    <resources>
-        <image name="logo" width="184" height="44"/>
-    </resources>
 </document>

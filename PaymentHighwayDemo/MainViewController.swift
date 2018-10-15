@@ -2,7 +2,6 @@
 //  MainViewController.swift
 //  PaymentHighway
 //
-//  Created by Stefano Pironato on 08/08/2018.
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
@@ -47,9 +46,10 @@ func simpleAlert(title: String, message: String, seconds: Int = 0, completion: @
     return alertController
 }
 
-class MainViewController: UITableViewController, AddCardDelegate, SettingsDelegate {
+class MainViewController: UITableViewController, AddCardDelegate, PayWithCardDelegate, SettingsDelegate {
     
-    var presenter: Presenter<AddCardViewController>?
+    var presenterAddCard: Presenter<AddCardViewController>?
+    var presenterPayWithCard: Presenter<PayWithCardViewController>?
     var paymentContext: PaymentContext<BackendAdapterExample>!
     
     let merchantId = MerchantId(id: "test_merchantId")
@@ -57,7 +57,7 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
 
     let rowHeight: CGFloat = 50
     
-    var presentationType: PresentationType = .halfScreen
+    var presentationType: PresentationType = .fullView
     
     var themes: [ThemeItem: Theme] = [.default: DefaultTheme.instance, .dark: DarkTheme()]
     var themeItem: ThemeItem = .default
@@ -68,17 +68,19 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
     
     enum MainRowItem: Int, TableRowItem {
         case addCardView
+        case payWithCard
         case settings
 
         var title: String {
             switch self {
             case .addCardView: return "Add Card"
+            case .payWithCard: return "Pay with Card"
             case .settings: return "Settings"
             }
         }
         
         static var count: Int {
-            return 2
+            return 3
         }
     }
     
@@ -122,6 +124,7 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
         DispatchQueue.main.async(execute: {
             switch cellItem {
             case .addCardView: self.presentAddCardViewController(presentationType: self.presentationType)
+            case .payWithCard:  self.presentPayWithCardViewController(presentationType: self.presentationType)
             case .settings: self.presentSettingsViewController()
             }
         })
@@ -129,9 +132,9 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
     
     // MARK: AddCardDelegate
     
-    func cancel() {
-        self.presenter?.dismissPresentedController(animated: true) { () in
-            self.presenter = nil
+    func addCardCancelled() {
+        self.presenterAddCard?.dismissPresentedController(animated: true) { () in
+            self.presenterAddCard = nil
         }
     }
     
@@ -139,8 +142,8 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
         paymentContext.addCard(card: card) { (result) in
             switch result {
             case .success(let transactionToken):
-                self.presenter?.dismissPresentedController(animated: true) { () in
-                    self.presenter = nil
+                self.presenterAddCard?.dismissPresentedController(animated: true) { () in
+                    self.presenterAddCard = nil
                     let message = """
                     
                         Ready for payment:
@@ -154,9 +157,22 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
                     self.present(alert, animated: true)
                 }
             case .failure(let error):
-                self.presenter?.presentedViewController?.showError(message: "\(error)")
+                self.presenterAddCard?.presentedViewController?.showToast(message: "\(error)")
             }
         }
+    }
+
+    // MARK: PayWithCardDelegate
+
+    func paymentCancelled() {
+        self.presenterPayWithCard?.dismissPresentedController(animated: true) { () in
+            self.presenterPayWithCard = nil
+        }
+    }
+    
+    func executePayment(purchase: Purchase, card: CardData) {
+        //TODO
+        print("EXECUTE PAYMENT!!!!")
     }
 
     // MARK: SettingsDelegate
@@ -173,12 +189,24 @@ class MainViewController: UITableViewController, AddCardDelegate, SettingsDelega
     // MARK: private
     
     private func presentAddCardViewController(presentationType: PresentationType) {
-        guard presenter == nil else { return }
+        guard presenterAddCard == nil else { return }
         
         let addCardViewController = AddCardViewController(theme: theme)
         addCardViewController.addCardDelegate = self
-        presenter = Presenter(presentationType: presentationType)
-        presenter!.present(presentingViewController: self, presentedViewController: addCardViewController)
+        presenterAddCard = Presenter(presentationType: presentationType)
+        presenterAddCard!.present(presentingViewController: self, presentedViewController: addCardViewController)
+    }
+    
+    private func presentPayWithCardViewController(presentationType: PresentationType) {
+        guard presenterPayWithCard == nil else { return }
+        
+        let description = "This is the purchase description"
+        
+        let purchase = Purchase(purchaseId: PurchaseId(id: "purchaseID"), currency: "EUR", amount: 199.99, description: description)
+        let payWithCardViewController = PayWithCardViewController(purchase: purchase, theme: theme)
+        payWithCardViewController.payWithCardDelegate = self
+        presenterPayWithCard = Presenter(presentationType: presentationType)
+        presenterPayWithCard!.present(presentingViewController: self, presentedViewController: payWithCardViewController)
     }
     
     private func presentSettingsViewController() {

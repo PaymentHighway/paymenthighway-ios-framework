@@ -7,19 +7,24 @@
 
 import UIKit
 
-private let showErrorAnimation = 0.8
-private let delayHidingError = 800
-
 class AddCardView: UIView, ValidationDelegate {
+    
+    let nibName = "AddCardView"
+    var contentView: UIView?
     
     @IBOutlet weak var cardNumberTextField: CardNumberTextField!
     @IBOutlet weak var expiryDateTextField: ExpiryDateTextField!
     @IBOutlet weak var securityCodeTextField: SecurityCodeTextField!
-    
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var topLabelConstraint: NSLayoutConstraint!
 
     weak var validationDelegate: ValidationDelegate?
+    
+    var card: CardData? {
+        guard let pan = cardNumberTextField.text,
+              let cvc = securityCodeTextField.text,
+              let expiryDateString =  expiryDateTextField.text,
+            let expiryDate = ExpiryDate(expiryDate: expiryDateString) else { return nil }
+        return CardData(pan: pan, cvc: cvc, expiryDate: expiryDate)
+    }
     
     var theme: Theme = DefaultTheme.instance {
         didSet {
@@ -28,22 +33,33 @@ class AddCardView: UIView, ValidationDelegate {
         }
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        guard let view = loadViewFromNib() else { return }
+        view.frame = self.bounds
+        self.addSubview(view)
+        contentView = view
+    }
+    
+    func loadViewFromNib() -> UIView? {
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: nibName, bundle: bundle)
+        return nib.instantiate(withOwner: self, options: nil).first as? UIView
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         cardNumberTextField.validationDelegate = self
         expiryDateTextField.validationDelegate = self
         securityCodeTextField.validationDelegate = self
         securityCodeTextField.cardBrand = { [weak self] () in CardBrand(cardNumber: self?.cardNumberTextField.text ?? "")}
-        errorLabel.alpha = 0
         setTheme()
     }
     
     private func setTheme() {
+        contentView?.backgroundColor = theme.primaryBackgroundColor
         backgroundColor = theme.primaryBackgroundColor
-        errorLabel.font = theme.font
-        // Invert the error color
-        errorLabel.backgroundColor = theme.errorForegroundColor
-        errorLabel.textColor = theme.secondaryBackgroundColor
         cardNumberTextField.theme = theme
         expiryDateTextField.theme = theme
         securityCodeTextField.theme = theme
@@ -72,30 +88,6 @@ class AddCardView: UIView, ValidationDelegate {
            let currentTextField = textField {
             moveToNextInvalid(current: currentTextField)
         }
-    }
-    
-    func showError(message: String) {
-        self.errorLabel.text = message
-        UIView.animate(withDuration: showErrorAnimation, delay: 0.0, options: .curveEaseOut,
-                       animations: {
-                           self.errorLabel.alpha = 1.0
-                           self.topLabelConstraint.constant = 0
-                       },
-                       completion: { _ in
-                           self.hideError()
-                       })
-    }
-    
-    private func hideError() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(delayHidingError), execute: {
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseIn, .beginFromCurrentState],
-                           animations: {
-                               self.errorLabel.alpha = 0
-                           },
-                           completion: { _ in
-                               self.topLabelConstraint.constant = -(self.errorLabel.bounds.height)
-                           })
-        })
     }
     
     private func moveToNextInvalid(current: TextField) {
