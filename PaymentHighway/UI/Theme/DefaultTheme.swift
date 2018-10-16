@@ -5,23 +5,24 @@
 //  Copyright © 2018 Payment Highway Oy. All rights reserved.
 //
 
-private let defaulBackgroundColor = UIColor.white
-private let defaultPrimaryForegroundColor = UIColor(hexInt: 0x808080)
-private let defaultPrimaryActiveForegroundColor = UIColor(hexInt:  0x000000)
-private let defaultSecondaryForegroundColor = defaultPrimaryForegroundColor
-private let defaultSecondaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
-private let defaultErrorForegroundColor = UIColor(hexInt: 0xe80f0f)
-private let defaultErrorActiveForegroundColor = UIColor(hexInt: 0x993333)
-private let defaultHighlightColor = UIColor(hexInt: 0x007AFF)
-private let defaultHighlightDisableColor = UIColor.gray
+private let defaultBarTintColor =  UIColor(hexInt: 0xf6f6f6)
+private let defaultBackgroundColor = UIColor.white
+private let defaultPrimaryForegroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 153)
+private let defaultPrimaryActiveForegroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 222)
+private let defaultSecondaryForegroundColor = UIColor(hexInt: 0x9d00ba)
+private let defaultSecondaryActiveForegroundColor = defaultSecondaryForegroundColor
+private let defaultErrorForegroundColor = UIColor.red
+private let defaultErrorActiveForegroundColor = UIColor.red
+private let defaultHighlightColor = defaultSecondaryForegroundColor
+private let defaultHighlightDisableColor = UIColor(red: 124, green: 124, blue: 124, alpha: 153)
 
-private let defaulRoundedBorderRadius: CGFloat = 20
-private let defaultPlaceholderFontScale: CGFloat = 0.7
-private let defaulBorderWidth: CGFloat = 1.5
-private let defaulPlaceholderAnimationDuration: Double = 0.25
-private let defaultFontSize: CGFloat = 13.0
-private let defaultTextImages: [TextFieldType] = [.cardNumber, .expiryDate, .securityCode]
-private let defaultTextPaddingX: CGFloat = 20.0
+private let defaultRoundedBorderRadius: CGFloat = 28
+private let defaultPlaceholderFontScale: CGFloat = 0.8
+private let defaultBorderWidth: CGFloat = 1.5
+private let defaultPlaceholderAnimationDuration = 0.25
+private let defaultFontSize: CGFloat = 13
+private let defaultTextImageHeight: CGFloat = 24
+private let defaultTextPaddingX: CGFloat = 24.0
 private let defaultShowKeyboard = false
 private let defaultExpiryDatePicker = false
 
@@ -51,13 +52,17 @@ open class DefaultTheme : Theme {
     ///
     public var borderWidth: CGFloat
     
-    /// returns which TextFields will have image
+    /// returns height of the Text Field image
     ///
-    public var textImages: [TextFieldType]
+    public var textImageHeight: CGFloat
     
     /// X padding for Text Field
     ///
     public var textPaddingX: CGFloat
+    
+    /// Bar tin color
+    ///
+    public var barTintColor: UIColor
     
     /// View background color
     ///
@@ -116,25 +121,36 @@ open class DefaultTheme : Theme {
     public var expiryDatePicker: Bool
     
     public init() {
-        self.placeholderAnimationDuration = defaulPlaceholderAnimationDuration
-        self.borderRadius = defaulRoundedBorderRadius
-        self.placeholderFontScale = defaultPlaceholderFontScale
-        self.borderWidth = defaulBorderWidth
-        self.textImages = defaultTextImages
-        self.textPaddingX = defaultTextPaddingX
-        self.primaryBackgroundColor = defaulBackgroundColor
-        self.secondaryBackgroundColor = defaulBackgroundColor
-        self.primaryForegroundColor = defaultPrimaryForegroundColor
-        self.primaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
-        self.secondaryForegroundColor = defaultSecondaryForegroundColor
-        self.secondaryActiveForegroundColor = defaultSecondaryActiveForegroundColor
-        self.errorForegroundColor = defaultErrorForegroundColor
-        self.errorActiveForegroundColor = defaultErrorActiveForegroundColor
-        self.highlightColor = defaultHighlightColor
-        self.highlightDisableColor = defaultHighlightDisableColor
-        self.showKeyboard = defaultShowKeyboard
-        self.emphasisFont = UIFont.systemFont(ofSize: defaultFontSize+1, weight: .bold)
-        self.font = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
-        self.expiryDatePicker = defaultExpiryDatePicker
+        placeholderAnimationDuration = defaultPlaceholderAnimationDuration
+        borderRadius = defaultRoundedBorderRadius
+        placeholderFontScale = defaultPlaceholderFontScale
+        borderWidth = defaultBorderWidth
+        textImageHeight = defaultTextImageHeight
+        textPaddingX = defaultTextPaddingX
+        barTintColor = defaultBarTintColor
+        primaryBackgroundColor = defaultBackgroundColor
+        secondaryBackgroundColor = defaultBackgroundColor
+        primaryForegroundColor = defaultPrimaryForegroundColor
+        primaryActiveForegroundColor = defaultPrimaryActiveForegroundColor
+        secondaryForegroundColor = defaultSecondaryForegroundColor
+        secondaryActiveForegroundColor = defaultSecondaryActiveForegroundColor
+        errorForegroundColor = defaultErrorForegroundColor
+        errorActiveForegroundColor = defaultErrorActiveForegroundColor
+        highlightColor = defaultHighlightColor
+        highlightDisableColor = defaultHighlightDisableColor
+        showKeyboard = defaultShowKeyboard
+        emphasisFont = UIFont.systemFont(ofSize: defaultFontSize+1, weight: .bold)
+        font = UIFont.systemFont(ofSize: defaultFontSize, weight: .regular)
+        expiryDatePicker = defaultExpiryDatePicker
+    }
+    
+    open func textImageView(textFieldType: TextFieldType, cardBrand: CardBrand? = nil) -> UIView? {
+        let iconImageView = UIImageView(frame: CGRect.zero)
+        iconImageView.image = UIImage(named: textFieldType.iconId(cardBrand: cardBrand),
+                                      in: Bundle(for: type(of: self)),
+                                      compatibleWith: nil)
+        iconImageView.frame = CGRect(x: 0, y: 0, width: textImageHeight, height: textImageHeight)
+        iconImageView.contentMode = .scaleAspectFit
+        return iconImageView
     }
 }

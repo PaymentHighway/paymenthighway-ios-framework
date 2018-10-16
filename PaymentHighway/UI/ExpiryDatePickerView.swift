@@ -20,12 +20,12 @@ class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.initialize()
+        initialize()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initialize()
+        initialize()
     }
     
     override func didMoveToSuperview() {
@@ -34,12 +34,12 @@ class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
     }
     
     private func initialize() {
-        self.months = (1...12).map { $0 }
+        months = (1...12).map { $0 }
         let currentYear = Calendar.current.component(.year, from: Date())
-        self.years = (0..<numberOfYears).map { $0+currentYear }
+        years = (0..<numberOfYears).map { $0+currentYear }
         
-        self.delegate = self
-        self.dataSource = self
+        delegate = self
+        dataSource = self
         selectCurrentMonth()
     }
     
@@ -52,7 +52,7 @@ class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
         switch component {
         case 0: return months.count
         case 1: return years.count
-        default: return 0
+        default: fatalError()
         }
     }
     
@@ -61,25 +61,25 @@ class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
         switch component {
         case 0: return "\(months[row])"
         case 1: return "\(years[row])"
-        default: return nil
+        default: fatalError()
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if self.selectedRow(inComponent: 1) == 0 && self.selectedRow(inComponent: 0)+1 < currentMonth {
+        if selectedRow(inComponent: 1) == 0 && selectedRow(inComponent: 0)+1 < currentMonth {
             selectCurrentMonth()
         }
         notify()
     }
     
     private func selectCurrentMonth() {
-        self.selectRow(currentMonth - 1, inComponent: 0, animated: false)
-        self.selectRow(0, inComponent: 1, animated: false)
+        selectRow(currentMonth - 1, inComponent: 0, animated: false)
+        selectRow(0, inComponent: 1, animated: false)
     }
     
     private func notify() {
-        let month = self.selectedRow(inComponent: 0)+1
-        let year = years[self.selectedRow(inComponent: 1)]
+        let month = selectedRow(inComponent: 0)+1
+        let year = years[selectedRow(inComponent: 1)]
         onDateSelected?(month, year)
     }
 }

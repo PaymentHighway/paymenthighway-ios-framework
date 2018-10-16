@@ -29,20 +29,23 @@ public protocol Theme: class {
     /// Returns Text Field image
     ///
     /// - parameter textFieldType: `TextFieldType`
-    /// - parameter height: image height
     /// - parameter cardBrand: cardBrand if available
     /// - seealso: TextFieldType and CardBrand
     /// - seealso: default implementation of textImageView
-    func textImageView(textFieldType: TextFieldType, height: CGFloat, cardBrand: CardBrand?) -> UIImageView?
+    func textImageView(textFieldType: TextFieldType, cardBrand: CardBrand?) -> UIView?
     
-    /// returns which TextFields will have image
+    /// returns height of the Text Field image
     ///
-    var textImages: [TextFieldType] { get set }
+    var textImageHeight: CGFloat { get set }
     
     /// X padding for Text Field
     ///
     var textPaddingX: CGFloat { get set }
-    
+
+    /// Bar tint color
+    ///
+    var barTintColor: UIColor { get set }
+
     /// View background color
     ///
     var primaryBackgroundColor: UIColor { get set }
@@ -102,19 +105,10 @@ public protocol Theme: class {
 
 extension Theme {
 
-    public func textImageView(textFieldType: TextFieldType, height: CGFloat, cardBrand: CardBrand? = nil) -> UIImageView? {
-        let iconImageView = UIImageView(frame: CGRect.zero)
-        iconImageView.image = UIImage(named: textFieldType.iconId(cardBrand: cardBrand),
-                                      in: Bundle(for: type(of: self)),
-                                      compatibleWith: nil)
-        iconImageView.frame = CGRect(x: 0, y: 0, width: height, height: height)
-        iconImageView.contentMode = UIViewContentMode.scaleAspectFit
-        return iconImageView
+    public func textImageView(textFieldType: TextFieldType) -> UIView? {
+        return textImageView(textFieldType: textFieldType, cardBrand: nil)
     }
-}
 
-extension Theme {
-    
     func textColor(isActive: Bool) -> UIColor {
         return isActive ? primaryActiveForegroundColor : primaryForegroundColor
     }

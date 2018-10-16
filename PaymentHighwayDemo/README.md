@@ -17,13 +17,13 @@ The demo includes an implementation example for a `BackendAdapter` in the folder
 
 ## Environment
 
-Payment Highway provide a [development `sandbox`](https://dev.paymenthighway.io/#development-sandbox) and a `production` environments.
+Payment Highway provides a [development `sandbox`](https://dev.paymenthighway.io/#development-sandbox) and a `production` environments.
 
 ## Add a credit card
 
 In order to add credit card and get a payment token you need a `PaymentContext`.
 
-The demo app run in the `sandbox` environment therefore uses the provided [sandbox `merchant id` and `account id`](https://dev.paymenthighway.io/#development-sandbox).
+The demo app run in the `sandbox` environment and therefore uses the provided [sandbox `merchant id` and `account id`](https://dev.paymenthighway.io/#development-sandbox).
 
 Example how istantiate a `PaymentContext`:
 ```swift
