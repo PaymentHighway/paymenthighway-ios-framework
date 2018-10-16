@@ -8,6 +8,7 @@
 import UIKit
 
 private let defaultAdjustPlaceholderY: CGFloat = 4
+private let imageTextPaddingPercentage: CGFloat = 0.5
 
 /// TextField is the base class for the specialized text fields UI elements for collecting credit card information.
 ///
@@ -176,9 +177,9 @@ open class TextField: UITextField, UITextFieldDelegate {
     private func updateTextImage() {
         guard let textFieldType = textFieldType else { return }
         if let image = theme.textImageView(textFieldType: textFieldType) {
-            // text-image padding half of the padding
-            let paddingImageText = theme.textPaddingX*0.5
-            paddingX = theme.textPaddingX+theme.textImageHeight+paddingImageText
+            // image-text padding half of the padding
+            let paddingImageText = theme.textPaddingX * imageTextPaddingPercentage
+            paddingX = theme.textPaddingX + theme.textImageHeight + paddingImageText
             leftViewMode = .always
             leftView = image
         } else {
@@ -189,7 +190,7 @@ open class TextField: UITextField, UITextFieldDelegate {
     
     override open func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.leftViewRect(forBounds: bounds)
-        return CGRect.init(x: rect.minX+theme.textPaddingX, y: rect.minY, width: rect.width, height: rect.height)
+        return CGRect.init(x: rect.minX + theme.textPaddingX, y: rect.minY, width: rect.width, height: rect.height)
     }
     
     private func updateUI() {

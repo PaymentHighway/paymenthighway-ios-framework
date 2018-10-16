@@ -1,18 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "dateLight.png",
-      "scale" : "1x",
-      "idiom" : "universal"
-    },
-    {
-      "filename" : "dateLight@2x.png",
-      "scale" : "2x",
-      "idiom" : "universal"
-    },
-    {
-      "filename" : "dateLight@3x.png",
-      "scale" : "3x",
+      "filename" : "dateLight.pdf",
       "idiom" : "universal"
     }
   ],

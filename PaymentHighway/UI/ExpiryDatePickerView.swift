@@ -52,9 +52,7 @@ class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
         switch component {
         case 0: return months.count
         case 1: return years.count
-        default:
-            assertionFailure("Unexpected Component")
-            return 0
+        default: fatalError()
         }
     }
     
@@ -63,9 +61,7 @@ class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
         switch component {
         case 0: return "\(months[row])"
         case 1: return "\(years[row])"
-        default:
-            assertionFailure("Unexpected Component")
-            return nil
+        default: fatalError()
         }
     }
     

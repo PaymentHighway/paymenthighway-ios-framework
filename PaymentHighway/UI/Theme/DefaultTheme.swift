@@ -19,7 +19,7 @@ private let defaultHighlightDisableColor = UIColor(red: 124, green: 124, blue: 1
 private let defaultRoundedBorderRadius: CGFloat = 28
 private let defaultPlaceholderFontScale: CGFloat = 0.8
 private let defaultBorderWidth: CGFloat = 1.5
-private let defaultPlaceholderAnimationDuration: Double = 0.25
+private let defaultPlaceholderAnimationDuration = 0.25
 private let defaultFontSize: CGFloat = 13
 private let defaultTextImageHeight: CGFloat = 24
 private let defaultTextPaddingX: CGFloat = 24.0
@@ -150,7 +150,7 @@ open class DefaultTheme : Theme {
                                       in: Bundle(for: type(of: self)),
                                       compatibleWith: nil)
         iconImageView.frame = CGRect(x: 0, y: 0, width: textImageHeight, height: textImageHeight)
-        iconImageView.contentMode = UIViewContentMode.scaleAspectFit
+        iconImageView.contentMode = .scaleAspectFit
         return iconImageView
     }
 }
