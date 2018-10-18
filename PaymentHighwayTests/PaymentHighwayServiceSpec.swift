@@ -11,11 +11,11 @@ import Nimble
 @testable import PaymentHighway
 import Alamofire
 
-// swiftlint:disable function_body_length
+// swiftlint:disable function_body_length cyclomatic_complexity
 class PaymentHighwayServiceSpec: QuickSpec {
     
     override func spec() {
-        let merchantId = MerchantId(id: "   test_merchantId")
+        let merchantId = MerchantId(id: "test_merchantId")
         let accountId = AccountId(id: "test")
         let paymentConfig = PaymentConfig(merchantId: merchantId, accountId: accountId, environment: Environment.sandbox)
         let cardTest = CardData(pan: "4153013999700024", cvc: "024", expiryDate: ExpiryDate(month: "11", year: "2023")!)
@@ -115,6 +115,43 @@ class PaymentHighwayServiceSpec: QuickSpec {
                 expect(receivedTransactionToken.card.partialPan).to(equal("0024"))
                 expect(receivedTransactionToken.card.expireMonth).to(equal("11"))
                 expect(receivedTransactionToken.card.expireYear).to(equal("2023"))
+            }
+        }
+        
+        it("we should get error") {
+            var isReceivedError = false
+            var receivedError: BackendAdapterExampleError?
+            
+            let cardTestError = CardData(pan: "4444333322221111", cvc: "111", expiryDate: ExpiryDate(month: "11", year: "2023")!)
+            backendAdapter.getTransactionId { (transactionIdResult) in
+                if case .success(let transactionId) = transactionIdResult {
+                    paymentHighwayService.encryptionKey(transactionId: transactionId) { (encryptionKeyResult) in
+                        if case .success(let encryptionKey) = encryptionKeyResult {
+                            paymentHighwayService.tokenizeTransaction(transactionId: transactionId,
+                                                                      cardData: cardTestError,
+                                                                      encryptionKey: encryptionKey) { (tokenizeTransactionResult) in
+                                if case .success = tokenizeTransactionResult {
+                                    backendAdapter.addCardCompleted(transactionId: transactionId) { (cardAddedResult) in
+                                        if case .failure(let error) = cardAddedResult {
+                                            receivedError = error
+                                            isReceivedError = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            expect(isReceivedError).toEventually(equal(true), timeout: 5)
+
+            if let receivedError = receivedError,
+               case .networkError(let networkError)  = receivedError,
+               case .internalError(let code, _) = networkError {
+                expect(code).to(equal(900))
+            } else {
+                fail("Received unexpected error")
             }
         }
     }
