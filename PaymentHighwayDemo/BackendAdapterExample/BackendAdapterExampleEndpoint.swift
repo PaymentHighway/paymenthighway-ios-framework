@@ -17,15 +17,15 @@ enum BackendAdapterExampleEndpoint {
 extension BackendAdapterExampleEndpoint : Endpoint {
     
     var baseURL: URL {
-        return URL(string: "http://54.194.196.206:8081")!
+        return URL(string: "https://ssocw2l28c.execute-api.eu-west-1.amazonaws.com/staging")!
     }
     
     var path: String? {
         switch self {
         case .transactionId:
-            return "/mobile-key"
+            return "/paymenthighway/transaction"
         case .transactionToken(let transactionId):
-            return "/tokenization/\(transactionId.id)"
+            return "/paymenthighway/tokenization/\(transactionId.id)"
         }
     }
 }
