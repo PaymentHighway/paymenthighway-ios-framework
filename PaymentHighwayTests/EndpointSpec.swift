@@ -200,26 +200,27 @@ class EndpointSpec: QuickSpec {
             
             it("should return Error") {
                 
+                let expectedError =  NSError(domain: "ErrorDomain", code: 999, userInfo: nil)
                 stub(condition: isHost(self.endpoint1URL.host!) && isPath(self.endpoint1URL.path)) { _ in
-                    return OHHTTPStubsResponse(error: TestError.testError)
+                    return OHHTTPStubsResponse(error: expectedError)
                 }
                 
-                var responseError: TestError = .noError
+                var responseError: NSError = NSError(domain: "", code: 0, userInfo: nil)
                 
                 self.endpoint1.getJson { (result: PaymentHighway.Result<TestResponseResult, NetworkError>) in
                     switch result {
                     case .success(let value):
                         fail("Got unexpected success:\(value)")
                     case .failure(let error):
-                        if case .requestError(let networkError) = error {
-                            responseError = networkError as! TestError
+                        if case .requestError(let requestError) = error {
+                            responseError = requestError as NSError
                         } else {
                             fail("Got unexpected errot:\(error)")
                         }
                     }
                 }
                 
-                expect(responseError).toEventually(equal(TestError.testError), timeout: 3)
+                expect(responseError.code).toEventually(equal(expectedError.code), timeout: 3)
             }
             
             it("should return 400") {
