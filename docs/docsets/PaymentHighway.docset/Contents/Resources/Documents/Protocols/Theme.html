@@ -299,13 +299,10 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14PaymentHighway5ThemeP13textImageView0D9FieldType6height9cardBrandSo07UIImageF0CSgAA04TextgH0O_12CoreGraphics7CGFloatVAA04CardK0OSgtF"></a>
-                    <a name="//apple_ref/swift/Method/textImageView(textFieldType:height:cardBrand:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14PaymentHighway5ThemeP13textImageView0D9FieldType6height9cardBrandSo07UIImageF0CSgAA04TextgH0O_12CoreGraphics7CGFloatVAA04CardK0OSgtF">textImageView(textFieldType:height:cardBrand:)</a>
+                    <a name="/s:14PaymentHighway5ThemeP13textImageView0D9FieldType9cardBrandSo6UIViewCSgAA04TextgH0O_AA04CardJ0OSgtF"></a>
+                    <a name="//apple_ref/swift/Method/textImageView(textFieldType:cardBrand:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP13textImageView0D9FieldType9cardBrandSo6UIViewCSgAA04TextgH0O_AA04CardJ0OSgtF">textImageView(textFieldType:cardBrand:)</a>
                     </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -325,15 +322,11 @@
 </div>
 
                       </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        
-                      </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">textImageView</span><span class="p">(</span><span class="nv">textFieldType</span><span class="p">:</span> <span class="kt"><a href="../Enums/TextFieldType.html">TextFieldType</a></span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">cardBrand</span><span class="p">:</span> <span class="kt"><a href="../Enums/CardBrand.html">CardBrand</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIImageView</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">textImageView</span><span class="p">(</span><span class="nv">textFieldType</span><span class="p">:</span> <span class="kt"><a href="../Enums/TextFieldType.html">TextFieldType</a></span><span class="p">,</span> <span class="nv">cardBrand</span><span class="p">:</span> <span class="kt"><a href="../Enums/CardBrand.html">CardBrand</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -350,18 +343,6 @@
                               <td>
                                 <div>
                                   <p><code><a href="../Enums/TextFieldType.html">TextFieldType</a></code></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>height</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>image height</p>
                                 </div>
                               </td>
                             </tr>
@@ -386,9 +367,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14PaymentHighway5ThemeP10textImagesSayAA13TextFieldTypeOGvp"></a>
-                    <a name="//apple_ref/swift/Property/textImages" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14PaymentHighway5ThemeP10textImagesSayAA13TextFieldTypeOGvp">textImages</a>
+                    <a name="/s:14PaymentHighway5ThemeP15textImageHeight12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/textImageHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP15textImageHeight12CoreGraphics7CGFloatVvp">textImageHeight</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -396,14 +377,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>returns which TextFields will have image</p>
+                        <p>returns height of the Text Field image</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">textImages</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/TextFieldType.html">TextFieldType</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">textImageHeight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -431,6 +412,33 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">textPaddingX</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemeP12barTintColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/barTintColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemeP12barTintColorSo7UIColorCvp">barTintColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar tint color</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">barTintColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -817,10 +825,44 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PaymentHighway5ThemePAAE13textImageView0D9FieldTypeSo6UIViewCSgAA04TextgH0O_tF"></a>
+                    <a name="//apple_ref/swift/Method/textImageView(textFieldType:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PaymentHighway5ThemePAAE13textImageView0D9FieldTypeSo6UIViewCSgAA04TextgH0O_tF">textImageView(textFieldType:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">textImageView</span><span class="p">(</span><span class="nv">textFieldType</span><span class="p">:</span> <span class="kt"><a href="../Enums/TextFieldType.html">TextFieldType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.paymenthighway.io" target="_blank" rel="external">Payment Highway</a>. All rights reserved. (Last updated: 2018-10-01)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.paymenthighway.io" target="_blank" rel="external">Payment Highway</a>. All rights reserved. (Last updated: 2018-10-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
