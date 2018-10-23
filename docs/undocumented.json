@@ -331,127 +331,141 @@
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 65,
+      "line": 64,
       "symbol": "TextField.init(frame:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 70,
+      "line": 69,
       "symbol": "TextField.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 87,
+      "line": 86,
       "symbol": "TextField.textFieldDidBeginEditing(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 91,
+      "line": 90,
       "symbol": "TextField.textFieldDidEndEditing(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 96,
+      "line": 95,
       "symbol": "TextField.textField(_:shouldChangeCharactersIn:replacementString:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 107,
+      "line": 106,
       "symbol": "TextField.text",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 117,
+      "line": 116,
       "symbol": "TextField.bounds",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 123,
+      "line": 122,
       "symbol": "TextField.placeholder",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 129,
+      "line": 128,
       "symbol": "TextField.placeholderRect(forBounds:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 137,
+      "line": 136,
       "symbol": "TextField.animateViewsForTextEntry()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 143,
+      "line": 142,
       "symbol": "TextField.animateViewsForTextDisplay()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 149,
+      "line": 148,
       "symbol": "TextField.drawViewsForRect(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 155,
+      "line": 154,
       "symbol": "TextField.draw(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 159,
+      "line": 158,
       "symbol": "TextField.drawPlaceholder(in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 163,
+      "line": 162,
       "symbol": "TextField.textFieldType",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 166,
+      "line": 165,
       "symbol": "TextField.textRect(forBounds:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
-      "line": 174,
+      "line": 173,
       "symbol": "TextField.editingRect(forBounds:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/TextField.swift",
+      "line": 191,
+      "symbol": "TextField.leftViewRect(forBounds:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/Theme/DefaultTheme.swift",
-      "line": 118,
+      "line": 123,
       "symbol": "DefaultTheme.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/spironato/development/paymenthighway-ios-framework/PaymentHighway/UI/Theme/Theme.swift",
+      "line": 108,
+      "symbol": "Theme.textImageView(textFieldType:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }

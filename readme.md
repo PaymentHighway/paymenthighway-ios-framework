@@ -26,7 +26,7 @@ Currently installation via Carthage and CocoaPods is supported.
 
 Create a "Cartfile"-file in the root of your project and add a line within:
 ```
-github "paymenthighway/paymenthighway-ios-framework" "v-2.0.0"
+github "paymenthighway/paymenthighway-ios-framework" "v-2.0.1"
 ```
 
 Run the following command to integrate the required frameworks to your project.
@@ -51,7 +51,7 @@ platform :ios, '9.0'
 use_frameworks!
     
 target '<Your Target Name>' do
-    pod 'PaymentHighway', '2.0.0'
+    pod 'PaymentHighway', '2.0.1'
 end
 ```
 

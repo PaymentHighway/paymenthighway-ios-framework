@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PaymentHighway"
-  s.version      = "2.0.0"
+  s.version      = "2.0.1"
   s.summary      = "Payment Highway framework for iOS."
   s.description  = <<-DESC
 		   This is the Payment Highway iOS SDK. Payment Highway is the app payments toolkit built for developers who are busy building great apps.
