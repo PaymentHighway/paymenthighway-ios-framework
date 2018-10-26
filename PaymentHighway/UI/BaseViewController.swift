@@ -75,7 +75,7 @@ public class BaseViewController: UIViewController {
             okButton.setTitleTextAttributes([.foregroundColor: theme.highlightDisableColor], for: .disabled)
             
         } else {
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: theme.barTintColor.isLight() ? .gray : .white)
             activityIndicator.hidesWhenStopped = false
             activityIndicator.startAnimating()
             okButton = UIBarButtonItem(customView: activityIndicator)

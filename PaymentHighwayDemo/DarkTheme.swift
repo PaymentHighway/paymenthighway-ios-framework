@@ -23,10 +23,11 @@ class DarkTheme: DefaultTheme {
         barTintColor = UIColor.black
         primaryBackgroundColor = UIColor.black
         secondaryBackgroundColor = UIColor.black
-        primaryForegroundColor = UIColor.white
+        primaryForegroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 203)
         primaryActiveForegroundColor = UIColor.white
         secondaryForegroundColor = UIColor(hexInt: 0xd261e7)
         secondaryActiveForegroundColor = secondaryForegroundColor
+        highlightDisableColor = UIColor(red: 155, green: 155, blue: 155)
     }
     
     override func textImageView(textFieldType: TextFieldType, cardBrand: CardBrand? = nil) -> UIView? {

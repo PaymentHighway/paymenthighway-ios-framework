@@ -28,4 +28,21 @@ extension UIColor {
     public convenience init(hexInt: Int) {
         self.init(red: (hexInt >> 16) & 0xff, green: (hexInt >> 8) & 0xff, blue: hexInt & 0xff)
     }
+    
+    /// Check if color is light
+    func isLight() -> Bool {
+        if let colorSpace = self.cgColor.colorSpace {
+            if colorSpace.model == .rgb {
+                guard let components = cgColor.components, components.count > 2 else {return false}
+                let brightness = ((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000
+                return (brightness > 0.5)
+            } else {
+                var white : CGFloat = 0.0
+                self.getWhite(&white, alpha: nil)
+                return white >= 0.5
+            }
+        }
+        
+        return false
+    }
 }
