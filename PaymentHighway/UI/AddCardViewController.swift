@@ -27,7 +27,7 @@ public class AddCardViewController: BaseViewController, ValidationDelegate {
     /// The add card delegate
     public weak var addCardDelegate: AddCardDelegate?
     
-    /// Initializes a new `AddCardViewController` with thecprovided theme.
+    /// Initializes a new `AddCardViewController` with the provided theme.
     ///
     public init(theme: Theme = DefaultTheme.instance) {
         let okButtonLabel = NSLocalizedString("AddCardButtonTitle",

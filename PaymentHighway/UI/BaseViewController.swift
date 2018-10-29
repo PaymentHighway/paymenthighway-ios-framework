@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Base class for all the SDK UIViewControllers
 public class BaseViewController: UIViewController {
     
     var okButton: UIBarButtonItem!
@@ -46,10 +47,11 @@ public class BaseViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.primaryForegroundColor, .font: theme.emphasisFont]
     }
 
+    /// Show toast depending of the thme on top of bottoom of the view
     public func showToast(message: String, completion: (() -> Void)? = nil) {
         Toast.show(view: view, theme: theme, message: message, completion: completion)
     }
-    
+
     @objc func cancelPressed(_ sender: Any) {
          fatalError("cancelPressed has not been implemented")
     }

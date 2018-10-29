@@ -10,11 +10,13 @@ import Foundation
 private let toastLabelPadding: CGFloat = 15
 private let toastBottomPadding: CGFloat = 10
 
+/// Toast position
 public enum ToastPosition {
     case top
     case bottom
 }
 
+/// Toast Helper to show toast message on the top or in the bottom of the view
 class Toast {
     
     class func show(view: UIView, theme: Theme, message: String, completion: (() -> Void)? = nil) {

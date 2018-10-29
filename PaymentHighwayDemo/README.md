@@ -48,6 +48,10 @@ If you have the card data available (for example from your own form) then you ca
     }
 ```
 
+## Pay with a credit card
+
+TODO: PaymentContext api for Pay with card not implemented yet.
+
 ## AddCardViewController
 
 Payment Highway SDK provide UI Form to input a credit card.
@@ -60,13 +64,6 @@ It renders a `Cancel` and `Add card` buttons so it must be presented inside a `U
 
 AddCardViewController provide api showError(message) to show simple toast view with the error message.
 
-### Presenter
-
-`Presenter` is a helper to present a View Controller in 3 modalities:
-1. Full screen
-2. Popup half screen 
-3. Popup custom where you can define the height of the screen that the view controller use
-
 ### AddCardDelegate
 
 You need to provide the delegate implementation to manage the submission of a card or the cancellation of the operation.
@@ -77,6 +74,27 @@ public protocol AddCardDelegate: class {
     func addCard(_ card: CardData)
 }
 ```
+
+## PayWithCardViewController
+
+Payment Highway SDK provide UI Form to input a credit card then make a payment.
+
+Information of the purchase are displayed in the view.
+The infomation displayed are:
+1. Amount of the purchase
+2. Description of the purchase
+
+It renders a `Cancel` and `Pay` buttons so it must be presented inside a `UINavigationController`.
+
+`PayWithCardViewController` require `Purchase` as a parameter. It has even a theme parameter(optional).
+
+## Presenter
+
+`Presenter` is a helper to present a View Controller in 4 modalities:
+1. Full screen
+2. Using the actual height of the presented ViewController
+3. Popup half screen 
+4. Popup custom where you can define the height of the screen that the view controller use
 
 Example how `Presenter` can be used with a basic `add card delegate`implementation:
 
@@ -118,12 +136,11 @@ class YourViewController: UIViewController, AddCardDelegate {
 ````
 Note: You need a strong reference to the presenter. Presenter keep a reference to the presented View Controller. You can access it via instance variable `presentedViewController`.
 
-
 ## How customize appearence of the Payment Highway UI Elements
 
 You can define your own appearence attributes for the Payment Highway UI Elements.
 
-You can customize from the default theme, modify the default theme or just have your theme implementing the protocol `Theme`.
+You can customize the theme using the default theme as base, or you can modify the default theme or you can just have your theme implementing the protocol `Theme`.
 
 Example to create own theme from `DefaultTheme`
 ```swift

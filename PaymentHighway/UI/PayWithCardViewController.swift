@@ -12,6 +12,18 @@ public protocol PayWithCardDelegate: class {
     func executePayment(purchase: Purchase, card: CardData)
 }
 
+private let scaleForSumLabelFont: CGFloat = 2.2
+private let scaleForPurchaseDescriptionLabelFont: CGFloat = 1.8
+private let scaleForInfoLabelFont: CGFloat = 1.2
+
+/// View controller to manage a credit card entry for a specific purchase
+/// It renders a 'Cancel' and 'Pay' buttons so it must be presented inside a `UINavigationController`.
+///
+/// `Presenter` helper can be used to show the View Controller.
+///
+/// User can fill out the form and on submission card data will be provided to payWithCard delegate.
+/// User can cancel the form and proper delegate call is performed.
+///
 public class PayWithCardViewController: BaseViewController, ValidationDelegate {
     
     @IBOutlet weak var addCardView: AddCardView!
@@ -48,9 +60,14 @@ public class PayWithCardViewController: BaseViewController, ValidationDelegate {
         let infoText = NSLocalizedString("PayWithCardInfo",
                                         bundle: Bundle(for: type(of: self)),
                                         comment: "Please fill in the information on your card")
-        theme.setTheme(sumLabel, text: purchase.amountWithCurrency, isEmphasisFont: true, fontScale: 2.2)
-        theme.setTheme(purchaseDescription, text: purchase.description, fontScale: 1.8)
-        theme.setTheme(infoLabel, text: infoText, fontScale: 1.2)
+        theme.setTheme(sumLabel,
+                       text: purchase.amountWithCurrency,
+                       isEmphasisFont: true,
+                       fontScale: scaleForSumLabelFont)
+        theme.setTheme(purchaseDescription,
+                       text: purchase.description,
+                       fontScale: scaleForPurchaseDescriptionLabelFont)
+        theme.setTheme(infoLabel, text: infoText, fontScale: scaleForInfoLabelFont)
         view.backgroundColor = theme.primaryBackgroundColor
     }
     
